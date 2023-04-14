@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-
-const GetSeat = () => {
-    const locationId=1;
-    const date="2023-03-05";
+import accolite from '../../Static/Accolite_Logo_Grey.png'
+const GetSeat = (props) => {
+    
+    const date=props.date;
+    const locationId=props.locationId;
+    const seatId=props.seatId
     const [allSeats,setAllSeats]=useState([]);
-    const[bookedseat,setBookedSeat]=useState({})
+    const[availableSeat,setAvailableSeat]=useState({})
     const [isPendings, setIsPendings] = useState(true);
     const [isPendingsa, setIsPendingsa] = useState(true);
     const [error, setError] = useState("");
+
     useEffect(()=>{
         const header = "Bearer " + localStorage.getItem('accessToken');
         fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
@@ -22,6 +25,7 @@ const GetSeat = () => {
           })
           .then((data)=>{
                 setAllSeats(data)
+                props.setCountAll(data.length)
                 setIsPendings(false)
           }).catch((error)=>{
             setError(error.message)
@@ -40,37 +44,57 @@ const GetSeat = () => {
             return res.json();
           })
           .then((data)=>{
-            setBookedSeat(data)
+            setAvailableSeat(data)
+                props.setCountAvailable(Object.keys(data).length)
                 setIsPendingsa(false)
           }).catch((error)=>{
             setError(error.message)
           })
     },[locationId,date])
-    console.log(bookedseat)
+    const handleChange=(e)=>{
+      props.setSeatName(e.name)
+      props.setSeatId(e.id)
+    }
     return ( <>
-    {isPendings && <span>Loading...</span>}
-    {error&&<span>{error}</span>}
-    {allSeats&& allSeats.map((seat)=>{
-      if(bookedseat.hasOwnProperty(seat.id)){
+    {isPendings && 
+    <div >
+      <img src={accolite} alt="" className="accolite-logo-img"/>
+    </div>
+    
+      }
+    {/* {error&&<span>{error}</span>} */}
+
+
+    {allSeats && availableSeat && allSeats.map((seat)=>{
+      if (availableSeat.hasOwnProperty(seat.id)) {
         return(
-        <div className="seat">
-        <input type="checkbox" key={seat.id} value={seat.id} />
-        <label for={seat.id} style={{background: '#1dc4e9'}}>{seat.name}</label>
-    </div>)
+          <div className="seat">
+  <label key={seat.id} style={{backgroundColor: seatId===seat.id ? '#7efaae' : '#5de1ff'}}>
+        <input
+          type="radio"
+          name="seat"
+          value={seat.id} 
+          style={{display: 'contents'}}
+          onChange={(e) => props.setSeatId(e.target.value)} 
+          onClick={()=>handleChange(seat)}
+        />
+        <span>{seat.name}</span>
+      </label>   </div>     )
       }
       else{
         return(
-        <div className="seat">
-        <input type="checkbox" key={seat.id} value={seat.id} disabled />
-        <label for={seat.id} style={{background: 'RED'}}>{seat.name}</label>
-    </div>)
-      }
-    }
-    
-
-
-    
-    )}
+          <div className="seat" >
+          <label key={seat.id} style={{backgroundColor:'#fb7765'}}>
+                <input
+                  type="radio"
+                  name="seat"
+                  value={seat.id} 
+                  style={{display: 'contents'}}
+                  checked={seat.id === props.selectedSeat} disabled
+                />
+                <span>{seat.name}</span>
+              </label>   </div>     )      }
+    })}
     </> );
 }
  

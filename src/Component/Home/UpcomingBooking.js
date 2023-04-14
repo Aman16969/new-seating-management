@@ -4,9 +4,11 @@ const UpcomingBooking = () => {
   const authContext = useContext(AuthContext);
 const { token,accessToken } = authContext;
 const userId = 2;
+const[isOpenCon,setIsOpenCon]=useState(false)
 const [upcomingBooking, setupcomingBooking] = useState(null);
 const [isPending, setIsPending] = useState(true);
-console.log(token)
+const[message,setMessage]=useState("");
+const[bookId,setBookId]=useState(null);
 useEffect(() => {
   const header = "Bearer " + localStorage.getItem('accessToken');
   fetch(`http://localhost:8081/api/booking/user/?user=${userId}`, {
@@ -28,25 +30,81 @@ useEffect(() => {
       setIsPending(false);
     });
 }, [token]);
+
+const handlePopup=(e)=>{
+  setBookId(e)
+  setIsOpenCon(true)
+}
+const handleDelete=(bookId)=>{
+  const header = "Bearer " + localStorage.getItem('accessToken');
+  fetch(`http://localhost:8081/api/booking/${bookId}`,{
+    method:'DELETE',
+    headers:{
+      Authorization: header,
+    }
+  }).then((res)=>{
+    if(!res.ok){
+      throw Error("cannot be deleted")
+    }
+    return res.json()
+  }).then((e)=>{
+    setMessage("booking deleted successfully")
+    setIsOpenCon(false)
+    window.location.reload();
+  }).catch((err)=>{
+    setMessage(err.message)
+  })
+}
   return (
     <>
       <h1>{token}</h1>
       <tbody>
         {isPending && <span>Loading.</span>}
-       
-        {upcomingBooking && upcomingBooking.map((booking)=>
-        <tr key={booking.id} className="table-row">
+        {upcomingBooking && upcomingBooking.sort((a, b) => {
+    const [yearA, monthA, dayA] = a.date.split('-'); 
+    const bookingDateA = new Date(yearA, monthA - 1, dayA); 
+    const [yearB, monthB, dayB] = b.date.split('-'); 
+    const bookingDateB = new Date(yearB, monthB - 1, dayB); 
+    return bookingDateA - bookingDateB; 
+  })
+        .map((booking) => {
+  const [year, month, day] = booking.date.split('-'); 
+  const bookingDate = new Date(year, month - 1, day); 
+  if (bookingDate >= new Date()) { 
+    return (
+      <tr key={booking.id} className="table-row">
         <td>
-            <span>&#x2022;</span>{booking.date}
+          <span>&#x2022;</span>{booking.date}
         </td>
         <td>{booking.location.name}</td>
         <td>{booking.seat.name}</td>
         <td>
-        <button className="button-group" value={booking.id} >x</button>
-    </td>
-    </tr>
-    )}
+          <button className="button-group" value={booking.id} onClick={() => handlePopup(booking.id)}>x</button>
+        </td>
+      </tr>
+    )
+  } else {
+    return null; 
+  }
+})}
+
       </tbody>
+      {isOpenCon && <div className='popupContainer' onClick={() => setIsOpenCon(false)}>
+          <div className='popup-boxd' onClick={(e)=>e.stopPropagation()}>
+            <div className='popupHeader'>
+              <h2>Are you sure to cancle this booking?</h2>
+            </div>
+              <div className='buttonsContainer'>
+                <button type="submit" className="submit-btn" onClick={() => handleDelete(bookId)}>
+                  Yes
+                </button>
+                <button type="reset" className="cancel-btn" onClick={() => setIsOpenCon(false)}>
+                  No
+                </button>
+              </div>
+          </div>
+        </div>
+        }
     </>
   );
 };
