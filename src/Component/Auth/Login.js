@@ -1,47 +1,57 @@
+import { configure } from "@testing-library/react";
 import logo from "../../Static/logo.jpg";
 import { useState, useEffect } from "react";
 const Login = () => {
-    const[jwtToken,setJwtToken]=useState([]);
-    const[error,setError]=useState("");
-    useEffect(() => {
-        /* global google */
-        const onGoogleScriptLoad = () => {
-          google.accounts.id.initialize({
-            client_id: "946965422673-l41tegruelb9vqb1q6iqrpaf0ha7vnvh.apps.googleusercontent.com",
-            callback: handleLoginApi,
-          });
-          google.accounts.id.renderButton(document.getElementById("LoginButton"), {
-            theme: "outline",
-            size: "large",
-            type: "standard",
-          });
-        };
-        const script = document.createElement("script");
-        script.src = "https://accounts.google.com/gsi/client";
-        script.onload = onGoogleScriptLoad;
-        document.body.appendChild(script);
-      }, []);
-      const handleLoginApi = (response) => {
-        setTimeout(()=>{
-            fetch(`http://localhost:8081/auth/login`,{
-                method: "POST",
-                headers: { "content-type": "application/json"},
-                body: JSON.stringify({token: response.credential})
-            }).then((res) =>{
-                if(!res.ok){
-                    throw new Error(res.statusText);
-                }return res.json();
-            }).then((data)=>{
-                setJwtToken(data)
-            }).catch((error) => {
-                setError(error.message);
-            })
-        },500)
-      };
-      if(jwtToken){
-        localStorage.setItem("email",jwtToken.email);
-        localStorage.setItem("accessToken",jwtToken.accessToken)
-      }
+  const [jwtToken, setJwtToken] = useState([]);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    /* global google */
+    const onGoogleScriptLoad = () => {
+      google.accounts.id.initialize({
+        client_id:
+          "946965422673-l41tegruelb9vqb1q6iqrpaf0ha7vnvh.apps.googleusercontent.com",
+        callback: handleLoginApi,
+      });
+      google.accounts.id.renderButton(document.getElementById("LoginButton"), {
+        theme: "outline",
+        size: "large",
+        type: "standard",
+      });
+    };
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.onload = onGoogleScriptLoad;
+    document.body.appendChild(script);
+  }, []);
+  const handleLoginApi = (response) => {
+    setTimeout(() => {
+      fetch(`http://localhost:8081/auth/login`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ token: response.credential }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setJwtToken(data);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    }, 500);
+  };
+  useEffect(() => {
+    console.log(jwtToken);
+    if (jwtToken.length !== 0) {
+      console.log(1);
+      localStorage.setItem("email", jwtToken.email);
+      localStorage.setItem("accessToken", jwtToken.accessToken);
+    }
+  }, [jwtToken]);
   return (
     <>
       <div className="container-login">
@@ -57,8 +67,8 @@ const Login = () => {
           <h1>Accolite Digital</h1>
         </div>
         <div className="content">
-            {error&& <div>{error}</div>}
-            {jwtToken&& <div>{jwtToken.email}</div>}
+          {error && <div>{error}</div>}
+          {jwtToken && <div>{jwtToken.email}</div>}
           <h1>Welcome to Our Innovative Digital Transformation Services!</h1>
           <p>
             At our company, we believe in approaching complex digital challenges
