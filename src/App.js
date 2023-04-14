@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
 import "./App.css";
 import Navbar from "./Component/NavBar/Navbar";
-import Home from "./Testing/Home";
+import Home from "./Component/Home/Home";
 function App() {
   return (
     <div className="App">
+      <Navbar/>
       <Router>
         <Routes>
           <Route element={<PrivateRoutes />}>
