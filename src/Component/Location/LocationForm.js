@@ -7,8 +7,8 @@ const LocationForm = () => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
 
-  const token = localStorage.getItem("accessToken");
-  console.log(token);
+  const token = "Bearer "+localStorage.getItem("accessToken");
+  console.log("token is " + token);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,8 +19,7 @@ const LocationForm = () => {
       method: "POST",
       mode: "no-cors",
       headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + token
+        Authorization: token
       },
       body: JSON.stringify(location)
     }).then((response)=>{

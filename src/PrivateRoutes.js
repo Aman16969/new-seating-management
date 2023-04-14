@@ -4,7 +4,6 @@ const checkToken = () => {
   let token = localStorage.getItem("accessToken");
   console.log(token);
   return token ? true : false;
-  console.log(token);
 };
 const PrivateRoutes = () => {
   const isAuthenticated = checkToken();
