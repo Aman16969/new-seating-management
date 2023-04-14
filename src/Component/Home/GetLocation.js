@@ -5,11 +5,11 @@ const GetLocation = (props) => {
     const[isPending,setIsPending]=useState(true)
     const accessToken = localStorage.getItem("access_token");
     useEffect(()=>{
-        setTimeout(()=>{
+      const header = "Bearer " + localStorage.getItem('accessToken');
             fetch(`http://localhost:8081/api/location/`,{
                 headers: {
                     "Content-type": "application/json",
-                    Authorization: accessToken},
+                    Authorization: header},
             }).then((response)=>{
                 if(!response.ok){
                     throw Error(response.statusText)
@@ -21,7 +21,6 @@ const GetLocation = (props) => {
             }).catch((error)=>{
                 setError(error)
             })
-    },500)
 },[])
   return (
     <>

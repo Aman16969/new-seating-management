@@ -31,9 +31,20 @@ menu-item {
   margin-bottom: 20px;
 }
 
+.menu-caption{
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: row;
+  width:105%;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .seat-header-img {
   height: 30px;
   width: 30px;
+  border: 1px;
+
 }
 .seat-header-img:hover {
   height: 32px;
@@ -231,9 +242,7 @@ menu-item {
   cursor: pointer;
 }
 .seat-display-img {
-  width: 90%;
-  height: 250px;
-  padding: 20px;
+  width: 100%;
 }
 
 
@@ -245,6 +254,7 @@ menu-item {
   padding: 5px;
   position: relative;
   width: 35px;
+  height: 40px;
 }
 
 .seat:nth-child(3) {
@@ -292,7 +302,7 @@ menu-item {
   font-weight: bold;
   line-height: 1.5rem;
   padding: 4px 0;
-  background: #1dc4e9;
+
   border-radius: 5px;
   animation-duration: 300ms;
   animation-fill-mode: both;
@@ -351,7 +361,7 @@ menu-item {
 .seat-display {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  height: 260px !important;
+  height: 340px !important;
   overflow-y: scroll;
   border-bottom: 1px solid #5c6aff;
 }

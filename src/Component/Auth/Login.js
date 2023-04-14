@@ -1,8 +1,12 @@
 import { configure } from "@testing-library/react";
 import logo from "../../Static/logo.jpg";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext, } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../ContextApi/AuthContext";
 const Login = () => {
-  const [jwtToken, setJwtToken] = useState([]);
+  const navigate=useNavigate();
+  const contextType=useContext(AuthContext);
+  const {setToken,token,accessToken,updateaccessToken,updatetoken}=contextType;
   const [error, setError] = useState("");
   useEffect(() => {
     /* global google */
@@ -24,7 +28,6 @@ const Login = () => {
     document.body.appendChild(script);
   }, []);
   const handleLoginApi = (response) => {
-    setTimeout(() => {
       fetch(`http://localhost:8081/auth/login`, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -37,21 +40,27 @@ const Login = () => {
           return res.json();
         })
         .then((data) => {
-          setJwtToken(data);
+          updateaccessToken(data)
+          if (data.length !== 0) {
+            localStorage.setItem("email", data.email);
+            localStorage.setItem("accessToken", data.accessToken);
+            console.log(data.accessToken)
+            navigate("/home",true)
+            
+          }
+          // updateaccessToken(data);
         })
         .catch((error) => {
           setError(error.message);
         });
-    }, 500);
   };
-  useEffect(() => {
-    console.log(jwtToken);
-    if (jwtToken.length !== 0) {
-      console.log(1);
-      localStorage.setItem("email", jwtToken.email);
-      localStorage.setItem("accessToken", jwtToken.accessToken);
-    }
-  }, [jwtToken]);
+  // useEffect(() => {
+  //   if (accessToken.length !== 0) {
+  //     localStorage.setItem("email", accessToken.email);
+  //     localStorage.setItem("accessToken", accessToken.accessToken);
+  //     updatetoken(accessToken.accessToken)
+  //   }
+  // }, [accessToken]);
   return (
     <>
       <div className="container-login">
@@ -68,7 +77,7 @@ const Login = () => {
         </div>
         <div className="content">
           {error && <div>{error}</div>}
-          {jwtToken && <div>{jwtToken.email}</div>}
+          {accessToken && <div>{accessToken.email}</div>}
           <h1>Welcome to Our Innovative Digital Transformation Services!</h1>
           <p>
             At our company, we believe in approaching complex digital challenges
