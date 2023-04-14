@@ -240,10 +240,7 @@ menu-item{
     height: 250px;
     padding: 20px
 }
-.seat-display{
-    display: grid;
-    grid-template-columns:  1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
+
 
 /* Seat  */
 
@@ -359,7 +356,7 @@ menu-item{
   .seat-display{
     display: grid;
     grid-template-columns:  1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    height: 260px !important;
+    height: 331px !important;
     overflow-y: scroll;
     border-bottom: 1px solid #5C6AFF;
   }
