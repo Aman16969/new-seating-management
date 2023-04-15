@@ -32,7 +32,7 @@ const LocationForm = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        Authorization: token
+        Authorization: token,
       },
       body: JSON.stringify(location),
     })
@@ -98,12 +98,15 @@ const LocationForm = () => {
                 setAddress(e.target.value);
               }}
             ></textarea>
-            <br />
+            <label for="image">
+              <h2>Image</h2>
+            </label>
             <input
               accept="image/"
               type="file"
               onChange={(e) => convertToBase64(e)}
             />
+            <br />
 
             {/* {image && <img src={image} />} */}
             {!isPending && <button>Add Location</button>}

@@ -171,6 +171,12 @@ menu-item {
   text-align: center;
   background-color: transparent;
 }
+.table-row th {
+  width: 25%;
+}
+.table-row td {
+  width: 25%;
+}
 .table-row:hover {
   background-color: #f1f1f1;
 }
@@ -520,12 +526,11 @@ menu-item {
 
 .location-form {
   background-image: linear-gradient(#c7dbff, #c7e2e7);
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  height: 75%;
+  height: auto;
   padding: 10px;
   width: 70%;
   box-shadow: 5px 7px 10px #3f4d67;
@@ -550,15 +555,5 @@ menu-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 444px;
-}
-
-.location-item input[type="text"] {
-  width: 100%;
-  padding: 14px 15px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #3f4d67;
-  box-sizing: border-box;
-  background-color: white;
+  height: 480px;
 }

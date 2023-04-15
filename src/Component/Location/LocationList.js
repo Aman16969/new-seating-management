@@ -9,6 +9,7 @@ const LocationList = ({ locations }) => {
           <tr class="table-row">
             <th>Location</th>
             <th>Seating Capacity</th>
+            <th>Image</th>
             <th>Action</th>
           </tr>
         </table>
@@ -19,7 +20,9 @@ const LocationList = ({ locations }) => {
             <tr class="table-row">
               <td>{location.name}</td>
               <td>{location.seatingCapacity}</td>
-              <td><img width={"100px"} src={location.image}/></td>
+              <td>
+                <img width={"100px"} src={location.image} />
+              </td>
               <td class="Action">
                 <button class="button-group">edit</button>
                 <button class="button-group">x</button>
