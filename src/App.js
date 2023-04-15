@@ -9,7 +9,6 @@ import Location from "./Component/Location/Location";
 function App() {
   return (
     <div className="App">
-      {/* <Navbar/> */}
       <Auth>
         <Router>
           <Routes>
@@ -21,8 +20,9 @@ function App() {
                 </div>
               }
             >
-              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/location" element={<Location />} />
+              {/* <Route path="/profile" element={<Profile />} /> */}
             </Route>
             <Route path="/login" element={<Login />} />
           </Routes>
