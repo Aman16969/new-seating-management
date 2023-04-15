@@ -6,19 +6,33 @@ const LocationForm = () => {
   const [address, setAddress] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
+  const [image, setImage] = useState("");
 
-  const token = "Bearer "+localStorage.getItem("accessToken");
-  
+  const convertToBase64 = (e) => {
+    console.log(e.target.files);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      console.log(reader.result);
+      setImage(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.log("Error: ", error);
+    };
+  };
+
+  const token = "Bearer " + localStorage.getItem("accessToken");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const location = { name, seatingCapacity, address };
+    const location = { name, seatingCapacity, address, image };
     console.log(location);
     setIsPending(true);
     fetch("http://localhost:8081/api/location/", {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        Authorization: "Bearer " + token,
+        Authorization: token
       },
       body: JSON.stringify(location),
     })
@@ -84,7 +98,14 @@ const LocationForm = () => {
                 setAddress(e.target.value);
               }}
             ></textarea>
-            <br/>
+            <br />
+            <input
+              accept="image/"
+              type="file"
+              onChange={(e) => convertToBase64(e)}
+            />
+
+            {/* {image && <img src={image} />} */}
             {!isPending && <button>Add Location</button>}
           </form>
         </div>
