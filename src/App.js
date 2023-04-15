@@ -7,6 +7,7 @@ import Home from "./Component/Home/Home";
 import { Auth } from "../src/ContextApi/AuthContext";
 import Location from "./Component/Location/Location";
 import Logout from "./Component/Auth/Logout";
+import Profile from "./Component/Profile/Profile";
 function App() {
   return (
     <div className="App">
@@ -23,7 +24,7 @@ function App() {
             >
               <Route path="/" element={<Home />} />
               <Route path="/location" element={<Location />} />
-              {/* <Route path="/profile" element={<Profile />} /> */}
+              <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />

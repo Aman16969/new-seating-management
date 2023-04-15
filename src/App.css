@@ -430,8 +430,8 @@ menu-item {
   flex-direction: row;
   justify-content: space-between;
 }
-.title:hover{
-  color:#fa6400
+.title:hover {
+  color: #fa6400;
 }
 /* .logo{
   margin: 20px;
@@ -441,15 +441,15 @@ menu-item {
   width: 200px;
 }
 
-.login-button{
+.login-button {
   width: 20%;
   height: 40px;
-  color:rgb(175, 122, 255);
+  color: rgb(175, 122, 255);
   padding: 5px;
   background-color: rgb(255, 239, 239);
 }
 
-.login-button:hover{
+.login-button:hover {
   color: aliceblue;
 }
 
@@ -737,3 +737,34 @@ tr {
   align-items: center;
   height: 480px;
 } */
+
+/* Profile */
+.profile-form {
+  height: 80%;
+  width: 35%;
+  padding: 20px;
+  background-image: linear-gradient(#c7dbff, #c7e2e7);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2%;
+  box-shadow: 5px 7px 10px #3f4d67;
+  text-align: center;
+  font-size: 20px;
+}
+.profile-form input[type="text"] {
+  width: 90%;
+  height: 30px;
+  background-color: #e0ebff;
+  font-size: 15px;
+  text-align: center;
+}
+.profile-container {
+  display: block;
+  place-items: center;
+  height: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+}
