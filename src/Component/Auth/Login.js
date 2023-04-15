@@ -46,7 +46,7 @@ const Login = () => {
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("userId", data.id);
             console.log(data)
-            navigate("/home",true)
+            navigate("/",true)
             
           }
           
