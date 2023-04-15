@@ -20,8 +20,9 @@ function App() {
                 </div>
               }
             >
-              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/location" element={<Location />} />
+              {/* <Route path="/profile" element={<Profile />} /> */}
             </Route>
             <Route path="/login" element={<Login />} />
           </Routes>
