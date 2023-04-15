@@ -548,7 +548,7 @@ menu-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 480px;
+  height: 444px;
 }
 
 .location-item input[type="text"] {
