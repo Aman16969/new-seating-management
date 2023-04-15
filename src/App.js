@@ -6,6 +6,7 @@ import Navbar from "./Component/NavBar/Navbar";
 import Home from "./Component/Home/Home";
 import { Auth } from "../src/ContextApi/AuthContext";
 import Location from "./Component/Location/Location";
+import Logout from "./Component/Auth/Logout";
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,7 @@ function App() {
               {/* <Route path="/profile" element={<Profile />} /> */}
             </Route>
             <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
           </Routes>
         </Router>
       </Auth>
