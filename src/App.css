@@ -439,8 +439,8 @@ menu-item {
   flex-direction: row;
   justify-content: space-between;
 }
-.title:hover{
-  color:#fa6400
+.title:hover {
+  color: #fa6400;
 }
 /* .logo{
   margin: 20px;
@@ -450,15 +450,15 @@ menu-item {
   width: 200px;
 }
 
-.login-button{
+.login-button {
   width: 20%;
   height: 40px;
-  color:rgb(175, 122, 255);
+  color: rgb(175, 122, 255);
   padding: 5px;
   background-color: rgb(255, 239, 239);
 }
 
-.login-button:hover{
+.login-button:hover {
   color: aliceblue;
 }
 
