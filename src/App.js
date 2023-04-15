@@ -11,10 +11,16 @@ function App() {
     <div className="App">
       {/* <Navbar/> */}
       <Auth>
-        <Navbar />
         <Router>
           <Routes>
-            <Route element={<PrivateRoutes />}>
+            <Route
+              element={
+                <div>
+                  <Navbar />
+                  <PrivateRoutes />
+                </div>
+              }
+            >
               <Route path="/home" element={<Home />} />
               <Route path="/location" element={<Location />} />
             </Route>

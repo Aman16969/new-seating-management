@@ -17,31 +17,36 @@ const LocationForm = () => {
     fetch("http://localhost:8081/api/location/", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": token
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
       },
-      body: JSON.stringify(location)
-    }).then((response)=>{
-        if(!response.ok){
-            throw new Error(response.statusText);
+      body: JSON.stringify(location),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
         }
         return response.json();
-    }).then((data)=>{            
+      })
+      .then((data) => {
         setIsPending(false);
-    }).catch((error)=>{
+      })
+      .catch((error) => {
         setIsPending(false);
-        setError(error.message)
-    })
+        setError(error.message);
+      });
   };
 
   return (
     <div className="row-card">
-      <div class="row-card-body">
+      <div className="row-card-title">
         <h2>Add New Location</h2>
+      </div>
+      <div class="row-card-body">
         <div className="location-container">
-          <form className="modal-content" onSubmit={handleSubmit}>
+          <form className="location-form" onSubmit={handleSubmit}>
             <label for="Location">
-              <b>Location</b>
+              <h2>Location</h2>
             </label>
             <input
               type="text"
@@ -53,10 +58,8 @@ const LocationForm = () => {
               }}
               required
             />
-            <br/>
-
             <label for="seat">
-              <b>Seat Capacity</b>
+              <h2>Seat Capacity</h2>
             </label>
             <input
               type="number"
@@ -68,10 +71,8 @@ const LocationForm = () => {
               }}
               required
             />
-            <br/>
-
             <label for="address">
-              <b>Address</b>
+              <h2>Address</h2>
             </label>
             <textarea
               name="address"
