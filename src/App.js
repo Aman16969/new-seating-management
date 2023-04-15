@@ -9,7 +9,6 @@ import Location from "./Component/Location/Location";
 function App() {
   return (
     <div className="App">
-      {/* <Navbar/> */}
       <Auth>
         <Router>
           <Routes>

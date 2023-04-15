@@ -44,23 +44,18 @@ const Login = () => {
           if (data.length !== 0) {
             localStorage.setItem("email", data.email);
             localStorage.setItem("accessToken", data.accessToken);
-            console.log(data.accessToken)
+            localStorage.setItem("userId", data.id);
+            console.log(data)
             navigate("/home",true)
             
           }
-          // updateaccessToken(data);
+          
         })
         .catch((error) => {
           setError(error.message);
         });
   };
-  // useEffect(() => {
-  //   if (accessToken.length !== 0) {
-  //     localStorage.setItem("email", accessToken.email);
-  //     localStorage.setItem("accessToken", accessToken.accessToken);
-  //     updatetoken(accessToken.accessToken)
-  //   }
-  // }, [accessToken]);
+
   return (
     <>
       <div className="container-login">

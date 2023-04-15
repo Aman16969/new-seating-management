@@ -25,7 +25,7 @@ const Navbar = () => {
               >
             </li>
             <li className="nav-item">
-              <a href="location.html" className="nav-link"
+              <a href="/location" className="nav-link"
                 ><span className="span-logo"
                   ></span
                 ><span className="span-text">Location</span></a
