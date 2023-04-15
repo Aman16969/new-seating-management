@@ -13,9 +13,11 @@ const Navbar = () => {
             <ul className="inner-navbar">
               <li className="nav-item">
                 <div className="menu-caption">
+                <Link to="/">
                   <img src={seat} alt="" className="seat-header-img" />
-
-                  <p>Seating Management</p>
+                  </Link>
+                 <p>Seating Management</p>
+                  
                 </div>
               </li>
 

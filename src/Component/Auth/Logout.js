@@ -6,7 +6,6 @@ const Logout = () => {
         localStorage.clear();
     navigate("/",true)
     })
-    
     return ( <>
     Logged Out
     </> );
