@@ -4,11 +4,13 @@ import PrivateRoutes from "./PrivateRoutes";
 import "./App.css";
 import Navbar from "./Component/NavBar/Navbar";
 import Home from "./Component/Home/Home";
+import { Auth} from "../src/ContextApi/AuthContext";
 import Location from "./Component/Location/Location";
-
 function App() {
   return (
     <div className="App">
+      {/* <Navbar/> */}
+      <Auth>
       <Router>
         <Routes>
           <Route element={<PrivateRoutes />}>
@@ -18,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
+      </Auth>
     </div>
   );
 }

@@ -13,7 +13,7 @@ const Location = () =>{
         setTimeout(()=>{
             fetch('http://localhost:8081/api/location/', {
                 method: "GET",
-                headers: {"content-type": "application/json", Authorization: "Bearer "+ token}
+                headers: {"Content-Type": "application/json", "Authorization": "Bearer "+ token}
             }).then((response)=>{
                 if(!response.ok){
                     throw new Error(response.statusText);
@@ -30,16 +30,16 @@ const Location = () =>{
     },[]);
 
     return(
-        <>
-            <div>
+        <div style={{display:"flex"}}>
+            <div style={{margin:"5px"}}>
                 {isPending && <div>Loading...</div>}
                 {error && <div>error</div>}
                 {locations && <LocationList locations={locations}/>}
             </div>
-            <div>
+            <div style={{margin:"5px"}}>
                 <LocationForm/>
             </div>
-        </>
+        </div>
     );
 }
 

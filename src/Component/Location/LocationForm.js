@@ -8,8 +8,7 @@ const LocationForm = () => {
   const [error, setError] = useState(null);
 
   const token = "Bearer "+localStorage.getItem("accessToken");
-  console.log("token is " + token);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const location = { name, seatingCapacity, address };
@@ -17,9 +16,9 @@ const LocationForm = () => {
     setIsPending(true);
     fetch("http://localhost:8081/api/location/", {
       method: "POST",
-      mode: "no-cors",
       headers: {
-        Authorization: token
+        "Content-Type": "application/json",
+        "Authorization": token
       },
       body: JSON.stringify(location)
     }).then((response)=>{
@@ -37,7 +36,6 @@ const LocationForm = () => {
 
   return (
     <div className="row-card">
-      <h1>Form</h1>
       <div class="row-card-body">
         <h2>Add New Location</h2>
         <div className="location-container">
@@ -55,6 +53,7 @@ const LocationForm = () => {
               }}
               required
             />
+            <br/>
 
             <label for="seat">
               <b>Seat Capacity</b>
@@ -69,6 +68,7 @@ const LocationForm = () => {
               }}
               required
             />
+            <br/>
 
             <label for="address">
               <b>Address</b>
@@ -83,6 +83,7 @@ const LocationForm = () => {
                 setAddress(e.target.value);
               }}
             ></textarea>
+            <br/>
             {!isPending && <button>Add Location</button>}
           </form>
         </div>

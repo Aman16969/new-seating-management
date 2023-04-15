@@ -1,36 +1,39 @@
-import { useEffect, useState } from "react";
-
+import { useEffect, useState,useContext } from "react";
+import AuthContext from "../../ContextApi/AuthContext";
 const UpcomingBooking = () => {
-  const userId = 2;
-  const [upcomingBooking, setupcomingBooking] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    fetch(`http://localhost:8081/api/booking/user/?user=2`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2LHJhamF2YXJhcHUudmlzc3dhdGV6YUBhY2NvbGl0ZWRpZ2l0YWwuY29tIiwiaXNzIjoiTWF0cml4Iiwicm9sZSI6IlVTRVIiLCJpYXQiOjE2ODE0NTYwMzQsImV4cCI6MTY4MTU0MjQzNH0.grwJynQVPqRAdyqy0c8EOqjOFhMPoJCtzDx3xYQBrlA4M8Un2xdzgM3DiMH_t2cD5haPQR-JbmeUA3BGWNiUCg"   },
+  const authContext = useContext(AuthContext);
+const { token,accessToken } = authContext;
+const userId = 2;
+const [upcomingBooking, setupcomingBooking] = useState(null);
+const [isPending, setIsPending] = useState(true);
+console.log(token)
+useEffect(() => {
+  const header = "Bearer " + localStorage.getItem('accessToken');
+  fetch(`http://localhost:8081/api/booking/user/?user=${userId}`, {
+    headers: {
+      Authorization: header,
+    },
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw Error("Response not received");
+      }
+      return res.json();
     })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("Response not recieved");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setupcomingBooking(data);
-        setIsPending(false)
-      })
-      .catch((err) => {
-        setError(err.message);
-        setIsPending(false)
-      });
-  }, []);
+    .then((data) => {
+      setupcomingBooking(data);
+      setIsPending(false);
+    })
+    .catch((err) => {
+      setIsPending(false);
+    });
+}, [token]);
   return (
     <>
+      <h1>{token}</h1>
       <tbody>
         {isPending && <span>Loading.</span>}
-        {error && <span>{error.message}</span>}
+       
         {upcomingBooking && upcomingBooking.map((booking)=>
         <tr key={booking.id} className="table-row">
         <td>

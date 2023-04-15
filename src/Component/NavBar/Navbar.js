@@ -1,3 +1,4 @@
+import seat from '../../Static/armchair.png'
 const Navbar = () => {
     return ( <>
      <nav className="navbar">
@@ -8,9 +9,12 @@ const Navbar = () => {
         </div>
         <div className="navbar-content">
           <ul className="inner-navbar">
-            <li className="nav-item menu-caption">
-              <img src="armchair.png" alt="" className="seat-header-img" />
-              <label className="seat-header" style={{fontWeight: '1500'}}>Seating Management</label>
+            <li className="nav-item">
+              <div className="menu-caption">
+              <img src={seat} alt="" className="seat-header-img" />
+              
+              <p>Seating Management</p>
+              </div>
             </li>
 
             <li className="nav-item">
