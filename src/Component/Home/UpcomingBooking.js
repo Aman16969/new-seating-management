@@ -3,7 +3,6 @@ import AuthContext from "../../ContextApi/AuthContext";
 const UpcomingBooking = () => {
   const authContext = useContext(AuthContext);
 const { token,accessToken } = authContext;
-const userId = 2;
 const[isOpenCon,setIsOpenCon]=useState(false)
 const [upcomingBooking, setupcomingBooking] = useState(null);
 const [isPending, setIsPending] = useState(true);
@@ -11,6 +10,7 @@ const[message,setMessage]=useState("");
 const[bookId,setBookId]=useState(null);
 useEffect(() => {
   const header = "Bearer " + localStorage.getItem('accessToken');
+  const userId = localStorage.getItem('userId');
   fetch(`http://localhost:8081/api/booking/user/?user=${userId}`, {
     headers: {
       Authorization: header,
@@ -72,9 +72,9 @@ const handleDelete=(bookId)=>{
   const bookingDate = new Date(year, month - 1, day); 
   if (bookingDate >= new Date()) { 
     return (
-      <tr key={booking.id} className="table-row">
+      <tr key={booking.id} className="user-row">
         <td>
-          <span>&#x2022;</span>{booking.date}
+         {booking.date}
         </td>
         <td>{booking.location.name}</td>
         <td>{booking.seat.name}</td>

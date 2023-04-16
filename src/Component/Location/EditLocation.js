@@ -84,7 +84,7 @@ const EditLocation = (props) => {
               {message && <span>{message}</span>}
             </div>
             <div className="location-container">
-              <form className="location-form">
+              <form className="location-form" style={{marginTop:'-80px',width:'100%'}}>
                 <div className="location-item">
                   <label for="location">Location</label>
                   <input

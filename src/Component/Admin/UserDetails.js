@@ -49,42 +49,43 @@ function UserDetails() {
               Employee Details
             </h2>
           </header>
-          <div className="user-detail">
-            <div className="row-card">
+
+          <div className="row-card">
+            <div className="row-card-body" style={{ height: '490px' }}>
               <div className="row-card-title">
                 <table>
-                  <tr className="user-row">
-                    <th>Accolite ID</th>
+                  <tr className="table-row">
+                    <th>Accolite Id</th>
                     <th>Email</th>
                     <th>First name</th>
                     <th>Last name</th>
                     <th>Role</th>
                   </tr>
                 </table>
-                <div className="row-card-body">
-                  <div className="table-scroll">
-                    <table className="table">
-                      <tbody>
-                        {userDetails.map((user) => (
-                          <tr key={user.id} className="user-row">
-                            <td>{user.accoliteId}</td>
-                            <td>{user.email}</td>
-                            <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
-                            <td>{user.role}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+              </div>
+              <div className="table-scroll" >
+                <table className="table">
+                  <tbody>
+                    {userDetails.map((user) => (
+                      <tr key={user.id} className="user-row">
+                        <td>{user.accoliteId}</td>
+                        <td>{user.email}</td>
+                        <td>{user.firstName}</td>
+                        <td>{user.lastName}</td>
+                        <td>{user.role}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
-  );
+
+
+        </>
+        );
 }
 
-export default UserDetails;
+        export default UserDetails;

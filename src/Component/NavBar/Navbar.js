@@ -35,6 +35,13 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link to="/userdetails" className="nav-link">
+                  <span className="span-logo"></span>
+                  <span className="span-text">Users</span>
+                </Link>
+              </li>
+              
+              <li className="nav-item">
                 <Link to="/profile" className="nav-link">
                   <span className="span-logo"></span>
                   <span className="span-text">Profile</span>

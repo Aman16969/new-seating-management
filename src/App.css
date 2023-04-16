@@ -1,6 +1,6 @@
 .navbar {
   font-variant: small-caps;
-  background-color: #3f4d67;
+  
   display: block;
   color: #a9b7d0;
   top: 0;
@@ -8,6 +8,7 @@
   position: fixed;
   height: 100%;
   box-shadow: 2px 0 10px #007bff;
+  background-image: linear-gradient(#2b5876 , #4e4376);
 }
 .navbar-wrapper {
   width: 100%;
@@ -82,7 +83,7 @@ menu-item {
   font-size: 16px;
 }
 .span-text:hover {
-  color: #007bff;
+  color: #00aaff;
   font-size: 17px;
 }
 .container {
@@ -92,7 +93,8 @@ menu-item {
   float: unset;
   margin-left: 235px;
   background-color: #f3f3ff;
-  min-height: 100vh;
+  background-image: linear-gradient(rgba(219, 250, 255, 0.53) ,   #d2f8ff);
+  min-height: 98vh;
 }
 .container-content {
   box-sizing: border-box;
@@ -113,9 +115,10 @@ menu-item {
 .row-card {
   box-sizing: border-box;
   background-color: #ffffff;
-  box-shadow: 1px 0 5px #007bff;
+  box-shadow: 2px 1px 10px #4b4476;
   display: block;
   border-radius: 3px;
+  background-image: linear-gradient(#c7dbff, #c7e2e7);
 }
 .row-card-title {
   top: 0;
@@ -132,34 +135,45 @@ menu-item {
 }
 .row-card-title h2:after {
   content: "";
-  background-color: #007bff;
+  background-color: #5c64ff;
   position: absolute;
   left: 0;
-  top: 10px;
+  top: 20px;
   width: 2px;
-  height: 15px;
+  height: 25px;
+  
 }
 .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
+  
 }
 .table tbody {
   box-sizing: border-box;
   display: table-row-group;
   vertical-align: middle;
+  
 }
 .table-row {
   display: table-row;
-  vertical-align: inherit;
   border-color: inherit;
   padding: 10px 0;
-  margin: 5px 0;
-  height: 40px;
-  border-bottom: 1px solid#007bff;
-  text-align: center;
+  margin: 5px 5px;
+  height: 60px;
+  border-bottom: 4px solid#007bff;
   background-color: transparent;
+}
+.table-row:after {
+  content: "";
+  background-color: #000dff;
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 2px;
+  height: 25px;
+  
 }
 .table-row th {
   width: 25%;
@@ -168,7 +182,7 @@ menu-item {
   width: 25%;
 }
 .table-row:hover {
-  background-color: #f1f1f1;
+  background-color: #bad4fe;
 }
 .button-group {
   border-radius: 3px;
@@ -472,8 +486,9 @@ menu-item {
 }
 .popup-boxd {
   position: absolute;
-  background: #a9b7d0;
+  background-image: linear-gradient(#c7dbff, #c7e2e7);
   width: 35vw;
+  height: 500px;
   border-radius: 3px;
   box-shadow: 0 2px 2px #007bff;
 }
@@ -493,14 +508,14 @@ menu-item {
   width: fit-content;
   border: 1px solid #007bff;
   border-radius: 3px;
-  color: #007bff;
+  color: #57708b;
   padding: 8px 40px;
   font-size: 18px;
   cursor: pointer;
   margin: 0px 40px;
 }
 .buttonsContainer > button:hover {
-  background: #0067d6;
+  background: #4c4476;
   color: white;
 }
 .accolite-logo-img {
@@ -537,9 +552,8 @@ menu-item {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
   padding: 14px 15px;
-  width: 70%;
+  width: 60%;
   box-shadow: 3px 1px 10px #486aaa;
 }
 .location-form button {
@@ -667,7 +681,7 @@ menu-item {
 }
 
 .user-row:hover {
-  background-color: #f1f1f1;
+   background-color: #bad4fe;
 }
 
 .user-row {
@@ -679,5 +693,5 @@ menu-item {
   height: 40px;
   border-bottom: 1px solid#007bff;
   text-align: center;
-  background-color: transparent;
+  background-color: transparent #3f4d670d;
 }

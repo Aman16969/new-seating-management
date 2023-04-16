@@ -84,6 +84,15 @@ const LocationForm = () => {
               />
             </div>
             <div className="location-item">
+              <label for="image">Layout</label>
+              <input
+                accept="image/"
+                type="file"
+                onChange={(e) => convertToBase64(e)}
+                required/>
+             
+            </div>
+            <div className="location-item">
               <label for="location">Addresss</label>
               <input
                 type="text"
@@ -95,15 +104,7 @@ const LocationForm = () => {
               />
             </div>
 
-            <div className="location-item">
-              <label for="image">Layout</label>
-              <input
-                accept="image/"
-                type="file"
-                onChange={(e) => convertToBase64(e)}
-              />
-              <br />
-            </div>
+            
             <div className="location-item">
               {!isPending && <button className="button-group">Add Location</button>}
             </div>
