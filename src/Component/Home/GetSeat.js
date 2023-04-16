@@ -10,6 +10,7 @@ const GetSeat = (props) => {
     const [isPendings, setIsPendings] = useState(true);
     const [isPendingsa, setIsPendingsa] = useState(true);
     const [error, setError] = useState("");
+   
 
     useEffect(()=>{
         const header = "Bearer " + localStorage.getItem('accessToken');
@@ -27,10 +28,11 @@ const GetSeat = (props) => {
                 setAllSeats(data)
                 props.setCountAll(data.length)
                 setIsPendings(false)
+                
           }).catch((error)=>{
             setError(error.message)
           })
-    },[locationId])
+    },[locationId,props])
     useEffect(()=>{
       const header = "Bearer " + localStorage.getItem('accessToken');
         fetch(`http://localhost:8081/api/booking/availabe/locationAndDate?location=${locationId}&date=${date}`, {
@@ -47,10 +49,11 @@ const GetSeat = (props) => {
             setAvailableSeat(data)
                 props.setCountAvailable(Object.keys(data).length)
                 setIsPendingsa(false)
+                
           }).catch((error)=>{
             setError(error.message)
           })
-    },[locationId,date])
+    },[locationId])
     const handleChange=(e)=>{
       props.setSeatName(e.name)
       props.setSeatId(e.id)

@@ -42,14 +42,16 @@ const Login = () => {
         .then((data) => {
           updateaccessToken(data)
           if (data.length !== 0) {
+            var expirationTime = new Date();
+expirationTime.setTime(expirationTime.getTime() + (12 * 60 * 60 * 1000));
+var cookieValue = data.id + '|' + data.email + '|' + data.token;
+document.cookie = 'userdata=' + cookieValue + ';expires=' + expirationTime.toUTCString() + ';path=/';
             localStorage.setItem("email", data.email);
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("userId", data.id);
-            console.log(data)
-            navigate("/",true)
-            
+            console.log(data.accessToken)
+            navigate("/",true)   
           }
-          
         })
         .catch((error) => {
           setError(error.message);

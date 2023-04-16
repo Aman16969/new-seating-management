@@ -17,7 +17,7 @@ const Home = () => {
       const header = "Bearer " + localStorage.getItem('accessToken');
       const bookingDetail = {
         location_id: locationId,
-        user_id: 2,
+        user_id: localStorage.getItem("userId"),
         seat_id: seatId,
         date: date,
       };
@@ -36,6 +36,9 @@ const Home = () => {
         setMessage(
           "You Have Booked A seat: " + seatName + " on " + date + "."
         );
+        setTimeout(()=>{
+          window.location.reload()
+        },1500)
     })
   }
   return (

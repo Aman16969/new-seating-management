@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
-
+import profilePic from "../../Static/man.png";
 function Profile() {
   const [editMode, setEditMode] = useState(false);
   const [userDetail, setUserDetail] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [Error, setError] = useState(null);
+  const [accolite, setAccoliteid] = useState("");
+  const header = "Bearer " + localStorage.getItem("accessToken");
+  const userId = localStorage.getItem("userId");
+  const [read,setReadOnly] =useState(true);
+  const[message,setMessage]=useState("");
 
-  const handleEditProfile = () => {
-    setEditMode(true);
-  };
-
-  const userId = "1";
   useEffect(() => {
-    fetch(`http://localhost:8081/api/user/1`, {
+    fetch(`http://localhost:8081/api/user/${userId}`, {
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGRlbmN5LnBhdGVsQGFjY29saXRlZGlnaXRhbC5jb20iLCJpc3MiOiJNYXRyaXgiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY4MTUzNDI5NCwiZXhwIjoxNjgxNjIwNjk0fQ.g2raJ6_680ejdDZ-FUPEFc2_NcQzfIfUMV8mGncbJnIn1sPqZ8zN3k_hj_gAG0DRmydvAGRPcdlWf1pf4iUubw",
+        Authorization: header,
       },
     })
       .then((res) => {
@@ -26,13 +25,45 @@ function Profile() {
       })
       .then((data) => {
         setUserDetail(data);
+        if(data){
+          setAccoliteid(data.accoliteId)
+        }
+        
         setIsPending(false);
       })
       .catch((err) => {
         setError(err.message);
       });
   }, []);
-  console.log(userDetail);
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:8081/api/user/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json', 
+        Authorization: header,
+      },
+      body: accolite,
+      
+    }).then((res) => {
+      if (!res.ok) {
+        throw Error("Failed to update");
+      }
+      return res.json();
+    }).then((data)=>{
+      setMessage("User updated Successfully")
+      setReadOnly(true)
+      setTimeout(()=>{
+        window.location.reload()
+      },1000)
+     
+    })
+    .catch((err) => {
+      throw Error(err.message);
+    });
+  };
 
   return (
     <>
@@ -40,26 +71,27 @@ function Profile() {
         <div className="container-content">
           {!isPending && (
             <div className="profile-form">
-              <h2>PROFILE</h2>
-              <br />
-              <form className="profile-container">
+              <img className="profile-img" src={profilePic} alt="Profile" />
+
+              <form className="profile-container" onSubmit={handleSubmit}>
                 <div className="profile-item">
                   <label for="acccolite_id">Accolite ID:</label>
-                  <br />
                   <input
                     type="text"
                     placeholder="Enter Accolite Id"
                     name="accolite_id"
                     id="accolite_id"
+                    onClick={()=>setReadOnly(false)}
                     required
-                    readOnly={true}
-                    value={userDetail.accoliteId}
+                    readOnly={read}
+                    value={accolite}
+                    onChange={(e) => {
+                      setAccoliteid(e.target.value);
+                    }}
                   />
                 </div>
-                <br />
                 <div className="profile-item">
                   <label for="email">Email:</label>
-                  <br />
                   <input
                     type="text"
                     placeholder="Enter Email"
@@ -70,10 +102,10 @@ function Profile() {
                     value={userDetail.email}
                   />
                 </div>
-                <br />
+
                 <div className="profile-item">
                   <label for="fname">First Name:</label>
-                  <br />
+
                   <input
                     type="text"
                     placeholder="Enter First Name"
@@ -84,10 +116,10 @@ function Profile() {
                     value={userDetail.firstName}
                   />
                 </div>
-                <br />
+
                 <div className="profile-item">
                   <label for="lname">Last Name:</label>
-                  <br />
+
                   <input
                     type="text"
                     placeholder="Enter Last Name"
@@ -98,14 +130,11 @@ function Profile() {
                     value={userDetail.lastName}
                   />
                 </div>
-                <br />
-                <button
-                  className="button-group"
-                  style={{ fontSize: "18px" }}
-                  onClick={handleEditProfile}
-                >
+                <span style={{fontSize:'small'}}>{message}</span>
+{!read &&<button className="button-group" >
                   Edit
-                </button>
+                </button>}
+                
               </form>
             </div>
           )}

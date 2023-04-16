@@ -29,7 +29,7 @@ useEffect(() => {
     .catch((err) => {
       setIsPending(false);
     });
-}, [token]);
+}, [token,upcomingBooking]);
 
 const handlePopup=(e)=>{
   setBookId(e)

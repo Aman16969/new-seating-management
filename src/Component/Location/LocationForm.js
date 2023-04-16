@@ -61,48 +61,57 @@ const LocationForm = () => {
           <form className="location-form" onSubmit={handleSubmit}>
             <div className="location-item">
               <label for="location">Location</label>
-              <input type="text" id="location" value={name}
+              <input
+                type="text"
+                id="location"
+                value={name}
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
-                required />
+                required
+              />
             </div>
             <div className="location-item">
               <label for="location">Seating Capacity</label>
-                <input type="number" id="seatingcapacity" value={seatingCapacity}
-                  onChange={(e) => {
-                    setSeatingCapacity(e.target.value);
-                  }}
-                  required />
-                  </div>
-                  <div className="location-item">
-                    <label for="location">Addresss</label>
-                      <input type="text" id="address" value={address}
-                        onChange={(e) => {
-                          setAddress(e.target.value);
-                        }}/>
-                        </div>
+              <input
+                type="number"
+                id="seatingcapacity"
+                value={seatingCapacity}
+                onChange={(e) => {
+                  setSeatingCapacity(e.target.value);
+                }}
+                required
+              />
+            </div>
+            <div className="location-item">
+              <label for="location">Addresss</label>
+              <input
+                type="text"
+                id="address"
+                value={address}
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
+              />
+            </div>
 
-
-                          <div className="location-item">
-                            <label for="image" >
-                              Layout
-                            </label>
-                            <input
-                              accept="image/"
-                              type="file"
-                              onChange={(e) => convertToBase64(e)}
-                            />
-                            <br />
-                          </div>
-                          <div className="location-item">
-                          {!isPending && <button class="button-group">Add Location</button>}
-                          </div>
-                        </form>
-                      </div>
-                  </div>
-                </div>
-                );
+            <div className="location-item">
+              <label for="image">Layout</label>
+              <input
+                accept="image/"
+                type="file"
+                onChange={(e) => convertToBase64(e)}
+              />
+              <br />
+            </div>
+            <div className="location-item">
+              {!isPending && <button className="button-group">Add Location</button>}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-                export default LocationForm;
+export default LocationForm;
