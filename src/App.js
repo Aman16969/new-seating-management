@@ -8,6 +8,7 @@ import { Auth } from "../src/ContextApi/AuthContext";
 import Location from "./Component/Location/Location";
 import Logout from "./Component/Auth/Logout";
 import Profile from "./Component/Profile/Profile";
+import UserDetails from "./Component/Admin/UserDetails";
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,7 @@ function App() {
               <Route exact path="/" element={<Home />} />
               <Route exact path="/location" element={<Location />} />
               <Route exact path="/profile" element={<Profile />} />
+              <Route exact path="/userdetails" element={<UserDetails />} />
             </Route>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/logout" element={<Logout />} />
