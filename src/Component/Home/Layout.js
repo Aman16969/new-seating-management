@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import viewIcon from "../../Static/eye-solid.svg";
+import viewIcon from "../../Static/seats.png";
 const Layout = (props) => {
   const [locationData, setLocationData] = useState([]);
   const [error, setError] = useState("");

@@ -1,6 +1,7 @@
 import { useState,useContext } from "react";
 import seat from "../../Static/armchair.png";
 import { Link } from "react-router-dom";
+import accLogo from '../../Static/newlogo.png'
 import AuthContext from "../../ContextApi/AuthContext";
 const Navbar = () => {
   const authContext=useContext(AuthContext);
@@ -12,8 +13,8 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-wrapper">
           <div className="navbar-header-logo">
-            <img src="" alt="" />
-            <span className="b-title">Accolite Digital</span>
+            <img src={accLogo} alt="" className="acc-logo" />
+            
           </div>
           {/* <span style={{ fontSize:'15px'}}>{sessionStorage.getItem("email")}</span> */}
           <div className="navbar-content">

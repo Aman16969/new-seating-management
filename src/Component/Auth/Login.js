@@ -82,6 +82,7 @@ const Login = () => {
           <h1>Accolite Digital</h1>
         </div>
         <div className="content">
+        <h1 style={{color:"orange"}}>Seating Management System</h1>
           {error && <div>{error}</div>}
           {accessToken && <div>{accessToken.email}</div>}
           <h1>Welcome to Our Innovative Digital Transformation Services!</h1>
