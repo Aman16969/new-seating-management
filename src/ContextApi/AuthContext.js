@@ -55,6 +55,7 @@ export const Auth=(props)=>{
           updateuserrole,
           updateaccessToken,
           updatetoken,
+          setUserrole
         }}
       >
         {props.children}

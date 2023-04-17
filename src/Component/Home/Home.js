@@ -3,6 +3,7 @@ import GetLocation from "./GetLocation";
 import UpcomingBooking from "./UpcomingBooking";
 import seat from '../../Static/seats.png'
 import GetSeat from "./GetSeat";
+import Layout from "./Layout";
 const Home = () => {
     const[countall,setCountAll]=useState(0)
     const[countAvailable,setCountAvailable]=useState(0)
@@ -10,8 +11,8 @@ const Home = () => {
     const[date,setDate]=useState("");
     const[seatName,setSeatName]=useState("");
     const[seatId,setSeatId]=useState("");
-    const[gseat,setgseat]=useState(false);
     const[message,setMessage]=useState("");
+    const[flagBooking,setFlagBooking]=useState(false)
 
     const handleBooking=()=>{
       const header = "Bearer " + localStorage.getItem('accessToken');
@@ -53,7 +54,7 @@ const Home = () => {
               <div className="row-card-body">
                 <div className="table-scroll">
                   <table className="table">
-                    <UpcomingBooking/>
+                    <UpcomingBooking setFlagBooking={setFlagBooking} flagBooking={flagBooking} />
                   </table>
                 </div>
               </div>
@@ -72,15 +73,17 @@ const Home = () => {
                         }} />
                       </div>
                       <div className="form-item">
-                        <GetLocation locationId={locationId} setLocationId={setLocationId}/>
+                        <GetLocation setFlagBooking={setFlagBooking} flagBooking={flagBooking} locationId={locationId} onLocationChange={setLocationId}/>
                       </div>
-                      
+                      <div className="form-item">
+                        {locationId && <Layout locationId={locationId}/>}
+                      </div>
                     </form>
                   </div>
                 </div>
                 <div className="card-body-col">
                   <div className="seat-display">
-                    <GetSeat date={date} locationId={locationId} seatId={seatId} setSeatId={setSeatId} setSeatName={setSeatName} setCountAvailable={setCountAvailable} setCountAll={setCountAll}/>
+                    <GetSeat setFlagBooking={setFlagBooking} flagBooking={flagBooking} date={date} locationId={locationId} seatId={seatId} setSeatId={setSeatId} setSeatName={setSeatName} setCountAvailable={setCountAvailable} setCountAll={setCountAll}/>
                     {/* <img src={seat} alt="" className="seat-display-img"/>  */}
                   </div>
                   <div className="seat-book-item">

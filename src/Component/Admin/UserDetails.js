@@ -56,7 +56,7 @@ function UserDetails() {
                 <table>
                   <tr className="table-row">
                     <th>Accolite Id</th>
-                    <th>Email</th>
+                    <th style={{width:'250px'}}>Email</th>
                     <th>First name</th>
                     <th>Last name</th>
                     <th>Role</th>

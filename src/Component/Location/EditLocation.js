@@ -78,7 +78,7 @@ const EditLocation = (props) => {
             props.setIsOpenEdit(false);
           }}
         >
-          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+          <div  id="pop-edit" className="popup-boxd" onClick={(e) => e.stopPropagation()}>
             <div className="popupHeader">
               <h2>Edit Location</h2>
               {message && <span>{message}</span>}

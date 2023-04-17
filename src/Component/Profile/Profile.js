@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import profilePic from "../../Static/man.png";
+import AuthContext from "../../ContextApi/AuthContext";
 function Profile() {
+  const authContext=useContext(AuthContext);
+  const {userrole,setUserrole}=authContext;
   const [editMode, setEditMode] = useState(false);
   const [userDetail, setUserDetail] = useState(null);
   const [isPending, setIsPending] = useState(true);
@@ -27,6 +30,7 @@ function Profile() {
         setUserDetail(data);
         if(data){
           setAccoliteid(data.accoliteId)
+          setUserrole(data.role)
         }
         
         setIsPending(false);
@@ -75,7 +79,7 @@ function Profile() {
 
               <form className="profile-container" onSubmit={handleSubmit}>
                 <div className="profile-item">
-                  <label for="acccolite_id">Accolite ID:</label>
+                  <label for="acccolite_id">Accolite ID</label>
                   <input
                     type="text"
                     placeholder="Enter Accolite Id"
@@ -91,7 +95,7 @@ function Profile() {
                   />
                 </div>
                 <div className="profile-item">
-                  <label for="email">Email:</label>
+                  <label for="email">Email</label>
                   <input
                     type="text"
                     placeholder="Enter Email"
@@ -104,7 +108,7 @@ function Profile() {
                 </div>
 
                 <div className="profile-item">
-                  <label for="fname">First Name:</label>
+                  <label for="fname">First Name</label>
 
                   <input
                     type="text"
@@ -118,7 +122,7 @@ function Profile() {
                 </div>
 
                 <div className="profile-item">
-                  <label for="lname">Last Name:</label>
+                  <label for="lname">Last Name</label>
 
                   <input
                     type="text"

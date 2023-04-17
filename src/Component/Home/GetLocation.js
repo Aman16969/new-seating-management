@@ -20,11 +20,13 @@ const GetLocation = (props) => {
       .then((data) => {
         setLocation(data);
         setIsPending(false);
+        props.setFlagBooking(!props.flagBooking)
       })
       .catch((error) => {
         setError(error);
       });
-  }, []);
+  }, [props.flagBooking]);
+  
   return (
     <>
       {error && <span>{error}</span>}
@@ -33,7 +35,7 @@ const GetLocation = (props) => {
         name="select"
         id="select"
         value={props.locationId}
-          onChange={(e) => props.setLocationId(e.target.value)}
+          onChange={(e) => props.onLocationChange(e.target.value)}
       >
         <option value="none" selected disabled hidden>
           Select a Location

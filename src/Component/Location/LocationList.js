@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import DeleteLocation from "./DeleteLocation";
 import EditLocation from "./EditLocation";
-const LocationList = () => {
-  const [locations, setLocations] = useState(null);
+const LocationList = (props) => {
+  const [locations, setLocations] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const token = localStorage.getItem("accessToken");
   const[isOpenCon,setIsOpenCon]=useState(false)
   const[isOpenEdit,setIsOpenEdit]=useState(false)
-  const[location,setlocationId]=useState(null);
+  const[locationId,setlocationId]=useState(null);
   const[message,setMessage]=useState("");
+  
   const handlePopup=(e)=>{
     setlocationId(e)
     setIsOpenCon(true)
@@ -19,7 +20,6 @@ const LocationList = () => {
     setIsOpenEdit(true)
   }
   useEffect((e) => {
-    
     setIsPending(true);
       fetch("http://localhost:8081/api/location/", {
         method: "GET",
@@ -42,7 +42,7 @@ const LocationList = () => {
           setIsPending(false);
           setError(error.message);
         });
-  }, [locations]);
+  }, [props.flag]);
   return (
     <>
       <div className="row-card">
@@ -92,9 +92,9 @@ const LocationList = () => {
           </div>
         </div>
       </div>
-      {isOpenCon && <DeleteLocation location={location} setMessage={setMessage} setIsOpenCon={setIsOpenCon}  />
+      {isOpenCon && <DeleteLocation location={locationId} setMessage={setMessage} setIsOpenCon={setIsOpenCon}  />
         }
-        {isOpenEdit && <EditLocation location={location} setIsOpenEdit={setIsOpenEdit}/>}
+        {isOpenEdit && <EditLocation location={locationId} setIsOpenEdit={setIsOpenEdit}/>}
     </>
   );
 };

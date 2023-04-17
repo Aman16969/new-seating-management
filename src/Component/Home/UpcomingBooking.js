@@ -1,6 +1,6 @@
 import { useEffect, useState,useContext } from "react";
 import AuthContext from "../../ContextApi/AuthContext";
-const UpcomingBooking = () => {
+const UpcomingBooking = (props) => {
   const authContext = useContext(AuthContext);
 const { token,accessToken } = authContext;
 const[isOpenCon,setIsOpenCon]=useState(false)
@@ -25,11 +25,12 @@ useEffect(() => {
     .then((data) => {
       setupcomingBooking(data);
       setIsPending(false);
+      props.setFlagBooking(!props.flagBooking)
     })
     .catch((err) => {
       setIsPending(false);
     });
-}, [token,upcomingBooking]);
+}, [props.flagBooking]);
 
 const handlePopup=(e)=>{
   setBookId(e)
@@ -92,7 +93,7 @@ const handleDelete=(bookId)=>{
       {isOpenCon && <div className='popupContainer' onClick={() => setIsOpenCon(false)}>
           <div className='popup-boxd' onClick={(e)=>e.stopPropagation()}>
             <div className='popupHeader'>
-              <h2>Are you sure to cancle this booking?</h2>
+              <h2>Are you sure to cancel this booking?</h2>
             </div>
               <div className='buttonsContainer'>
                 <button type="submit" className="submit-btn" onClick={() => handleDelete(bookId)}>

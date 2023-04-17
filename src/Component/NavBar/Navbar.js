@@ -1,6 +1,12 @@
+import { useState,useContext } from "react";
 import seat from "../../Static/armchair.png";
 import { Link } from "react-router-dom";
+import AuthContext from "../../ContextApi/AuthContext";
 const Navbar = () => {
+  const authContext=useContext(AuthContext);
+  const {userrole,setUserrole}=authContext;
+  const role=localStorage.getItem("userRole");
+  console.log(userrole)
   return (
     <>
       <nav className="navbar">
@@ -28,7 +34,7 @@ const Navbar = () => {
                   <span className="span-text">All Booking</span>
                 </Link>
               </li>
-              <li className="nav-item">
+              {role && role==="ADMIN" && <><li className="nav-item">
                 <Link to="/location" className="nav-link">
                   <span className="span-logo"></span>
                   <span className="span-text">Location</span>
@@ -39,7 +45,8 @@ const Navbar = () => {
                   <span className="span-logo"></span>
                   <span className="span-text">Users</span>
                 </Link>
-              </li>
+              </li></>}
+              
               
               <li className="nav-item">
                 <Link to="/profile" className="nav-link">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const LocationForm = () => {
+const LocationForm = (props) => {
   const [name, setName] = useState(null);
   const [seatingCapacity, setSeatingCapacity] = useState(null);
   const [address, setAddress] = useState(null);
@@ -44,6 +44,7 @@ const LocationForm = () => {
       })
       .then((data) => {
         setIsPending(false);
+        props.setflag(!props.flag);
       })
       .catch((error) => {
         setIsPending(false);
@@ -97,6 +98,7 @@ const LocationForm = () => {
               <input
                 type="text"
                 id="address"
+                style={{height:'80px'}}
                 value={address}
                 onChange={(e) => {
                   setAddress(e.target.value);

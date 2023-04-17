@@ -1,12 +1,13 @@
 import { configure } from "@testing-library/react";
 import logo from "../../Static/logo.jpg";
-import { useState, useEffect,useContext, } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../ContextApi/AuthContext";
 const Login = () => {
-  const navigate=useNavigate();
-  const contextType=useContext(AuthContext);
-  const {setToken,token,accessToken,updateaccessToken,updatetoken}=contextType;
+  const navigate = useNavigate();
+  const contextType = useContext(AuthContext);
+  const { setToken, token, accessToken, updateaccessToken, updatetoken } =
+    contextType;
   const [error, setError] = useState("");
   useEffect(() => {
     /* global google */
@@ -28,34 +29,42 @@ const Login = () => {
     document.body.appendChild(script);
   }, []);
   const handleLoginApi = (response) => {
-      fetch(`http://localhost:8081/auth/login`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ token: response.credential }),
+    fetch(`http://localhost:8081/auth/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ token: response.credential }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        return res.json();
       })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(res.statusText);
-          }
-          return res.json();
-        })
-        .then((data) => {
-          updateaccessToken(data)
-          if (data.length !== 0) {
-            var expirationTime = new Date();
-expirationTime.setTime(expirationTime.getTime() + (12 * 60 * 60 * 1000));
-var cookieValue = data.id + '|' + data.email + '|' + data.token;
-document.cookie = 'userdata=' + cookieValue + ';expires=' + expirationTime.toUTCString() + ';path=/';
-            localStorage.setItem("email", data.email);
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("userId", data.id);
-            console.log(data.accessToken)
-            navigate("/",true)   
-          }
-        })
-        .catch((error) => {
-          setError(error.message);
-        });
+      .then((data) => {
+        updateaccessToken(data);
+        if (data.length !== 0) {
+          var expirationTime = new Date();
+          expirationTime.setTime(
+            expirationTime.getTime() + 12 * 60 * 60 * 1000
+          );
+          var cookieValue = data.id + "|" + data.email + "|" + data.token;
+          document.cookie =
+            "userdata=" +
+            cookieValue +
+            ";expires=" +
+            expirationTime.toUTCString() +
+            ";path=/";
+          localStorage.setItem("email", data.email);
+          localStorage.setItem("accessToken", data.accessToken);
+          localStorage.setItem("userId", data.id);
+          localStorage.setItem("userRole", data.role);
+          console.log(data.accessToken);
+          navigate("/", true);
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
