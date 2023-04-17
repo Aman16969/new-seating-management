@@ -4,7 +4,7 @@ const GetLocation = (props) => {
   const [error, setError] = useState("");
   const [isPending, setIsPending] = useState(true);
   useEffect(() => {
-    const header = "Bearer " + localStorage.getItem("accessToken");
+    const header = "Bearer " + sessionStorage.getItem("accessToken");
     fetch(`http://localhost:8081/api/location/`, {
       headers: {
         "Content-type": "application/json",

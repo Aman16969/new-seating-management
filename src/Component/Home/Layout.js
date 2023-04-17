@@ -7,7 +7,7 @@ const Layout = (props) => {
   const [layout, setLayout] = useState(null);
   useEffect(() => {
     console.log(props.locationId);
-    const header = "Bearer " + localStorage.getItem("accessToken");
+    const header = "Bearer " + sessionStorage.getItem("accessToken");
     fetch(`http://localhost:8081/api/location/${props.locationId}`, {
       headers: {
         "Content-type": "application/json",

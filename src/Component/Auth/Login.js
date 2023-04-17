@@ -54,10 +54,10 @@ const Login = () => {
             ";expires=" +
             expirationTime.toUTCString() +
             ";path=/";
-          localStorage.setItem("email", data.email);
-          localStorage.setItem("accessToken", data.accessToken);
-          localStorage.setItem("userId", data.id);
-          localStorage.setItem("userRole", data.role);
+          sessionStorage.setItem("email", data.email);
+          sessionStorage.setItem("accessToken", data.accessToken);
+          sessionStorage.setItem("userId", data.id);
+          sessionStorage.setItem("userRole", data.role);
           console.log(data.accessToken);
           navigate("/", true);
         }

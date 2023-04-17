@@ -8,7 +8,7 @@ const EditLocation = (props) => {
   const [message, setMessage] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("accessToken");
+  const token = sessionStorage.getItem("accessToken");
   const convertToBase64 = (e) => {
     console.log(e.target.files);
     var reader = new FileReader();

@@ -21,7 +21,7 @@ const LocationForm = (props) => {
     };
   };
 
-  const token = "Bearer " + localStorage.getItem("accessToken");
+  const token = "Bearer " + sessionStorage.getItem("accessToken");
 
   const handleSubmit = (e) => {
     e.preventDefault();

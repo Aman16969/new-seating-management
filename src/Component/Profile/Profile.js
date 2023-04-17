@@ -9,8 +9,8 @@ function Profile() {
   const [isPending, setIsPending] = useState(true);
   const [Error, setError] = useState(null);
   const [accolite, setAccoliteid] = useState("");
-  const header = "Bearer " + localStorage.getItem("accessToken");
-  const userId = localStorage.getItem("userId");
+  const header = "Bearer " + sessionStorage.getItem("accessToken");
+  const userId = sessionStorage.getItem("userId");
   const [read,setReadOnly] =useState(true);
   const[message,setMessage]=useState("");
 

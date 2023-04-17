@@ -1,6 +1,6 @@
 const DeleteLocation = (props) => {
     const handleDelete = (locationId) => {
-        const header = "Bearer " + localStorage.getItem('accessToken');
+        const header = "Bearer " + sessionStorage.getItem('accessToken');
         console.log(props.location)
         fetch(`http://localhost:8081/api/location/${props.location}`, {
             method: 'DELETE',

@@ -9,8 +9,8 @@ const [isPending, setIsPending] = useState(true);
 const[message,setMessage]=useState("");
 const[bookId,setBookId]=useState(null);
 useEffect(() => {
-  const header = "Bearer " + localStorage.getItem('accessToken');
-  const userId = localStorage.getItem('userId');
+  const header = "Bearer " + sessionStorage.getItem('accessToken');
+  const userId = sessionStorage.getItem('userId');
   fetch(`http://localhost:8081/api/booking/user/?user=${userId}`, {
     headers: {
       Authorization: header,
@@ -37,7 +37,7 @@ const handlePopup=(e)=>{
   setIsOpenCon(true)
 }
 const handleDelete=(bookId)=>{
-  const header = "Bearer " + localStorage.getItem('accessToken');
+  const header = "Bearer " + sessionStorage.getItem('accessToken');
   fetch(`http://localhost:8081/api/booking/${bookId}`,{
     method:'DELETE',
     headers:{

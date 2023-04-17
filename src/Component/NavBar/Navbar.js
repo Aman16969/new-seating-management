@@ -5,7 +5,7 @@ import AuthContext from "../../ContextApi/AuthContext";
 const Navbar = () => {
   const authContext=useContext(AuthContext);
   const {userrole,setUserrole}=authContext;
-  const role=localStorage.getItem("userRole");
+  const role=sessionStorage.getItem("userRole");
   console.log(userrole)
   return (
     <>
@@ -15,7 +15,7 @@ const Navbar = () => {
             <img src="" alt="" />
             <span className="b-title">Accolite Digital</span>
           </div>
-          {/* <span style={{ fontSize:'15px'}}>{localStorage.getItem("email")}</span> */}
+          {/* <span style={{ fontSize:'15px'}}>{sessionStorage.getItem("email")}</span> */}
           <div className="navbar-content">
             <ul className="inner-navbar">
               <li className="nav-item">

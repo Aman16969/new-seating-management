@@ -12,7 +12,7 @@ const GetSeat = ({date,locationId,seatId,...props}) => {
 
     useEffect(()=>{
       if(date && locationId){
-        const header = "Bearer " + localStorage.getItem('accessToken');
+        const header = "Bearer " + sessionStorage.getItem('accessToken');
         fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
             headers: {
               Authorization: header,
@@ -39,7 +39,7 @@ const GetSeat = ({date,locationId,seatId,...props}) => {
 
     useEffect(()=>{
       if(locationId && date){
-        const header = "Bearer " + localStorage.getItem('accessToken');
+        const header = "Bearer " + sessionStorage.getItem('accessToken');
         fetch(`http://localhost:8081/api/booking/availabe/locationAndDate?location=${locationId}&date=${date}`, {
             headers: {
               Authorization: header,

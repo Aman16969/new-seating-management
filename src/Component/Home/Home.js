@@ -15,10 +15,10 @@ const Home = () => {
     const[flagBooking,setFlagBooking]=useState(false)
 
     const handleBooking=()=>{
-      const header = "Bearer " + localStorage.getItem('accessToken');
+      const header = "Bearer " + sessionStorage.getItem('accessToken');
       const bookingDetail = {
         location_id: locationId,
-        user_id: localStorage.getItem("userId"),
+        user_id: sessionStorage.getItem("userId"),
         seat_id: seatId,
         date: date,
       };

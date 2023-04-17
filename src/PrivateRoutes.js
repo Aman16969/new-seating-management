@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 const checkToken = () => {
-  let token = localStorage.getItem("accessToken");
+  let token = sessionStorage.getItem("accessToken");
   console.log(token);
   return token ? true : false;
 };
