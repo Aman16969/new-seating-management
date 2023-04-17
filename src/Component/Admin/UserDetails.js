@@ -51,19 +51,19 @@ function UserDetails() {
           </header>
 
           <div className="row-card">
-            <div className="row-card-body" style={{ height: '490px' }}>
+            <div className="row-card-body" style={{ height: "490px" }}>
               <div className="row-card-title">
                 <table>
-                  <tr className="table-row">
+                  <tr className="user-row">
                     <th>Accolite Id</th>
-                    <th style={{width:'250px'}}>Email</th>
+                    <th>Email</th>
                     <th>First name</th>
                     <th>Last name</th>
                     <th>Role</th>
                   </tr>
                 </table>
               </div>
-              <div className="table-scroll" >
+              <div className="table-scroll">
                 <table className="table">
                   <tbody>
                     {userDetails.map((user) => (
@@ -82,10 +82,8 @@ function UserDetails() {
           </div>
         </div>
       </div>
-
-
-        </>
-        );
+    </>
+  );
 }
 
-        export default UserDetails;
+export default UserDetails;
