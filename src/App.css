@@ -1,6 +1,6 @@
 .navbar {
   font-variant: small-caps;
-  
+
   display: block;
   color: #a9b7d0;
   top: 0;
@@ -8,9 +8,9 @@
   position: fixed;
   height: 100%;
   box-shadow: 5px 7px 10px #3f4d67;
-  background-image: linear-gradient(#2b5876 , #4e4376);
+  background-image: linear-gradient(#2b5876, #4e4376);
 }
-.acc-logo{
+.acc-logo {
   width: 200px;
   height: 50px;
 }
@@ -97,7 +97,7 @@ menu-item {
   float: unset;
   margin-left: 235px;
   background-color: #f3f3ff;
-  background-image: linear-gradient(rgba(219, 250, 255, 0.53) ,   #d2f8ff);
+  background-image: linear-gradient(rgba(219, 250, 255, 0.53), #d2f8ff);
   min-height: 98vh;
 }
 .container-content {
@@ -145,20 +145,17 @@ menu-item {
   top: 20px;
   width: 2px;
   height: 25px;
-  
 }
 .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
-  
 }
 .table tbody {
   box-sizing: border-box;
   display: table-row-group;
   vertical-align: middle;
-  
 }
 .table-row {
   display: table-row;
@@ -177,11 +174,10 @@ menu-item {
   top: 20px;
   width: 2px;
   height: 25px;
-  
 }
-/* .table-row th {
+.table-row th {
   width: 25%;
-} */
+}
 .table-row td {
   width: 25%;
 }
@@ -203,7 +199,7 @@ menu-item {
   overflow-y: scroll;
 }
 .table-scroll::-webkit-scrollbar {
-  display:flex
+  display: flex;
 }
 
 .card-body {
@@ -482,7 +478,7 @@ menu-item {
 /* popup */
 .popupContainer {
   top: 0;
-  left: 0;;
+  left: 0;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -501,7 +497,7 @@ menu-item {
   border-radius: 3px;
   box-shadow: 0 2px 2px #007bff;
 }
-#pop-edit{
+#pop-edit {
   height: 80vh;
 }
 .popupHeader h2 {
@@ -696,7 +692,7 @@ menu-item {
 }
 
 .user-row:hover {
-   background-color: #bad4fe;
+  background-color: #bad4fe;
 }
 
 .user-row {
@@ -711,23 +707,22 @@ menu-item {
   background-color: transparent #3f4d670d;
 }
 /* Layout */
-.view-layout-icon{
+.view-layout-icon {
   height: 35px;
   width: 70px;
   padding: 2px 2px 2px 2px;
   /* background-color: #e0f9ff; */
   /* border: 1px solid #7daefd; */
 }
-.view-layout-icon:hover{
+.view-layout-icon:hover {
   background-color: #d2f2ff;
 }
-.container-layout-location{
+.container-layout-location {
   width: 100%;
   background-color: #c7e2e7;
   border: 1px solid rgb(230, 230, 230);
-
 }
-.location-layout-img{
+.location-layout-img {
   height: 500px;
   width: 500px;
 }
