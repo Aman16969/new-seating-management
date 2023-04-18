@@ -3,6 +3,7 @@ import logo from "../../Static/logo.jpg";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../ContextApi/AuthContext";
+import book from "../../Static/book.jpg";
 const Login = () => {
   const navigate = useNavigate();
   const contextType = useContext(AuthContext);
@@ -21,6 +22,7 @@ const Login = () => {
         theme: "outline",
         size: "large",
         type: "standard",
+        
       });
     };
     const script = document.createElement("script");
@@ -69,47 +71,39 @@ const Login = () => {
 
   return (
     <>
+
       <div className="container-login">
         <div className="header">
+        <style>
+         @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap')
+        </style>
+
           <div className="logo">
             <img src={logo} alt="logo" />
           </div>
           <div className="login-button">
-            <div id="LoginButton"></div>
+           <div id="LoginButton"></div>
           </div>
         </div>
-        <div className="title">
-          <h1>Accolite Digital</h1>
+        <div className="girlbook">
+        <img className="book" src={book} alt= "book" width="500" height="300" />
         </div>
+        <span className="heading"> <h1 >Book your</h1> </span>
+          <span className="heading2"> <h3>seats now!</h3></span>
+        
+        {/* <div className="seatlogo">
+       <center> <img src={seat_transparent} alt= "seat_transparent" width="500" height="300" /></center>
+        </div> */}
+
         <div className="content">
-        <h1 style={{color:"orange"}}>Seating Management System</h1>
+        {/* <h1 style={{color:"white"}}>Seating Management System</h1> */}
           {error && <div>{error}</div>}
           {accessToken && <div>{accessToken.email}</div>}
-          <h1>Welcome to Our Innovative Digital Transformation Services!</h1>
-          <p>
-            At our company, we believe in approaching complex digital challenges
-            with an innovative design thinking approach. We work hand-in-hand
-            with Fortune 500 clients to simplify their digital journeys, driving
-            their success in today's fast-paced, technology-driven world.
-          </p>
-          <h3>Our People Are Our Strength</h3>
-          <p>
-            At the heart of our business is our talented team of world-class
-            technologists who are passionate about helping our clients overcome
-            their most pressing technology challenges. With their expertise, we
-            guide our clients from vision to reality, empowering them to respond
-            to disruptive technologies and stay ahead of the curve.
-          </p>
-          <h3>Success Is Our Priority</h3>
-          <p>
-            We are committed to delivering exceptional value to our clients by
-            focusing on their success. Our core value of driving customer
-            success is the driving force behind everything we do. We collaborate
-            closely with our clients to understand their unique needs and
-            deliver customized digital solutions that enable them to thrive in
-            the digital landscape.
-          </p>
+        
+         
         </div>
+      
       </div>
     </>
   );
