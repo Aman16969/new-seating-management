@@ -13,7 +13,9 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-wrapper">
           <div className="navbar-header-logo">
-            <img src={accLogo} alt="" className="acc-logo" />
+            {/* <img src={accLogo} alt="" className="acc-logo" /> */}
+            <img className="acc-logo" style={{width: '182px',height: '64px'}} src="https://www.accolite.com/assets/jpg/homebannerimages/accolite-logo.svg" class="navbar-image" alt="Accolite Digital Logo"/>
+
             
           </div>
           {/* <span style={{ fontSize:'15px'}}>{sessionStorage.getItem("email")}</span> */}

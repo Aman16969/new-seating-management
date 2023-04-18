@@ -67,7 +67,7 @@ const LocationList = (props) => {
                     <td>
                       <img src={location.image} alt="layout" className="layout-img"/>
                     </td>
-                    <td className="action">
+                    <td id="action">
                       <img
                         className="action-icons"
                         id="edit"
@@ -92,9 +92,9 @@ const LocationList = (props) => {
           </div>
         </div>
       </div>
-      {isOpenCon && <DeleteLocation location={locationId} setMessage={setMessage} setIsOpenCon={setIsOpenCon}  />
+      {isOpenCon && <DeleteLocation locations={locations} location={locationId} setMessage={setMessage} setIsOpenCon={setIsOpenCon}  />
         }
-        {isOpenEdit && <EditLocation location={locationId} setIsOpenEdit={setIsOpenEdit}/>}
+        {isOpenEdit && <EditLocation locations={locations} location={locationId} setIsOpenEdit={setIsOpenEdit}/>}
     </>
   );
 };

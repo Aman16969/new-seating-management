@@ -29,6 +29,7 @@ const Login = () => {
     document.body.appendChild(script);
   }, []);
   const handleLoginApi = (response) => {
+    console.log(response.credential)
     fetch(`http://localhost:8081/auth/login`, {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -85,29 +86,17 @@ const Login = () => {
         <h1 style={{color:"orange"}}>Seating Management System</h1>
           {error && <div>{error}</div>}
           {accessToken && <div>{accessToken.email}</div>}
-          <h1>Welcome to Our Innovative Digital Transformation Services!</h1>
+          {/* <h1>Welcome to Our Innovative Digital Transformation Services!</h1> */}
           <p>
-            At our company, we believe in approaching complex digital challenges
-            with an innovative design thinking approach. We work hand-in-hand
-            with Fortune 500 clients to simplify their digital journeys, driving
-            their success in today's fast-paced, technology-driven world.
+          Welcome to our seat management system! This platform is designed to help you book a desk or workspace when you need to work from the office. By reserving your workspace in advance, you can ensure that you have a comfortable and productive environment to get your work done.
           </p>
-          <h3>Our People Are Our Strength</h3>
+          <br />
           <p>
-            At the heart of our business is our talented team of world-class
-            technologists who are passionate about helping our clients overcome
-            their most pressing technology challenges. With their expertise, we
-            guide our clients from vision to reality, empowering them to respond
-            to disruptive technologies and stay ahead of the curve.
+          Using our system is easy and intuitive. Simply log in with your company credentials, select the date and time you plan to work from the office, and choose the workspace that suits your needs.
           </p>
-          <h3>Success Is Our Priority</h3>
+          <br />
           <p>
-            We are committed to delivering exceptional value to our clients by
-            focusing on their success. Our core value of driving customer
-            success is the driving force behind everything we do. We collaborate
-            closely with our clients to understand their unique needs and
-            deliver customized digital solutions that enable them to thrive in
-            the digital landscape.
+          Thank you for using our seat management system. We hope you find it helpful and convenient!
           </p>
         </div>
       </div>

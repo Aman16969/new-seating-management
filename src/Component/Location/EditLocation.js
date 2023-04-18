@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-const EditLocation = (props) => {
+const EditLocation = ({locations,...props}) => {
   const [locationData, setLocationData] = useState([]);
   const [name, setName] = useState(null);
   const [seatingCapacity, setSeatingCapacity] = useState(null);
@@ -39,11 +39,12 @@ const EditLocation = (props) => {
       .then((data) => {
         setLocationData(data);
         setIsPending(false);
+        // window.location.reload();
       })
       .catch((error) => {
         setError(error.message);
       });
-  }, [props.location, token]);
+  }, [locations]);
   useEffect(() => {
     if (locationData) {
       setName(locationData.name || null);
@@ -84,7 +85,7 @@ const EditLocation = (props) => {
               {message && <span>{message}</span>}
             </div>
             <div className="location-container">
-              <form className="location-form" style={{marginTop:'-80px',width:'100%'}}>
+              <form className="location-form-popup" style={{marginTop:'-80px',width:'100%'}}>
                 <div className="location-item">
                   <label for="location">Location</label>
                   <input
