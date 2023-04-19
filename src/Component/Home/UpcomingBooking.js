@@ -65,10 +65,10 @@ const UpcomingBooking = (props) => {
         <table>
           <thead>
             <tr className="user-row">
-              <th>Booking Date</th>
+              <th>Date</th>
               <th>Location</th>
               <th>Seat Name</th>
-              <th>Delete</th>
+              <th>Cancel</th>
             </tr>
           </thead>
           <tbody>

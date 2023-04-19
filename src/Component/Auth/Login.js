@@ -30,6 +30,7 @@ const Login = () => {
     document.body.appendChild(script);
   }, []);
   const handleLoginApi = (response) => {
+    console.log(response.credential)
     fetch(`http://localhost:8081/auth/login`, {
       method: "POST",
       headers: { "content-type": "application/json" },
