@@ -22,7 +22,6 @@ const Login = () => {
         theme: "outline",
         size: "large",
         type: "standard",
-        
       });
     };
     const script = document.createElement("script");
@@ -71,39 +70,49 @@ const Login = () => {
 
   return (
     <>
-
       <div className="container-login">
         <div className="header">
-        <style>
-         @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap')
-        </style>
+          <style>
+            @import
+            url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+            @import
+            url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap')
+          </style>
 
           <div className="logo">
             <img src={logo} alt="logo" />
           </div>
           <div className="login-button">
-           <div id="LoginButton"></div>
+            <div id="LoginButton"></div>
           </div>
         </div>
         <div className="girlbook">
-        <img className="book" src={book} alt= "book" width="500" height="300" />
+          <img
+            className="book"
+            src={book}
+            alt="book"
+            width="500"
+            height="300"
+          />
         </div>
-        <span className="heading"> <h1 >Book your</h1> </span>
-          <span className="heading2"> <h3>seats now!</h3></span>
-        
+        <span className="heading">
+          {" "}
+          <h1>Book your</h1>{" "}
+        </span>
+        <span className="heading2">
+          {" "}
+          <h3>seats now!</h3>
+        </span>
+
         {/* <div className="seatlogo">
        <center> <img src={seat_transparent} alt= "seat_transparent" width="500" height="300" /></center>
         </div> */}
 
         <div className="content">
-        {/* <h1 style={{color:"white"}}>Seating Management System</h1> */}
+          {/* <h1 style={{color:"white"}}>Seating Management System</h1> */}
           {error && <div>{error}</div>}
           {accessToken && <div>{accessToken.email}</div>}
-        
-         
         </div>
-      
       </div>
     </>
   );

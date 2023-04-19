@@ -466,31 +466,28 @@ id.login-button {
   padding: 5px; */
   margin-top: 50%;
   left: 50%;
-  
 }
 
 .login-button:hover {
   color: aliceblue;
 }
 
-
- .heading h1{
+.heading h1 {
   color: white;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   width: 53.33%;
   margin-top: -18.5rem;
   margin-left: 3rem;
   font-size: 100px;
 }
- .heading2 h3 {
+.heading2 h3 {
   color: white;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 90px;
   margin-left: 3.5rem;
   margin-top: -2rem;
-  
 }
- /* video{
+/* video{
   position: fixed;
   top: 0;
   left: 0;
@@ -503,15 +500,14 @@ id.login-button {
  filter: drop-shadow(10px 10px 10px rgb(154, 96, 8));
  
 } */
-.girlbook{
+.girlbook {
   margin-left: 50%;
   margin-top: 5%;
   width: 33.33%;
 }
-.book{
+.book {
   border-radius: 2%;
-  filter: drop-shadow(20px 20px 20px rgb(75, 89, 223)); 
- 
+  filter: drop-shadow(20px 20px 20px rgb(75, 89, 223));
 }
 /* login */
 
