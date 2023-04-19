@@ -4,6 +4,7 @@ import UpcomingBooking from "./UpcomingBooking";
 import seat from "../../Static/seats.png";
 import GetSeat from "./GetSeat";
 import Layout from "./Layout";
+import Booking from "./Booking";
 const Home = () => {
   const [countall, setCountAll] = useState(0);
   const [countAvailable, setCountAvailable] = useState(0);
@@ -57,7 +58,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="row-card">
+            {/* <div className="row-card">
               <div className="row-card-title">
                 <h2>Book Seats</h2>
               </div>
@@ -105,7 +106,6 @@ const Home = () => {
                       setCountAvailable={setCountAvailable}
                       setCountAll={setCountAll}
                     />
-                    {/* <img src={seat} alt="" className="seat-display-img"/>  */}
                   </div>
                   <div className="seat-book-item">
                     <p>
@@ -137,7 +137,8 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
+            <Booking/>
           </div>
         </div>
       </div>

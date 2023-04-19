@@ -58,6 +58,7 @@ const Login = () => {
           sessionStorage.setItem("accessToken", data.accessToken);
           sessionStorage.setItem("userId", data.id);
           sessionStorage.setItem("userRole", data.role);
+          sessionStorage.setItem("locationId", data.locationId);
           console.log(data.accessToken);
           navigate("/", true);
         }
