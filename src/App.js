@@ -11,6 +11,7 @@ import Profile from "./Component/Profile/Profile";
 import UserDetails from "./Component/Admin/UserDetails";
 import RoleRoutes from "./RoleRoutes";
 import Request from "./Component/Forms/Request";
+import BookingForm from "./Component/Forms/BookingRoom";
 function App() {
   return (
     <div className="App">
