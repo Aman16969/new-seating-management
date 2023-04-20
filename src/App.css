@@ -1,23 +1,86 @@
 .navbar {
   font-variant: small-caps;
-
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #0c0c0c;
   top: 0;
   left: 0;
   position: fixed;
-  height: 100%;
-  box-shadow: 5px 7px 10px #3f4d67;
+  width: 100%;
+  height: 60px;
+  /* box-shadow: 5px 7px 10px #3f4d67; */
   background-image: linear-gradient(#2b5876, #4e4376);
+
+  height: 45px;
+  border-radius: 2px;
 }
+.navbar-wrapper {
+  display: block;
+
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  padding: 0 20px;
+}
+.navbar li {
+  padding-right: 10px;
+  margin: 0 5px;
+}
+
+.navbar li a {
+  font-variant: small-caps;
+  text-decoration: none;
+  color: rgb(9, 7, 7);
+  border-width: 1px;
+}
+
+.navbar li a:hover {
+  color: #eb7d21;
+  transform: scale(1.2);
+  font-weight: bold;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropbtn {
+  cursor: pointer;
+  height: 30px;
+}
+.dropbtn:hover {
+  height: 40px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 17px;
+}
+
+.navbar li:last-child {
+  margin-left: auto;
+}
+
 .acc-logo {
   width: 200px;
   height: auto;
 }
-.navbar-wrapper {
-  width: 100%;
-  height: 100%;
-}
+
 .b-title:hover {
   color: #f46c1d;
 }
@@ -51,62 +114,60 @@ menu-item {
   height: 40px;
   margin-top: 10px;
   margin-left: 20px;
-  font-size: 20px;
-  font-weight: 400;
 }
-.navbar-content {
+
+/* .navbar-content {
   padding: 5px;
   margin: 5px 0;
   position: relative;
   font-size: 17px;
-  font-family: "Lato", sans-serif;
-  font-family: "Raleway", sans-serif;
-}
+} */
 .inner-navbar {
   text-align: left;
-  padding: 7px 7px 7px 7px;
+  padding: 7px;
   margin: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 5px 0;
+  position: relative;
+  font-size: 17px;
 }
 .nav-item {
   height: 30px;
-  margin-top: 20px;
-  font-size: 50px;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 .inner-navbar li {
   text-align: left;
-  padding: 10px 15px;
-  margin: 10px 0 10px;
-  display: block;
+  padding: 0 15px;
+  margin: 0;
+  display: flex;
+  align-items: center;
   border-radius: 50%;
   position: relative;
 }
-.inner-navbar a {
-  text-decoration: none;
-}
+
 .span-text {
   color: #dadaf5;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 20px;
+  margin: 0 10px;
 }
 .span-text:hover {
-  color: #66fcf1;
-  font-size: 17px;
+  color: #f46c1d;
+  transform: scale(1.2);
 }
+
 .container {
   position: relative;
   margin: 0 auto;
   display: block;
   float: unset;
-  margin-left: 235px;
+  margin-top: 50px;
   background-color: #f3f3ff;
   background-image: linear-gradient(rgba(219, 250, 255, 0.53), #d2f8ff);
-  background-color: #fdfdff;
-  background-image: linear-gradient(rgb(252, 252, 252), #ffffff);
-  min-height: 98vh;
+  height: fit-content;
+  min-height: 90vh;
 }
 .container-content {
   box-sizing: border-box;
@@ -122,7 +183,7 @@ menu-item {
   column-gap: 20px;
   row-gap: 20px;
   justify-content: space-between;
-  height: 90vh;
+  /* height: 90vh; */
 }
 .row-card {
   box-sizing: border-box;
