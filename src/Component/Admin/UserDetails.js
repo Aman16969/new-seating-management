@@ -5,7 +5,7 @@ function UserDetails() {
   const [userDetails, setUserDetails] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
-  const header = "Bearer " + localStorage.getItem("accessToken");
+  const header = "Bearer " + sessionStorage.getItem("accessToken");
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -21,6 +21,7 @@ function UserDetails() {
           throw new Error("Response not received");
         }
         const data = await response.json();
+        console.log(data)
         setUserDetails(data);
         setIsPending(false);
       } catch (err) {

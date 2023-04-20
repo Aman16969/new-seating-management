@@ -38,8 +38,8 @@ const UpcomingBooking = (props) => {
   };
   const handleDelete = (bookId) => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
-    fetch(`http://localhost:8081/api/booking/${bookId}`, {
-      method: "DELETE",
+    fetch(`http://localhost:8081/api/booking/${bookId}/false`, {
+      method: "PUT",
       headers: {
         Authorization: header,
       },
