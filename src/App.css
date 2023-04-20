@@ -2,7 +2,7 @@
   font-variant: small-caps;
 
   display: block;
- background-color: #0c0c0c;
+  background-color: #0c0c0c;
   top: 0;
   left: 0;
   position: fixed;
@@ -59,8 +59,8 @@ menu-item {
   margin: 5px 0;
   position: relative;
   font-size: 17px;
-  font-family: 'Lato', sans-serif;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Lato", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 .inner-navbar {
   text-align: left;
@@ -93,7 +93,7 @@ menu-item {
   font-size: 20px;
 }
 .span-text:hover {
-  color: #66FCF1;
+  color: #66fcf1;
   font-size: 17px;
 }
 .container {
@@ -105,7 +105,7 @@ menu-item {
   background-color: #f3f3ff;
   background-image: linear-gradient(rgba(219, 250, 255, 0.53), #d2f8ff);
   background-color: #fdfdff;
-  background-image: linear-gradient(rgb(252, 252, 252) ,   #ffffff);
+  background-image: linear-gradient(rgb(252, 252, 252), #ffffff);
   min-height: 98vh;
 }
 .container-content {
@@ -268,7 +268,7 @@ menu-item {
 
 /* Seat  */
 
-.seat {
+/* .seat {
   display: flex;
   flex: 0 0 14.28571428571429%;
   padding: 5px;
@@ -279,6 +279,23 @@ menu-item {
 
 .seat:nth-child(3) {
   margin-right: 14.28571428571429%;
+} */
+
+.seat-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.seat-container > .seat {
+  flex: 0 0 14%;
+  padding: 5px;
+  position: relative;
+  width: 35px;
+  height: 40px;
+}
+
+.seat-container > .seat:nth-child(20n + 1) {
+  margin-right: 14%;
 }
 
 .seat input[type="checkbox"] {
