@@ -1,9 +1,9 @@
 import { useState } from "react";
 import GetLocation from "./GetLocation";
 import UpcomingBooking from "./UpcomingBooking";
-import seat from "../../Static/seats.png";
 import GetSeat from "./GetSeat";
 import Layout from "./Layout";
+import CompletedBooking from "./CompletedBooking";
 const Home = () => {
   const [countall, setCountAll] = useState(0);
   const [countAvailable, setCountAvailable] = useState(0);
@@ -43,13 +43,18 @@ const Home = () => {
         <div className="container-content">
           <div className="row">
             <div className="row-card">
-              <div className="row-card-title">
-                <h2>Upcoming Booking</h2>
-              </div>
+              <span className="btn-group">
+                <button ><h3>Upcoming Booking</h3></button>
+                <button ><h3>Completed Booking</h3></button>
+              </span>
               <div className="row-card-body">
                 <div className="table-scroll">
                   <table className="table">
                     <UpcomingBooking
+                      setFlagBooking={setFlagBooking}
+                      flagBooking={flagBooking}
+                    />
+                     <CompletedBooking
                       setFlagBooking={setFlagBooking}
                       flagBooking={flagBooking}
                     />
