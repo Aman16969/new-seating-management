@@ -67,12 +67,12 @@ const GetSeat = ({date,locationId,seatId,...props}) => {
       props.setSeatId(e.id)
     }
     return ( <>
-    {isPendings && 
+    {/* {isPendings && 
     <div >
       <img src={accolite} alt="" className="accolite-logo-img"/>
     </div>
     
-      }
+      } */}
     {/* {error&&<span>{error}</span>} */}
 
 

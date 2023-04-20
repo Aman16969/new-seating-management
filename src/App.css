@@ -1,14 +1,12 @@
 .navbar {
   font-variant: small-caps;
-  
   display: block;
-  color: #a9b7d0;
+ background-color: #0c0c0c;
   top: 0;
   left: 0;
   position: fixed;
   height: 100%;
   box-shadow: 5px 7px 10px #3f4d67;
-  background-image: linear-gradient(#2b5876 , #4e4376);
 }
 .acc-logo{
   width: 200px;
@@ -26,19 +24,22 @@ menu-item {
   margin-bottom: 20px;
 }
 
-.menu-caption {
-  /* border: 1px solid black; */
+/* .menu-caption {
+  border: 1px solid black;
   display: flex;
   flex-direction: row;
   width: 105%;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
-.seat-header-img {
-  height: 30px;
-  width: 30px;
-  border: 1px;
+.seat-transparent {
+  /* margin-top: 100px; 
+  height: 300px; */
+  height: auto;
+  max-width: 100%;
+  margin-right: 2rem;
+  /* object-position: left top; */
 }
 .seat-header-img:hover {
   height: 32px;
@@ -56,6 +57,8 @@ menu-item {
   margin: 5px 0;
   position: relative;
   font-size: 17px;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 .inner-navbar {
   text-align: left;
@@ -68,6 +71,7 @@ menu-item {
 .nav-item {
   height: 30px;
   margin-top: 20px;
+  font-size: 50px;
 }
 .inner-navbar li {
   text-align: left;
@@ -84,10 +88,10 @@ menu-item {
   color: #dadaf5;
   margin-top: 20px;
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 20px;
 }
 .span-text:hover {
-  color: #00aaff;
+  color: #66FCF1;
   font-size: 17px;
 }
 .container {
@@ -96,8 +100,8 @@ menu-item {
   display: block;
   float: unset;
   margin-left: 235px;
-  background-color: #f3f3ff;
-  background-image: linear-gradient(rgba(219, 250, 255, 0.53) ,   #d2f8ff);
+  background-color: #fdfdff;
+  background-image: linear-gradient(rgb(252, 252, 252) ,   #ffffff);
   min-height: 98vh;
 }
 .container-content {
@@ -122,7 +126,7 @@ menu-item {
   box-shadow: 2px 1px 10px #4b4476;
   display: block;
   border-radius: 3px;
-  background-image: linear-gradient(#c7dbff, #c7e2e7);
+  background-image: linear-gradient(#f7ffc7, #c7e2e7);
 }
 .row-card-title {
   top: 0;
@@ -769,3 +773,6 @@ id.login-button {
   height: 500px;
   width: 500px;
 }
+.btn-group button{
+ width:50%;
+ }
