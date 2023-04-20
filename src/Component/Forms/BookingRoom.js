@@ -14,9 +14,12 @@ function BookingForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <center><h2>Board Room Booking</h2></center>
-      <div className="form-group">
+    <form onSubmit={handleSubmit} className='form-group'>
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Raleway:wght@600&display=swap');
+</style>
+        <center><h2>BOARD ROOM BOOKING</h2></center>
+      <div >
         
         <center><label htmlFor="date">Date</label></center>
        <center><input
@@ -28,7 +31,8 @@ function BookingForm() {
           required
         /></center> 
       </div>
-      <div className="form-group">
+      <p></p>
+      <div>
         <center><label htmlFor="start-time">Start Time</label></center>
         <center><input
           type="time"
@@ -39,7 +43,8 @@ function BookingForm() {
           required
         /></center>
       </div>
-     <div className="form-group">
+      <p></p>
+     <div >
      <center><label htmlFor="end-time">End Time</label></center>
        <center><input
           type="time"
@@ -50,7 +55,8 @@ function BookingForm() {
           required
         /></center> 
       </div>
-      <div className="form-group">
+      <p></p>
+      <div >
        <center> <label htmlFor="location">Location</label></center>
        <center><select
           id="location"
@@ -65,7 +71,8 @@ function BookingForm() {
           <option value="Hyderabad">Hyderabad</option>
         </select></center> 
       </div>
-      <div className="form-group">
+      <p></p>
+      <div >
       <center> <label htmlFor="board-room">Board Room</label></center> 
         <center><select
           id="board-room"
@@ -80,6 +87,7 @@ function BookingForm() {
           <option value="Board Room 3">Board Room C</option>
         </select></center>
       </div>
+      <p></p>
     <center><button type="submit" className="btn btn-primary">
         Book
       </button></center>  
