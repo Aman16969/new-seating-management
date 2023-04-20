@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
+import { excelToJson } from "./ExcelToJson";
 
 const LocationForm = (props) => {
   const [name, setName] = useState(null);
@@ -7,6 +8,7 @@ const LocationForm = (props) => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");
+  const fileInput = useRef(null);
 
   const convertToBase64 = (e) => {
     console.log(e.target.files);
@@ -51,6 +53,9 @@ const LocationForm = (props) => {
         setError(error.message);
       });
   };
+  const filePathset = (e) => {
+    console.log(e.target.files[0].name);
+  };
 
   return (
     <div className="row-card">
@@ -85,30 +90,34 @@ const LocationForm = (props) => {
               />
             </div>
             <div className="location-item">
+              <label for="location">Excel Sheet for Seats</label>
+              <div id="excel-sheet">
+                <input
+                  type="file"
+                  id="file"
+                  ref={fileInput}
+                  name="file"
+                  onChange={filePathset}
+                />
+                <button onClick={() => excelToJson(fileInput.current.files[0])}>
+                  Fetch Seats
+                </button>
+              </div>
+            </div>
+            <div className="location-item">
               <label for="image">Layout</label>
               <input
                 accept="image/"
                 type="file"
                 onChange={(e) => convertToBase64(e)}
-                required/>
-             
-            </div>
-            <div className="location-item">
-              <label for="location">Addresss</label>
-              <input
-                type="text"
-                id="address"
-                style={{height:'80px'}}
-                value={address}
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                }}
+                required
               />
             </div>
 
-            
             <div className="location-item">
-              {!isPending && <button className="button-group">Add Location</button>}
+              {!isPending && (
+                <button className="button-group">Add Location</button>
+              )}
             </div>
           </form>
         </div>

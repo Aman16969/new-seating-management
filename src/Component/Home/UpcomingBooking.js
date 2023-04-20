@@ -40,8 +40,10 @@ const UpcomingBooking = (props) => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
     fetch(`http://localhost:8081/api/booking/${bookId}/false`, {
       method: "PUT",
+
       headers: {
         Authorization: header,
+        mode: "no-cors",
       },
     })
       .then((res) => {
