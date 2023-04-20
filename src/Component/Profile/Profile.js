@@ -1,9 +1,9 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import profilePic from "../../Static/man.png";
 import AuthContext from "../../ContextApi/AuthContext";
 function Profile() {
-  const authContext=useContext(AuthContext);
-  const {userrole,setUserrole}=authContext;
+  const authContext = useContext(AuthContext);
+  const { userrole, setUserrole } = authContext;
   const [editMode, setEditMode] = useState(false);
   const [userDetail, setUserDetail] = useState(null);
   const [isPending, setIsPending] = useState(true);
@@ -11,8 +11,8 @@ function Profile() {
   const [accolite, setAccoliteid] = useState("");
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const userId = sessionStorage.getItem("userId");
-  const [read,setReadOnly] =useState(true);
-  const[message,setMessage]=useState("");
+  const [read, setReadOnly] = useState(true);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:8081/api/user/${userId}`, {
@@ -28,11 +28,11 @@ function Profile() {
       })
       .then((data) => {
         setUserDetail(data);
-        if(data){
-          setAccoliteid(data.accoliteId)
-          setUserrole(data.role)
+        if (data) {
+          setAccoliteid(data.accoliteId);
+          setUserrole(data.role);
         }
-        
+
         setIsPending(false);
       })
       .catch((err) => {
@@ -40,33 +40,32 @@ function Profile() {
       });
   }, []);
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch(`http://localhost:8081/api/user/${userId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json', 
+        "Content-Type": "application/json",
         Authorization: header,
       },
       body: accolite,
-      
-    }).then((res) => {
-      if (!res.ok) {
-        throw Error("Failed to update");
-      }
-      return res.json();
-    }).then((data)=>{
-      setMessage("User updated Successfully")
-      setReadOnly(true)
-      setTimeout(()=>{
-        window.location.reload()
-      },1000)
-     
     })
-    .catch((err) => {
-      throw Error(err.message);
-    });
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("Failed to update");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setMessage("User updated Successfully");
+        setReadOnly(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      })
+      .catch((err) => {
+        throw Error(err.message);
+      });
   };
 
   return (
@@ -85,7 +84,7 @@ function Profile() {
                     placeholder="Enter Accolite Id"
                     name="accolite_id"
                     id="accolite_id"
-                    onClick={()=>setReadOnly(false)}
+                    onClick={() => setReadOnly(false)}
                     required
                     readOnly={read}
                     value={accolite}
@@ -134,11 +133,8 @@ function Profile() {
                     value={userDetail.lastName}
                   />
                 </div>
-                <span style={{fontSize:'small'}}>{message}</span>
-{!read &&<button className="button-group" >
-                  Edit
-                </button>}
-                
+                <span style={{ fontSize: "small" }}>{message}</span>
+                {!read && <button className="button-group">Edit</button>}
               </form>
             </div>
           )}
