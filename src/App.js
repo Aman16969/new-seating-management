@@ -30,7 +30,6 @@ function App() {
               <Route exact path="/profile" element={<Profile />} />
               <Route element={<RoleRoutes />}>
                 <Route exact path="/location" element={<Location />} />
-                <Route exact path="/userdetails" element={<UserDetails />} />
               </Route>
               <Route exact path="/admin" element={<Admin/>} />
             </Route>

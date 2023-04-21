@@ -5,6 +5,7 @@ import Request from "./Request";
 const Admin = () => {
   return (
     <>
+      <div className="container">
       <div className="admin-container">
         <div className="admin-content">
           <div className="admin-content-row">
@@ -129,6 +130,7 @@ const Admin = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

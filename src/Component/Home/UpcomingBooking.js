@@ -30,7 +30,7 @@ const UpcomingBooking = (props) => {
       .catch((err) => {
         setIsPending(false);
       });
-  }, [props.flagBooking]);
+  }, []);
 
   const handlePopup = (e) => {
     setBookId(e);
