@@ -183,7 +183,7 @@ menu-item {
   background-color: #f3f3ff;
   background-image: linear-gradient(rgba(219, 250, 255, 0.53), #d2f8ff);
   height: fit-content;
-  min-height: calc(90vh-50px);
+  min-height: calc(90vh);
   width: 98.5%;
 }
 .container-content {
@@ -208,7 +208,7 @@ menu-item {
   box-shadow: 2px 1px 10px #4b4476;
   display: block;
   border-radius: 3px;
-  background-image: linear-gradient(#f7ffc7, #c7e2e7);
+  background-image: linear-gradient(#c7dbff, #c7e2e7);
 }
 .row-card-title {
   top: 0;
@@ -238,12 +238,11 @@ menu-item {
 }
 .btn-group button {
   width: 100%;
-}
-.table {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 1rem;
   background-color: transparent;
+  border: 0px;
+}
+.btn-group button:hover {
+  color: #1dc4e9;
 }
 .header-booking {
   width: 100%;
@@ -254,6 +253,12 @@ menu-item {
 .header-booking th,
 td {
   width: 20%;
+}
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .table tbody {

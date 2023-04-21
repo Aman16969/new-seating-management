@@ -1,13 +1,13 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 const CompletedBooking = (props) => {
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [upcomingBooking, setupcomingBooking] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [message, setMessage] = useState("");
   const [bookId, setBookId] = useState(null);
-  const[flag,setFlag]=useState(false)
+  const [flag, setFlag] = useState(false);
   const yearMonthDay = new Date();
-  const  currentDate= yearMonthDay .toISOString().substr(0, 10);
+  const currentDate = yearMonthDay.toISOString().substr(0, 10);
   useEffect(() => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
     const userId = sessionStorage.getItem("userId");
@@ -24,7 +24,7 @@ const CompletedBooking = (props) => {
       })
       .then((data) => {
         setupcomingBooking(data);
-        console.log(upcomingBooking)
+        console.log(upcomingBooking);
         setIsPending(false);
       })
       .catch((err) => {
@@ -36,12 +36,12 @@ const CompletedBooking = (props) => {
     setBookId(e);
     setIsOpenCon(true);
   };
- 
+
   return (
     <>
       {upcomingBooking && (
         <table>
-          <tbody>
+          <tbody className="header-booking">
             {isPending && <span>Loading.</span>}
             {upcomingBooking &&
               upcomingBooking
@@ -53,7 +53,6 @@ const CompletedBooking = (props) => {
                   return bookingDateA - bookingDateB;
                 })
                 .map((booking) => {
-                  
                   if (booking.date < currentDate) {
                     return (
                       <tr key={booking.id} className="user-row">
@@ -61,7 +60,6 @@ const CompletedBooking = (props) => {
                         <td>{booking.seat.name}</td>
                         <td>{booking.fromTime}</td>
                         <td>{booking.toTime}</td>
-                        
                       </tr>
                     );
                   } else {
@@ -71,10 +69,8 @@ const CompletedBooking = (props) => {
           </tbody>
         </table>
       )}
-     
     </>
   );
 };
-
 
 export default CompletedBooking;

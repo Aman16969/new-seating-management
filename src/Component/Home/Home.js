@@ -15,9 +15,9 @@ const Home = () => {
   const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
   const [flagBooking, setFlagBooking] = useState(false);
-  const[location,setLocation]=useState([]);
-  const[openBooking,setOpenBooking]=useState(true)
-  const userId=sessionStorage.getItem("userId");
+  const [location, setLocation] = useState([]);
+  const [openBooking, setOpenBooking] = useState(true);
+  const userId = sessionStorage.getItem("userId");
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
@@ -60,21 +60,31 @@ const Home = () => {
       }, 1500);
     });
   };
-  console.log(openBooking)
+  console.log(openBooking);
   return (
     <>
       <div className="container">
         <div className="container-content">
           <div className="row">
             <div className="row-card">
-              <span className="btn-group">
-                <button onClick={()=>{setOpenBooking(!openBooking)}}>
-                  <h3>Upcoming Booking</h3>
-                </button>
-                <button onClick={()=>{setOpenBooking(!openBooking)}}>
-                  <h3>Completed Booking</h3>
-                </button>
-              </span>
+              <div className="row-card-title">
+                <span className="btn-group">
+                  <button
+                    onClick={() => {
+                      setOpenBooking(!openBooking);
+                    }}
+                  >
+                    <h3>Upcoming Booking</h3>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setOpenBooking(!openBooking);
+                    }}
+                  >
+                    <h3>Completed Booking</h3>
+                  </button>
+                </span>
+              </div>
               <div className="row-card-body">
                 <table>
                   <tr className="header-booking">
@@ -86,15 +96,18 @@ const Home = () => {
                   </tr>
                 </table>
                 <div className="table-scroll">
-                  {openBooking && <UpcomingBooking
+                  {openBooking && (
+                    <UpcomingBooking
                       setFlagBooking={setFlagBooking}
                       flagBooking={flagBooking}
-                    />}
-                    {! openBooking && <CompletedBooking
+                    />
+                  )}
+                  {!openBooking && (
+                    <CompletedBooking
                       setFlagBooking={setFlagBooking}
                       flagBooking={flagBooking}
-                    />}
-                    
+                    />
+                  )}
                 </div>
               </div>
             </div>
