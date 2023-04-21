@@ -63,13 +63,16 @@ const UpcomingBooking = (props) => {
   };
   return (
     <>
-      {upcomingBooking && (
+
+    
+      {/* {upcomingBooking && (
         <table>
           <thead>
             <tr className="user-row">
               <th>Date</th>
-              <th>Location</th>
               <th>Seat Name</th>
+              <th>StartDate</th>
+              <th>End Date</th>
               <th>Cancel</th>
             </tr>
           </thead>
@@ -135,7 +138,7 @@ const UpcomingBooking = (props) => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };
