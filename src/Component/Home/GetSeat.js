@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import accolite from "../../Static/Accolite_Logo_Grey.png";
-const GetSeat = ({ date, locationId, seatId, ...props }) => {
+const GetSeat = ({ date, locationId,fromTime,toTime,seatId, ...props }) => {
   const [allSeats, setAllSeats] = useState([]);
   const [availableSeat, setAvailableSeat] = useState({});
   const [isPendings, setIsPendings] = useState(true);
@@ -9,7 +9,7 @@ const GetSeat = ({ date, locationId, seatId, ...props }) => {
   const seatDivs = [];
 
   useEffect(() => {
-    if (date && locationId) {
+    if (date && fromTime && toTime && locationId) {
       const header = "Bearer " + sessionStorage.getItem("accessToken");
       fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
         headers: {
@@ -24,6 +24,7 @@ const GetSeat = ({ date, locationId, seatId, ...props }) => {
         })
         .then((data) => {
           setAllSeats(data);
+          console.log(allSeats)
           props.setCountAll(data.length);
           setIsPendings(false);
           props.setFlagBooking(props.flagBooking);
@@ -32,13 +33,14 @@ const GetSeat = ({ date, locationId, seatId, ...props }) => {
           setError(error.message);
         });
     }
-  }, [locationId, date]);
+  }, [fromTime,toTime,locationId,date]);
+  
 
   useEffect(() => {
-    if (locationId && date) {
+    if (locationId && date && fromTime && toTime ) {
       const header = "Bearer " + sessionStorage.getItem("accessToken");
       fetch(
-        `http://localhost:8081/api/booking/availabe/locationAndDate?location=${locationId}&date=${date}`,
+        `http://localhost:8081/api/booking/available/locationDateTime?location=${locationId}&date=${date}&fromTime=${fromTime}&toTime=${toTime}`,
         {
           headers: {
             Authorization: header,
@@ -53,6 +55,7 @@ const GetSeat = ({ date, locationId, seatId, ...props }) => {
         })
         .then((data) => {
           setAvailableSeat(data);
+          console.log(availableSeat)
           props.setCountAvailable(Object.keys(data).length);
           setIsPendingsa(false);
           props.setFlagBooking(props.flagBooking);
@@ -61,24 +64,24 @@ const GetSeat = ({ date, locationId, seatId, ...props }) => {
           setError(error.message);
         });
     }
-  }, [date, locationId]);
+  }, [date, locationId,fromTime,toTime]);
   const handleChange = (e) => {
     props.setSeatName(e.name);
     props.setSeatId(e.id);
   };
   return (
     <>
-      {/* {isPendings && 
+      {isPendings && 
     <div >
       <img src={accolite} alt="" className="accolite-logo-img"/>
     </div>
     
-      } */}
+      }
       {/* {error&&<span>{error}</span>} */}
 
       {allSeats &&
         availableSeat &&
-        allSeats.map((seat, index) => {
+        allSeats.map((seat) => {
           if (availableSeat.hasOwnProperty(seat.id)) {
             return (
               <div className="seat">
@@ -97,8 +100,8 @@ const GetSeat = ({ date, locationId, seatId, ...props }) => {
                     onClick={() => handleChange(seat)}
                   />
                   <span>{seat.name}</span>
-                </label>{" "}
-                {(index + 1) % 20 === 0 && <br />}
+                </label>
+                {/* {(index + 1) % 20 === 0 && <br />} */}
               </div>
             );
           } else {
@@ -114,8 +117,8 @@ const GetSeat = ({ date, locationId, seatId, ...props }) => {
                     disabled
                   />
                   <span>{seat.name}</span>
-                </label>{" "}
-                {(index + 1) % 20 === 0 && <br />}
+                </label>
+                {/* {(index + 1) % 20 === 0 && <br />} */}
               </div>
             );
           }

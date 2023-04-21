@@ -8,29 +8,29 @@ const CompletedBooking = (props) => {
   const [isPending, setIsPending] = useState(true);
   const [message, setMessage] = useState("");
   const [bookId, setBookId] = useState(null);
-  useEffect(() => {
-    const header = "Bearer " + sessionStorage.getItem("accessToken");
-    const userId = sessionStorage.getItem("userId");
-    fetch(`http://localhost:8081/api/booking/user/?user=${userId}`, {
-      headers: {
-        Authorization: header,
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("Response not received");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setCompletedBooking(data);
-        setIsPending(false);
-        props.setFlagBooking(!props.flagBooking);
-      })
-      .catch((err) => {
-        setIsPending(false);
-      });
-  }, [props.flagBooking]);
+  // useEffect(() => {
+  //   const header = "Bearer " + sessionStorage.getItem("accessToken");
+  //   const userId = sessionStorage.getItem("userId");
+  //   fetch(`http://localhost:8081/api/booking/user/?user=${userId}`, {
+  //     headers: {
+  //       Authorization: header,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw Error("Response not received");
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       setCompletedBooking(data);
+  //       setIsPending(false);
+  //       props.setFlagBooking(!props.flagBooking);
+  //     })
+  //     .catch((err) => {
+  //       setIsPending(false);
+  //     });
+  // }, [props.flagBooking]);
 
   
   return (

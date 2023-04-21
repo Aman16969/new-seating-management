@@ -10,9 +10,11 @@ import Logout from "./Component/Auth/Logout";
 import Profile from "./Component/Profile/Profile";
 import UserDetails from "./Component/Admin/UserDetails";
 import RoleRoutes from "./RoleRoutes";
+import Admin from "./Component/Admin/Admin";
 function App() {
   return (
     <div className="App">
+ 
       <Auth>
         <Router>
           <Routes>
@@ -28,8 +30,8 @@ function App() {
               <Route exact path="/profile" element={<Profile />} />
               <Route element={<RoleRoutes />}>
                 <Route exact path="/location" element={<Location />} />
-                <Route exact path="/userdetails" element={<UserDetails />} />
               </Route>
+              <Route exact path="/admin" element={<Admin/>} />
             </Route>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/logout" element={<Logout />} />
