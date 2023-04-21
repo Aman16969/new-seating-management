@@ -251,8 +251,15 @@ menu-item {
   background-color: transparent;
 }
 .header-booking th,
-td {
+td,
+tr {
   width: 20%;
+}
+.header-booking > td {
+  text-align: center;
+}
+.header-booking > tr:hover {
+  background-color: #bad4fe;
 }
 .table {
   width: 100%;

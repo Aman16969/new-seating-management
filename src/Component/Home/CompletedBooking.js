@@ -41,7 +41,7 @@ const CompletedBooking = (props) => {
     <>
       {upcomingBooking && (
         <table>
-          <tbody className="header-booking">
+          <tbody>
             {isPending && <span>Loading.</span>}
             {upcomingBooking &&
               upcomingBooking
@@ -55,7 +55,7 @@ const CompletedBooking = (props) => {
                 .map((booking) => {
                   if (booking.date < currentDate) {
                     return (
-                      <tr key={booking.id} className="user-row">
+                      <tr key={booking.id} className="header-booking">
                         <td>{booking.date}</td>
                         <td>{booking.seat.name}</td>
                         <td>{booking.fromTime}</td>

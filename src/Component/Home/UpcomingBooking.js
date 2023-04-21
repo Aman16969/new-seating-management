@@ -1,14 +1,14 @@
 import { useEffect, useState, useContext } from "react";
-const UpcomingBooking = (props) => {  
+const UpcomingBooking = (props) => {
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [upcomingBooking, setupcomingBooking] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [message, setMessage] = useState("");
   const [bookId, setBookId] = useState(null);
-  const[flag,setFlag]=useState(false)
+  const [flag, setFlag] = useState(false);
 
   const yearMonthDay = new Date();
-  const  currentDate= yearMonthDay .toISOString().substr(0, 10);
+  const currentDate = yearMonthDay.toISOString().substr(0, 10);
 
   useEffect(() => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
@@ -26,7 +26,7 @@ const UpcomingBooking = (props) => {
       })
       .then((data) => {
         setupcomingBooking(data);
-        console.log(upcomingBooking)
+        console.log(upcomingBooking);
         setIsPending(false);
       })
       .catch((err) => {
@@ -57,7 +57,7 @@ const UpcomingBooking = (props) => {
       .then((e) => {
         setMessage("booking cancled successfully");
         setIsOpenCon(false);
-        setFlag(!flag)
+        setFlag(!flag);
       })
       .catch((err) => {
         setMessage(err.message);
@@ -66,8 +66,8 @@ const UpcomingBooking = (props) => {
   return (
     <>
       {upcomingBooking && (
-        <table>
-          <tbody>
+        <table className="header-booking">
+          <tbody className="header-booking">
             {isPending && <span>Loading.</span>}
             {upcomingBooking &&
               upcomingBooking
@@ -79,10 +79,10 @@ const UpcomingBooking = (props) => {
                   return bookingDateA - bookingDateB;
                 })
                 .map((booking) => {
-                  console.log(currentDate)
+                  console.log(currentDate);
                   if (booking.date >= currentDate) {
                     return (
-                      <tr key={booking.id} className="user-row">
+                      <tr key={booking.id} className="header-booking">
                         <td>{booking.date}</td>
                         <td>{booking.seat.name}</td>
                         <td>{booking.fromTime}</td>

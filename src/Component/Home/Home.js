@@ -86,8 +86,8 @@ const Home = () => {
                 </span>
               </div>
               <div className="row-card-body">
-                <table>
-                  <tr className="header-booking">
+                <table className="header-booking">
+                  <tr>
                     <th>Date</th>
                     <th>Seat Name</th>
                     <th>Start Time</th>
