@@ -1,13 +1,15 @@
 import { useEffect, useState, useContext } from "react";
-import AuthContext from "../../ContextApi/AuthContext";
-const UpcomingBooking = (props) => {
-  const authContext = useContext(AuthContext);
-  const { token, accessToken } = authContext;
+const UpcomingBooking = (props) => {  
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [upcomingBooking, setupcomingBooking] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [message, setMessage] = useState("");
   const [bookId, setBookId] = useState(null);
+  const[flag,setFlag]=useState(false)
+
+  const yearMonthDay = new Date();
+  const  currentDate= yearMonthDay .toISOString().substr(0, 10);
+
   useEffect(() => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
     const userId = sessionStorage.getItem("userId");
@@ -24,13 +26,13 @@ const UpcomingBooking = (props) => {
       })
       .then((data) => {
         setupcomingBooking(data);
+        console.log(upcomingBooking)
         setIsPending(false);
-        props.setFlagBooking(!props.flagBooking);
       })
       .catch((err) => {
         setIsPending(false);
       });
-  }, []);
+  }, [flag]);
 
   const handlePopup = (e) => {
     setBookId(e);
@@ -53,9 +55,9 @@ const UpcomingBooking = (props) => {
         return res.json();
       })
       .then((e) => {
-        setMessage("booking deleted successfully");
+        setMessage("booking cancled successfully");
         setIsOpenCon(false);
-        window.location.reload();
+        setFlag(!flag)
       })
       .catch((err) => {
         setMessage(err.message);
@@ -63,19 +65,8 @@ const UpcomingBooking = (props) => {
   };
   return (
     <>
-
-    
-      {/* {upcomingBooking && (
+      {upcomingBooking && (
         <table>
-          <thead>
-            <tr className="user-row">
-              <th>Date</th>
-              <th>Seat Name</th>
-              <th>StartDate</th>
-              <th>End Date</th>
-              <th>Cancel</th>
-            </tr>
-          </thead>
           <tbody>
             {isPending && <span>Loading.</span>}
             {upcomingBooking &&
@@ -88,14 +79,14 @@ const UpcomingBooking = (props) => {
                   return bookingDateA - bookingDateB;
                 })
                 .map((booking) => {
-                  const [year, month, day] = booking.date.split("-");
-                  const bookingDate = new Date(year, month - 1, day);
-                  if (bookingDate >= new Date()) {
+                  console.log(currentDate)
+                  if (booking.date >= currentDate) {
                     return (
                       <tr key={booking.id} className="user-row">
                         <td>{booking.date}</td>
-                        <td>{booking.location.name}</td>
                         <td>{booking.seat.name}</td>
+                        <td>{booking.fromTime}</td>
+                        <td>{booking.toTime}</td>
                         <td>
                           <button
                             className="button-group"
@@ -138,7 +129,7 @@ const UpcomingBooking = (props) => {
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </>
   );
 };

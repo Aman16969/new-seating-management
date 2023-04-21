@@ -15,8 +15,9 @@ const Home = () => {
   const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
   const [flagBooking, setFlagBooking] = useState(false);
-  const [location, setLocation] = useState([]);
-  const userId = sessionStorage.getItem("userId");
+  const[location,setLocation]=useState([]);
+  const[openBooking,setOpenBooking]=useState(true)
+  const userId=sessionStorage.getItem("userId");
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
@@ -59,6 +60,7 @@ const Home = () => {
       }, 1500);
     });
   };
+  console.log(openBooking)
   return (
     <>
       <div className="container">
@@ -66,10 +68,10 @@ const Home = () => {
           <div className="row">
             <div className="row-card">
               <span className="btn-group">
-                <button>
+                <button onClick={()=>{setOpenBooking(!openBooking)}}>
                   <h3>Upcoming Booking</h3>
                 </button>
-                <button>
+                <button onClick={()=>{setOpenBooking(!openBooking)}}>
                   <h3>Completed Booking</h3>
                 </button>
               </span>
@@ -84,14 +86,15 @@ const Home = () => {
                   </tr>
                 </table>
                 <div className="table-scroll">
-                  <UpcomingBooking
-                    setFlagBooking={setFlagBooking}
-                    flagBooking={flagBooking}
-                  />
-                  <CompletedBooking
-                    setFlagBooking={setFlagBooking}
-                    flagBooking={flagBooking}
-                  />
+                  {openBooking && <UpcomingBooking
+                      setFlagBooking={setFlagBooking}
+                      flagBooking={flagBooking}
+                    />}
+                    {! openBooking && <CompletedBooking
+                      setFlagBooking={setFlagBooking}
+                      flagBooking={flagBooking}
+                    />}
+                    
                 </div>
               </div>
             </div>
