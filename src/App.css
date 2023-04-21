@@ -214,6 +214,13 @@ menu-item {
   width: 2px;
   height: 25px;
 }
+.btn-group{
+  display: flex;
+  flex-direction: row;
+}
+.btn-group button{
+  width: 100%;
+}
 .table {
   width: 100%;
   max-width: 100%;

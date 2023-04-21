@@ -72,10 +72,8 @@ const Home = () => {
                 </button>
               </span>
               <div className="row-card-body">
-                <div className="table-scroll">
-
-                  <table>
-                    <thead>
+              <table>
+                   
                       <tr className="header-booking">
                         <th>Date</th>
                         <th>Seat Name</th>
@@ -83,8 +81,11 @@ const Home = () => {
                         <th>End Time</th>
                         <th>Cancel</th>
                       </tr>
-                    </thead>
+                    
                   </table>
+                <div className="table-scroll">
+
+                 
 
                     <UpcomingBooking
                       setFlagBooking={setFlagBooking}
