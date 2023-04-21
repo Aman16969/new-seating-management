@@ -47,10 +47,11 @@ const Navbar = () => {
               </>
             )}
 
-            <li className="nav-item" style={{ marginLeft: "auto" }}>
+            <li className="nav-item">
               <div className="dropdown">
-                <div className="dropbtn">
-                  <span className="span-text">Profile</span>
+                <div class="dropbtn">
+                  Profile
+                  <i class="fa fa-caret-down"></i>
                 </div>
                 <div className="dropdown-content">
                   <Link to="/profile">Profile</Link>

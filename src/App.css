@@ -39,16 +39,33 @@
   transform: scale(1.2);
   font-weight: bold;
 }
-.dropdown {
+/* .dropdown {
   position: relative;
   display: inline-block;
+} */
+.dropdown {
+  float: left;
+  overflow: hidden;
+  z-index: 1;
+}
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  z-index: 1;
-  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2;
 }
 
 .dropdown:hover .dropdown-content {
@@ -158,6 +175,7 @@ menu-item {
 }
 
 .container {
+  z-index: 0;
   position: fixed;
   display: block;
   float: unset;
@@ -214,11 +232,11 @@ menu-item {
   width: 2px;
   height: 25px;
 }
-.btn-group{
+.btn-group {
   display: flex;
   flex-direction: row;
 }
-.btn-group button{
+.btn-group button {
   width: 100%;
 }
 .table {
@@ -227,6 +245,17 @@ menu-item {
   margin-bottom: 1rem;
   background-color: transparent;
 }
+.header-booking {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+.header-booking th,
+td {
+  width: 20%;
+}
+
 .table tbody {
   box-sizing: border-box;
   display: table-row-group;
