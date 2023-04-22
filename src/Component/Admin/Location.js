@@ -35,7 +35,7 @@ const Location = (props) => {
           name="select"
           id="select"
           value={props.locationId}
-            onChange={(e) => props.onLocationChange(e.target.value)}
+            onChange={(e) => props.setLocationId(e.target.value)}
         >
           <option value="none" selected disabled hidden>
             Select a Location

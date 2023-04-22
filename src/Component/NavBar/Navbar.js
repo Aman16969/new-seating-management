@@ -39,19 +39,18 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/admin" className="nav-link">
+                  <Link to="/userdetails" className="nav-link">
                     <span className="span-logo"></span>
-                    <span className="span-text">Admin</span>
+                    <span className="span-text">Users</span>
                   </Link>
                 </li>
               </>
             )}
 
-            <li className="nav-item">
+            <li className="nav-item" >
               <div className="dropdown">
-                <div class="dropbtn">
-                  Profile
-                  <i class="fa fa-caret-down"></i>
+                <div className="dropbtn">
+                  <span className="span-text">Profile</span>
                 </div>
                 <div className="dropdown-content">
                   <Link to="/profile">Profile</Link>

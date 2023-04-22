@@ -6,7 +6,7 @@ const GetSeat = ({ date, locationId,fromTime,toTime,seatId, ...props }) => {
   const [isPendings, setIsPendings] = useState(true);
   const [isPendingsa, setIsPendingsa] = useState(true);
   const [error, setError] = useState("");
-  const seatDivs = [];
+
 
   useEffect(() => {
     if (date && fromTime && toTime && locationId) {
@@ -71,12 +71,6 @@ const GetSeat = ({ date, locationId,fromTime,toTime,seatId, ...props }) => {
   };
   return (
     <>
-      {isPendings && 
-    <div >
-      <img src={accolite} alt="" className="accolite-logo-img"/>
-    </div>
-    
-      }
       {/* {error&&<span>{error}</span>} */}
 
       {allSeats &&

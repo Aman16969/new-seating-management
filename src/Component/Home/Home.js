@@ -4,6 +4,7 @@ import UpcomingBooking from "./UpcomingBooking";
 import GetSeat from "./GetSeat";
 import Layout from "./Layout";
 import CompletedBooking from "./CompletedBooking";
+
 const Home = () => {
   const [countall, setCountAll] = useState(0);
   const [countAvailable, setCountAvailable] = useState(0);
@@ -121,6 +122,7 @@ const Home = () => {
                     <span>{message}</span>
                     <form className="modal-form">
                       <div className="form-item">
+                     
                         <input
                           type="date"
                           name="date"
