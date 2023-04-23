@@ -1,42 +1,22 @@
-import { useEffect, useState } from "react";
-import GetLocation from "./GetLocation";
+import {useState } from "react";
 import UpcomingBooking from "./UpcomingBooking";
 import GetSeat from "./GetSeat";
-import Layout from "./Layout";
 import CompletedBooking from "./CompletedBooking";
 
 const Home = () => {
   const [countall, setCountAll] = useState(0);
   const [countAvailable, setCountAvailable] = useState(0);
-  const [locationId, setLocationId] = useState(null);
   const [date, setDate] = useState("");
   const [fromTime, setFromTime] = useState("");
   const [toTime, setToTime] = useState("");
   const [seatName, setSeatName] = useState("");
   const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
-  const [flagBooking, setFlagBooking] = useState(false);
-  const [location, setLocation] = useState([]);
   const [openBooking, setOpenBooking] = useState(true);
-  const userId = sessionStorage.getItem("userId");
   const header = "Bearer " + sessionStorage.getItem("accessToken");
-  useEffect(() => {
-    const userId = sessionStorage.getItem("userId");
-    fetch(`http://localhost:8081/api/user/${userId}`, {
-      headers: { "content-type": "application/json", Authorization: header },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("failed to book seat");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setLocation(data.location);
-        setLocationId(location.id);
-      });
-  }, []);
-
+  const [flag, setFlag] = useState(false);
+  const location = sessionStorage.getItem("UserLocation");
+  const [locationId, setLocationId] = useState(null);
   const handleBooking = () => {
     const bookingDetail = {
       location_id: locationId,
@@ -46,7 +26,6 @@ const Home = () => {
       fromTime: fromTime,
       toTime: toTime,
     };
-    console.log(bookingDetail);
     fetch(`http://localhost:8081/api/booking/`, {
       method: "POST",
       headers: { "content-type": "application/json", Authorization: header },
@@ -55,13 +34,13 @@ const Home = () => {
       if (!res.ok) {
         throw Error("failed to book seat");
       }
+      setFlag(!flag);
       setMessage("You Have Booked A seat: " + seatName + " on " + date + ".");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
     });
   };
-  console.log(openBooking);
+  if(location!==null){
+    setLocationId(location.id)
+  }
   return (
     <>
       <div className="container">
@@ -93,21 +72,16 @@ const Home = () => {
                     <th>Seat Name</th>
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <th>Cancel</th>
+                    {openBooking && <th>Cancel</th>}
+                    
                   </tr>
                 </table>
                 <div className="table-scroll">
                   {openBooking && (
-                    <UpcomingBooking
-                      setFlagBooking={setFlagBooking}
-                      flagBooking={flagBooking}
-                    />
+                    <UpcomingBooking flag={flag} setFlag={setFlag} />
                   )}
                   {!openBooking && (
-                    <CompletedBooking
-                      setFlagBooking={setFlagBooking}
-                      flagBooking={flagBooking}
-                    />
+                    <CompletedBooking flag={flag} setFlag={setFlag} />
                   )}
                 </div>
               </div>
@@ -122,7 +96,6 @@ const Home = () => {
                     <span>{message}</span>
                     <form className="modal-form">
                       <div className="form-item">
-                     
                         <input
                           type="date"
                           name="date"
@@ -134,14 +107,6 @@ const Home = () => {
                           min={new Date().toISOString().split("T")[0]} // Set minimum date to today
                         />
                       </div>
-                      {/* <div className="form-item">
-                        <GetLocation
-                          setFlagBooking={setFlagBooking}
-                          flagBooking={flagBooking}
-                          locationId={locationId}
-                          onLocationChange={setLocationId}
-                        />
-                      </div> */}
                       <div class="form-item">
                         <input
                           type="time"
@@ -179,20 +144,21 @@ const Home = () => {
                 </div>
                 <div className="card-body-col">
                   <div className="seat-display">
-                    <GetSeat
-                      setFlagBooking={setFlagBooking}
-                      flagBooking={flagBooking}
-                      date={date}
-                      locationId={location.id}
-                      fromTime={fromTime}
-                      toTime={toTime}
-                      seatId={seatId}
-                      setSeatId={setSeatId}
-                      setSeatName={setSeatName}
-                      setCountAvailable={setCountAvailable}
-                      setCountAll={setCountAll}
-                    />
-                    {/* <img src={seat} alt="" className="seat-display-img"/>  */}
+                    {locationId && (
+                      <GetSeat
+                        setFlag={setFlag}
+                        flag={flag}
+                        date={date}
+                        locationId={location.id}
+                        fromTime={fromTime}
+                        toTime={toTime}
+                        seatId={seatId}
+                        setSeatId={setSeatId}
+                        setSeatName={setSeatName}
+                        setCountAvailable={setCountAvailable}
+                        setCountAll={setCountAll}
+                      />
+                    )}
                   </div>
                   <div className="seat-book-item">
                     <p>

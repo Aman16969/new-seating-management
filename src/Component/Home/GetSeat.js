@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
-import accolite from "../../Static/Accolite_Logo_Grey.png";
+import { useNavigate } from "react-router-dom";
+
 const GetSeat = ({ date, locationId,fromTime,toTime,seatId, ...props }) => {
+  const navigate=useNavigate();
+  useEffect(()=>{
+    if(sessionStorage.getItem("userLocation")===null){
+      navigate("/profile")
+    }
+  },[])
   const [allSeats, setAllSeats] = useState([]);
   const [availableSeat, setAvailableSeat] = useState({});
   const [isPendings, setIsPendings] = useState(true);
@@ -27,7 +34,7 @@ const GetSeat = ({ date, locationId,fromTime,toTime,seatId, ...props }) => {
           console.log(allSeats)
           props.setCountAll(data.length);
           setIsPendings(false);
-          props.setFlagBooking(props.flagBooking);
+          props.setFlag(!props.flag);
         })
         .catch((error) => {
           setError(error.message);
@@ -58,7 +65,7 @@ const GetSeat = ({ date, locationId,fromTime,toTime,seatId, ...props }) => {
           console.log(availableSeat)
           props.setCountAvailable(Object.keys(data).length);
           setIsPendingsa(false);
-          props.setFlagBooking(props.flagBooking);
+          props.setFlag(!props.flag);
         })
         .catch((error) => {
           setError(error.message);

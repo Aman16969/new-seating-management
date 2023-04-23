@@ -1,14 +1,13 @@
-import { useState, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import accLogo from "../../Static/newlogo.png";
-import Acco from "../../Static/Acco.png";
-import AuthContext from "../../ContextApi/AuthContext";
-import seat_transparent from "../../Static/seat transparent.png";
+import { CgChevronDoubleDownO } from "react-icons/cg";
+import { MdOutlineLocalLibrary } from "react-icons/md";
+
 const Navbar = () => {
-  const authContext = useContext(AuthContext);
-  const { userrole, setUserrole } = authContext;
+
   const role = sessionStorage.getItem("userRole");
-  console.log(userrole);
+  const userName=sessionStorage.getItem("userFirstName")+" "+sessionStorage.getItem("userLastName");
   return (
     <>
       <nav className="navbar">
@@ -27,7 +26,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link to="/">
                 {" "}
-                <span className="span-text">All Booking</span>
+                <span className="span-text"><MdOutlineLocalLibrary/> Seat Booking Application </span>
               </Link>
             </li>
             {role && role === "ADMIN" && (
@@ -39,9 +38,9 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/userdetails" className="nav-link">
+                  <Link to="/admin" className="nav-link">
                     <span className="span-logo"></span>
-                    <span className="span-text">Users</span>
+                    <span className="span-text">Admin</span>
                   </Link>
                 </li>
               </>
@@ -50,7 +49,7 @@ const Navbar = () => {
             <li className="nav-item" >
               <div className="dropdown">
                 <div className="dropbtn">
-                  <span className="span-text">Profile</span>
+                  <span className="span-text">{userName} <CgChevronDoubleDownO/></span>
                 </div>
                 <div className="dropdown-content">
                   <Link to="/profile">Profile</Link>

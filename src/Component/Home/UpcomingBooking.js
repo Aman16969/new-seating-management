@@ -1,4 +1,5 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState} from "react";
+
 const UpcomingBooking = (props) => {
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [upcomingBooking, setupcomingBooking] = useState(null);
@@ -40,7 +41,7 @@ const UpcomingBooking = (props) => {
   };
   const handleDelete = (bookId) => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
-    fetch(`http://localhost:8081/api/booking/${bookId}/false`, {
+    fetch(`http://localhost:8081/api/booking/setActiveStatus/${bookId}/value/false`, {
       method: "PUT",
       headers: {
         Authorization: header,
