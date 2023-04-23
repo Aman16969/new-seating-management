@@ -50,14 +50,16 @@ const OpenBookingForm = (props) => {
   return (
     <>
       {isOpenCon && (
-        <div className="popupContainer">
+        <div className="popupContainer" onClick={()=>props.setOpenBookingForm(false)} >
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
             <div className="popupHeader">
               <h2>Book</h2>
+              <hr />
             </div>
-            <form className="booking-form" onSubmit={handleSubmit}>
-
+            <form className="room-form" onSubmit={handleSubmit}>
+            <div className="location-item">
                 <label for="date">Date</label>
+                <br />
                 <input
                   type="date"
                   id="date"
@@ -65,11 +67,12 @@ const OpenBookingForm = (props) => {
                   class="form-control"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
+                  style={{height:'20px',width:'90%'}}
                   required
                 />
-              
+              </div>
 
-             
+              <div className="location-item">
                 <label for="fromTime">From Time</label>
                 <input
                   type="time"
@@ -78,12 +81,13 @@ const OpenBookingForm = (props) => {
                   class="form-control"
                   value={fromTime}
                   onChange={(e) => setFromTime(e.target.value)}
+                  style={{height:'20px',width:'90%'}}
                   required
                   step="3600"
                 />
              
-
-              
+</div>
+<div className="location-item">
                 <label for="toTime">To Time</label>
                 <input
                   type="time"
@@ -94,22 +98,25 @@ const OpenBookingForm = (props) => {
                   onChange={(e) => setToTime(e.target.value)}
                   required
                   step="3600"
+                  style={{height:'20px',width:'90%'}}
                 />
               
-
+</div>
+<div className="location-item">
               
                 <label for="location">Location</label>
                 <Location
                   locationId={locationId}
                   setLocationId={setLocationId}
                 />
-              
-              
+              </div>
+              <div className="location-item">
                 <label for="RoomType">Room Type</label>
                 <select
                   className="drop-select"
                   name="select"
                   id="select"
+                  style={{height:'20px',width:'90%'}}
                   value={roomType}
                   onChange={(e) => {
                     setRoomType(e.target.value);
@@ -121,14 +128,15 @@ const OpenBookingForm = (props) => {
                   <option value="Board Room">Board Room</option>
                   <option value="Confrence Room">Confrence Room</option>
                 </select>
-              
+              </div>
+              <div className="location-item">
               {locationId && <div class="form-group">
                 <label for="RoomType">Room</label>
                 <Room roomId={roomId} locationId={locationId} setRoomId={setRoomId}/>
               </div>}
-              
+              </div>
 
-             <button>Submit</button>
+             <button className="button-group">Submit</button>
             </form>
           </div>
         </div>

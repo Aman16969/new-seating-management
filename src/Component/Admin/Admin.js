@@ -112,14 +112,16 @@ const Admin = () => {
               <div className="content-row-header">
                 <h2>Users</h2>
               </div>
-              <div className="row-card-title">
-                <table>
-                  <tr className="user-row">
-                    <th>Email</th>
-                    <th>Role</th>
-                  </tr>
+              
+              <table className="table-header">
+                  <thead>
+                    <tr className="user-row">
+                      <th>Email</th>
+                      <th>Role</th>
+                    </tr>
+                  </thead>
                 </table>
-              </div>
+             
               <div className="table-scroll">
                 <table className="table">
                   <tbody>

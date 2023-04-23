@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import accLogo from "../../Static/newlogo.png";
 import { CgChevronDoubleDownO } from "react-icons/cg";
 import { MdOutlineLocalLibrary } from "react-icons/md";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [activeTab, setActiveTab] = useState("")
 
   const role = sessionStorage.getItem("userRole");
   const userName=sessionStorage.getItem("userFirstName")+" "+sessionStorage.getItem("userLastName");
@@ -24,8 +26,8 @@ const Navbar = () => {
               <img src={accLogo} alt="" className="acc-logo" />
             </li>
             <li className="nav-item">
-              <Link to="/">
-                {" "}
+              <Link to="/" onClick={() => setActiveTab("home")} className={activeTab === "home" ? "active-tab" : ""}>
+                
                 <span className="span-text"><MdOutlineLocalLibrary/> Seat Booking Application </span>
               </Link>
             </li>

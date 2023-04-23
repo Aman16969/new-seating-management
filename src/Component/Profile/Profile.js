@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import profilePic from "../../Static/man.png";
-import Location from "../Admin/Location";
+import Location from "./Location";
 function Profile() {
   console.log("hi")
   const [editMode, setEditMode] = useState(false);
@@ -56,6 +56,7 @@ function Profile() {
         setReadOnly(true);
         setFlag(!flag)
         sessionStorage.setItem("userLocation",data.location)
+        sessionStorage.setItem("userLocationId",data.location.id)
       })
       .catch((err) => {
         throw Error(err.message);
@@ -112,9 +113,10 @@ function Profile() {
                     value={userDetail.lastName}
                   />
                 </div>
-                <div className="profile-item" style={{width:'80%'}} onClick={()=>setReadOnly(false)}>
-                  <label for="acccolite_id">Accolite ID</label>
-                  <Location setLocationId={setLocationId}  />
+                <div className="profile-item" onClick={()=>setReadOnly(false)}>
+                  <label for="Location">Location  </label>
+                  <br />
+                  <Location setLocationId={setLocationId} />
                 </div>
                 <span style={{ fontSize: "small" }}>{message}</span>
                 {!read && <button className="button-group">Edit</button>}

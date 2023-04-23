@@ -116,12 +116,12 @@ const Request = () => {
             <div className="popupHeader">
               <h2>Request</h2>
             </div>
-            {isPending && <span>Loading...</span>}
+            {/* {isPending && <span>Loading...</span>} */}
             {!isPending && (
               <div className="request-info">
                 {requestById && (
                   <div className="request-details">
-                    <span className="email">{requestById.email}</span>
+                    <span className="email" >{requestById.email}</span>
                     <hr />
                     <p className="description">{requestById.description}</p>
                   </div>

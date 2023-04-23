@@ -7,6 +7,7 @@ const CurrentDayBooking = () => {
   const [bookId, setBookId] = useState(null);
   const [message, setMessage] = useState("");
   const[flag,setFlag]=useState(false)
+  const locationId=sessionStorage.getItem("userLocationId")
   const token = "Bearer " + sessionStorage.getItem("accessToken");
   const handlePopup = (e) => {
     setBookId(e);
@@ -14,7 +15,7 @@ const CurrentDayBooking = () => {
   };
   useEffect(() => {
     setIsPending(true);
-    fetch(`http://localhost:8081/api/booking/`, {
+    fetch(`http://localhost:8081/api/booking/location?location=${locationId}`, {
       headers: {
         "content-type": "application/json",
         Authorization: token,

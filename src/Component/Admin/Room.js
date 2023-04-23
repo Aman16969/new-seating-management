@@ -31,6 +31,7 @@ const Room = (props) => {
           id="select"
           value={props.roomId}
             onChange={(e) => props.setRoomId(e.target.value)}
+            style={{height:'20px',width:'90%'}}
         >
         <option value={props.roomId} selected disabled hidden>
             Select a Room

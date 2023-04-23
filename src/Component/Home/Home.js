@@ -88,7 +88,7 @@ const Home = () => {
             </div>
             <div className="row-card">
               <div className="row-card-title">
-                <h2>Book Seats</h2>
+                <h3>Book Seats</h3>
               </div>
               <div className="card-body">
                 <div className="cards-body-col">
