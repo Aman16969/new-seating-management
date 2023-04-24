@@ -1,0 +1,52 @@
+#locationLayout{
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+}
+
+.seatCell{
+    border: 1px solid black;
+}
+
+.seatDiv{
+    height: 10vh;
+    width: 20vh;
+}
+
+.seatDiv>div{
+    display: flex;
+    justify-content: end;
+}
+
+.seatDiv>p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-top: 5px solid #666;
+    border-right: 5px solid #666;
+    border-bottom: 2px solid #666;
+    border-left: 5px solid #666;
+    border-radius: 5px;
+}
+
+.addBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seat {
+    width: 30px;
+    height: 20px;
+    background-color: #ccc;
+    border-top: 5px solid #666;
+    border-right: 5px solid #666;
+    border-bottom: 2px solid #666;
+    border-left: 5px solid #666;
+    border-radius: 5px;
+    position: relative;
+  }
+  
+  
