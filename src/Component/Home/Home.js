@@ -1,7 +1,8 @@
-import {useState } from "react";
+import {useState, useEffect } from "react";
 import UpcomingBooking from "./UpcomingBooking";
 import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
+import RequestAccess from "../Admin/RequestAccess";
 import DisplayLayout from "./DisplayLayout";
 
 const Home = () => {
@@ -16,9 +17,61 @@ const Home = () => {
   const [openBooking, setOpenBooking] = useState(true);
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const [flag, setFlag] = useState(false);
-  const location = sessionStorage.getItem("UserLocation");
-  const [locationId, setLocationId] = useState(null);
-  
+  const locationId = sessionStorage.getItem("userLocationId");
+  const [showModal,setShowModal] = useState(false);
+  const [location, setLocation] = useState(null);
+  const [error, setError] = useState(null);
+  const [seatAvailability, setSeatAvailability] = useState(null);
+  const token = sessionStorage.getItem("accessToken");
+
+  useEffect((e) => {
+    fetch(`http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSeatAvailability(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, [date, fromTime, toTime]);
+
+  useEffect((e) => {
+    fetch(`http://localhost:8081/api/location/${locationId}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLocation(data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, []);
+
+ function handleAccessClick(){
+  setShowModal(true);
+ }
   const handleBooking = () => {
     const bookingDetail = {
       location_id: locationId,
@@ -40,10 +93,6 @@ const Home = () => {
       setMessage("You Have Booked A seat: " + seatName + " on " + date + ".");
     });
   };
-  
-  if(location!==null){
-    setLocationId(location.id)
-  }
   
   return (
     <>
@@ -92,8 +141,13 @@ const Home = () => {
             </div>
             <div className="row-card">
               <div className="row-card-title">
-                <h3>Book Seats</h3>
-              </div>
+               <center> <h3>Book Seats  <button className="access" onClick={handleAccessClick} >Access</button></h3></center>
+                { showModal&&
+                   <RequestAccess onClose={() =>
+                    setShowModal(false)}/>
+                }
+                  </div>
+   
               <div className="card-body">
                 <div className="cards-body-col">
                   <div className="form-container">
@@ -142,7 +196,8 @@ const Home = () => {
                     </form>
                   </div>
                 </div>
-                {location && <DisplayLayout location={location}></DisplayLayout>}
+                {location && !seatAvailability && <DisplayLayout location={location}></DisplayLayout>}
+                {location && seatAvailability && <DisplayLayout location={location} seatAvailability={seatAvailability}></DisplayLayout>}
               </div>
             </div>
           </div>

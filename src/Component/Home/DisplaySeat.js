@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+//import "./Admin.css";
 
-
-const DisplaySeat = ({ location, row, col }) => {
+const DisplaySeat = ({ location, row, col, status }) => {
   const [seat, setSeat] = useState(null);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
@@ -27,7 +27,6 @@ const DisplaySeat = ({ location, row, col }) => {
       .then((data) => {
         setSeat(data);
         setName(data.seatName);
-        console.log(data);
       })
       .catch((error) => {
         setError(error.message);
@@ -36,8 +35,8 @@ const DisplaySeat = ({ location, row, col }) => {
 
   return (
     <>
-      <div className="seat-display">
-        {seat && seat.isAvailable === 1 && <div className="seat">{seat.seatName}</div>}
+      <div>
+        {seat && seat.isAvailable === 1 && status && <div className="display-seat" style={{color:"green"}}>{seat.seatName}</div>}
         {seat && seat.isAvailable === 0 && <h1>{" "}</h1>}
         </div>
     </>
