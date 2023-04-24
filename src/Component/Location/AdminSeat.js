@@ -95,10 +95,10 @@ const AdminSeat = ({ location, row, col }) => {
 
   return (
     <>
-      {/* <>
+      <>
         {seat && seat.isAvailable !== 0 && (
           <div className="seatDiv">
-            <input
+            {/* <input
               type="text"
               id="name"
               value={name}
@@ -107,7 +107,7 @@ const AdminSeat = ({ location, row, col }) => {
               }}
             />
             <button onClick={() => onHandleAdd()}>Edit</button>
-            <button onClick={() => onHandleDelete()}>Delete</button>
+            <button onClick={() => onHandleDelete()}>Delete</button> */}
             <div>
               {seat.seatDirection === 0 && <MdOutlineArrowUpward size={"20px"}/>}
               {seat.seatDirection === 1 && <MdOutlineArrowDownward size={"20px"}/>}
@@ -123,7 +123,7 @@ const AdminSeat = ({ location, row, col }) => {
           <>
             {!add && (
               <div className="seatDiv">
-                <button onClick={() => setAdd(true)}>Add</button>
+                {/* <button onClick={() => setAdd(true)}>Add</button> */}
                 <div className="addBtn"><MdAdd size={"20px"} onClick={()=>{setAddPopUp(!addPopUp)}}/></div>
                 {addPopUp && <AddSeatPopUp name={""} onHandleAdd={onHandleAdd} onHandleCancel={onHandleCancelPopUp}/>}
               </div>
@@ -143,13 +143,13 @@ const AdminSeat = ({ location, row, col }) => {
             )}
           </>
         )}
-      </> */}
-      <>
+      </>
+      {/* <>
       <div className="seat-display">
         {seat && seat.isAvailable === 1 && <div className="seat">{seat.seatName}</div>}
         {seat && seat.isAvailable === 0 && <h1>{" "}</h1>}
         </div>
-      </>
+      </> */}
     </>
   );
 };

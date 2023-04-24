@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const AddSeatPopUp = ({onHandleAdd, onHandleCancel}) =>{
-    const [name, setName] = useState("");
+    const [name, setName] = useState(null);
 
     return(
         <>
