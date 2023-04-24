@@ -49,3 +49,22 @@
 .location-rc > input[type="number"] {
   width: 30%;
 }
+.locationList {
+  display: flex;
+  justify-content: space-evenly;
+}
+.locationList select {
+  width: 70%;
+  border-radius: 2px;
+  border: 1px solid #007bff;
+  background-color: #e0ebff;
+  padding: 10px;
+  font-size: 15px;
+}
+.locationList option {
+  padding: 10px;
+  font-size: 15px;
+  background-color: #e0ebff;
+  color: #007bff;
+  cursor: pointer;
+}
