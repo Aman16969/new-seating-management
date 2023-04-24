@@ -13,6 +13,7 @@ const checkLocation=()=>{
 }
 const PrivateRoutes = () => {
   const hasLocation=checkLocation();
+  console.log(hasLocation)
   const isAuthenticated = checkToken();
   if(!isAuthenticated){
     return <Navigate to="/login"/>;

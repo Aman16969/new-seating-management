@@ -1,8 +1,8 @@
-import {useState } from "react";
+import { useState } from "react";
 import UpcomingBooking from "./UpcomingBooking";
 import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
-import RequestAccess from "../Admin/RequestAccess";
+import RequestAccess from "./RequestAccess";
 
 const Home = () => {
   const [countall, setCountAll] = useState(0);
@@ -18,11 +18,11 @@ const Home = () => {
   const [flag, setFlag] = useState(false);
   const location = sessionStorage.getItem("UserLocation");
   const [locationId, setLocationId] = useState(null);
- const [showModal,setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
- function handleAccessClick(){
-  setShowModal(true);
- }
+  function handleAccessClick() {
+    setShowModal(true);
+  }
   const handleBooking = () => {
     const bookingDetail = {
       location_id: locationId,
@@ -44,8 +44,8 @@ const Home = () => {
       setMessage("You Have Booked A seat: " + seatName + " on " + date + ".");
     });
   };
-  if(location!==null){
-    setLocationId(location.id)
+  if (location !== null) {
+    setLocationId(location.id);
   }
   return (
     <>
@@ -79,7 +79,6 @@ const Home = () => {
                     <th>Start Time</th>
                     <th>End Time</th>
                     {openBooking && <th>Cancel</th>}
-                    
                   </tr>
                 </table>
                 <div className="table-scroll">
@@ -93,14 +92,24 @@ const Home = () => {
               </div>
             </div>
             <div className="row-card">
-              <div className="row-card-title">
-               <center> <h3>Book Seats  <button className="access" onClick={handleAccessClick} >Access</button></h3></center>
-                { showModal&&
-                   <RequestAccess onClose={() =>
-                    setShowModal(false)}/>
-                }
-                  </div>
-   
+              <div className="row-card-title" style={{display: 'flex',
+  justifyContent: 'space-around',flexDirection: 'row'}}>
+                <div>
+                  <h3>Book Seats</h3>{" "}
+                </div>
+                <div>
+                  <button className="access" onClick={handleAccessClick}>
+                    Request Access
+                  </button>
+                </div>
+              </div>
+
+              {showModal && (
+                <RequestAccess
+                  setShowModal={setShowModal}
+                  onClose={() => setShowModal(false)}
+                />
+              )}
               <div className="card-body">
                 <div className="cards-body-col">
                   <div className="form-container">
