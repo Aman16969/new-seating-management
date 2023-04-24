@@ -53,7 +53,10 @@ const Login = () => {
           sessionStorage.setItem("userLastName",data.lastName)
           sessionStorage.setItem("userRole", data.role);
           sessionStorage.setItem("userLocation", data.location);
-          sessionStorage.setItem("userLocationId",data.location.id)
+          if(data.location!==null){
+            sessionStorage.setItem("userLocationId",data.location.id)
+          }
+          
 
           if(data.location===null){
             navigate("/profile",true)

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-function RequestAccess({ onClose }) {
+function RequestAccess({ onClose, ...props }) {
   const [description, setDescription] = useState("");
   const email = sessionStorage.getItem("email");
   const token = "Bearer " + sessionStorage.getItem("accessToken");
@@ -27,6 +27,10 @@ function RequestAccess({ onClose }) {
       .then((response) => {
         if (response.ok) {
           setDescription("Your request has been sent successfully!");
+          setTimeout(()=>{
+            props.setShowModal(false)
+          },1000)
+          
         } else {
           throw new Error("failed to send request");
         }
