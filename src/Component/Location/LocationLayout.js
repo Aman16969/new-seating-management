@@ -52,7 +52,7 @@ const LocationLayout = ({ location }) => {
     <div>
       {/* <h1>{location.name}</h1> */}
       <div className="location-rc">
-        Rows:{" "}
+        <b>Rows:</b>{" "}
         <input
           type="number"
           value={rows}
@@ -60,7 +60,7 @@ const LocationLayout = ({ location }) => {
             setRows(e.target.value);
           }}
         />
-        Columns:{" "}
+        <b>Columns:</b>{" "}
         <input
           type="number"
           value={cols}
@@ -73,7 +73,7 @@ const LocationLayout = ({ location }) => {
             updateRowsAndCols();
           }}
         >
-          Update Layout
+          <b> Update Layout</b>
         </button>
       </div>
       <div className="location-scroll">
