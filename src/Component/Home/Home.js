@@ -2,6 +2,7 @@ import {useState } from "react";
 import UpcomingBooking from "./UpcomingBooking";
 import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
+import RequestAccess from "../Admin/RequestAccess";
 
 const Home = () => {
   const [countall, setCountAll] = useState(0);
@@ -17,6 +18,11 @@ const Home = () => {
   const [flag, setFlag] = useState(false);
   const location = sessionStorage.getItem("UserLocation");
   const [locationId, setLocationId] = useState(null);
+ const [showModal,setShowModal] = useState(false);
+
+ function handleAccessClick(){
+  setShowModal(true);
+ }
   const handleBooking = () => {
     const bookingDetail = {
       location_id: locationId,
@@ -88,8 +94,13 @@ const Home = () => {
             </div>
             <div className="row-card">
               <div className="row-card-title">
-                <h3>Book Seats</h3>
-              </div>
+               <center> <h3>Book Seats  <button className="access" onClick={handleAccessClick} >Access</button></h3></center>
+                { showModal&&
+                   <RequestAccess onClose={() =>
+                    setShowModal(false)}/>
+                }
+                  </div>
+   
               <div className="card-body">
                 <div className="cards-body-col">
                   <div className="form-container">
