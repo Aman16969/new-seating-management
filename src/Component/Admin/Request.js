@@ -11,7 +11,6 @@ const Request = () => {
   const[openBookingForm,setOpenBookingForm]=useState(false);
   const token = "Bearer " + sessionStorage.getItem("accessToken");
   useEffect(() => {
-    setIsPending(true);
     fetch(`http://localhost:8081/api/requestBooking/`, {
       headers: {
         "content-type": "application/json",
@@ -26,7 +25,6 @@ const Request = () => {
       })
       .then((data) => {
         setRequest(data);
-        setIsPending(false);
       });
   }, [flag]);
   const handlePopup = (e) => {
@@ -111,19 +109,19 @@ const Request = () => {
             );
           })}
       </tbody>
-      {openBookingForm && <OpenBookingForm setOpenBookingForm={setOpenBookingForm}/>}
+      {openBookingForm && <OpenBookingForm setOpenBookingForm={setOpenBookingForm} userEmail={requestById.email} />}
       {isOpenCon && (
         <div className="popupContainer" onClick={() => setIsOpenCon(false)}>
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
             <div className="popupHeader">
               <h2>Request</h2>
             </div>
-            {isPending && <span>Loading...</span>}
+            {/* {isPending && <span>Loading...</span>} */}
             {!isPending && (
               <div className="request-info">
                 {requestById && (
                   <div className="request-details">
-                    <span className="email">{requestById.email}</span>
+                    <span className="email" >{requestById.email}</span>
                     <hr />
                     <p className="description">{requestById.description}</p>
                   </div>

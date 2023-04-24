@@ -14,7 +14,6 @@ import Admin from "./Component/Admin/Admin";
 function App() {
   return (
     <div className="App">
- 
       <Auth>
         <Router>
           <Routes>
@@ -30,8 +29,8 @@ function App() {
               <Route exact path="/profile" element={<Profile />} />
               <Route element={<RoleRoutes />}>
                 <Route exact path="/location" element={<Location />} />
+                <Route exact path="/admin" element={<Admin />} />
               </Route>
-              <Route exact path="/admin" element={<Admin/>} />
             </Route>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/logout" element={<Logout />} />

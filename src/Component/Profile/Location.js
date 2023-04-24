@@ -33,8 +33,8 @@ const Location = (props) => {
         <select
           className="drop-select"
           name="select"
-          style={{height:'20px',width:'90%'}}
           id="select"
+         
           value={props.locationId}
             onChange={(e) => props.setLocationId(e.target.value)}
         >

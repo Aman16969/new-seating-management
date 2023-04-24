@@ -1,6 +1,6 @@
 const colors = {
     
-    navBar: '##0c0c0c',
+    navBar: '#0c0c0c',
     container: '#fdfdff',
     row_card: '#ffffff',
     row_card_title: 'transparent',

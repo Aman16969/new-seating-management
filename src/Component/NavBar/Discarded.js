@@ -19,7 +19,7 @@ const Navbar = () => {
             {/* <img className="acc-logo" style={{width: '182px',height: '64px'}} src="https://www.accolite.com/assets/jpg/homebannerimages/accolite-logo.svg" class="navbar-image" alt="Accolite Digital Logo"/> */}
             {/* <img src={seat_transparent} alt="" className="seat-transparent" width="115" height="600"/> */}
             <a href="/">
-              {" "}
+              
               <img
                 src={seat_transparent}
                 alt=""

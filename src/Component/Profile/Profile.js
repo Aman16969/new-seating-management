@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect} from "react";
 import profilePic from "../../Static/man.png";
-import AuthContext from "../../ContextApi/AuthContext";
+import Location from "./Location";
 function Profile() {
-  const authContext = useContext(AuthContext);
-  const { userrole, setUserrole } = authContext;
+  console.log("hi")
   const [editMode, setEditMode] = useState(false);
   const [userDetail, setUserDetail] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [Error, setError] = useState(null);
-  const [accolite, setAccoliteid] = useState("");
+  const [locationId, setLocationId] = useState(null);
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const userId = sessionStorage.getItem("userId");
   const [read, setReadOnly] = useState(true);
   const [message, setMessage] = useState("");
+  const[flag,setFlag]=useState(true)
 
   useEffect(() => {
+    console.log("hi")
     fetch(`http://localhost:8081/api/user/${userId}`, {
       headers: {
         Authorization: header,
@@ -28,27 +29,21 @@ function Profile() {
       })
       .then((data) => {
         setUserDetail(data);
-        if (data) {
-          setAccoliteid(data.accoliteId);
-          setUserrole(data.role);
-        }
-
         setIsPending(false);
       })
       .catch((err) => {
         setError(err.message);
       });
-  }, []);
+  }, [flag]);
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8081/api/user/${userId}`, {
+    fetch(`http://localhost:8081/api/user/${userId}/location/${locationId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: header,
       },
-      body: accolite,
     })
       .then((res) => {
         if (!res.ok) {
@@ -59,9 +54,9 @@ function Profile() {
       .then((data) => {
         setMessage("User updated Successfully");
         setReadOnly(true);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        setFlag(!flag)
+        sessionStorage.setItem("userLocation",data.location)
+        sessionStorage.setItem("userLocationId",data.location.id)
       })
       .catch((err) => {
         throw Error(err.message);
@@ -76,23 +71,8 @@ function Profile() {
             <div className="profile-form">
               <img className="profile-img" src={profilePic} alt="Profile" />
 
-              <form className="profile-container" onSubmit={handleSubmit}>
-                <div className="profile-item">
-                  <label for="acccolite_id">Accolite ID</label>
-                  <input
-                    type="text"
-                    placeholder="Enter Accolite Id"
-                    name="accolite_id"
-                    id="accolite_id"
-                    onClick={() => setReadOnly(false)}
-                    required
-                    readOnly={read}
-                    value={accolite}
-                    onChange={(e) => {
-                      setAccoliteid(e.target.value);
-                    }}
-                  />
-                </div>
+              <form className="profile-container" onSubmit={handleUpdate}>
+                
                 <div className="profile-item">
                   <label for="email">Email</label>
                   <input
@@ -132,6 +112,11 @@ function Profile() {
                     readOnly={true}
                     value={userDetail.lastName}
                   />
+                </div>
+                <div className="profile-item" onClick={()=>setReadOnly(false)}>
+                  <label for="Location">Location  </label>
+                  <br />
+                  <Location setLocationId={setLocationId} />
                 </div>
                 <span style={{ fontSize: "small" }}>{message}</span>
                 {!read && <button className="button-group">Edit</button>}
