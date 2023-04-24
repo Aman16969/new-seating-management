@@ -21,7 +21,7 @@ const LocationLayout = ({ location }) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        window.reload();
+        window.location.reload();
         return response.json();
       })
       .then((data) => {

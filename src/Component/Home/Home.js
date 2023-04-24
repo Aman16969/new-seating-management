@@ -2,13 +2,14 @@ import {useState } from "react";
 import UpcomingBooking from "./UpcomingBooking";
 import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
+import DisplayLayout from "./DisplayLayout";
 
 const Home = () => {
   const [countall, setCountAll] = useState(0);
   const [countAvailable, setCountAvailable] = useState(0);
-  const [date, setDate] = useState("");
-  const [fromTime, setFromTime] = useState("");
-  const [toTime, setToTime] = useState("");
+  const [date, setDate] = useState(null);
+  const [fromTime, setFromTime] = useState(null);
+  const [toTime, setToTime] = useState(null);
   const [seatName, setSeatName] = useState("");
   const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
@@ -17,6 +18,7 @@ const Home = () => {
   const [flag, setFlag] = useState(false);
   const location = sessionStorage.getItem("UserLocation");
   const [locationId, setLocationId] = useState(null);
+  
   const handleBooking = () => {
     const bookingDetail = {
       location_id: locationId,
@@ -38,9 +40,11 @@ const Home = () => {
       setMessage("You Have Booked A seat: " + seatName + " on " + date + ".");
     });
   };
+  
   if(location!==null){
     setLocationId(location.id)
   }
+  
   return (
     <>
       <div className="container">
@@ -135,59 +139,10 @@ const Home = () => {
                           step="3600"
                         />
                       </div>
-
-                      {/* <div className="form-item">
-                        {locationId && <Layout locationId={locationId} />}
-                      </div> */}
                     </form>
                   </div>
                 </div>
-                <div className="card-body-col">
-                  <div className="seat-display">
-                    {locationId && (
-                      <GetSeat
-                        setFlag={setFlag}
-                        flag={flag}
-                        date={date}
-                        locationId={location.id}
-                        fromTime={fromTime}
-                        toTime={toTime}
-                        seatId={seatId}
-                        setSeatId={setSeatId}
-                        setSeatName={setSeatName}
-                        setCountAvailable={setCountAvailable}
-                        setCountAll={setCountAll}
-                      />
-                    )}
-                  </div>
-                  <div className="seat-book-item">
-                    <p>
-                      {!date && !locationId && (
-                        <span>
-                          Welcome To Accolite Digital. Please Book Your Seat.
-                        </span>
-                      )}
-                      {date && locationId && seatName && (
-                        <span style={{ color: "#3f4d67" }}>
-                          &diams; You have selected {seatName} for {date}
-                        </span>
-                      )}
-                    </p>
-                    {date && locationId && (
-                      <p style={{}}>
-                        <span style={{ color: "red" }}>Available:</span>
-                        <span style={{ color: "#3f4d67" }}>
-                          {countAvailable} &#8725;{countall}
-                        </span>
-                      </p>
-                    )}
-                    {date && locationId && seatName && (
-                      <button className="button-group" onClick={handleBooking}>
-                        Book Seat
-                      </button>
-                    )}
-                  </div>
-                </div>
+                {location && <DisplayLayout location={location}></DisplayLayout>}
               </div>
             </div>
           </div>
