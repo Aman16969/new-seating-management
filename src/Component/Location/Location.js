@@ -41,7 +41,7 @@ const Location = () => {
   return (
     <>
       <div className="container-content">
-        <div className="row-card">
+        <div className="row-card" style={{ padding: "5px" }}>
           <div class="row-card-title">
             <h2>Locations</h2>
           </div>
