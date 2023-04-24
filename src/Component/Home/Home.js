@@ -69,9 +69,9 @@ const Home = () => {
       });
   }, []);
 
- function handleAccessClick(){
-  setShowModal(true);
- }
+  function handleAccessClick() {
+    setShowModal(true);
+  }
   const handleBooking = () => {
     const bookingDetail = {
       location_id: locationId,
@@ -93,6 +93,9 @@ const Home = () => {
       setMessage("You Have Booked A seat: " + seatName + " on " + date + ".");
     });
   };
+  if (location !== null) {
+    setLocationId(location.id);
+  }
   
   return (
     <>
@@ -126,7 +129,6 @@ const Home = () => {
                     <th>Start Time</th>
                     <th>End Time</th>
                     {openBooking && <th>Cancel</th>}
-                    
                   </tr>
                 </table>
                 <div className="table-scroll">
@@ -140,14 +142,24 @@ const Home = () => {
               </div>
             </div>
             <div className="row-card">
-              <div className="row-card-title">
-               <center> <h3>Book Seats  <button className="access" onClick={handleAccessClick} >Access</button></h3></center>
-                { showModal&&
-                   <RequestAccess onClose={() =>
-                    setShowModal(false)}/>
-                }
-                  </div>
-   
+              <div className="row-card-title" style={{display: 'flex',
+  justifyContent: 'space-around',flexDirection: 'row'}}>
+                <div>
+                  <h3>Book Seats</h3>{" "}
+                </div>
+                <div>
+                  <button className="access" onClick={handleAccessClick}>
+                    Request Access
+                  </button>
+                </div>
+              </div>
+
+              {showModal && (
+                <RequestAccess
+                  setShowModal={setShowModal}
+                  onClose={() => setShowModal(false)}
+                />
+              )}
               <div className="card-body">
                 <div className="cards-body-col">
                   <div className="form-container">

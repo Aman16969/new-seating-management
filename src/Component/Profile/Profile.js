@@ -54,9 +54,10 @@ function Profile() {
       .then((data) => {
         setMessage("User updated Successfully");
         setReadOnly(true);
-        setFlag(!flag)
+        
         sessionStorage.setItem("userLocation",data.location)
         sessionStorage.setItem("userLocationId",data.location.id)
+        setFlag(!flag)
       })
       .catch((err) => {
         throw Error(err.message);
