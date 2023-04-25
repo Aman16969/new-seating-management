@@ -61,21 +61,40 @@ const DisplayLayout = ({ location, seatAvailability, seats, date, fromTime, toTi
       );
     }
     else{
-      cols.push(
-        <td>
-          <div id={id} name={id} onClick={()=>{setSelected(id)}}>
-            {
-              <DisplaySeat
-                location={location}
-                row={i}
-                col={j}
-                selected={selected}
-                status={seatAvailability.hasOwnProperty(id)}
-              ></DisplaySeat>
-            }
-          </div>
-        </td>
-      );
+      if(seatAvailability.hasOwnProperty(id)){
+        cols.push(
+          <td>
+            <div id={id} name={id} onClick={()=>{setSelected(id)}}>
+              {
+                <DisplaySeat
+                  location={location}
+                  row={i}
+                  col={j}
+                  selected={selected}
+                  status={seatAvailability.hasOwnProperty(id)}
+                ></DisplaySeat>
+              }
+            </div>
+          </td>
+        );
+      }
+      else{
+        cols.push(
+          <td>
+            <div id={id} name={id}>
+              {
+                <DisplaySeat
+                  location={location}
+                  row={i}
+                  col={j}
+                  selected={selected}
+                  status={seatAvailability.hasOwnProperty(id)}
+                ></DisplaySeat>
+              }
+            </div>
+          </td>
+        );
+      }
     }
     }
     rows.push(<tr>{cols}</tr>);
