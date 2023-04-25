@@ -12,4 +12,6 @@
 
 .locationTable {
   display: inline-block;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }

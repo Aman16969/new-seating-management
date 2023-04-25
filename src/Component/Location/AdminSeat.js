@@ -13,6 +13,7 @@ const AdminSeat = ({ location, row, col }) => {
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
   const [name, setName] = useState("");
+  const [editName, setEditName] = useState("");
   const [add, setAdd] = useState(false);
   const [addPopUp, setAddPopUp] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -41,8 +42,7 @@ const AdminSeat = ({ location, row, col }) => {
       .then((data) => {
         setSeat(data);
         setName(data.seatName);
-        console.log(data);
-   
+        // console.log(data);
       })
       .catch((error) => {
         setError(error.message);
@@ -69,7 +69,6 @@ const AdminSeat = ({ location, row, col }) => {
       .then((data) => {
         setAddPopUp(false)
         setFlag(!flag)
-      
       })
       .catch((error) => {
         console.log(error.message);
@@ -98,25 +97,23 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         console.log(data);
-        window.location.reload();
+        setIsDeleting(false);
+        setFlag(!flag);
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
-    setIsDeleting(false);
-    
   };
 
   const handleCancel= () => {
-   
     setIsEditing(false);
-    window.location.reload();
+    setIsDeleting(false);
   }
 
   const handleEdit = (e) => {
     console.log(name);
-    const seat = { row: row, col: col, locationId: location.id, name: name };
+    const seat = { row: row, col: col, locationId: location.id, name: editName };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {
@@ -134,12 +131,12 @@ const AdminSeat = ({ location, row, col }) => {
       .then((data) => {
         console.log(data);
         setFlag(!flag)
+        setIsEditing(false)
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
-      setIsEditing(true)
   };
 
   return (
@@ -162,12 +159,13 @@ const AdminSeat = ({ location, row, col }) => {
 
         {isEditing ? (
            <>
+           {/* {setEditName(name)} */}
            <input
               type="text"
               id="name"
-              value={name}
+              value={editName}
               onChange={(e) => {
-                setName(e.target.value);
+                setEditName(e.target.value);
               }}
             />
             <button onClick={()=>handleEdit()}>Save</button>
