@@ -92,14 +92,20 @@ const Home = () => {
               </div>
             </div>
             <div className="row-card">
-              <div className="row-card-title" style={{display: 'flex',
-  justifyContent: 'space-around',flexDirection: 'row'}}>
+              <div
+                className="row-card-title"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  flexDirection: "row",
+                }}
+              >
                 <div>
                   <h3>Book Seats</h3>{" "}
                 </div>
                 <div>
                   <button className="access" onClick={handleAccessClick}>
-                    Request Access
+                    Request Board/Discussion Room
                   </button>
                 </div>
               </div>
