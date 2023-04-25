@@ -2,7 +2,7 @@ import "./admin.css";
 import AdminStats from "./AdminStats";
 import AllUsers from "./AllUsers";
 import CurrentDayBooking from "./CurrentDayBooking";
-import Request from "./Request";
+
 const Admin = () => {
   return (
     <>
@@ -53,7 +53,7 @@ const Admin = () => {
                 </table>
                 <div className="table-scroll">
                   <table>
-                    <Request />
+                    {/* <Request /> */}
                   </table>
                 </div>
               </div>

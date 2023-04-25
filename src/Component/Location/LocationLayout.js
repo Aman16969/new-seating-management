@@ -50,30 +50,32 @@ const LocationLayout = ({ location }) => {
   }
   return (
     <div>
-      <h1>{location.name}</h1>
-      Rows:{" "}
-      <input
-        type="number"
-        value={rows}
-        onChange={(e) => {
-          setRows(e.target.value);
-        }}
-      />
-      Columns:{" "}
-      <input
-        type="number"
-        value={cols}
-        onChange={(e) => {
-          setCols(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          updateRowsAndCols();
-        }}
-      >
-        Update Layout
-      </button>
+      {/* <h1>{location.name}</h1> */}
+      <div className="location-rc">
+        <b>Rows:</b>{" "}
+        <input
+          type="number"
+          value={rows}
+          onChange={(e) => {
+            setRows(e.target.value);
+          }}
+        />
+        <b>Columns:</b>{" "}
+        <input
+          type="number"
+          value={cols}
+          onChange={(e) => {
+            setCols(e.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            updateRowsAndCols();
+          }}
+        >
+          <b> Update Layout</b>
+        </button>
+      </div>
       <div className="location-scroll">
         <table className="locationLayout">{rs}</table>
       </div>
