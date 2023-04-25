@@ -1,13 +1,22 @@
 import { useState, useEffect } from "react";
 import DisplaySeat from "./DisplaySeat";
 
-const DisplayLayout = ({ location, seatAvailability, seats, date, fromTime, toTime }) => {
+const DisplayLayout = ({
+  location,
+  seatAvailability,
+  seats,
+  date,
+  fromTime,
+  toTime,
+}) => {
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
   const [selected, setSelected] = useState(null);
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState(null);
   const userId = sessionStorage.getItem("userId");
+
+  console.log(seatAvailability);
 
   const handleBooking = () => {
     const bookingDetail = {
@@ -20,23 +29,28 @@ const DisplayLayout = ({ location, seatAvailability, seats, date, fromTime, toTi
     };
     fetch(`http://localhost:8081/api/booking/`, {
       method: "POST",
-      headers: { "content-type": "application/json", Authorization: "Bearer "+token },
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
       body: JSON.stringify(bookingDetail),
-    }).then((res) => {
-      if (!res.ok) {
-        throw Error("failed to book seat");
-      }
-      setSelected(null);
-      return res.json();
     })
-    .then((data) => {
-      console.log(data);
-      setStatus(data.isSuccessful);
-      setMessage(data.message);
-    }).catch((error)=>{
-      setError(error.message);
-      console.log(error.message);
-    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("failed to book seat");
+        }
+        setSelected(null);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setStatus(data.isSuccessful);
+        setMessage(data.message);
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.log(error.message);
+      });
   };
 
   const rows = [];
@@ -44,58 +58,39 @@ const DisplayLayout = ({ location, seatAvailability, seats, date, fromTime, toTi
     const cols = [];
     for (let j = 1; j <= location.cs; j++) {
       const id = location.id + "R" + i + "C" + j;
-      if(seatAvailability===null){
       cols.push(
         <td>
-          <div id={id} name={id}>
-            {
-              <DisplaySeat
-                location={location}
-                row={i}
-                col={j}
-                status={false}
-              ></DisplaySeat>
-            }
-          </div>
+          {!seatAvailability && (
+            <DisplaySeat
+              location={location}
+              row={i}
+              col={j}
+              status={false}
+              selected={selected}
+            ></DisplaySeat>
+          )}
+          {seatAvailability && seatAvailability.hasOwnProperty(id) && (
+            <div onClick={()=>{setSelected(id)}}>
+            <DisplaySeat
+              location={location}
+              row={i}
+              col={j}
+              status={true}
+              selected={selected}
+            ></DisplaySeat>
+            </div>
+          )}
+          {seatAvailability && !seatAvailability.hasOwnProperty(id) && (
+            <DisplaySeat
+              location={location}
+              row={i}
+              col={j}
+              status={false}
+              selected={selected}
+            ></DisplaySeat>
+          )}
         </td>
       );
-    }
-    else{
-      if(seatAvailability.hasOwnProperty(id)){
-        cols.push(
-          <td>
-            <div id={id} name={id} onClick={()=>{setSelected(id)}}>
-              {
-                <DisplaySeat
-                  location={location}
-                  row={i}
-                  col={j}
-                  selected={selected}
-                  status={seatAvailability.hasOwnProperty(id)}
-                ></DisplaySeat>
-              }
-            </div>
-          </td>
-        );
-      }
-      else{
-        cols.push(
-          <td>
-            <div id={id} name={id}>
-              {
-                <DisplaySeat
-                  location={location}
-                  row={i}
-                  col={j}
-                  selected={selected}
-                  status={seatAvailability.hasOwnProperty(id)}
-                ></DisplaySeat>
-              }
-            </div>
-          </td>
-        );
-      }
-    }
     }
     rows.push(<tr>{cols}</tr>);
   }
@@ -103,10 +98,18 @@ const DisplayLayout = ({ location, seatAvailability, seats, date, fromTime, toTi
   return (
     <>
       <h1>{location.name}</h1>
-      <table className="locationTable">{rows}</table>
-      {selected && <button onClick={()=>{handleBooking()}}>Book Seat</button>}
-      {message && status===0 && <h3 style={{color:"red"}}>{message}</h3>}
-      {message && status===1 && <h3 style={{color:"green"}}>{message}</h3>}
+      <table>{rows}</table>
+      {selected && (
+        <button
+          onClick={() => {
+            handleBooking();
+          }}
+        >
+          Book Seat
+        </button>
+      )}
+      {message && status === 0 && <h3 style={{ color: "red" }}>{message}</h3>}
+      {message && status === 1 && <h3 style={{ color: "green" }}>{message}</h3>}
     </>
   );
 };
