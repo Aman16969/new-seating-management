@@ -1,0 +1,15 @@
+.display-seat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px;
+  padding: 5px;
+  width: 50px;
+  height: 30px;
+  border-radius: 5px;
+  table-layout: fixed;
+}
+
+.locationTable {
+  display: inline-block;
+}

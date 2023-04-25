@@ -114,7 +114,8 @@ const UpcomingBooking = (props) => {
               <button
                 type="submit"
                 className="submit-btn"
-                onClick={() => handleDelete(bookId)}
+                onClick={() => {handleDelete(bookId);
+                setIsOpenCon(false)}}
               >
                 Yes
               </button>

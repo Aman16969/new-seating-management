@@ -1,43 +1,70 @@
-import UserList from "./pdf";
+import AllUsers from "./PDF/AllUsers";
+import AllAdmin from "./PDF/AllAdminByLocation";
+import AllUsersByLocation from "./PDF/AllUsersByLocation";
+import AllBookingDaily from "./PDF/AllBookingDaily";
+import AllBookingWeekly from "./PDF/AllBookingWeekly";
+import AllBookingMonthly from "./PDF/AllBookingMonthly";
+import AllRequest from "./PDF/AllRequestByLocation";
+import AllRoomByLocation from "./PDF/AllRoomByLocation";
+import AllSeatByLocation from "./PDF/AllSeatsByLocation";
 
 const AdminStats = () => {
   return (
     <>
       <tbody >
-        <tr className="user-row" >
-          <td>Daily Report</td>
+      <tr className="user-row" >
+          <td>Users</td>
           <td >
-            <button className="button-group">Download</button>
+           <AllUsers/>
           </td>
         </tr>
-        <tr className="user-row" >
-          <td>Weekly Report</td>
+      <tr className="user-row" >
+          <td>All Admin</td>
           <td >
-            <button className="button-group">Download</button>
-          </td>
-        </tr>
-        <tr className="user-row" >
-          <td>Monthly Report</td>
-          <td >
-            <button className="button-group">Download</button>
-          </td>
-        </tr>
-        <tr className="user-row" >
-          <td>Yearly Report</td>
-          <td >
-            <button className="button-group">Download</button>
+            <AllAdmin/>
           </td>
         </tr>
         <tr className="user-row" >
           <td>All Users</td>
           <td >
-           <UserList/>
+           <AllUsersByLocation/>
           </td>
         </tr>
         <tr className="user-row" >
+          <td>All Seats</td>
+          <td >
+           <AllSeatByLocation/>
+          </td>
+        </tr>
+        <tr className="user-row" >
+          <td>Daily Report</td>
+          <td >
+            <AllBookingDaily/>
+          </td>
+        </tr>
+        <tr className="user-row" >
+          <td>Last Week Report</td>
+          <td >
+            <AllBookingWeekly/>
+          </td>
+        </tr>
+        <tr className="user-row" >
+          <td>Last Month Report</td>
+          <td >
+            <AllBookingMonthly/>
+          </td>
+        </tr>
+        
+        <tr className="user-row" >
           <td>All Requests</td>
           <td >
-            <button className="button-group">Download</button>
+            <AllRequest/>
+          </td>
+        </tr>
+        <tr className="user-row" >
+          <td>All Room Booking</td>
+          <td >
+            <AllRoomByLocation/>
           </td>
         </tr>
       </tbody>

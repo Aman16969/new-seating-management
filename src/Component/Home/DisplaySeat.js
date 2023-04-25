@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./Admin.css";
+import "./home.css";
 
 const DisplaySeat = ({ location, row, col, status, selected }) => {
   const [seat, setSeat] = useState(null);
@@ -88,12 +88,7 @@ const DisplaySeat = ({ location, row, col, status, selected }) => {
           </div>
         )}
         {seat && seat.isAvailable === 0 && (
-          <div
-            className="display-seat"
-            style={{
-              
-            }}
-          >
+          <div className="display-seat" style={{}}>
             {"  "}
           </div>
         )}

@@ -61,21 +61,40 @@ const DisplayLayout = ({ location, seatAvailability, seats, date, fromTime, toTi
       );
     }
     else{
-      cols.push(
-        <td>
-          <div id={id} name={id} onClick={()=>{setSelected(id)}}>
-            {
-              <DisplaySeat
-                location={location}
-                row={i}
-                col={j}
-                selected={selected}
-                status={seatAvailability.hasOwnProperty(id)}
-              ></DisplaySeat>
-            }
-          </div>
-        </td>
-      );
+      if(seatAvailability.hasOwnProperty(id)){
+        cols.push(
+          <td>
+            <div id={id} name={id} onClick={()=>{setSelected(id)}}>
+              {
+                <DisplaySeat
+                  location={location}
+                  row={i}
+                  col={j}
+                  selected={selected}
+                  status={seatAvailability.hasOwnProperty(id)}
+                ></DisplaySeat>
+              }
+            </div>
+          </td>
+        );
+      }
+      else{
+        cols.push(
+          <td>
+            <div id={id} name={id}>
+              {
+                <DisplaySeat
+                  location={location}
+                  row={i}
+                  col={j}
+                  selected={selected}
+                  status={seatAvailability.hasOwnProperty(id)}
+                ></DisplaySeat>
+              }
+            </div>
+          </td>
+        );
+      }
     }
     }
     rows.push(<tr>{cols}</tr>);
@@ -84,7 +103,7 @@ const DisplayLayout = ({ location, seatAvailability, seats, date, fromTime, toTi
   return (
     <>
       <h1>{location.name}</h1>
-      <table>{rows}</table>
+      <table className="locationTable">{rows}</table>
       {selected && <button onClick={()=>{handleBooking()}}>Book Seat</button>}
       {message && status===0 && <h3 style={{color:"red"}}>{message}</h3>}
       {message && status===1 && <h3 style={{color:"green"}}>{message}</h3>}
