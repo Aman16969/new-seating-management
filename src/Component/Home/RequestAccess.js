@@ -20,17 +20,15 @@ function RequestAccess({ onClose, ...props }) {
     console.log(JSON.stringify(requestData));
     fetch("http://localhost:8081/api/requestBooking/", {
       method: "POST",
-      headers: {"Content-Type":"application/json", "Authorization": token },
+      headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify(requestData),
-    
-    })  
+    })
       .then((response) => {
         if (response.ok) {
           setDescription("Your request has been sent successfully!");
-          setTimeout(()=>{
-            props.setShowModal(false)
-          },1000)
-          
+          setTimeout(() => {
+            props.setShowModal(false);
+          }, 1000);
         } else {
           throw new Error("failed to send request");
         }
@@ -39,11 +37,10 @@ function RequestAccess({ onClose, ...props }) {
         setDescription(error.Description);
       });
   };
- 
 
   return (
     <div className="request-card">
-      <h1>Request Access</h1>
+      <h3 >Request Board/Discussion Room</h3>
       <form onSubmit={handleSubmit}>
         <textarea
           className="form-control"
@@ -62,4 +59,3 @@ function RequestAccess({ onClose, ...props }) {
 }
 
 export default RequestAccess;
-
