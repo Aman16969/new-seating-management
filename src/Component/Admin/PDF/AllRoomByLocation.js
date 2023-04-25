@@ -1,9 +1,10 @@
 import FileSaver from "file-saver";
-const UserList = () => {
+const AllRoomByLocation = () => {
 
     const downloadPdf = () => {
         const header = "Bearer " + sessionStorage.getItem("accessToken");
-        fetch("http://localhost:8081/api/pdf/users", {
+        const locationId=sessionStorage.getItem("userLocationId")
+        fetch(`http://localhost:8081/api/pdf/room/location/${locationId}`, {
           headers: {
             "Content-type": "application/json",
             Authorization: header,
@@ -12,7 +13,7 @@ const UserList = () => {
           return response.blob();
         }).then((blob) => {
           // Use FileSaver.js to save the blob as a file
-          FileSaver.saveAs(blob, "users.pdf");
+          FileSaver.saveAs(blob, "BookingRoom.pdf");
         }).catch((error) => {
           console.error("Error downloading PDF:", error);
         });
@@ -24,4 +25,4 @@ const UserList = () => {
         </div>
       );
     };
-    export default UserList;
+    export default AllRoomByLocation;

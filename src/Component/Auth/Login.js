@@ -35,17 +35,13 @@ const Login = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error(res.statusText);
+          throw new Error(res.message);
         }
         return res.json();
       })
       .then((data) => {
         console.log(data)
         if (data.length !== 0) {
-          var expirationTime = new Date();
-          expirationTime.setTime(
-            expirationTime.getTime() + 24 * 60 * 60 * 1000
-          );
           sessionStorage.setItem("email", data.email);
           sessionStorage.setItem("accessToken", data.accessToken);
           sessionStorage.setItem("userId", data.id);
@@ -57,7 +53,6 @@ const Login = () => {
             sessionStorage.setItem("userLocationId",data.location.id)
           }
           
-
           if(data.location===null){
             navigate("/profile",true)
           }
@@ -69,6 +64,7 @@ const Login = () => {
       })
       .catch((error) => {
         setError(error.message);
+        console.log(error.message)
       });
   };
 
