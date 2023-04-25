@@ -103,7 +103,7 @@ const DisplayLayout = ({ location, seatAvailability, seats, date, fromTime, toTi
   return (
     <>
       <h1>{location.name}</h1>
-      <table>{rows}</table>
+      <table className="locationTable">{rows}</table>
       {selected && <button onClick={()=>{handleBooking()}}>Book Seat</button>}
       {message && status===0 && <h3 style={{color:"red"}}>{message}</h3>}
       {message && status===1 && <h3 style={{color:"green"}}>{message}</h3>}
