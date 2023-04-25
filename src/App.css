@@ -113,9 +113,7 @@
   display: block;
   float: unset;
   background-color: #ffffff;
-
-  height: fit-content;
-  min-height: calc(90vh);
+  height: calc(90vh);
   width: 98.7%;
 }
 .container-content {

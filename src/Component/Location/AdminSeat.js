@@ -13,6 +13,7 @@ const AdminSeat = ({ location, row, col }) => {
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
   const [name, setName] = useState("");
+  const [editName, setEditName] = useState("");
   const [add, setAdd] = useState(false);
   const [addPopUp, setAddPopUp] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -94,23 +95,23 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         console.log(data);
-        window.location.reload();
+        setIsDeleting(false);
+        setFlag(!flag);
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
-    setIsDeleting(false);
   };
 
-  const handleCancel = () => {
+  const handleCancel= () => {
     setIsEditing(false);
-    window.location.reload();
-  };
+    setIsDeleting(false);
+  }
 
   const handleEdit = (e) => {
     console.log(name);
-    const seat = { row: row, col: col, locationId: location.id, name: name };
+    const seat = { row: row, col: col, locationId: location.id, name: editName };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {
@@ -127,13 +128,13 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         console.log(data);
-        setFlag(!flag);
+        setFlag(!flag)
+        setIsEditing(false)
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
-    setIsEditing(true);
   };
 
   return (

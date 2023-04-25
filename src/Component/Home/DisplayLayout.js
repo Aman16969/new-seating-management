@@ -40,6 +40,7 @@ const DisplayLayout = ({
           throw Error("failed to book seat");
         }
         setSelected(null);
+        setMessage(null);
         return res.json();
       })
       .then((data) => {
