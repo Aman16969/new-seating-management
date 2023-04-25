@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
-import { MdEdit, MdDelete, MdAdd, MdOutlineArrowDownward, MdOutlineArrowUpward, MdLaptopWindows} from "react-icons/md";
+import {
+  MdEdit,
+  MdDelete,
+  MdAdd,
+  MdOutlineArrowDownward,
+  MdOutlineArrowUpward,
+} from "react-icons/md";
 import AddSeatPopUp from "./AddSeatPopUp";
 
 const AdminSeat = ({ location, row, col }) => {
   const [seat, setSeat] = useState(null);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [add, setAdd] = useState(false);
   const [addPopUp, setAddPopUp] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -36,7 +42,6 @@ const AdminSeat = ({ location, row, col }) => {
         setSeat(data);
         setName(data.seatName);
         console.log(data);
-        setFlag(!flag)
    
       })
       .catch((error) => {
@@ -63,8 +68,6 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         console.log(data);
-        setFlag(!flag)
-        setAddPopUp(false)
       
       })
       .catch((error) => {
@@ -74,14 +77,14 @@ const AdminSeat = ({ location, row, col }) => {
   };
 
   const onHandleCancelPopUp= () =>{
+    console.log("cancel");
     setAddPopUp(false);
-  }
+  };
 
   const handleDelete = () => {
     fetch(`http://localhost:8081/api/seat/${seat.seatId}/${false}`, {
       method: "PUT",
       headers: {
-        "content-type": "application/json",
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify(seat),
@@ -100,19 +103,26 @@ const AdminSeat = ({ location, row, col }) => {
         console.log(error.message);
         setError(error.message);
       });
-      setIsDeleting(false);  
+    setIsDeleting(false);
+    
   };
-  const handleEdit = (e) => {
-    e.preventDefault();
+
+  const handleCancel= () => {
+   
     setIsEditing(false);
-    const updatedSeat = { ...seat, seatName:name};
-    fetch(`http://localhost:8081/api/seat/${seat.id}`, {
-      method: "PUT",
+    window.location.reload();
+  }
+
+  const handleEdit = (e) => {
+    console.log(name);
+    const seat = { row: row, col: col, locationId: location.id, name: name };
+    fetch(`http://localhost:8081/api/seat/`, {
+      method: "POST",
       headers: {
         "content-type": "application/json",
         Authorization: "Bearer " + token,
       },
-      body: JSON.stringify({ updatedSeat}),
+      body: JSON.stringify(seat),
     })
       .then((response) => {
         if (!response.ok) {
@@ -122,13 +132,13 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         console.log(data);
-        setSeat(updatedSeat);
         setFlag(!flag)
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
+      setIsEditing(true)
   };
 
   return (
@@ -137,50 +147,50 @@ const AdminSeat = ({ location, row, col }) => {
         {seat && seat.isAvailable !== 0 && (
           <div className="seatDiv">
             <div>
-              {seat.seatDirection === 0 && <MdOutlineArrowUpward size={"20px"}/>}
-              {seat.seatDirection === 1 && <MdOutlineArrowDownward size={"20px"}/>}
-              <MdOutlineArrowUpward size={"20px"}/>
-              <MdEdit size={"20px"} onClick={() => setIsEditing(true)}/>
-              <MdDelete size={"20px"} onClick={() => setIsDeleting(true)}/>
+              {seat.seatDirection === 0 && (
+                <MdOutlineArrowUpward size={"20px"} />
+              )}
+              {seat.seatDirection === 1 && (
+                <MdOutlineArrowDownward size={"20px"} />
+              )}
+              <MdEdit size={"20px"} onClick={() => setIsEditing(true)} />
+              <MdDelete size={"20px"} onClick={() => setIsDeleting(true)} />
             </div>
           </div>
         )}
 
-{ isEditing? (
-  <form onSubmit={handleEdit}>
-    <input
-     type="text"
-     id="name"
-     value={name || seat.seatName}
-     onChange={(e) => {
-       setName(e.target.value);
-      }}
-      />
-      <button type ="submit">Save</button>
-      <button type ="button" onClick={() =>{
-        setIsEditing(false);
-        // setName(seat.seatName)
-      }}>Cancel</button>
-  </form>
-) : (
-  <>
-  <p>{name}</p>
-  </>
-)}
+        {isEditing ? (
+           <>
+           <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <button onClick={()=>handleEdit()}>Save</button>
+            <button onClick={() =>handleCancel() }>Cancel</button>
+           </>
+        ) : (
+          <>
+            <p>{name}</p>
+          </>
+        )}
 
-{isDeleting && (
-  <div className="popup">
-    <p>Are you sure you want to delete?</p>
-    <button onClick={handleDelete}>Yes</button>
-    <button onClick={() => setIsDeleting(false)}>No</button>
-  </div>
-)}
+        {isDeleting && (
+          <div className="popup">
+            <p>Are you sure you want to delete?</p>
+            <button onClick={handleDelete}>Yes</button>
+            <button onClick={() => setIsDeleting(false)}>No</button>
+          </div>
+        )}
         {seat && seat.isAvailable === 0 && (
           <>
             {!add && (
               <div className="seatDiv">
                 <div className="addBtn"><MdAdd size={"20px"} onClick={()=>{setAddPopUp(!addPopUp)}}/></div>
-                {addPopUp && <AddSeatPopUp flag={flag} setFlag={setFlag} name={""} onHandleAdd={onHandleAdd} onHandleCancel={onHandleCancelPopUp}/>}
+                {addPopUp && <AddSeatPopUp name={""} onHandleAdd={onHandleAdd} onHandleCancel={onHandleCancelPopUp}/>}
               </div>
             )}
             {add && (
