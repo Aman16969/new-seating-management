@@ -1,8 +1,8 @@
-import {useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import UpcomingBooking from "./UpcomingBooking";
 import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
-import RequestAccess from "../Admin/RequestAccess";
+import RequestAccess from "./RequestAccess";
 import DisplayLayout from "./DisplayLayout";
 
 const Home = () => {
@@ -18,34 +18,41 @@ const Home = () => {
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const [flag, setFlag] = useState(false);
   const locationId = sessionStorage.getItem("userLocationId");
-  const [showModal,setShowModal] = useState(false);
-  const [location, setLocation] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [seats, setSeats] = useState(null);
   const [seatAvailability, setSeatAvailability] = useState(null);
   const token = sessionStorage.getItem("accessToken");
 
-  useEffect((e) => {
-    fetch(`http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
+  useEffect(
+    (e) => {
+      fetch(
+        `http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + token,
+          },
         }
-        return response.json();
-      })
-      .then((data) => {
-        setSeatAvailability(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  }, [date, fromTime, toTime]);
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setSeatAvailability(data);
+          // console.log(data);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    },
+    [date, fromTime, toTime]
+  );
 
   useEffect((e) => {
     fetch(`http://localhost:8081/api/location/${locationId}`, {
@@ -63,6 +70,29 @@ const Home = () => {
       })
       .then((data) => {
         setLocation(data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, []);
+
+  useEffect((e) => {
+    fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSeats(data);
+        // console.log(data);
       })
       .catch((error) => {
         setError(error.message);
@@ -93,10 +123,7 @@ const Home = () => {
       setMessage("You Have Booked A seat: " + seatName + " on " + date + ".");
     });
   };
-  if (location !== null) {
-    setLocationId(location.id);
-  }
-  
+
   return (
     <>
       <div className="container">
@@ -142,8 +169,14 @@ const Home = () => {
               </div>
             </div>
             <div className="row-card">
-              <div className="row-card-title" style={{display: 'flex',
-  justifyContent: 'space-around',flexDirection: 'row'}}>
+              <div
+                className="row-card-title"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  flexDirection: "row",
+                }}
+              >
                 <div>
                   <h3>Book Seats</h3>{" "}
                 </div>
@@ -208,8 +241,16 @@ const Home = () => {
                     </form>
                   </div>
                 </div>
-                {location && !seatAvailability && <DisplayLayout location={location}></DisplayLayout>}
-                {location && seatAvailability && <DisplayLayout location={location} seatAvailability={seatAvailability}></DisplayLayout>}
+                {location && seats && (
+                  <DisplayLayout
+                    location={location}
+                    seats={seats}
+                    seatAvailability={seatAvailability}
+                    date={date}
+                    fromTime={fromTime}
+                    toTime={toTime}
+                  ></DisplayLayout>
+                )}
               </div>
             </div>
           </div>

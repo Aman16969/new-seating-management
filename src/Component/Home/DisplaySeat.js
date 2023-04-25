@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-//import "./Admin.css";
+import "./Admin.css";
 
-const DisplaySeat = ({ location, row, col, status }) => {
+const DisplaySeat = ({ location, row, col, status, selected }) => {
   const [seat, setSeat] = useState(null);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
@@ -36,9 +36,68 @@ const DisplaySeat = ({ location, row, col, status }) => {
   return (
     <>
       <div>
-        {seat && seat.isAvailable === 1 && status && <div className="display-seat" style={{color:"green"}}>{seat.seatName}</div>}
-        {seat && seat.isAvailable === 0 && <h1>{" "}</h1>}
-        </div>
+        {seat &&
+          seat.isAvailable === 1 &&
+          status &&
+          selected === seat.seatId && (
+            <div
+              className="display-seat"
+              style={{
+                color: "black",
+                backgroundColor: "#ADFF2F",
+                borderTop: "1px solid red",
+                borderBottom: "5px solid red",
+                borderLeft: "5px solid red",
+                borderRight: "5px solid red",
+              }}
+            >
+              {seat.seatName}
+            </div>
+          )}
+        {seat &&
+          seat.isAvailable === 1 &&
+          status &&
+          selected !== seat.seatId && (
+            <div
+              className="display-seat"
+              style={{
+                color: "black",
+                backgroundColor: "#ADFF2F",
+                borderTop: "1px solid black",
+                borderBottom: "5px solid black",
+                borderLeft: "5px solid black",
+                borderRight: "5px solid black",
+              }}
+            >
+              {seat.seatName}
+            </div>
+          )}
+        {seat && seat.isAvailable === 1 && !status && (
+          <div
+            className="display-seat"
+            style={{
+              color: "black",
+              backgroundColor: "#FF3333",
+              borderTop: "1px solid black",
+              borderBottom: "5px solid black",
+              borderLeft: "5px solid black",
+              borderRight: "5px solid black",
+            }}
+          >
+            {seat.seatName}
+          </div>
+        )}
+        {seat && seat.isAvailable === 0 && (
+          <div
+            className="display-seat"
+            style={{
+              
+            }}
+          >
+            {"  "}
+          </div>
+        )}
+      </div>
     </>
   );
 };
