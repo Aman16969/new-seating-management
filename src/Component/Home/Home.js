@@ -1,24 +1,103 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UpcomingBooking from "./UpcomingBooking";
 import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
 import RequestAccess from "./RequestAccess";
+import DisplayLayout from "./DisplayLayout";
 
 const Home = () => {
   const [countall, setCountAll] = useState(0);
   const [countAvailable, setCountAvailable] = useState(0);
-  const [date, setDate] = useState("");
-  const [fromTime, setFromTime] = useState("");
-  const [toTime, setToTime] = useState("");
+  const [date, setDate] = useState(null);
+  const [fromTime, setFromTime] = useState(null);
+  const [toTime, setToTime] = useState(null);
   const [seatName, setSeatName] = useState("");
   const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
   const [openBooking, setOpenBooking] = useState(true);
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const [flag, setFlag] = useState(false);
-  const location = sessionStorage.getItem("UserLocation");
-  const [locationId, setLocationId] = useState(null);
+  const locationId = sessionStorage.getItem("userLocationId");
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [seats, setSeats] = useState(null);
+  const [seatAvailability, setSeatAvailability] = useState(null);
+  const token = sessionStorage.getItem("accessToken");
+
+  useEffect(
+    (e) => {
+      fetch(
+        `http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setSeatAvailability(data);
+          // console.log(data);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    },
+    [date, fromTime, toTime]
+  );
+
+  useEffect((e) => {
+    fetch(`http://localhost:8081/api/location/${locationId}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLocation(data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, []);
+
+  useEffect((e) => {
+    fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSeats(data);
+        // console.log(data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, []);
 
   function handleAccessClick() {
     setShowModal(true);
@@ -44,9 +123,7 @@ const Home = () => {
       setMessage("You Have Booked A seat: " + seatName + " on " + date + ".");
     });
   };
-  if (location !== null) {
-    setLocationId(location.id);
-  }
+
   return (
     <>
       <div className="container">
@@ -92,14 +169,20 @@ const Home = () => {
               </div>
             </div>
             <div className="row-card">
-              <div className="row-card-title" style={{display: 'flex',
-  justifyContent: 'space-around',flexDirection: 'row'}}>
+              <div
+                className="row-card-title"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  flexDirection: "row",
+                }}
+              >
                 <div>
                   <h3>Book Seats</h3>{" "}
                 </div>
                 <div>
                   <button className="access" onClick={handleAccessClick}>
-                    Request Access
+                    Request Board/Discussion Room
                   </button>
                 </div>
               </div>
@@ -155,59 +238,19 @@ const Home = () => {
                           step="3600"
                         />
                       </div>
-
-                      {/* <div className="form-item">
-                        {locationId && <Layout locationId={locationId} />}
-                      </div> */}
                     </form>
                   </div>
                 </div>
-                <div className="card-body-col">
-                  <div className="seat-display">
-                    {locationId && (
-                      <GetSeat
-                        setFlag={setFlag}
-                        flag={flag}
-                        date={date}
-                        locationId={location.id}
-                        fromTime={fromTime}
-                        toTime={toTime}
-                        seatId={seatId}
-                        setSeatId={setSeatId}
-                        setSeatName={setSeatName}
-                        setCountAvailable={setCountAvailable}
-                        setCountAll={setCountAll}
-                      />
-                    )}
-                  </div>
-                  <div className="seat-book-item">
-                    <p>
-                      {!date && !locationId && (
-                        <span>
-                          Welcome To Accolite Digital. Please Book Your Seat.
-                        </span>
-                      )}
-                      {date && locationId && seatName && (
-                        <span style={{ color: "#3f4d67" }}>
-                          &diams; You have selected {seatName} for {date}
-                        </span>
-                      )}
-                    </p>
-                    {date && locationId && (
-                      <p style={{}}>
-                        <span style={{ color: "red" }}>Available:</span>
-                        <span style={{ color: "#3f4d67" }}>
-                          {countAvailable} &#8725;{countall}
-                        </span>
-                      </p>
-                    )}
-                    {date && locationId && seatName && (
-                      <button className="button-group" onClick={handleBooking}>
-                        Book Seat
-                      </button>
-                    )}
-                  </div>
-                </div>
+                {location && seats && (
+                  <DisplayLayout
+                    location={location}
+                    seats={seats}
+                    seatAvailability={seatAvailability}
+                    date={date}
+                    fromTime={fromTime}
+                    toTime={toTime}
+                  ></DisplayLayout>
+                )}
               </div>
             </div>
           </div>

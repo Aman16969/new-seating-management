@@ -844,12 +844,11 @@ id.login-button {
   text-align: center;
 }
 
-.request-card form {
-  display: flex;
-  flex-direction: column;
-}
 .request-card {
+  display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
   margin-left: 20%;
   margin-right: 40%;
   margin-bottom: 100%;
@@ -858,7 +857,7 @@ id.login-button {
   background-color: #abe9cd;
   background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
   box-shadow: 0 0 20px rgba(6, 6, 6, 0.2);
-  padding: 20px;
+  padding: 30px;
   width: 400px;
   z-index: 1;
 }
@@ -867,7 +866,7 @@ id.login-button {
   margin-bottom: 20px;
   width: 90%;
   padding: 10px;
-  margin-left: 3%;
+  /* margin-left: 3%; */
   resize: none;
 }
 
@@ -890,6 +889,7 @@ id.login-button {
 .access {
   background-color: #0f355e;
   color: white;
+  height: 30px;
   border-radius: 5px;
   margin-top: 10px;
   margin-left: 200px;
