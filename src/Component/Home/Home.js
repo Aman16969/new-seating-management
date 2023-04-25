@@ -9,8 +9,8 @@ const Home = () => {
   const [countall, setCountAll] = useState(0);
   const [countAvailable, setCountAvailable] = useState(0);
   const [date, setDate] = useState(null);
-  const [fromTime, setFromTime] = useState(null);
-  const [toTime, setToTime] = useState(null);
+  const [fromTime, setFromTime] = useState("09:30");
+  const [toTime, setToTime] = useState("17:30");
   const [seatName, setSeatName] = useState("");
   const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
