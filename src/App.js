@@ -8,7 +8,6 @@ import { Auth } from "../src/ContextApi/AuthContext";
 import Location from "./Component/Location/Location";
 import Logout from "./Component/Auth/Logout";
 import Profile from "./Component/Profile/Profile";
-import UserDetails from "./Component/Admin/UserDetails";
 import RoleRoutes from "./RoleRoutes";
 import Admin from "./Component/Admin/Admin";
 function App() {

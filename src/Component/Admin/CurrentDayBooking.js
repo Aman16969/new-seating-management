@@ -33,7 +33,6 @@ const CurrentDayBooking = () => {
       });
   }, [flag]);
   const handleDelete = (bookId) => {
-    console.log(bookId)
     fetch(`http://localhost:8081/api/booking/setActiveStatus/${bookId}/value/false`, {
       method: 'PUT',
       headers: {

@@ -60,7 +60,6 @@ const Request = () => {
       }
       return res;
     }).then((data) => {
-      console.log(data)
       setFlag(!flag)
       setIsOpenCon(false)
     });
@@ -78,7 +77,7 @@ const Request = () => {
       }
       return res;
     }).then((data) => {
-      console.log(data)
+
       setFlag(!flag)
       setOpenBookingForm(true)
       setIsOpenCon(false)

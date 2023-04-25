@@ -24,7 +24,6 @@ const OpenBookingForm = (props) => {
     "location_id":parseInt(locationId),
     "room_id":parseInt(roomId)
     }
-    console.log(data)
     const header = "Bearer " + sessionStorage.getItem("accessToken");
         fetch(`http://localhost:8081/api/bookRoom/`, {
           method:'POST',

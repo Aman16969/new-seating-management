@@ -68,7 +68,7 @@ const LocationLayout = ({ location }) => {
             setCols(e.target.value);
           }}
         />
-        <button
+        <button className="button-group"
           onClick={() => {
             updateRowsAndCols();
           }}

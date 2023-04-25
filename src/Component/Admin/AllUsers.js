@@ -36,7 +36,6 @@ const AllUsers = () => {
   }, [flag]);
 
   const handleUpdate = () => {
-    console.log(userEmail)
     fetch(`http://localhost:8081/api/user/role/${userEmail}`, {
       method: "POST",
       headers: {
@@ -48,7 +47,7 @@ const AllUsers = () => {
       .then((res) => {
         if (!res.ok) {
           throw Error("connot fetch the data");
-        }console.log(res)
+        }
         return res;
       })
       .then((data) => {

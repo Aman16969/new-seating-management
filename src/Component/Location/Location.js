@@ -45,7 +45,6 @@ const Location = () => {
     if (!name) return;
     const location = { name };
     setIsPending(true);
-    console.log(location);
     fetch("http://localhost:8081/api/location/", {
       method: "POST",
       headers: {
@@ -75,27 +74,34 @@ const Location = () => {
     <>
       <div className="container-content">
         <div className="row-card" style={{ padding: "5px" }}>
-          <div class="row-card-title">
-            <h2>Locations</h2>
-          </div>
-          <div className="locationList">
-            <select
-              name="select"
-              id="select"
-              value={selectedLocation?.id || ""}
-              onChange={handleLocationChange}
-            >
-              <option value="">Select a location</option> 
-              {locations.map((location) => (
-                <option key={location.id} value={location.id}>
-                  {location.name}
-                </option>
-              ))}
-            </select>
-            <button onClick={addLocation} disabled={isPending}>
-              Add Location
-            </button>
-          </div>
+          
+                <div className="locationList">
+                  <form className="loc-select-form">
+                    <div>
+                  
+                  <select
+                    name="select"
+                    id="select"
+                    value={selectedLocation?.id || ""}
+                    onChange={handleLocationChange}
+                  >
+                    <option value="">Select a location</option> 
+                    {locations.map((location) => (
+                      <option key={location.id} value={location.id}>
+                        {location.name}
+                      </option>
+                    ))}
+                  </select>
+                  </div>
+                  <div>
+                  <button 
+                  className="button-group"
+                  onClick={addLocation} disabled={isPending}>
+                    Add Location
+                  </button>
+                  </div>
+                  </form>
+                </div>
           {selectedLocation && <LocationLayout location={selectedLocation} />}{" "}
         </div>
       </div>
