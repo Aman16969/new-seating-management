@@ -13,3 +13,14 @@
 .locationTable {
   display: inline-block;
 }
+
+.header {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.header button {
+  height: 35px;
+}
