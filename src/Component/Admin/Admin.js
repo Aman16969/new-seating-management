@@ -1,4 +1,5 @@
 import "./admin.css";
+import AdminStats from "./AdminStats";
 import AllUsers from "./AllUsers";
 import CurrentDayBooking from "./CurrentDayBooking";
 import Request from "./Request";
@@ -31,62 +32,11 @@ const Admin = () => {
               <div className="content-row-header">
                 <h2>Booking Stats</h2>
               </div>
-              <div className="admin-stats-row">
-                <div className="stats-admin">
-                  <div className="content-row-header">
-                    <h2>Weekly Booking Stats</h2>
-                  </div>
-                  <div className="stats-content">
-                    <table>
-                      <tbody className="stats-body">
-                        <tr>
-                          <th>Total Bookings: </th>
-                          <td> 200</td>
-                        </tr>
-                        <tr>
-                          <th>Total Active users:</th>
-                          <td>100</td>
-                        </tr>
-                        <tr>
-                          <th>Average Booking per day:</th>
-                          <td>60</td>
-                        </tr>
-                        <tr>
-                          <th>Canceled Bookings</th>
-                          <td>20</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+              <div className="table-scroll">
+                  <table>
+                    <AdminStats />
+                  </table>
                 </div>
-                <div className="stats-admin">
-                  <div className="content-row-header">
-                    <h2>Monthly Booking Stats</h2>
-                  </div>
-                  <div className="stats-content">
-                    <table>
-                      <tbod className="stats-body">
-                        <tr>
-                          <th>Total Bookings: </th>
-                          <td> 200</td>
-                        </tr>
-                        <tr>
-                          <th>Total Active users:</th>
-                          <td>100</td>
-                        </tr>
-                        <tr>
-                          <th>Average Booking per day:</th>
-                          <td>60</td>
-                        </tr>
-                        <tr>
-                          <th>Cancled Bookings</th>
-                          <td>20</td>
-                        </tr>
-                      </tbod>
-                    </table>
-                  </div>
-                </div>
-              </div>
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">

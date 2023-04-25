@@ -96,7 +96,7 @@ const Request = () => {
                 <td style={{ fontSize: "15px", textAlign: "left" }}>
                   {req.email.substring(0, 30)}
                 </td>
-                <th>
+                <td>
                   <button
                     className="button-group"
                     value={req.id}
@@ -104,7 +104,7 @@ const Request = () => {
                   >
                     view
                   </button>
-                </th>
+                </td>
               </tr>
             );
           })}
