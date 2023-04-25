@@ -13,13 +13,12 @@ const AdminSeat = ({ location, row, col }) => {
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
   const [name, setName] = useState("");
+  const [editName, setEditName] = useState("");
   const [add, setAdd] = useState(false);
   const [addPopUp, setAddPopUp] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const[flag,setFlag]=useState(true)
-  
-
+  const [flag, setFlag] = useState(true);
 
   useEffect(() => {
     fetch(
@@ -42,7 +41,6 @@ const AdminSeat = ({ location, row, col }) => {
         setSeat(data);
         setName(data.seatName);
         console.log(data);
-   
       })
       .catch((error) => {
         setError(error.message);
@@ -67,9 +65,8 @@ const AdminSeat = ({ location, row, col }) => {
         return response.json();
       })
       .then((data) => {
-        setAddPopUp(false)
-        setFlag(!flag)
-      
+        setAddPopUp(false);
+        setFlag(!flag);
       })
       .catch((error) => {
         console.log(error.message);
@@ -77,7 +74,7 @@ const AdminSeat = ({ location, row, col }) => {
       });
   };
 
-  const onHandleCancelPopUp= () =>{
+  const onHandleCancelPopUp = () => {
     console.log("cancel");
     setAddPopUp(false);
   };
@@ -98,25 +95,23 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         console.log(data);
-        window.location.reload();
+        setIsDeleting(false);
+        setFlag(!flag);
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
-    setIsDeleting(false);
-    
   };
 
   const handleCancel= () => {
-   
     setIsEditing(false);
-    window.location.reload();
+    setIsDeleting(false);
   }
 
   const handleEdit = (e) => {
     console.log(name);
-    const seat = { row: row, col: col, locationId: location.id, name: name };
+    const seat = { row: row, col: col, locationId: location.id, name: editName };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {
@@ -134,12 +129,12 @@ const AdminSeat = ({ location, row, col }) => {
       .then((data) => {
         console.log(data);
         setFlag(!flag)
+        setIsEditing(false)
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
-      setIsEditing(true)
   };
 
   return (
@@ -161,18 +156,22 @@ const AdminSeat = ({ location, row, col }) => {
         )}
 
         {isEditing ? (
-           <>
-           <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-            <button onClick={()=>handleEdit()}>Save</button>
-            <button onClick={() =>handleCancel() }>Cancel</button>
-           </>
+          <>
+            <div className="locationpopupContainer">
+              <div className="location-popup-boxd">
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <button onClick={() => handleEdit()}>Save</button>
+                <button onClick={() => handleCancel()}>Cancel</button>
+              </div>
+            </div>
+          </>
         ) : (
           <>
             <p>{name}</p>
@@ -180,18 +179,33 @@ const AdminSeat = ({ location, row, col }) => {
         )}
 
         {isDeleting && (
-          <div className="popup">
-            <p>Are you sure you want to delete?</p>
-            <button onClick={handleDelete}>Yes</button>
-            <button onClick={() => setIsDeleting(false)}>No</button>
+          <div className="locationpopupContainer">
+            <div className="location-popup-boxd">
+              <p>Are you sure you want to delete?</p>
+              <button onClick={handleDelete}>Yes</button>
+              <button onClick={() => setIsDeleting(false)}>No</button>
+            </div>
           </div>
         )}
         {seat && seat.isAvailable === 0 && (
           <>
             {!add && (
               <div className="seatDiv">
-                <div className="addBtn"><MdAdd size={"20px"} onClick={()=>{setAddPopUp(!addPopUp)}}/></div>
-                {addPopUp && <AddSeatPopUp name={""} onHandleAdd={onHandleAdd} onHandleCancel={onHandleCancelPopUp}/>}
+                <div className="addBtn">
+                  <MdAdd
+                    size={"20px"}
+                    onClick={() => {
+                      setAddPopUp(!addPopUp);
+                    }}
+                  />
+                </div>
+                {addPopUp && (
+                  <AddSeatPopUp
+                    name={""}
+                    onHandleAdd={onHandleAdd}
+                    onHandleCancel={onHandleCancelPopUp}
+                  />
+                )}
               </div>
             )}
             {add && (

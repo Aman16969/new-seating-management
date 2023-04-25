@@ -2,7 +2,6 @@ import "./admin.css";
 import AdminStats from "./AdminStats";
 import AllUsers from "./AllUsers";
 import CurrentDayBooking from "./CurrentDayBooking";
-
 const Admin = () => {
   return (
     <>
@@ -11,7 +10,7 @@ const Admin = () => {
           <div className="admin-content">
             <div className="admin-content-row">
               <div className="content-row-header">
-                <h2>Current day Booking</h2>
+                <h2>Today's Booking</h2>
               </div>
               <table className="table-header">
                 <thead>

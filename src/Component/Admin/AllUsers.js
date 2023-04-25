@@ -62,7 +62,7 @@ const AllUsers = () => {
         allUsers.map((user) => {
           return (
             <tr className="user-row">
-              <td>{user.email.substring(0, 40)}</td>
+              <td>{user.email?.substring(0, 40)}</td>
               <td>
                 <button
                   className="button-group"
