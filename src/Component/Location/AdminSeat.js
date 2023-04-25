@@ -11,6 +11,7 @@ const AdminSeat = ({ location, row, col }) => {
   const [addPopUp, setAddPopUp] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const[flag,setFlag]=useState(true)
   
 
 
@@ -35,12 +36,13 @@ const AdminSeat = ({ location, row, col }) => {
         setSeat(data);
         setName(data.seatName);
         console.log(data);
+        setFlag(!flag)
    
       })
       .catch((error) => {
         setError(error.message);
       });
-  }, []);
+  }, [flag]);
 
   const onHandleAdd = (name) => {
     console.log(name);
@@ -61,6 +63,8 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         console.log(data);
+        setFlag(!flag)
+        setAddPopUp(false)
       
       })
       .catch((error) => {
@@ -70,7 +74,6 @@ const AdminSeat = ({ location, row, col }) => {
   };
 
   const onHandleCancelPopUp= () =>{
-    console.log("cancel");
     setAddPopUp(false);
   }
 
@@ -120,6 +123,7 @@ const AdminSeat = ({ location, row, col }) => {
       .then((data) => {
         console.log(data);
         setSeat(updatedSeat);
+        setFlag(!flag)
       })
       .catch((error) => {
         console.log(error.message);
@@ -176,7 +180,7 @@ const AdminSeat = ({ location, row, col }) => {
             {!add && (
               <div className="seatDiv">
                 <div className="addBtn"><MdAdd size={"20px"} onClick={()=>{setAddPopUp(!addPopUp)}}/></div>
-                {addPopUp && <AddSeatPopUp name={""} onHandleAdd={onHandleAdd} onHandleCancel={onHandleCancelPopUp}/>}
+                {addPopUp && <AddSeatPopUp flag={flag} setFlag={setFlag} name={""} onHandleAdd={onHandleAdd} onHandleCancel={onHandleCancelPopUp}/>}
               </div>
             )}
             {add && (
