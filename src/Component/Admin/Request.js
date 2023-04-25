@@ -25,6 +25,7 @@ const Request = () => {
       })
       .then((data) => {
         setRequest(data);
+        console.log(data)
       });
   }, [flag]);
   const handlePopup = (e) => {

@@ -1,6 +1,7 @@
 import "./admin.css";
 import AdminStats from "./AdminStats";
 import AllUsers from "./AllUsers";
+import Request from "./Request";
 import CurrentDayBooking from "./CurrentDayBooking";
 const Admin = () => {
   return (
@@ -52,7 +53,7 @@ const Admin = () => {
                 </table>
                 <div className="table-scroll">
                   <table>
-                    {/* <Request /> */}
+                    <Request/>
                   </table>
                 </div>
               </div>
