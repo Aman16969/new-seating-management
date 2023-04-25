@@ -1,6 +1,6 @@
 import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 import { useState, useEffect } from "react";
-import { MdEdit, MdDelete, MdAdd, MdOutlineArrowDownward, MdOutlineArrowUpward, MdLaptopWindows} from "react-icons/md";
+import { MdEdit, MdDelete, MdAdd, MdOutlineArrowDownward, MdOutlineArrowUpward} from "react-icons/md";
 import AddSeatPopUp from "./AddSeatPopUp";
 
 const AdminSeat = ({ location, row, col }) => {
@@ -79,7 +79,6 @@ const AdminSeat = ({ location, row, col }) => {
     fetch(`http://localhost:8081/api/seat/${seat.seatId}/${false}`, {
       method: "PUT",
       headers: {
-        "content-type": "application/json",
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify(seat),
@@ -100,11 +99,12 @@ const AdminSeat = ({ location, row, col }) => {
       });
       setIsDeleting(false);  
   };
+
   const handleEdit = (e) => {
     e.preventDefault();
     setIsEditing(false);
     const updatedSeat = { ...seat, seatName:name};
-    fetch(`http://localhost:8081/api/seat/${seat.id}`, {
+    fetch(`http://localhost:8081/api/seat/${seat.seatId}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
