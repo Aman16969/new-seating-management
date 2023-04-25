@@ -892,13 +892,3 @@ id.login-button {
   margin-top: 10px;
   margin-left: 200px;
 }
-.locationList{
-  display: block;
-}
-.loc-select-form{
-  display: flex;
-  justify-content: space-between;
-}
-.loc-select-form select{
-  width: 100%;
-}

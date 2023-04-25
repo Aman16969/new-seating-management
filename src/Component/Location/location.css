@@ -50,21 +50,42 @@
   width: 30%;
 }
 .locationList {
+  align-items: center;
+  
+}
+
+.loc-select-form {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.locationList select {
-  width: 70%;
-  border-radius: 2px;
-  border: 1px solid #007bff;
-  background-color: #e0ebff;
+
+select {
+  width: 200%;
+  max-width: 300px;
   padding: 10px;
-  font-size: 15px;
+  font-size: 16px;
+  border: 2px solid #1055af;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
-.locationList option {
-  padding: 10px;
-  font-size: 15px;
-  background-color: #e0ebff;
-  color: #007bff;
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #0066aa;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

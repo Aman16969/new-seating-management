@@ -97,7 +97,7 @@ const Location = () => {
                   <button 
                   className="button-group"
                   onClick={addLocation} disabled={isPending}>
-                    Add Location
+                    Add New Location
                   </button>
                   </div>
                   </form>

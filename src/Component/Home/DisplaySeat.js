@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./home.css";
 
-const DisplaySeat = ({ location, row, col, status, selected }) => {
+const DisplaySeat = ({ location, row, col, status, selected,flag,setFlag }) => {
   const [seat, setSeat] = useState(null);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
@@ -29,11 +29,12 @@ const DisplaySeat = ({ location, row, col, status, selected }) => {
       .then((data) => {
         setSeat(data);
         setName(data.seatName);
+        setFlag(!flag)
       })
       .catch((error) => {
         setError(error.message);
       });
-  }, []);
+  }, [flag]);
 
   return (
     <>

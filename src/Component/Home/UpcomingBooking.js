@@ -6,7 +6,6 @@ const UpcomingBooking = (props) => {
   const [isPending, setIsPending] = useState(true);
   const [message, setMessage] = useState("");
   const [bookId, setBookId] = useState(null);
-  const [flag, setFlag] = useState(false);
 
   const yearMonthDay = new Date();
   const currentDate = yearMonthDay.toISOString().substr(0, 10);
@@ -27,13 +26,13 @@ const UpcomingBooking = (props) => {
       })
       .then((data) => {
         setupcomingBooking(data);
-        console.log(upcomingBooking);
         setIsPending(false);
+      
       })
       .catch((err) => {
         setIsPending(false);
       });
-  }, [flag]);
+  }, [props.flag]);
 
   const handlePopup = (e) => {
     setBookId(e);
@@ -58,7 +57,7 @@ const UpcomingBooking = (props) => {
       })
       .then((e) => {
         setMessage("booking canceled successfully");
-        setFlag(!flag);
+        props.setFlag(!props.flag);
         setIsOpenCon(false);
       })
       .catch((err) => {
@@ -81,7 +80,7 @@ const UpcomingBooking = (props) => {
                   return bookingDateA - bookingDateB;
                 })
                 .map((booking) => {
-                  console.log(currentDate);
+                 
                   if (booking.date >= currentDate) {
                     return (
                       <tr key={booking.id} className="header-booking">

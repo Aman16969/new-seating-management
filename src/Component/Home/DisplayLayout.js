@@ -8,6 +8,8 @@ const DisplayLayout = ({
   date,
   fromTime,
   toTime,
+  flag,
+  setFlag
 }) => {
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");

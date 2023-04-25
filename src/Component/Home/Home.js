@@ -16,7 +16,7 @@ const Home = () => {
   const [message, setMessage] = useState("");
   const [openBooking, setOpenBooking] = useState(true);
   const header = "Bearer " + sessionStorage.getItem("accessToken");
-  const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState(true);
   const locationId = sessionStorage.getItem("userLocationId");
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
@@ -75,7 +75,7 @@ const Home = () => {
       .catch((error) => {
         setError(error.message);
       });
-  }, []);
+  }, [flag]);
 
   useEffect((e) => {
     fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
@@ -103,27 +103,7 @@ const Home = () => {
   function handleAccessClick() {
     setShowModal(true);
   }
-  const handleBooking = () => {
-    const bookingDetail = {
-      location_id: locationId,
-      user_id: sessionStorage.getItem("userId"),
-      seat_id: seatId,
-      date: date,
-      fromTime: fromTime,
-      toTime: toTime,
-    };
-    fetch(`http://localhost:8081/api/booking/`, {
-      method: "POST",
-      headers: { "content-type": "application/json", Authorization: header },
-      body: JSON.stringify(bookingDetail),
-    }).then((res) => {
-      if (!res.ok) {
-        throw Error("failed to book seat");
-      }
-      setFlag(!flag);
-      setMessage("You Have Booked A seat: " + seatName + " on " + date + ".");
-    });
-  };
+
 
   return (
     <>
@@ -164,7 +144,7 @@ const Home = () => {
                     <UpcomingBooking flag={flag} setFlag={setFlag} />
                   )}
                   {!openBooking && (
-                    <CompletedBooking flag={flag} setFlag={setFlag} />
+                    <CompletedBooking   flag={flag} setFlag={setFlag} />
                   )}
                 </div>
               </div>
@@ -250,6 +230,8 @@ const Home = () => {
                     date={date}
                     fromTime={fromTime}
                     toTime={toTime}
+                    flag={flag}
+                    setFlag={setFlag}
                   ></DisplayLayout>
                 )}
               </div>
