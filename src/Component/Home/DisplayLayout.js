@@ -46,6 +46,7 @@ const DisplayLayout = ({
         console.log(data);
         setStatus(data.isSuccessful);
         setMessage(data.message);
+        window.location.reload();
       })
       .catch((error) => {
         setError(error.message);
@@ -98,7 +99,7 @@ const DisplayLayout = ({
   return (
     <>
       <h1>{location.name}</h1>
-      <table>{rows}</table>
+      <table className="locationTable">{rows}</table>
       {selected && (
         <button
           onClick={() => {

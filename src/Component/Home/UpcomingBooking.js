@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 const UpcomingBooking = (props) => {
   const [isOpenCon, setIsOpenCon] = useState(false);
@@ -41,12 +41,15 @@ const UpcomingBooking = (props) => {
   };
   const handleDelete = (bookId) => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
-    fetch(`http://localhost:8081/api/booking/setActiveStatus/${bookId}/value/false`, {
-      method: "PUT",
-      headers: {
-        Authorization: header,
-      },
-    })
+    fetch(
+      `http://localhost:8081/api/booking/setActiveStatus/${bookId}/value/false`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: header,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           throw Error("cannot be deleted");
@@ -54,9 +57,9 @@ const UpcomingBooking = (props) => {
         return res.json();
       })
       .then((e) => {
-        setMessage("booking cancled successfully");
-        setIsOpenCon(false);
+        setMessage("booking canceled successfully");
         setFlag(!flag);
+        setIsOpenCon(false);
       })
       .catch((err) => {
         setMessage(err.message);
