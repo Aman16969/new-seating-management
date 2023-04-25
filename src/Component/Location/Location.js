@@ -85,8 +85,7 @@ const Location = () => {
               value={selectedLocation?.id || ""}
               onChange={handleLocationChange}
             >
-              <option value="">Select a location</option> // add a default
-              option with an empty value
+              <option value="">Select a location</option> 
               {locations.map((location) => (
                 <option key={location.id} value={location.id}>
                   {location.name}
