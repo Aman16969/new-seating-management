@@ -182,7 +182,7 @@ const Home = () => {
                 </div>
                 <div>
                   <button className="access" onClick={handleAccessClick}>
-                    Request Access
+                    Request Board/Discussion Room
                   </button>
                 </div>
               </div>

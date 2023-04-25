@@ -13,7 +13,7 @@ const AddSeatPopUp = ({ onHandleAdd, onHandleCancel }) => {
         onClick={() => setIsOpenCon(false)}
       >
         <div className="location-popup-boxd">
-          <h4>Seat Name</h4>
+          <b>Seat Name</b>
           <input
             type="text"
             value={name}

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 const AuthContext=React.createContext();
+const AdminContext = React.createContext(null);
 export const Auth=(props)=>{
     const [isAuthenticated,setIsAuthenticated]=useState(false);
     const [userid,setUserid]=useState("");

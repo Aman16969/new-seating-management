@@ -21,7 +21,6 @@
 .navbar li a:hover {
   color: #ff9238;
   transform: scale(1.2);
-
 }
 
 .dropdown {
@@ -39,7 +38,11 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  background: linear-gradient(to top, rgb(9, 32, 63) 0%, rgb(83, 120, 149) 100%);
+  background: linear-gradient(
+    to top,
+    rgb(9, 32, 63) 0%,
+    rgb(83, 120, 149) 100%
+  );
   width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(255, 249, 249, 0.2);
   z-index: 1;
@@ -54,13 +57,11 @@
   height: 30px;
 }
 
-
 .dropdown-content a {
   color: rgb(255, 255, 255);
   padding: 12px 10px;
   text-decoration: none;
   display: block;
-  
 }
 .navbar li:last-child {
   margin-left: auto;
@@ -76,7 +77,6 @@
   margin-top: 10px;
   margin-left: 20px;
 }
-
 
 .inner-navbar li {
   text-align: left;
@@ -132,14 +132,12 @@
 }
 .row-card {
   box-sizing: border-box;
-  
+
   box-shadow: 2px 1px 10px #13121c;
   display: block;
   border-radius: 3px;
   background-color: #abe9cd;
-background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
-
-
+  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
 }
 .row-card-title {
   top: 0;
@@ -153,7 +151,6 @@ background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
   height: 50px;
   display: flex;
   flex-direction: column;
-  
 }
 .btn-group {
   display: flex;
@@ -174,15 +171,15 @@ background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
   background-color: transparent;
 }
 .header-booking th,
-td,
-tr {
+.header-booking td,
+.header-booking tr {
   width: 20%;
 }
 .header-booking > td {
   text-align: center;
 }
 .header-booking > tr:hover {
-  background-color: rgb(206, 206, 207)
+  background-color: rgb(206, 206, 207);
 }
 .table {
   width: 100%;
@@ -294,7 +291,6 @@ tr {
 } */
 
 /* Seat  */
-
 
 .seat-container {
   display: flex;
@@ -512,7 +508,6 @@ id.login-button {
   color: aliceblue;
 }
 
-
 /* video{
   position: fixed;
   top: 0;
@@ -580,7 +575,7 @@ id.login-button {
   border: 1px solid #007bff;
   border-radius: 3px;
   color: #ffffff;
-  background-color: #3eadcf ;
+  background-color: #3eadcf;
   padding: 8px 40px;
   font-size: 18px;
   cursor: pointer;
@@ -841,7 +836,6 @@ id.login-button {
   width: 500px;
 }
 
-
 /* Request */
 .request-card h1 {
   font-size: 40px;
@@ -850,23 +844,20 @@ id.login-button {
   text-align: center;
 }
 
-
-.request-card form {
+.request-card {
   display: flex;
-  flex-direction: column;
- 
-}
-.request-card{
   justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
   margin-left: 20%;
   margin-right: 40%;
   margin-bottom: 100%;
   margin-top: 3rem;
   border-radius: 10px;
   background-color: #abe9cd;
-background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
   box-shadow: 0 0 20px rgba(6, 6, 6, 0.2);
-  padding: 20px;
+  padding: 30px;
   width: 400px;
   z-index: 1;
 }
@@ -875,7 +866,7 @@ background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
   margin-bottom: 20px;
   width: 90%;
   padding: 10px;
-  margin-left: 3%;
+  /* margin-left: 3%; */
   resize: none;
 }
 
@@ -895,9 +886,10 @@ background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
   background-color: #0062cc;
 }
 
-.access{
+.access {
   background-color: #0f355e;
   color: white;
+  height: 30px;
   border-radius: 5px;
   margin-top: 10px;
   margin-left: 200px;
