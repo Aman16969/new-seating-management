@@ -99,17 +99,20 @@ const DisplayLayout = ({
 
   return (
     <>
-      <h1>{location.name}</h1>
+      <div className="header">
+        <h1>{location.name}</h1>
+        {selected && (
+          <button
+            onClick={() => {
+              handleBooking();
+            }}
+          >
+            Book Seat
+          </button>
+        )}
+      </div>
       <table className="locationTable">{rows}</table>
-      {selected && (
-        <button
-          onClick={() => {
-            handleBooking();
-          }}
-        >
-          Book Seat
-        </button>
-      )}
+
       {message && status === 0 && <h3 style={{ color: "red" }}>{message}</h3>}
       {message && status === 1 && <h3 style={{ color: "green" }}>{message}</h3>}
     </>
