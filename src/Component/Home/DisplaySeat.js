@@ -7,6 +7,8 @@ const DisplaySeat = ({ location, row, col, status, selected }) => {
   const token = sessionStorage.getItem("accessToken");
   const [name, setName] = useState(null);
 
+  // console.log(location.id+"R"+row+"C"+col, status);
+
   useEffect((e) => {
     fetch(
       `http://localhost:8081/api/seat/position?location=${location.id}&row=${row}&column=${col}`,
