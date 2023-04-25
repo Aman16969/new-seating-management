@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddSeatPopUp = ({ onHandleAdd, onHandleCancel }) => {
+const AddSeatPopUp = ({ onHandleAdd, onHandleCancel,flag,setFlag }) => {
   const [name, setName] = useState(null);
   const [isOpenCon, setIsOpenCon] = useState(false);
   const handlePopup = () => {

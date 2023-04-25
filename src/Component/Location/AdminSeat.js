@@ -67,7 +67,8 @@ const AdminSeat = ({ location, row, col }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        setAddPopUp(false)
+        setFlag(!flag)
       
       })
       .catch((error) => {
