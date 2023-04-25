@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+import { BsSaveFill } from 'react-icons/bs';
+import { MdCancel } from 'react-icons/md';
 const AddSeatPopUp = ({ onHandleAdd, onHandleCancel,flag,setFlag }) => {
   const [name, setName] = useState(null);
   const [isOpenCon, setIsOpenCon] = useState(false);
@@ -21,21 +22,21 @@ const AddSeatPopUp = ({ onHandleAdd, onHandleCancel,flag,setFlag }) => {
               setName(e.target.value);
             }}
           ></input>
-          <button className="button-group"
+          <button 
             onClick={() => {
               onHandleAdd(name);
             }}
           >
-            Add
+            Save
           </button>
-          <button
-          className="button-group"
-            onClick={() => {
+       
+          
+           
+     
+           <MdCancel  onClick={() => {
               onHandleCancel();
-            }}
-          >
-            Cancel
-          </button>
+            }}/>
+        
         </div>
       </div>
     </>

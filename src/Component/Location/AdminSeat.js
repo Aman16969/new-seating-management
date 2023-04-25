@@ -6,6 +6,9 @@ import {
   MdOutlineArrowDownward,
   MdOutlineArrowUpward,
 } from "react-icons/md";
+import { BsSaveFill } from 'react-icons/bs';
+
+
 import AddSeatPopUp from "./AddSeatPopUp";
 
 const AdminSeat = ({ location, row, col }) => {
@@ -167,8 +170,10 @@ const AdminSeat = ({ location, row, col }) => {
                     setName(e.target.value);
                   }}
                 />
-                <button onClick={() => handleEdit()}>Save</button>
-                <button onClick={() => handleCancel()}>Cancel</button>
+              
+                <button  onClick={() => handleEdit()}>Save</button>
+                <button  onClick={() => handleCancel()}>Cancel</button>
+               
               </div>
             </div>
           </>

@@ -1,18 +1,21 @@
 .location-scroll {
-  height: 435px !important;
+  height: 400px !important;
   overflow-y: scroll;
   overflow-x: scroll;
+  
 }
 .locationLayout {
   table-layout: fixed;
   border: 1px;
   width: 100%;
+  
 }
 .locationLayout > tr > td {
-  width: 100px;
-  height: 100px;
+  width: 40%;
+  height: 40%;
   size: fixed;
   background-color: white;
+  background-image: linear-gradient(315deg, #d2fdea 0%, #c2f1ff 74%);
 }
 
 .locationpopupContainer {
@@ -26,17 +29,18 @@
 }
 
 .location-popup-boxd {
+  padding: 10px;
   position: sticky;
   background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
-  width: 12vw;
+  width: 10vw;
   height: fit-content;
-  z-index: 1;
-  border-radius: 3px;
-  box-shadow: 0 2px 2px #007bff;
+  display: flex;
+  flex-direction: column;
 }
 .location-popup-boxd > input[type="text"] {
-  width: 70%;
+  width: 80%;
 }
+
 
 .location-rc {
   margin: 10px;
@@ -71,9 +75,13 @@ select {
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 10px 10px;
+  font-size: 14px;
+  width: 55px;
   background-color: #0077cc;
+  
+  margin-bottom: 5px;
+  margin-top: 5px;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -88,4 +96,8 @@ button:hover {
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+.handle-action{
+  display: flex;
+  flex-direction: row;
 }

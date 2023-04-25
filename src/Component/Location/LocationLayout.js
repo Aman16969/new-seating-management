@@ -50,7 +50,6 @@ const LocationLayout = ({ location }) => {
   }
   return (
     <div>
-      {/* <h1>{location.name}</h1> */}
       <div className="location-rc">
         <b>Rows:</b>{" "}
         <input
