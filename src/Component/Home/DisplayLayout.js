@@ -16,6 +16,8 @@ const DisplayLayout = ({
   const [status, setStatus] = useState(null);
   const userId = sessionStorage.getItem("userId");
 
+  console.log(seatAvailability);
+
   const handleBooking = () => {
     const bookingDetail = {
       locationId: location.id,
@@ -57,44 +59,39 @@ const DisplayLayout = ({
     const cols = [];
     for (let j = 1; j <= location.cs; j++) {
       const id = location.id + "R" + i + "C" + j;
-      if (seatAvailability === null) {
-        cols.push(
-          <td>
-            <div id={id} name={id}>
-              {
-                <DisplaySeat
-                  location={location}
-                  row={i}
-                  col={j}
-                  status={false}
-                ></DisplaySeat>
-              }
+      cols.push(
+        <td>
+          {!seatAvailability && (
+            <DisplaySeat
+              location={location}
+              row={i}
+              col={j}
+              status={false}
+              selected={selected}
+            ></DisplaySeat>
+          )}
+          {seatAvailability && seatAvailability.hasOwnProperty(id) && (
+            <div onClick={()=>{setSelected(id)}}>
+            <DisplaySeat
+              location={location}
+              row={i}
+              col={j}
+              status={true}
+              selected={selected}
+            ></DisplaySeat>
             </div>
-          </td>
-        );
-      } else {
-        cols.push(
-          <td>
-            <div
-              id={id}
-              name={id}
-              onClick={() => {
-                setSelected(id);
-              }}
-            >
-              {
-                <DisplaySeat
-                  location={location}
-                  row={i}
-                  col={j}
-                  selected={selected}
-                  status={seatAvailability.hasOwnProperty(id)}
-                ></DisplaySeat>
-              }
-            </div>
-          </td>
-        );
-      }
+          )}
+          {seatAvailability && !seatAvailability.hasOwnProperty(id) && (
+            <DisplaySeat
+              location={location}
+              row={i}
+              col={j}
+              status={false}
+              selected={selected}
+            ></DisplaySeat>
+          )}
+        </td>
+      );
     }
     rows.push(<tr>{cols}</tr>);
   }
