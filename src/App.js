@@ -10,6 +10,7 @@ import Logout from "./Component/Auth/Logout";
 import Profile from "./Component/Profile/Profile";
 import RoleRoutes from "./RoleRoutes";
 import Admin from "./Component/Admin/Admin";
+import Attendance from "./Component/Attendance/Attendance";
 function App() {
   return (
     <div className="App">
@@ -29,6 +30,7 @@ function App() {
               <Route element={<RoleRoutes />}>
                 <Route exact path="/location" element={<Location />} />
                 <Route exact path="/admin" element={<Admin />} />
+                <Route exact path="/attendance" element={<Attendance />} />
               </Route>
             </Route>
             <Route exact path="/login" element={<Login />} />

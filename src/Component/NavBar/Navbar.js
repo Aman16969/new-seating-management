@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import accLogo from "../../Static/newlogo.png";
 import { CgChevronDoubleDownO } from "react-icons/cg";
@@ -6,10 +5,13 @@ import { MdOutlineLocalLibrary } from "react-icons/md";
 import { useState } from "react";
 
 const Navbar = () => {
-  const [activeTab, setActiveTab] = useState("")
+  const [activeTab, setActiveTab] = useState("");
 
   const role = sessionStorage.getItem("userRole");
-  const userName=sessionStorage.getItem("userFirstName")+" "+sessionStorage.getItem("userLastName");
+  const userName =
+    sessionStorage.getItem("userFirstName") +
+    " " +
+    sessionStorage.getItem("userLastName");
   return (
     <>
       <nav className="navbar">
@@ -26,9 +28,14 @@ const Navbar = () => {
               <img src={accLogo} alt="" className="acc-logo" />
             </li>
             <li className="nav-item">
-              <Link to="/" onClick={() => setActiveTab("home")} className={activeTab === "home" ? "active-tab" : ""}>
-                
-                <span className="span-text"><MdOutlineLocalLibrary/> Seat Booking Application </span>
+              <Link
+                to="/"
+                onClick={() => setActiveTab("home")}
+                className={activeTab === "home" ? "active-tab" : ""}
+              >
+                <span className="span-text">
+                  <MdOutlineLocalLibrary /> Seat Booking Application{" "}
+                </span>
               </Link>
             </li>
             {role && role === "ADMIN" && (
@@ -45,13 +52,21 @@ const Navbar = () => {
                     <span className="span-text">Admin</span>
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/attendance" className="nav-link">
+                    <span className="span-logo"></span>
+                    <span className="span-text">Attendance</span>
+                  </Link>
+                </li>
               </>
             )}
 
-            <li className="nav-item" >
+            <li className="nav-item">
               <div className="dropdown">
                 <div className="dropbtn">
-                  <span className="span-text">{userName} <CgChevronDoubleDownO/></span>
+                  <span className="span-text">
+                    {userName} <CgChevronDoubleDownO />
+                  </span>
                 </div>
                 <div className="dropdown-content">
                   <Link to="/profile">Profile</Link>
