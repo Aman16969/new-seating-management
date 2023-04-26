@@ -55,27 +55,30 @@ const Home = () => {
     [date, fromTime, toTime]
   );
 
-  useEffect((e) => {
-    fetch(`http://localhost:8081/api/location/${locationId}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
+  useEffect(
+    (e) => {
+      fetch(`http://localhost:8081/api/location/${locationId}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
       })
-      .then((data) => {
-        setLocation(data);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  }, [flag]);
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setLocation(data);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    },
+    [flag]
+  );
 
   useEffect((e) => {
     fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
@@ -103,7 +106,6 @@ const Home = () => {
   function handleAccessClick() {
     setShowModal(true);
   }
-
 
   return (
     <>
@@ -144,7 +146,7 @@ const Home = () => {
                     <UpcomingBooking flag={flag} setFlag={setFlag} />
                   )}
                   {!openBooking && (
-                    <CompletedBooking   flag={flag} setFlag={setFlag} />
+                    <CompletedBooking flag={flag} setFlag={setFlag} />
                   )}
                 </div>
               </div>
