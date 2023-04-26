@@ -43,7 +43,6 @@ const AdminSeat = ({ location, row, col }) => {
       .then((data) => {
         setSeat(data);
         setName(data.seatName);
-        console.log(data);
       })
       .catch((error) => {
         setError(error.message);
@@ -51,7 +50,6 @@ const AdminSeat = ({ location, row, col }) => {
   }, [flag]);
 
   const onHandleAdd = (name) => {
-    console.log(name);
     const seat = { row: row, col: col, locationId: location.id, name: name };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
@@ -78,7 +76,6 @@ const AdminSeat = ({ location, row, col }) => {
   };
 
   const onHandleCancelPopUp = () => {
-    console.log("cancel");
     setAddPopUp(false);
   };
 
@@ -97,7 +94,6 @@ const AdminSeat = ({ location, row, col }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setIsDeleting(false);
         setFlag(!flag);
       })
@@ -113,8 +109,7 @@ const AdminSeat = ({ location, row, col }) => {
   }
 
   const handleEdit = (e) => {
-    console.log(name);
-    const seat = { row: row, col: col, locationId: location.id, name: editName };
+    const seat = { row: row, col: col, locationId: location.id, name: name };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {
@@ -130,7 +125,6 @@ const AdminSeat = ({ location, row, col }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setFlag(!flag)
         setIsEditing(false)
       })
