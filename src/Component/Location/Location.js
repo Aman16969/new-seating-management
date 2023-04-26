@@ -97,7 +97,10 @@ const Location = () => {
                   <button 
                   className="button-group"
                   onClick={addLocation} disabled={isPending}>
-                    Add New Location
+                    Add New Location 
+                  </button> &nbsp;&nbsp;
+                  <button className="button-group">
+                   Add New Conference/ Board room
                   </button>
                   </div>
                   </form>
