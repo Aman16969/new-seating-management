@@ -90,11 +90,11 @@ const Login = () => {
         </div>
         <span className="heading">
           {" "}
-          <h1>Book your</h1>{" "}
+          <h1 style={{color:'white' , fontSize:'30px'}}>Book your</h1>{" "}
         </span>
         <span className="heading2">
           {" "}
-          <h3>seats now!</h3>
+          <h3 style={{color:'white'}}>seats now!</h3>
         </span>
         <div className="content">
           {error && <div>{error}</div>}
