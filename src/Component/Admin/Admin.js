@@ -3,7 +3,6 @@ import AdminStats from "./AdminStats";
 import AllUsers from "./AllUsers";
 import Request from "./Request";
 import CurrentDayBooking from "./CurrentDayBooking";
-import RequestList from "./RequestList";
 const Admin = () => {
   return (
     <>
