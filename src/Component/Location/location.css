@@ -74,9 +74,9 @@ select {
   margin-bottom: 20px;
 }
 
-button {
+.loc-select-form button {
   padding: 10px 10px;
-  font-size: 14px
+  font-size: 14px;
   background-color: #0077cc;
   
   margin-bottom: 5px;
