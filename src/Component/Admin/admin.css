@@ -181,25 +181,28 @@ input[type="submit"]:hover {
   margin-bottom: 5px;
   margin-top: 5px;
 }
-
-input[type="date"]{
-  width:130px;
+/* 
+stats admin */
+input[type="date"],select{
   display: flex;
-  text-align: center;
-  margin: auto;
-  position: relative;
-  margin-left: 4rem;
+  text-align: left;
+  width:auto;
+  margin-bottom: 10px;
+  margin-left: 4px;
 }
 
 label{
-  display: flex;
-  text-align: center;
-  margin: auto;
-  position: relative;
-  margin-left: 4rem;
+  display: inline-block;
+  width: 120px;
+  text-align: left;
+  /* margin: auto;
+  position: relative; */
+  margin-right: 6px;
+  margin-left: 4px;
 }
+
 
 .ad{
   position: relative;
-  margin-left: 1rem;
+  margin-left: 4px;
 }
