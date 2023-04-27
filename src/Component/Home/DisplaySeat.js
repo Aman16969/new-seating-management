@@ -42,7 +42,62 @@ const DisplaySeat = ({ location, row, col, status, selected,flag,setFlag }) => {
         {seat &&
           seat.isAvailable === 1 &&
           status &&
-          selected === seat.seatId && (
+          selected === seat.seatId &&
+          seat.seatDirection === 0 && (
+            <div
+              className="display-seat"
+              style={{
+                color: "black",
+                backgroundColor: "#ADFF2F",
+                borderTop: "5px solid red",
+                borderBottom: "1px solid red",
+                borderLeft: "5px solid red",
+                borderRight: "5px solid red",
+              }}
+            >
+              {seat.seatName}
+            </div>
+          )}
+        {seat &&
+          seat.isAvailable === 1 &&
+          status &&
+          selected !== seat.seatId &&
+          seat.seatDirection === 0 && (
+            <div
+              className="display-seat"
+              style={{
+                color: "black",
+                backgroundColor: "#ADFF2F",
+                borderTop: "5px solid black",
+                borderBottom: "1px solid black",
+                borderLeft: "5px solid black",
+                borderRight: "5px solid black",
+              }}
+            >
+              {seat.seatName}
+            </div>
+          )}
+        {seat && seat.isAvailable === 1 && !status && 
+          seat.seatDirection === 0 && (
+          <div
+            className="display-seat"
+            style={{
+              color: "black",
+              backgroundColor: "rgb(150,150,150)",
+              borderTop: "5px solid black",
+              borderBottom: "1px solid black",
+              borderLeft: "5px solid black",
+              borderRight: "5px solid black",
+            }}
+          >
+            {seat.seatName}
+          </div>
+        )}
+        {seat &&
+          seat.isAvailable === 1 &&
+          status &&
+          selected === seat.seatId &&
+          seat.seatDirection === 1 && (
             <div
               className="display-seat"
               style={{
@@ -60,7 +115,8 @@ const DisplaySeat = ({ location, row, col, status, selected,flag,setFlag }) => {
         {seat &&
           seat.isAvailable === 1 &&
           status &&
-          selected !== seat.seatId && (
+          selected !== seat.seatId &&
+          seat.seatDirection === 1 && (
             <div
               className="display-seat"
               style={{
@@ -75,12 +131,13 @@ const DisplaySeat = ({ location, row, col, status, selected,flag,setFlag }) => {
               {seat.seatName}
             </div>
           )}
-        {seat && seat.isAvailable === 1 && !status && (
+        {seat && seat.isAvailable === 1 && !status && 
+          seat.seatDirection === 1 && (
           <div
             className="display-seat"
             style={{
               color: "black",
-              backgroundColor: "#FF3333",
+              backgroundColor: "rgb(150,150,150)",
               borderTop: "1px solid black",
               borderBottom: "5px solid black",
               borderLeft: "5px solid black",

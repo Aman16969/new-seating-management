@@ -109,7 +109,7 @@ const AdminSeat = ({ location, row, col }) => {
   }
 
   const handleEdit = (e) => {
-    const seat = { row: row, col: col, locationId: location.id, name: name };
+    const seat = { row: row, col: col, locationId: location.id, name: name, dir:seat.seatDirection };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {
@@ -134,6 +134,29 @@ const AdminSeat = ({ location, row, col }) => {
       });
   };
 
+  const handleChangeDirection = () =>{
+    fetch(`http://localhost:8081/api/seat/changeDirection/${seat.seatId}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setFlag(!flag)
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setError(error.message);
+      });
+  }
+
   return (
     <>
       <>
@@ -141,10 +164,10 @@ const AdminSeat = ({ location, row, col }) => {
           <div className="seatDiv">
             <div>
               {seat.seatDirection === 0 && (
-                <MdOutlineArrowUpward size={"20px"} />
+                <MdOutlineArrowUpward size={"20px"} onClick={()=>handleChangeDirection()}/>
               )}
               {seat.seatDirection === 1 && (
-                <MdOutlineArrowDownward size={"20px"} />
+                <MdOutlineArrowDownward size={"20px"} onClick={()=>handleChangeDirection()}/>
               )}
               <MdEdit size={"20px"} onClick={() => setIsEditing(true)} />
               <MdDelete size={"20px"} onClick={() => setIsDeleting(true)} />
