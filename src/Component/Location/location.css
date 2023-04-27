@@ -100,3 +100,44 @@ button:disabled {
   display: flex;
   flex-direction: row;
 }
+
+/* Conference */
+
+.conference form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  margin-left: 30%;
+  margin-right: 40%;
+  margin-bottom: 100%;
+  margin-top: 3rem;
+  border-radius: 10px;
+  background-color: #abe9cd;
+  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+  box-shadow: 0 0 20px rgba(6, 6, 6, 0.2);
+  padding: 30px;
+  width: 400px;
+  z-index: 1;
+}
+
+.conference label {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.conference input[type="text"],
+.conference input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+button{
+  margin-left: 4.3rem;
+}

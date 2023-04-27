@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /RequestList.js 
+/Location.js
+/AddConference.js
+/location.css

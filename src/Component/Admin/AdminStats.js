@@ -1,73 +1,33 @@
-import AllUsers from "./PDF/AllUsers";
-import AllAdmin from "./PDF/AllAdminByLocation";
-import AllUsersByLocation from "./PDF/AllUsersByLocation";
-import AllBookingDaily from "./PDF/AllBookingDaily";
-import AllBookingWeekly from "./PDF/AllBookingWeekly";
-import AllBookingMonthly from "./PDF/AllBookingMonthly";
-import AllRequest from "./PDF/AllRequestByLocation";
-import AllRoomByLocation from "./PDF/AllRoomByLocation";
-import AllSeatByLocation from "./PDF/AllSeatsByLocation";
+import jsPDF from "jspdf";
+import React, {useState} from "react";
 
-const AdminStats = () => {
+function AdminStats () {
+  const [fromDate, setFromDate]= useState(null);
+  const [toDate, setToDate]= useState(null);
+
+  const handleFromDateChange = (event) => {
+    setFromDate(event.target.value);
+  };
+  const handleToDateChange = (event) => {
+    setToDate(event.target.value);
+  };
+  const handleDownloadPdf = () => {
+    const doc = new jsPDF();
+    doc.text(`From Date: ${fromDate}`, 10, 10);
+    doc.text(`To Date: ${toDate}`,10,20);
+    doc.save('statistics.pdf');
+  };
   return (
     <>
-      <tbody >
-      <tr className="user-row" >
-          <td>Users</td>
-          <td >
-           <AllUsers/>
-          </td>
-        </tr>
-      <tr className="user-row" >
-          <td>All Admin</td>
-          <td >
-            <AllAdmin/>
-          </td>
-        </tr>
-        <tr className="user-row" >
-          <td>All Users</td>
-          <td >
-           <AllUsersByLocation/>
-          </td>
-        </tr>
-        <tr className="user-row" >
-          <td>All Seats</td>
-          <td >
-           <AllSeatByLocation/>
-          </td>
-        </tr>
-        <tr className="user-row" >
-          <td>Daily Report</td>
-          <td >
-            <AllBookingDaily/>
-          </td>
-        </tr>
-        <tr className="user-row" >
-          <td>Last Week Report</td>
-          <td >
-            <AllBookingWeekly/>
-          </td>
-        </tr>
-        <tr className="user-row" >
-          <td>Last Month Report</td>
-          <td >
-            <AllBookingMonthly/>
-          </td>
-        </tr>
-        
-        <tr className="user-row" >
-          <td>All Requests</td>
-          <td >
-            <AllRequest/>
-          </td>
-        </tr>
-        <tr className="user-row" >
-          <td>All Room Booking</td>
-          <td >
-            <AllRoomByLocation/>
-          </td>
-        </tr>
-      </tbody>
+      <div>
+        <label htmlFor="fromDate">From Date:</label>
+        <input type="date" id="fromDate" value={fromDate} onChange={handleFromDateChange} /><br></br>
+
+     <label htmlFor="toDate">To Date:</label>
+        <input type="date" id="toDate" value={toDate} onChange={handleToDateChange} /><br></br>
+
+       <center> <button className="ad" onClick={handleDownloadPdf}>Download PDF</button></center>
+      </div>
     </>
   );
 };
