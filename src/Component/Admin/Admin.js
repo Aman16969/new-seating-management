@@ -3,6 +3,9 @@ import AdminStats from "./AdminStats";
 import AllUsers from "./AllUsers";
 import Request from "./Request";
 import CurrentDayBooking from "./CurrentDayBooking";
+import AllBookingDaily from "./PDF/AllBookingDaily";
+import AllRequest from "./PDF/AllRequestByLocation";
+import AllUsersByLocation from "./PDF/AllUsersByLocation";
 const Admin = () => {
   return (
     <>
@@ -11,7 +14,10 @@ const Admin = () => {
           <div className="admin-content">
             <div className="admin-content-row">
               <div className="content-row-header">
-                <h2>Today's Booking</h2>
+                <center><tr className="report">
+                  <td> <h2>Today's Booking</h2></td>
+                  <td> <AllBookingDaily/></td>
+                </tr></center>
               </div>
               <table className="table-header">
                 <thead>
@@ -30,7 +36,7 @@ const Admin = () => {
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">
-                <h2>Booking Stats</h2>
+                <h2>Statistics</h2>
               </div>
               <div className="table-scroll">
                   <table>
@@ -40,7 +46,10 @@ const Admin = () => {
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">
-                <h2>Requests</h2>
+              <center><tr className="report">
+                  <td> <h2>Requests</h2></td>
+                  <td> <AllRequest/></td>
+                </tr></center>
               </div>
               <div className="admin-requests">
                 <table className="table-header">
@@ -60,7 +69,11 @@ const Admin = () => {
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">
-                <h2>Users</h2>
+              <center><tr className="report">
+                  <td><h2>Users</h2></td>
+                  <td><AllUsersByLocation/></td>
+                </tr></center>
+
               </div>
               
               <table className="table-header">
