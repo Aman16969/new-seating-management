@@ -47,13 +47,12 @@ function AdminStats () {
           <option value="regular-room">Regular Room</option>
         </select><br/>
 
-        <label htmlFor="roomType">Location:</label>
-        <select id="roomType" value={roomType} onChange={handleRoomTypeChange}>
-        <option value="" hidden >-----------------------</option>
+        <label htmlFor="location">Location:</label>
+        <select id="location" value={location} onChange={handleLocationChange}>
+        <option value="" hidden >------------------------</option>
           <option value="place">All</option>
-        </select><br/>
-
         
+        </select><br/>
 
         <button className="ad" onClick={handleDownloadPdf}>Download PDF</button>
       </div>
