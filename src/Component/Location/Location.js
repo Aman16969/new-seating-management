@@ -2,13 +2,30 @@ import LocationForm from "./LocationForm";
 import LocationLayout from "./LocationLayout";
 import LocationList from "./LocationList";
 import { useState, useEffect } from "react";
+import AddConference from "./AddConference";
 
 const Location = () => {
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [error, setError] = useState(null);
+  const [showAddConference, setShowAddConference] = useState(false);
+  const [conferences, setConferences] = useState([]);
   const [isPending, setIsPending] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const token = sessionStorage.getItem("accessToken");
+
+  const handleAddConference = (conference) => {
+    setConferences([...conferences, conference]);
+    setShowAddConference(false);
+  };
+
+  const handleCancel = () => {
+    setShowAddConference(false);
+  };
+
+  function handleConferenceClick() {
+    setShowAddConference(true);
+  }
 
   useEffect((e) => {
     fetch("http://localhost:8081/api/location/", {
@@ -74,37 +91,48 @@ const Location = () => {
     <>
       <div className="container-content">
         <div className="row-card" style={{ padding: "5px" }}>
-          
-                <div className="locationList">
-                  <form className="loc-select-form">
-                    <div>
-                  
-                  <select
-                    name="select"
-                    id="select"
-                    value={selectedLocation?.id || ""}
-                    onChange={handleLocationChange}
-                  >
-                    <option value="">Select a location</option> 
-                    {locations.map((location) => (
-                      <option key={location.id} value={location.id}>
-                        {location.name}
-                      </option>
-                    ))}
-                  </select>
-                  </div>
-                  <div>
-                  <button 
+          <div className="locationList">
+            <form className="loc-select-form">
+              <div>
+                <select
+                  name="select"
+                  id="select"
+                  value={selectedLocation?.id || ""}
+                  onChange={handleLocationChange}
+                >
+                  <option value="">Select a location</option>
+                  {locations.map((location) => (
+                    <option key={location.id} value={location.id}>
+                      {location.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <button
                   className="button-group"
-                  onClick={addLocation} disabled={isPending}>
-                    Add New Location 
-                  </button> &nbsp;&nbsp;
-                  <button className="button-group">
-                   Add New Conference/ Board room
-                  </button>
-                  </div>
-                  </form>
-                </div>
+                  onClick={addLocation}
+                  disabled={isPending}
+                >
+                  Add New Location
+                </button>{" "}
+                &nbsp;&nbsp;
+                <button
+                  className="button-group"
+                  type="button"
+                  onClick={handleConferenceClick}
+                >
+                  Add New Conference/ Board room
+                </button>
+              </div>
+            </form>
+            {showAddConference && (
+              <AddConference
+                onSave={handleAddConference}
+                onClose={handleCancel}
+              />
+            )}
+          </div>
           {selectedLocation && <LocationLayout location={selectedLocation} />}{" "}
         </div>
       </div>
