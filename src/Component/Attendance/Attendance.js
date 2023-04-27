@@ -39,8 +39,6 @@ const Attendance = () => {
                 />
                 <button onClick={handleSubmit}>Fetch attendance</button>
               </form>
-
-              <div id="excel-sheet"></div>
             </div>
           </div>
         </div>
