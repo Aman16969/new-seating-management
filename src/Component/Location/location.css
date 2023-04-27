@@ -122,14 +122,14 @@ button:disabled {
 }
 
 .conference label {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   
 }
 
 .conference input[type="text"],
 .conference input[type="number"] {
-  width: 100%;
+  width: 140%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;

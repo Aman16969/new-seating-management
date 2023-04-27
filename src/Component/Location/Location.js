@@ -121,6 +121,7 @@ const Location = () => {
                   className="button-group"
                   type="button"
                   onClick={handleConferenceClick}
+                  disabled={!selectedLocation}
                 >
                   Add New Conference/ Board room
                 </button>
