@@ -17,6 +17,7 @@ const Attendance = () => {
         raw: false,
         dateNF: "mm/dd/yyyy",
         header: ["Emp_ID", "Name", "Date", "In_Time", "Out_Time"],
+        range: 1, // ignore first row
       });
 
       const formattedJson = json.map((item) => {
