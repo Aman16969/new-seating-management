@@ -15,7 +15,7 @@ const Admin = () => {
             <div className="admin-content-row">
               <div className="content-row-header">
                 <center><tr className="report">
-                  <td> <h2>Today's Booking</h2></td>
+                  <td> <h2>Today Booking</h2></td>
                   <td> <AllBookingDaily/></td>
                 </tr></center>
               </div>
