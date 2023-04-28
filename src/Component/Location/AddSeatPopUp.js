@@ -29,10 +29,7 @@ const AddSeatPopUp = ({ onHandleAdd, onHandleCancel,flag,setFlag }) => {
           >
             Save
           </button>
-       
-          
-           
-     
+
            <MdCancel  onClick={() => {
               onHandleCancel();
             }}/>

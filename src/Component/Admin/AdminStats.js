@@ -73,7 +73,7 @@ function AdminStats() {
   };
   return (
     <>
-      <div>
+      <div className="stat">
         <br />
 
         <label htmlFor="fromDate">From Date:</label>
