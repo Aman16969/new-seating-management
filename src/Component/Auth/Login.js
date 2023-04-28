@@ -49,6 +49,7 @@ const Login = () => {
           sessionStorage.setItem("userLastName", data.lastName);
           sessionStorage.setItem("userRole", data.role);
           sessionStorage.setItem("userLocation", data.location);
+          sessionStorage.setItem("accoliteId", data.accoliteId);
           if (data.accoliteId === null) {
             fetch(`http://localhost:8081/api/swift/${data.email}`, {
               method: "GET",

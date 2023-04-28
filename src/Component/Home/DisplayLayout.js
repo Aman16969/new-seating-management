@@ -17,6 +17,7 @@ const DisplayLayout = ({
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState(null);
   const userId = sessionStorage.getItem("userId");
+  const accId = sessionStorage.getItem("accoliteId");
 
   console.log(seatAvailability);
 
@@ -28,6 +29,7 @@ const DisplayLayout = ({
       date: date,
       fromTime: fromTime,
       toTime: toTime,
+      accoliteId: accId,
     };
     fetch(`http://localhost:8081/api/booking/`, {
       method: "POST",
