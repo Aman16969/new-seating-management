@@ -2,9 +2,12 @@ import { useState } from "react";
 import * as XLSX from "xlsx";
 import "./Attendance.css";
 import { AttendanceExcel } from "./AttendanceExcel";
+import { use } from "@js-joda/core";
 
 const Attendance = () => {
   const [jsonData, setJsonData] = useState(null);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -15,21 +18,44 @@ const Attendance = () => {
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const json = XLSX.utils.sheet_to_json(worksheet, {
         raw: false,
-        dateNF: "mm/dd/yyyy",
-        header: ["Emp_ID", "Name", "Date", "In_Time", "Out_Time"],
+        header: ["Emp_Id", "Name", "Date", "In_Time", "Out_Time"],
         range: 1, // ignore first row
       });
 
-      const formattedJson = json.map((item) => {
-        return {
-          ...item,
-          Date: item.Date.split("/").reverse().join("-"),
-        };
-      });
+      // const formattedJson = json.map((item) => {
+      //   return {
+      //     ...item,
+      //     Date: item.Date.split("/").reverse().join("-"),
+      //   };
+      // });
 
-      setJsonData(formattedJson);
+      setJsonData(json);
     };
     reader.readAsBinaryString(file);
+  };
+
+  const submitAttendance = () => {
+    fetch(`http://localhost:8081/api/booking/markAttendance`, {
+      method: "POST",
+      headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      body: JSON.stringify(jsonData,  null, 2),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("failed to mark attendance");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.log(error.message);
+      });
   };
 
   return (
@@ -48,7 +74,9 @@ const Attendance = () => {
               />
               <label htmlFor="attendance">Upload the Excel Sheet</label>
               <input type="file" onChange={handleFile} />
-              {jsonData && <pre>{JSON.stringify(jsonData, null, 2)}</pre>}
+              <button onClick={()=>submitAttendance()}>Mark Attendance</button>
+              {data && <>{data}</>}
+              {jsonData && <>{JSON.stringify(jsonData,  null, 2)}</>}
             </form>
           </div>
         </div>

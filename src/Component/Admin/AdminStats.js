@@ -5,12 +5,19 @@ function AdminStats() {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [error, setError] = useState(null);
-
+  const [roomType, setRoomType] = useState("all");
+  const [location, setLocation] = useState("all");
   const handleFromDateChange = (event) => {
     setFromDate(event.target.value);
   };
   const handleToDateChange = (event) => {
     setToDate(event.target.value);
+  };
+  const handleRoomTypeChange = (event) => {
+    setRoomType(event.target.value);
+  };
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
   };
   const handleDownloadPdf = () => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
@@ -29,7 +36,10 @@ function AdminStats() {
       })
       .then((blob) => {
         // Use FileSaver.js to save the blob as a file
-        FileSaver.saveAs(blob, `Bookings between ${fromDate} and ${toDate}.pdf`);
+        FileSaver.saveAs(
+          blob,
+          `Bookings between ${fromDate} and ${toDate}.pdf`
+        );
       })
       .catch((error) => {
         console.error("Error downloading PDF:", error);
@@ -38,14 +48,17 @@ function AdminStats() {
   return (
     <>
       <div>
+        <br />
+
         <label htmlFor="fromDate">From Date:</label>
+
         <input
           type="date"
           id="fromDate"
           value={fromDate}
           onChange={handleFromDateChange}
         />
-        <br></br>
+        <br />
 
         <label htmlFor="toDate">To Date:</label>
         <input
@@ -54,14 +67,25 @@ function AdminStats() {
           value={toDate}
           onChange={handleToDateChange}
         />
-        <br></br>
+        <br />
 
-        <center>
-          {" "}
-          <button className="ad" onClick={handleDownloadPdf}>
-            Download PDF
-          </button>
-        </center>
+        <label htmlFor="roomType">Select Type:</label>
+        <select id="roomType" value={roomType} onChange={handleRoomTypeChange}>
+          <option value="regular-room">Seat</option>
+          <option value="board-room">Board Room</option>
+          <option value="conference-room">Conference Room</option>
+        </select>
+        <br />
+
+        <label htmlFor="location">Location:</label>
+        <select id="location" value={location} onChange={handleLocationChange}>
+          <option value="place">All</option>
+        </select>
+        <br />
+
+        <button className="ad" onClick={handleDownloadPdf}>
+          Download PDF
+        </button>
       </div>
     </>
   );
