@@ -27,7 +27,6 @@ const UpcomingBooking = (props) => {
       .then((data) => {
         setupcomingBooking(data);
         setIsPending(false);
-      
       })
       .catch((err) => {
         setIsPending(false);
@@ -56,9 +55,10 @@ const UpcomingBooking = (props) => {
         return res.json();
       })
       .then((e) => {
-        setMessage("booking canceled successfully");
-        props.setFlag(!props.flag);
+        props.setFlag((prevState) => !prevState);
         setIsOpenCon(false);
+        setMessage("booking canceled successfully");
+        console.log("booking canceled successfully");
       })
       .catch((err) => {
         setMessage(err.message);
@@ -80,7 +80,6 @@ const UpcomingBooking = (props) => {
                   return bookingDateA - bookingDateB;
                 })
                 .map((booking) => {
-                 
                   if (booking.date >= currentDate) {
                     return (
                       <tr key={booking.id} className="header-booking">
@@ -116,8 +115,10 @@ const UpcomingBooking = (props) => {
               <button
                 type="submit"
                 className="submit-btn"
-                onClick={() => {handleDelete(bookId);
-                setIsOpenCon(false)}}
+                onClick={() => {
+                  handleDelete(bookId);
+                  setIsOpenCon(false);
+                }}
               >
                 Yes
               </button>

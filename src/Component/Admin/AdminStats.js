@@ -19,6 +19,12 @@ function AdminStats() {
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
   };
+  const handleRoomTypeChange = (event) => {
+    setRoomType(event.target.value);
+  };
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
+  };
   const handleDownloadPdf = () => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
     // const locationId = sessionStorage.getItem("userLocationId");
@@ -83,6 +89,9 @@ function AdminStats() {
         </select>
         <br />
 
+        <button className="ad" onClick={handleDownloadPdf}>
+          Download PDF
+        </button>
         <button className="ad" onClick={handleDownloadPdf}>
           Download PDF
         </button>
