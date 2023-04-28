@@ -1,12 +1,12 @@
-import jsPDF from "jspdf";
 import React, { useState } from "react";
+import FileSaver from "file-saver";
 
 function AdminStats() {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
+  const [error, setError] = useState(null);
   const [roomType, setRoomType] = useState("all");
   const [location, setLocation] = useState("all");
-
   const handleFromDateChange = (event) => {
     setFromDate(event.target.value);
   };
@@ -19,20 +19,45 @@ function AdminStats() {
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
   };
+  const handleRoomTypeChange = (event) => {
+    setRoomType(event.target.value);
+  };
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
+  };
   const handleDownloadPdf = () => {
-    const doc = new jsPDF();
-    doc.text(`From Date: ${fromDate}`, 10, 10);
-    doc.text(`To Date: ${toDate}`, 10, 20);
-    doc.text(`Room Type: ${roomType}`, 10, 30);
-    doc.text(`Location: ${location}`, 10, 40);
-    doc.save("statistics.pdf");
+    const header = "Bearer " + sessionStorage.getItem("accessToken");
+    // const locationId = sessionStorage.getItem("userLocationId");
+    fetch(
+      `http://localhost:8081/api/pdf/bookings/dateWise/${fromDate}/${toDate}`,
+      {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: header,
+        },
+      }
+    )
+      .then((response) => {
+        return response.blob();
+      })
+      .then((blob) => {
+        // Use FileSaver.js to save the blob as a file
+        FileSaver.saveAs(
+          blob,
+          `Bookings between ${fromDate} and ${toDate}.pdf`
+        );
+      })
+      .catch((error) => {
+        console.error("Error downloading PDF:", error);
+      });
   };
   return (
     <>
-      <div className="stat">
+      <div>
         <br />
 
         <label htmlFor="fromDate">From Date:</label>
+
         <input
           type="date"
           id="fromDate"
@@ -52,24 +77,21 @@ function AdminStats() {
 
         <label htmlFor="roomType">Select Type:</label>
         <select id="roomType" value={roomType} onChange={handleRoomTypeChange}>
-          <option value="" hidden>
-            ---------------------
-          </option>
+          <option value="regular-room">Seat</option>
           <option value="board-room">Board Room</option>
           <option value="conference-room">Conference Room</option>
-          <option value="regular-room">Regular Room</option>
         </select>
         <br />
 
         <label htmlFor="location">Location:</label>
-        <select id="location1" value={location} onChange={handleLocationChange}>
-          <option value="" hidden>
-            ------------------------
-          </option>
+        <select id="location" value={location} onChange={handleLocationChange}>
           <option value="place">All</option>
         </select>
         <br />
 
+        <button className="ad" onClick={handleDownloadPdf}>
+          Download PDF
+        </button>
         <button className="ad" onClick={handleDownloadPdf}>
           Download PDF
         </button>

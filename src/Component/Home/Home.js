@@ -28,6 +28,7 @@ const Home = () => {
   useEffect(
     (e) => {
       // console.log(`http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`);
+      console.log(date, fromTime, toTime);
       fetch(
         `http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
         {
