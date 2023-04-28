@@ -93,7 +93,7 @@ const Location = () => {
         <div className="row-card" style={{ padding: "5px" }}>
           <div className="locationList">
             <form className="loc-select-form">
-              <div>
+              <div className="loc">
                 <select
                   name="select"
                   id="select"
