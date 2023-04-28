@@ -9,7 +9,7 @@ export const AttendanceExcel = (file) => {
     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
     const attendanceData = XLSX.utils
   .sheet_to_json(worksheet, {
-    header: ["Emp_ID", "Name", "Date", "In_Time", "Out_Time"],
+    header: ["emp_ID", "name", "date", "in_Time", "out_Time"],
     dateNF: "yyyy/mm/dd",
     timeNF: "hh:mm:ss AM/PM",
   })
