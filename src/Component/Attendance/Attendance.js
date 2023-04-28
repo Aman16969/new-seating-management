@@ -7,6 +7,7 @@ const Attendance = () => {
   const [jsonData, setJsonData] = useState(null);
 
   const handleFile = (e) => {
+    e.preventDefault();
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = (event) => {
