@@ -6,8 +6,7 @@ import {
   MdOutlineArrowDownward,
   MdOutlineArrowUpward,
 } from "react-icons/md";
-import { BsSaveFill } from 'react-icons/bs';
-
+import { BsSaveFill } from "react-icons/bs";
 
 import AddSeatPopUp from "./AddSeatPopUp";
 
@@ -17,10 +16,9 @@ const AdminSeat = ({ location, row, col }) => {
   const token = sessionStorage.getItem("accessToken");
   const [name, setName] = useState("");
   const [editName, setEditName] = useState("");
-  const [add, setAdd] = useState(false);
   const [addPopUp, setAddPopUp] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [editPopUp, setEditPopUp] = useState(false);
+  const [deletePopUp, setDeletePopUp] = useState(false);
   const [flag, setFlag] = useState(true);
 
   useEffect(() => {
@@ -49,8 +47,14 @@ const AdminSeat = ({ location, row, col }) => {
       });
   }, [flag]);
 
-  const onHandleAdd = (name) => {
-    const seat = { row: row, col: col, locationId: location.id, name: name, dir:1 };
+  const handleAdd = () => {
+    const seat = {
+      row: row,
+      col: col,
+      locationId: location.id,
+      name: name,
+      dir: 1,
+    };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {
@@ -75,10 +79,6 @@ const AdminSeat = ({ location, row, col }) => {
       });
   };
 
-  const onHandleCancelPopUp = () => {
-    setAddPopUp(false);
-  };
-
   const handleDelete = () => {
     fetch(`http://localhost:8081/api/seat/${seat.seatId}/${false}`, {
       method: "PUT",
@@ -94,7 +94,7 @@ const AdminSeat = ({ location, row, col }) => {
         return response.json();
       })
       .then((data) => {
-        setIsDeleting(false);
+        setDeletePopUp(false);
         setFlag(!flag);
       })
       .catch((error) => {
@@ -103,13 +103,14 @@ const AdminSeat = ({ location, row, col }) => {
       });
   };
 
-  const handleCancel= () => {
-    setIsEditing(false);
-    setIsDeleting(false);
-  }
-
   const handleEdit = (e) => {
-    const seat = { row: row, col: col, locationId: location.id, name: name, dir:seat.seatDirection };
+    const seat = {
+      row: row,
+      col: col,
+      locationId: location.id,
+      name: editName,
+      dir: seat.seatDirection,
+    };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {
@@ -125,8 +126,8 @@ const AdminSeat = ({ location, row, col }) => {
         return response.json();
       })
       .then((data) => {
-        setFlag(!flag)
-        setIsEditing(false)
+        setEditPopUp(false);
+        setFlag(!flag);
       })
       .catch((error) => {
         console.log(error.message);
@@ -134,7 +135,7 @@ const AdminSeat = ({ location, row, col }) => {
       });
   };
 
-  const handleChangeDirection = () =>{
+  const handleChangeDirection = () => {
     fetch(`http://localhost:8081/api/seat/changeDirection/${seat.seatId}`, {
       method: "PUT",
       headers: {
@@ -149,13 +150,13 @@ const AdminSeat = ({ location, row, col }) => {
         return response.json();
       })
       .then((data) => {
-        setFlag(!flag)
+        setFlag(!flag);
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
-  }
+  };
 
   return (
     <>
@@ -164,86 +165,180 @@ const AdminSeat = ({ location, row, col }) => {
           <div className="seatDiv">
             <div>
               {seat.seatDirection === 0 && (
-                <MdOutlineArrowUpward size={"20px"} onClick={()=>handleChangeDirection()}/>
+                <MdOutlineArrowUpward
+                  size={"20px"}
+                  onClick={() => handleChangeDirection()}
+                />
               )}
               {seat.seatDirection === 1 && (
-                <MdOutlineArrowDownward size={"20px"} onClick={()=>handleChangeDirection()}/>
-              )}
-              <MdEdit size={"20px"} onClick={() => setIsEditing(true)} />
-              <MdDelete size={"20px"} onClick={() => setIsDeleting(true)} />
-            </div>
-          </div>
-        )}
-
-        {isEditing ? (
-          <>
-            <div className="locationpopupContainer">
-              <div className="location-popup-boxd">
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
+                <MdOutlineArrowDownward
+                  size={"20px"}
+                  onClick={() => handleChangeDirection()}
                 />
-              
-                <button  onClick={() => handleEdit()}>Save</button>
-                <button  onClick={() => handleCancel()}>Cancel</button>
-               
-              </div>
+              )}
+              <MdEdit
+                size={"20px"}
+                onClick={() => {
+                  setEditPopUp(true);
+                  setEditName(name);
+                }}
+              />
+              <MdDelete size={"20px"} onClick={() => setDeletePopUp(true)} />
             </div>
-          </>
-        ) : (
-          <>
             <p>{name}</p>
-          </>
-        )}
-
-        {isDeleting && (
-          <div className="locationpopupContainer">
-            <div className="location-popup-boxd">
-              <p>Are you sure you want to delete?</p>
-              <button onClick={handleDelete}>Yes</button>
-              <button onClick={() => setIsDeleting(false)}>No</button>
-            </div>
           </div>
         )}
         {seat && seat.isAvailable === 0 && (
           <>
-            {!add && (
-              <div className="seatDiv">
-                <div className="addBtn">
-                  <MdAdd
-                    size={"20px"}
-                    onClick={() => {
-                      setAddPopUp(!addPopUp);
-                    }}
-                  />
-                </div>
-                {addPopUp && (
-                  <AddSeatPopUp
-                    name={""}
-                    onHandleAdd={onHandleAdd}
-                    onHandleCancel={onHandleCancelPopUp}
-                  />
-                )}
-              </div>
-            )}
-            {add && (
-              <div className="seatDiv">
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
+            <div className="seatDiv">
+              <div className="addBtn">
+                <MdAdd
+                  size={"20px"}
+                  onClick={() => {
+                    setAddPopUp(true);
                   }}
                 />
-                <button onClick={() => onHandleAdd()}>Save</button>
               </div>
-            )}
+            </div>
           </>
+        )}
+
+        {addPopUp && (
+          <div className="popup">
+            <h3>Add new Seat</h3>
+            <table>
+              <tr>
+                <td>Seat Name: </td>
+                <td>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onClick={() => {
+                      setAddPopUp(false);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </td>
+                <td>
+                  <button
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onClick={() => handleAdd()}
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        )}
+
+        {editPopUp && (
+          <div className="popup">
+            <h3>Edit Seat Name</h3>
+            <table>
+              <tr>
+                <td>New Name: </td>
+                <td>
+                  <input
+                    type="text"
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onClick={() => {
+                      setEditPopUp(false);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </td>
+                <td>
+                  <button
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onClick={() => {
+                      handleEdit();
+                    }}
+                  >
+                    Save
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        )}
+
+        {deletePopUp && (
+          <div className="popup">
+            <h3>Are you sure? Delete seat {name}</h3>
+            <table>
+              <tr>
+                <td>
+                  <button
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onClick={() => {
+                      setDeletePopUp(false);
+                    }}
+                  >
+                    No
+                  </button>
+                </td>
+                <td>
+                  <button
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onClick={() => {
+                      handleDelete();
+                    }}
+                  >
+                    Yes
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
         )}
       </>
     </>
