@@ -50,7 +50,7 @@ const AdminSeat = ({ location, row, col }) => {
   }, [flag]);
 
   const onHandleAdd = (name) => {
-    const seat = { row: row, col: col, locationId: location.id, name: name };
+    const seat = { row: row, col: col, locationId: location.id, name: name, dir:1 };
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {

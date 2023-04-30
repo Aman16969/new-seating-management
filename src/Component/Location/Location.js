@@ -116,23 +116,8 @@ const Location = () => {
                 >
                   Add New Location
                 </button>{" "}
-                &nbsp;&nbsp;
-                <button
-                  className="button-group"
-                  type="button"
-                  onClick={handleConferenceClick}
-                  disabled={!selectedLocation}
-                >
-                  Add New Conference/ Board room
-                </button>
               </div>
             </form>
-            {showAddConference && (
-              <AddConference
-                onSave={handleAddConference}
-                onClose={handleCancel}
-              />
-            )}
           </div>
           {selectedLocation && <LocationLayout location={selectedLocation} />}{" "}
         </div>
