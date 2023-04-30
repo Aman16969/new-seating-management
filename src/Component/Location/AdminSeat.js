@@ -48,7 +48,7 @@ const AdminSeat = ({ location, row, col }) => {
   }, [flag]);
 
   const handleAdd = () => {
-    const seat = {
+    const seata = {
       row: row,
       col: col,
       locationId: location.id,
@@ -61,7 +61,7 @@ const AdminSeat = ({ location, row, col }) => {
         "content-type": "application/json",
         Authorization: "Bearer " + token,
       },
-      body: JSON.stringify(seat),
+      body: JSON.stringify(seata),
     })
       .then((response) => {
         if (!response.ok) {
@@ -71,6 +71,7 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         setAddPopUp(false);
+        setSeat(seata);
         setFlag(!flag);
       })
       .catch((error) => {
@@ -104,7 +105,7 @@ const AdminSeat = ({ location, row, col }) => {
   };
 
   const handleEdit = (e) => {
-    const seat = {
+    const seatb = {
       row: row,
       col: col,
       locationId: location.id,
@@ -117,7 +118,7 @@ const AdminSeat = ({ location, row, col }) => {
         "content-type": "application/json",
         Authorization: "Bearer " + token,
       },
-      body: JSON.stringify(seat),
+      body: JSON.stringify(seatb),
     })
       .then((response) => {
         if (!response.ok) {
@@ -127,6 +128,7 @@ const AdminSeat = ({ location, row, col }) => {
       })
       .then((data) => {
         setEditPopUp(false);
+        setSeat(seatb);
         setFlag(!flag);
       })
       .catch((error) => {
