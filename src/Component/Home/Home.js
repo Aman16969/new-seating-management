@@ -56,27 +56,30 @@ const Home = () => {
     [date, fromTime, toTime]
   );
 
-  useEffect((e) => {
-    fetch(`http://localhost:8081/api/location/${locationId}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
+  useEffect(
+    (e) => {
+      fetch(`http://localhost:8081/api/location/${locationId}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
       })
-      .then((data) => {
-        setLocation(data);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  }, [flag]);
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setLocation(data);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    },
+    [flag]
+  );
 
   useEffect((e) => {
     fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
@@ -105,13 +108,12 @@ const Home = () => {
     setShowModal(true);
   }
 
-
   return (
     <>
       <div className="container">
         <div className="container-content">
           <div className="row">
-            <div className="row-card">
+            <div className="row-card" style={{ gridRow: "1 / 2" }}>
               <div className="row-card-title">
                 <span className="btn-group">
                   <button
@@ -145,12 +147,18 @@ const Home = () => {
                     <UpcomingBooking flag={flag} setFlag={setFlag} />
                   )}
                   {!openBooking && (
-                    <CompletedBooking   flag={flag} setFlag={setFlag} />
+                    <CompletedBooking flag={flag} setFlag={setFlag} />
                   )}
                 </div>
               </div>
             </div>
-            <div className="row-card">
+            <div className="row-card" style={{ gridRow: "2 / 3" }}>
+              <div className="row-card-title">
+                <h2>Requests</h2>
+              </div>
+              
+            </div>
+            <div className="row-card" style={{ gridRow: "1 / 3" }}>
               <div
                 className="row-card-title"
                 style={{

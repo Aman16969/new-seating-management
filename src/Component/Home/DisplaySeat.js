@@ -115,12 +115,12 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "white",
-                backgroundImage:"linear-gradient(#170404, rgb(100 83 57))",
+                backgroundImage: "linear-gradient(#170404, rgb(100 83 57))",
                 borderTop: "2px solid red",
                 borderBottom: "7px solid red",
                 borderLeft: "5px solid red",
                 borderRight: "5px solid red",
-                borderStyle:"inset",
+                borderStyle: "inset",
               }}
             >
               {seat.seatName}
@@ -141,7 +141,7 @@ const DisplaySeat = ({
                 borderBottom: "5px solid black",
                 borderLeft: "5px solid black",
                 borderRight: "5px solid black",
-                borderStyle:"inset",
+                borderStyle: "inset",
               }}
             >
               {seat.seatName}
@@ -156,20 +156,17 @@ const DisplaySeat = ({
               style={{
                 color: "white",
                 backgroundColor: "rgb(150,150,150)",
-                borderStyle:"inset",
+                borderStyle: "inset",
                 borderWidth: "0px 4px 7px",
                 borderColor: "#02070a",
-                cursor:"pointer"
+                cursor: "pointer",
               }}
             >
-              amans
               {seat.seatName}
             </div>
           )}
         {seat && seat.isAvailable === 0 && (
-          <div className="display-seat" style={{}}>
-            
-          </div>
+          <div className="display-seat" style={{}}></div>
         )}
       </div>
     </>

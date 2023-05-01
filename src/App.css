@@ -125,12 +125,13 @@
 .row {
   display: grid;
   grid-template-columns: 1.1fr 1.9fr;
+  grid-template-rows: 1fr 1fr;
   column-gap: 15px;
+  row-gap: 10px;
   justify-content: space-between;
 }
 .row-card {
   box-sizing: border-box;
-
   box-shadow: 2px 1px 10px #13121c;
   display: block;
   border-radius: 3px;
@@ -225,7 +226,7 @@
   background-color: #1030ac;
 }
 .table-scroll {
-  height: 435px !important;
+  /* height: 435px !important; */
   overflow-y: scroll;
 }
 .table-scroll::-webkit-scrollbar {
@@ -784,7 +785,6 @@ id.login-button {
   padding: 5px;
 }
 
-
 /* Admin UserDetails */
 
 .user-detail {
@@ -892,6 +892,6 @@ id.login-button {
   margin-top: 10px;
   margin-left: 200px;
 }
-.display-seat{
+.display-seat {
   cursor: pointer;
 }
