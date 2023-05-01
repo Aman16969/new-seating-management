@@ -14,10 +14,9 @@ const Admin = () => {
           <div className="admin-content">
             <div className="admin-content-row">
               <div className="content-row-header">
-                <center><tr className="report">
-                  <td> <h2>Today Booking</h2></td>
-                  <td> <AllBookingDaily/></td>
-                </tr></center>
+                <div><h2>Today's Booking</h2></div>
+                <div><AllBookingDaily/></div>
+                
               </div>
               <table className="table-header">
                 <thead>
@@ -46,10 +45,9 @@ const Admin = () => {
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">
-              <center><tr className="report">
-                  <td> <h2>Requests</h2></td>
-                  <td> <AllRequest/></td>
-                </tr></center>
+              <div><h2>Requests</h2></div>
+                <div><AllRequest/></div>
+             
               </div>
               <div className="admin-requests">
                 <table className="table-header">
@@ -69,10 +67,9 @@ const Admin = () => {
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">
-              <center><tr className="report">
-                  <td><h2>Users</h2></td>
-                  <td><AllUsersByLocation/></td>
-                </tr></center>
+              <div><h2>Users</h2></div>
+                <div ><AllUsersByLocation style={{width:'40px'}}/></div>
+              
 
               </div>
               

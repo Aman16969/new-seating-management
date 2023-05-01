@@ -16,6 +16,9 @@
   text-align: center;
   padding: 2px 2px;
   border-bottom: 1px solid blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 .content-row-header h2 {
   font-size: medium;
@@ -209,4 +212,8 @@ label {
 .ad {
   position: relative;
   margin-left: 4px;
+}
+#bookingRoom{
+  padding: 10px;
+  border-radius: 10px;
 }

@@ -66,7 +66,7 @@ const Attendance = () => {
   return (
     <div className="container">
       <div className="container-content">
-        <div className="row-card" style={{ height: "86.5vh" }}>
+        <div className="row-card-att" style={{ height: "86.5vh" }}>
           <h2>Upload the Excel Attendance Sheet</h2>
           <div>
             <form className="attendance-form" onSubmit={handleSubmit}>
@@ -77,9 +77,9 @@ const Attendance = () => {
                 id="date"
                 min={new Date().toISOString().split("T")[0]}
               />
-              <label htmlFor="attendance">Upload the Excel Sheet</label>
+              <label >Upload the Excel Sheet</label>
               <input type="file" onChange={handleFile} />
-              <button >Mark Attendance</button>
+              <button className="button-group" >Mark Attendance</button>
               {/* {data && <>{data}</>} */}
               {jsonData && <>{JSON.stringify(jsonData,  null, 2)}</>}
             </form>

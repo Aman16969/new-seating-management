@@ -1,4 +1,6 @@
 import FileSaver from "file-saver";
+
+import { BiDownload } from 'react-icons/bi';
 const AllUsersByLocation = () => {
 
     const downloadPdf = () => {
@@ -20,8 +22,8 @@ const AllUsersByLocation = () => {
       }
       
     return (
-        <div>
-          <button className="button-group" onClick={downloadPdf}>Download</button>
+        <div >  
+          <button className="button-group" onClick={downloadPdf} style={{marginTop:"10px"}}><BiDownload /></button>
         </div>
       );
     };

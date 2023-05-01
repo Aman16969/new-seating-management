@@ -2,11 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1px;
-  padding: 5px;
-  width: 50px;
-  height: 30px;
-  border-radius: 5px;
+  margin: 2px;
+  padding: 2px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
 }
 
 .locationTable {
@@ -17,12 +17,15 @@
 }
 
 .header {
+  font-family: 'Roboto',sans-serif;
   padding-left: 10px;
   padding-right: 10px;
+  font-size: small;
   display: flex;
   align-items: center;
 }
 
 .header button {
   height: 35px;
+  border-radius: 5px;
 }

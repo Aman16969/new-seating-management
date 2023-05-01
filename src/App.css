@@ -752,24 +752,23 @@ id.login-button {
   transform: translate(-50%, -50%);
   border-radius: 2%;
   box-shadow: 5px 7px 10px #3f4d67;
-  text-align: center;
   font-size: 20px;
 }
+
 .profile-form input[type="text"] {
-  width: 90%;
-  height: 25px;
-  background-color: #e0ebff;
+  width: 80%;
+  height: 30px;
+  background-color: #d0dbef;
   font-size: 15px;
-  text-align: center;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 .profile-form select {
-  width: 95%;
+  width: 82%;
   height: 40px;
-  background-color: #e0ebff;
+  background-color: #d0dbef;
   font-size: 15px;
   border-radius: 5px;
-  text-align: center;
   margin-bottom: 10px;
 }
 .profile-form button {
@@ -784,6 +783,7 @@ id.login-button {
   margin-bottom: 5px;
   padding: 5px;
 }
+
 
 /* Admin UserDetails */
 
@@ -808,7 +808,7 @@ id.login-button {
   border-color: inherit;
   padding: 10px 0;
   margin: 5px 0;
-  height: 40px;
+  height: 35px;
   border-bottom: 1px solid#007bff;
   text-align: center;
   background-color: transparent #3f4d670d;
@@ -891,4 +891,7 @@ id.login-button {
   border-radius: 5px;
   margin-top: 10px;
   margin-left: 200px;
+}
+.display-seat{
+  cursor: pointer;
 }

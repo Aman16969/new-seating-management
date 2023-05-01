@@ -61,7 +61,7 @@ const AllUsers = () => {
       {allUsers &&
         allUsers.map((user) => {
           return (
-            <tr className="user-row">
+            <tr className="user-row" style={{textAlign: "left",marginRight:'2 0px'}}>
               <td>{user.email?.substring(0, 40)}</td>
               <td>
                 <button

@@ -83,8 +83,8 @@ function AdminStats() {
           id="fromDate"
           value={fromDate}
           onChange={handleFromDateChange}
+          style={{width:'90%'}}
         />
-        <br />
 
         <label htmlFor="toDate">To Date:</label>
         <input
@@ -92,8 +92,9 @@ function AdminStats() {
           id="toDate"
           value={toDate}
           onChange={handleToDateChange}
+          style={{width:'90%'}}
         />
-        <br />
+        
 
         <label htmlFor="roomType">Select Type:</label>
         <select id="roomType" value={roomType} onChange={handleRoomTypeChange}>
@@ -101,18 +102,18 @@ function AdminStats() {
           <option value="board room">Board Room</option>
           <option value="conference room">Conference Room</option>
         </select> 
-        <br />
+        
 
         <label htmlFor="location">Location:</label>
         <select id="location" value={location} onChange={handleLocationChange}>
           <option value="0">All</option>
           {locations && locations.map((location)=>{return(<option value={location.id}>{location.name}</option>)})}
         </select>
-        <br />
-
-        <button className="ad" onClick={handleDownloadPdf}>
+        
+    <div style={{padding:'10px'}}><button className="button-group" style={{padding:'10px'}} onClick={handleDownloadPdf}>
           Download PDF
-        </button>
+        </button></div>
+        
       </div>
     </>
   );
