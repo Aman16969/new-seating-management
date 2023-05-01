@@ -125,12 +125,13 @@
 .row {
   display: grid;
   grid-template-columns: 1.1fr 1.9fr;
+  grid-template-rows: 1fr 1fr;
   column-gap: 15px;
+  row-gap: 10px;
   justify-content: space-between;
 }
 .row-card {
   box-sizing: border-box;
-
   box-shadow: 2px 1px 10px #13121c;
   display: block;
   border-radius: 3px;
@@ -226,7 +227,7 @@
   color: #0e0148;
 }
 .table-scroll {
-  height: 435px ;
+  /* height: 435px !important; */
   overflow-y: scroll;
 }
 .table-scroll::-webkit-scrollbar {
@@ -785,7 +786,6 @@ id.login-button {
   padding: 5px;
 }
 
-
 /* Admin UserDetails */
 
 .user-detail {
@@ -892,10 +892,6 @@ id.login-button {
   border-radius: 5px;
   margin-top: 10px;
   margin-left: 200px;
-}
-.access:hover{
-  background-color: #F09440;
-  color: #13121c;
 }
 .display-seat{
   cursor: pointer;
