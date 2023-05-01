@@ -165,6 +165,7 @@ const Home = () => {
                   )}
                 </div>
             </div> */}
+            </div>
             <div className="row-card" style={{ gridRow: "1 / 3" ,height:"530px"}}>
               <div
                 className="row-card-title"
