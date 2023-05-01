@@ -30,7 +30,7 @@ const Request = () => {
   }, [flag]);
   const handlePopup = (e) => {
     setRequestId(e);
-    setIsOpenCon(true);
+    
     fetch(`http://localhost:8081/api/requestBooking/${requestId}`, {
       headers: {
         "content-type": "application/json",
@@ -45,6 +45,7 @@ const Request = () => {
       })
       .then((data) => {
         setRequestById(data);
+        setIsOpenCon(true);
         setIsPending(false);
       });
   };

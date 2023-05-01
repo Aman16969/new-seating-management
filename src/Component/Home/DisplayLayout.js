@@ -107,6 +107,7 @@ const DisplayLayout = ({
         <h1>{location.name}</h1>
         {selected && (
           <button
+          className="button-group"
             onClick={() => {
               handleBooking();
             }}

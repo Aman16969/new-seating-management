@@ -4,7 +4,16 @@ const Location = (props) => {
     const [location, setLocation] = useState(null)
     const [error, setError] = useState("");
     const [isPending, setIsPending] = useState(true);
+    const loc=sessionStorage.getItem("userLocation")
+    const [locationName,setLocationName]=useState("Choose Your Location")
+    
+
+    console.log(JSON.stringify(loc))
+
     useEffect(() => {
+      if(loc){
+        setLocationName(JSON.parse(loc).name);
+      }
       const header = "Bearer " + sessionStorage.getItem("accessToken");
       fetch(`http://localhost:8081/api/location/`, {
         headers: {
@@ -39,7 +48,7 @@ const Location = (props) => {
             onChange={(e) => props.setLocationId(e.target.value)}
         >
           <option value="none" selected disabled hidden>
-            Select a Location
+            {locationName}
           </option>
           {isPending && <span>Loading Location</span>}
           {location &&

@@ -162,7 +162,6 @@ const DisplaySeat = ({
                 cursor:"pointer"
               }}
             >
-              amans
               {seat.seatName}
             </div>
           )}

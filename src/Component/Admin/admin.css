@@ -217,3 +217,7 @@ label {
   padding: 10px;
   border-radius: 10px;
 }
+.admin-request-room-booking{
+display: grid;
+grid-template-columns: 2fr 1fr;
+}
