@@ -4,6 +4,8 @@ import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
 import RequestAccess from "./RequestAccess";
 import DisplayLayout from "./DisplayLayout";
+import AcceptedRequest from "./AcceptedRequest";
+import PendingRequest from "./PendingRequest";
 
 const Home = () => {
   const [countall, setCountAll] = useState(0);
@@ -15,6 +17,7 @@ const Home = () => {
   const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
   const [openBooking, setOpenBooking] = useState(true);
+  const [openRequest, setOpenRequest] = useState(true);
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const [flag, setFlag] = useState(true);
   const locationId = sessionStorage.getItem("userLocationId");
@@ -154,10 +157,57 @@ const Home = () => {
             </div>
             <div className="row-card" style={{ gridRow: "2 / 3" }}>
               <div className="row-card-title">
-                <h2>Requests</h2>
+                <span className="btn-group">
+                  <button
+                    onClick={() => {
+                      setOpenRequest(true);
+                    }}
+                  >
+                    <h3>Room Bookings</h3>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setOpenRequest(false);
+                    }}
+                  >
+                    <h3>Requests</h3>
+                  </button>
+                </span>
               </div>
-              
+              <div className="row-card-body">
+                <table className="header-booking">
+                  <thead>
+                    {openRequest && (
+                      <>
+                        <tr>
+                          <th>Location</th>
+                          <th>From Time</th>
+                          <th>To Time</th>
+                          <th>Room Type</th>
+                        </tr>
+                      </>
+                    )}
+                    {!openRequest && (
+                      <>
+                        <tr>
+                          <th>Description</th>
+                          <th>Cancel</th>
+                        </tr>
+                      </>
+                    )}
+                  </thead>
+                  <div className="header-booking">
+                    {openRequest && (
+                      <AcceptedRequest flag={flag} setFlag={setFlag} />
+                    )}
+                    {!openRequest && (
+                      <PendingRequest flag={flag} setFlag={setFlag} />
+                    )}
+                  </div>
+                </table>
+              </div>
             </div>
+
             <div className="row-card" style={{ gridRow: "1 / 3" }}>
               <div
                 className="row-card-title"
