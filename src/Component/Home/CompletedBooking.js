@@ -40,8 +40,8 @@ const CompletedBooking = (props) => {
   return (
     <>
       {upcomingBooking && (
-        <table>
-          <tbody>
+         <table className="header-booking">
+         <tbody className="header-booking">
             {isPending && <span>Loading.</span>}
             {upcomingBooking &&
               upcomingBooking

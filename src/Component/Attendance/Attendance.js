@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
 import "./Attendance.css";
 import { AttendanceExcel } from "./AttendanceExcel";
 import { use } from "@js-joda/core";
 import { json } from "react-router-dom";
+import Present from "./Present";
+import Absent from "./Absent";
+
 
 const Attendance = () => {
+  const [date, setDate] = useState("");
+  const [toggle, setToggel] = useState(true);
   const [jsonData, setJsonData] = useState(null);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [message,setMessage]=useState("");
 
   const handleFile = (e) => {
     e.preventDefault();
@@ -33,16 +39,14 @@ const Attendance = () => {
     };
     reader.readAsBinaryString(file);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(jsonData, null, 2))
+    console.log(JSON.stringify(jsonData, null, 2));
     fetch(`http://localhost:8081/api/booking/markAttendance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + sessionStorage.getItem("accessToken")
-        
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
       },
       body: JSON.stringify(jsonData, null, 2),
     })
@@ -54,6 +58,8 @@ const Attendance = () => {
       })
       .then((data) => {
         setData(data);
+        setMessage("Attandance recorded successfully")
+        setJsonData(null);
         setError(null);
         console.log(data);
       })
@@ -63,30 +69,115 @@ const Attendance = () => {
         console.log(error.message);
       });
   };
+  // useEffect(() => {
+  //   const formattedDate = new Date().toLocaleDateString();
+  //   setDate(formattedDate);
+  // }, [date]);
+if(message){
+  setTimeout(()=>{
+    setMessage("")
+  },2000)
+}
   return (
-    <div className="container">
-      <div className="container-content">
-        <div className="row-card-att" style={{ height: "86.5vh" }}>
-          <h2>Upload the Excel Attendance Sheet</h2>
-          <div>
-            <form className="attendance-form" onSubmit={handleSubmit}>
-              <label for="date">Select Date</label>
-              <input
-                type="date"
-                name="date"
-                id="date"
-                min={new Date().toISOString().split("T")[0]}
-              />
-              <label >Upload the Excel Sheet</label>
-              <input type="file" onChange={handleFile} />
-              <button className="button-group" >Mark Attendance</button>
-              {/* {data && <>{data}</>} */}
-              {jsonData && <>{JSON.stringify(jsonData,  null, 2)}</>}
-            </form>
+    <>
+      <div className="container">
+        <div className="container-content">
+          <div className="row">
+            <div className="row-card">
+              <div className="row-card-title">
+                <span className="btn-group">
+                  <button
+                    onClick={() => {
+                      setToggel(!toggle);
+                    }}
+                  >
+                    <h3>Present</h3>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setToggel(!toggle);
+                    }}
+                  >
+                    <h3>Absent</h3>
+                  </button>
+                </span>
+                <hr />
+                <form className="modal-form">
+                  <div className="form-item">
+                    <input
+                      type="date"
+                      value={date}
+                      onChange={(e) => {
+                        setDate(e.target.value);
+                      }}
+                    />
+                  </div>
+                </form>
+              </div>
+              <div className="row-card-body">
+                <table className="header-booking" style={{ marginTop: "70px" }}>
+                  <tr>
+                    <th>Accolite Id</th>
+                    <th>Seat Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                  </tr>
+                </table>
+                <div className="table-scroll">
+                  {toggle && <Present date={date}/>}
+                  {!toggle && <Absent date={date}/>}
+                </div>
+              </div>
+            </div>
+            <div className="row-card">
+              <div className="row-card-attendance">
+                <div className="card-attandance">
+                  <div className="row-card-title">
+                    <span className="btn-group">
+                      <h3>Mark Attandance</h3>
+                    </span>
+                    <hr />
+                  </div>
+                  <form className="modal-form" onSubmit={handleSubmit}>
+                    <div className="form-item">
+                      <input type="file" onChange={handleFile} />
+                    </div>
+                    <button className="button-group">Mark Attendance</button>
+                  </form>
+                </div>
+                <div className="card-attandance">
+                  <div className="table-scroll">
+                    {message &&
+                      <span>{message}</span>
+                    }
+                    {jsonData && (
+                      <table>
+                        <thead>
+                          <tr>
+                            {Object.keys(jsonData[0]).map((key) => (
+                              <th key={key}>{key}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {jsonData.map((data, index) => (
+                            <tr key={index}>
+                              {Object.values(data).map((value, index) => (
+                                <td key={index}>{value}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
