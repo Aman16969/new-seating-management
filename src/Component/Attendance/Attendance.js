@@ -6,6 +6,7 @@ import { use } from "@js-joda/core";
 import { json } from "react-router-dom";
 import Present from "./Present";
 import Absent from "./Absent";
+import DayWisePdf from "./DateWisePdf";
 
 
 const Attendance = () => {
@@ -112,6 +113,8 @@ if(message){
                       }}
                     />
                   </div>
+                  {date && <DayWisePdf date={date}/>}
+                  
                 </form>
               </div>
               <div className="row-card-body">
@@ -151,15 +154,16 @@ if(message){
                       <span>{message}</span>
                     }
                     {jsonData && (
-                      <table>
-                        <thead>
+                       <table className="header-booking">
+                       <thead className="header-booking">
                           <tr>
                             {Object.keys(jsonData[0]).map((key) => (
                               <th key={key}>{key}</th>
                             ))}
                           </tr>
                         </thead>
-                        <tbody>
+                       
+          <tbody className="header-booking" style={{textAlign:"center"}}>
                           {jsonData.map((data, index) => (
                             <tr key={index}>
                               {Object.values(data).map((value, index) => (
