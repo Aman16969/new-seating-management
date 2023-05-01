@@ -11,9 +11,36 @@
 
 .locationTable {
   display: inline-block;
-  height: 55vh !important;
+  height: 55vh;
   overflow-y: scroll;
   overflow-x: scroll;
+  /* Set a max-width to prevent horizontal scrolling */
+  max-width: 100%;
+}
+
+/* Style the scrollbar */
+.locationTable::-webkit-scrollbar {
+  background-color: #d6eaf8;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}
+
+/* Style the scrollbar thumb */
+.locationTable::-webkit-scrollbar-thumb {
+  background-color: #1ba5dc;
+  border-radius: 10px;
+  border: 3px solid #f5f5f5;
+}
+
+/* Style the scrollbar on hover */
+.locationTable::-webkit-scrollbar-thumb:hover {
+  background-color: #999;
+}
+
+/* Style the scrollbar on active state */
+.locationTable::-webkit-scrollbar-thumb:active {
+  background-color: #555;
 }
 
 .header {

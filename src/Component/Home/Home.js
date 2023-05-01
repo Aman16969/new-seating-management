@@ -142,7 +142,7 @@ const Home = () => {
                     {openBooking && <th>Cancel</th>}
                   </tr>
                 </table>
-                <div className="table-scroll">
+                <div className="table-scroll-1" >
                   {openBooking && (
                     <UpcomingBooking flag={flag} setFlag={setFlag} />
                   )}
@@ -152,13 +152,20 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="row-card" style={{ gridRow: "2 / 3" }}>
+            <div className="row-card" style={{ gridRow: "2 / 3" ,height:'190px'}}>
               <div className="row-card-title">
                 <h2>Requests</h2>
               </div>
-              
-            </div>
-            <div className="row-card" style={{ gridRow: "1 / 3" }}>
+              {/* <div className="table-scroll-2" >
+                  {openBooking && (
+                    <UpcomingBooking flag={flag} setFlag={setFlag} />
+                  )}
+                  {!openBooking && (
+                    <CompletedBooking flag={flag} setFlag={setFlag} />
+                  )}
+                </div>
+            </div> */}
+            <div className="row-card" style={{ gridRow: "1 / 3" ,height:"530px"}}>
               <div
                 className="row-card-title"
                 style={{
@@ -167,8 +174,8 @@ const Home = () => {
                   flexDirection: "row",
                 }}
               >
-                <div>
-                  <h3>Book Seats</h3>{" "}
+                <div> 
+                  <h3>Book Seats</h3>
                 </div>
                 <div>
                   <button className="access" onClick={handleAccessClick}>
