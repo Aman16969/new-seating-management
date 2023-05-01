@@ -5,6 +5,7 @@ const DayWisePdf = ({date}) => {
     const downloadPdf = () => {
         const header = "Bearer " + sessionStorage.getItem("accessToken");
         const locationId=sessionStorage.getItem("userLocationId")
+
         fetch(`http://localhost:8081/api/pdf/booking/day/${date}/location/${locationId}`, {
           headers: {
             "Content-type": "application/json",
@@ -13,8 +14,6 @@ const DayWisePdf = ({date}) => {
         }).then((response) => {
           return response.blob();
         }).then((blob) => {
-          // Use FileSaver.js to save the blob as a file
-          console.log(blob)
           FileSaver.saveAs(blob, "dailydate.pdf");
         }).catch((error) => {
           console.error("Error downloading PDF:", error);
@@ -23,7 +22,7 @@ const DayWisePdf = ({date}) => {
       
     return (
       <div >  
-      <button className="button-group" onClick={downloadPdf} style={{marginTop:"10px"}}><BiDownload /></button>
+      <button className="button-group" onClick={downloadPdf} style={{marginTop:"1px"}}><BiDownload /></button>
     </div>
       );
     };

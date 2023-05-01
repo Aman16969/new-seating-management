@@ -113,7 +113,7 @@ if(message){
                       }}
                     />
                   </div>
-                  {date && <DayWisePdf date={date}/>}
+                  {date && <span>Download <DayWisePdf date={date}/></span>}
                   
                 </form>
               </div>
@@ -136,9 +136,9 @@ if(message){
               <div className="row-card-attendance">
                 <div className="card-attandance">
                   <div className="row-card-title">
-                    <span className="btn-group">
-                      <h3>Mark Attandance</h3>
-                    </span>
+                    
+                      <h3 >Mark Attandance</h3>
+                    
                     <hr />
                   </div>
                   <form className="modal-form" onSubmit={handleSubmit}>

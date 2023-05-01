@@ -63,10 +63,11 @@ const AllUsers = () => {
           return (
             <tr className="user-row" style={{textAlign: "left",marginRight:'2 0px'}}>
               <td>{user.email?.substring(0, 40)}</td>
-              <td>
+              <td style={{textAlign:'center'}}>
                 <button
                   className="button-group"
                   value={user}
+                  
                   onClick={() => handlePopup(user)}
                 >
                   {user.role}

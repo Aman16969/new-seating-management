@@ -55,7 +55,7 @@ function Profile() {
         setMessage("User updated Successfully");
         setReadOnly(true);
         
-        sessionStorage.setItem("userLocation",data.location)
+        sessionStorage.setItem("userLocation",JSON.stringify(data.location))
         sessionStorage.setItem("userLocationId",data.location.id)
         setFlag(!flag)
       })
@@ -73,8 +73,20 @@ function Profile() {
               <img className="profile-img" src={profilePic} alt="Profile" />
 
               <form className="profile-container" onSubmit={handleUpdate}>
-                
+                {/* <div className="profile-item" onClick={()=>setReadOnly(false)}>
+                <label for="email">Accolite Id</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Accolite Id"
+                    name="accoliteId"
+                    id="accoliteId"
+                    required
+                    readOnly={true}
+                    value={userDetail.accoliteId}
+                  />
+                </div> */}
                 <div className="profile-item">
+               
                   <label for="email">Email</label>
                   <input
                     type="text"
