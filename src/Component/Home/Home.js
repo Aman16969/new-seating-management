@@ -4,6 +4,8 @@ import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
 import RequestAccess from "./RequestAccess";
 import DisplayLayout from "./DisplayLayout";
+import AcceptedRequest from "./AcceptedRequest";
+import PendingRequest from "./PendingRequest";
 
 const Home = () => {
   const [countall, setCountAll] = useState(0);
@@ -15,6 +17,7 @@ const Home = () => {
   const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
   const [openBooking, setOpenBooking] = useState(true);
+  const [openRequest, setOpenRequest] = useState(true);
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const [flag, setFlag] = useState(true);
   const locationId = sessionStorage.getItem("userLocationId");
@@ -56,27 +59,30 @@ const Home = () => {
     [date, fromTime, toTime]
   );
 
-  useEffect((e) => {
-    fetch(`http://localhost:8081/api/location/${locationId}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
+  useEffect(
+    (e) => {
+      fetch(`http://localhost:8081/api/location/${locationId}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
       })
-      .then((data) => {
-        setLocation(data);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  }, [flag]);
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setLocation(data);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    },
+    [flag]
+  );
 
   useEffect((e) => {
     fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
@@ -105,13 +111,12 @@ const Home = () => {
     setShowModal(true);
   }
 
-
   return (
     <>
       <div className="container">
         <div className="container-content">
           <div className="row">
-            <div className="row-card">
+            <div className="row-card" style={{ gridRow: "1 / 2" }}>
               <div className="row-card-title">
                 <span className="btn-group">
                   <button
@@ -140,17 +145,78 @@ const Home = () => {
                     {openBooking && <th>Cancel</th>}
                   </tr>
                 </table>
-                <div className="table-scroll">
+                <div className="table-scroll-1" >
                   {openBooking && (
                     <UpcomingBooking flag={flag} setFlag={setFlag} />
                   )}
                   {!openBooking && (
-                    <CompletedBooking   flag={flag} setFlag={setFlag} />
+                    <CompletedBooking flag={flag} setFlag={setFlag} />
                   )}
                 </div>
               </div>
             </div>
-            <div className="row-card">
+            <div className="row-card" style={{ gridRow: "2 / 3" ,height:'190px'}}>
+              <div className="row-card-title">
+                <span className="btn-group">
+                  <button
+                    onClick={() => {
+                      setOpenRequest(true);
+                    }}
+                  >
+                    <h3>Room Bookings</h3>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setOpenRequest(false);
+                    }}
+                  >
+                    <h3>Requests</h3>
+                  </button>
+                </span>
+              </div>
+              <div className="row-card-body">
+                <table className="header-booking">
+                  <thead>
+                    {openRequest && (
+                      <>
+                        <tr>
+                          <th>Location</th>
+                          <th>From Time</th>
+                          <th>To Time</th>
+                          <th>Room Type</th>
+                        </tr>
+                      </>
+                    )}
+                    {!openRequest && (
+                      <>
+                        <tr>
+                          <th>Description</th>
+                          <th>Cancel</th>
+                        </tr>
+                      </>
+                    )}
+                  </thead>
+                  <div className="header-booking">
+                    {openRequest && (
+                      <AcceptedRequest flag={flag} setFlag={setFlag} />
+                    )}
+                    {!openRequest && (
+                      <PendingRequest flag={flag} setFlag={setFlag} />
+                    )}
+                  </div>
+                </table>
+              </div>
+              {/* <div className="table-scroll-2" >
+                  {openBooking && (
+                    <UpcomingBooking flag={flag} setFlag={setFlag} />
+                  )}
+                  {!openBooking && (
+                    <CompletedBooking flag={flag} setFlag={setFlag} />
+                  )}
+                </div>
+            </div> */}
+            </div>
+            <div className="row-card" style={{ gridRow: "1 / 3" ,height:"530px"}}>
               <div
                 className="row-card-title"
                 style={{
@@ -159,8 +225,8 @@ const Home = () => {
                   flexDirection: "row",
                 }}
               >
-                <div>
-                  <h3>Book Seats</h3>{" "}
+                <div> 
+                  <h3>Book Seats</h3>
                 </div>
                 <div>
                   <button className="access" onClick={handleAccessClick}>
