@@ -115,12 +115,12 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "white",
-                backgroundImage: "linear-gradient(#170404, rgb(100 83 57))",
-                borderTop: "2px solid red",
-                borderBottom: "7px solid red",
+                backgroundImage: "linear-gradient( #28fa54, #97fcac)",
+                borderTop: "1px solid red",
+                borderBottom: "5px solid red",
                 borderLeft: "5px solid red",
                 borderRight: "5px solid red",
-                borderStyle: "inset",
+                borderStyle: "solid",
               }}
             >
               {seat.seatName}
@@ -135,13 +135,13 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "black",
-                // backgroundColor: "#ADFF2F",
+                backgroundColor: "#ADFF2F",
                 backgroundImage: "linear-gradient( #97fcac, #28fa54)",
                 borderTop: "1px solid black",
                 borderBottom: "5px solid black",
                 borderLeft: "5px solid black",
                 borderRight: "5px solid black",
-                borderStyle: "inset",
+                borderStyle: "solid",
               }}
             >
               {seat.seatName}
@@ -156,10 +156,12 @@ const DisplaySeat = ({
               style={{
                 color: "white",
                 backgroundColor: "rgb(150,150,150)",
-                borderStyle: "inset",
-                borderWidth: "0px 4px 7px",
-                borderColor: "#02070a",
-                cursor: "pointer",
+                backgroundImage: "linear-gradient( #97fcac, #28fa54)",
+                borderTop: "1px solid black",
+                borderBottom: "5px solid black",
+                borderLeft: "5px solid black",
+                borderRight: "5px solid black",
+                borderStyle: "solid",
               }}
             >
               {seat.seatName}
