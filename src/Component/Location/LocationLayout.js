@@ -3,16 +3,20 @@ import AdminSeat from "./AdminSeat";
 import "./location.css";
 import AddConference from "./AddConference";
 
-const LocationLayout = ({ location }) => {
+const LocationLayout = ({ location, flag }) => {
   const [rows, setRows] = useState(location.rs);
   const [cols, setCols] = useState(location.cs);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
-  const [flag, setFlag] = useState(false);
   const [addRoom, setAddRoom] = useState(false);
   const [roomName, setRoomName] = useState(null);
   const [capacity, setCapacity] = useState(null);
   const [type, setType] = useState("BOARD");
+
+  useEffect(() => {
+    setRows(location.rs);
+    setCols(location.cs);
+  }, [location]);
 
   const updateRowsAndCols = () => {
     fetch(
@@ -29,7 +33,6 @@ const LocationLayout = ({ location }) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        setFlag(!flag);
         return response.json();
       })
       .then((data) => {
@@ -42,24 +45,25 @@ const LocationLayout = ({ location }) => {
   };
 
   const handleAddRoom = () => {
-    const room = {name:roomName, capacity:capacity, roomType:type, location:location}
+    const room = {
+      name: roomName,
+      capacity: capacity,
+      roomType: type,
+      location: location,
+    };
     console.log(room);
-    fetch(
-      `http://localhost:8081/api/room/`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(room),
-      }
-    )
+    fetch(`http://localhost:8081/api/room/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(room),
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        setFlag(!flag);
         return response.json();
       })
       .then((data) => {
@@ -78,7 +82,9 @@ const LocationLayout = ({ location }) => {
     for (let j = 1; j <= location.cs; j++) {
       cs.push(
         <td>
-          <h3>{<AdminSeat location={location} row={i} col={j} />}</h3>
+          <h3>
+            {<AdminSeat location={location} row={i} col={j} refresh={flag} />}
+          </h3>
         </td>
       );
     }
@@ -153,7 +159,7 @@ const LocationLayout = ({ location }) => {
                     alignItems: "center",
                     justifyContent: "center",
                   }}
-                  onClick={()=>handleAddRoom()}
+                  onClick={() => handleAddRoom()}
                 >
                   Add Room
                 </button>
@@ -197,11 +203,6 @@ const LocationLayout = ({ location }) => {
           <b> Add Board Room / Discussion Room</b>
         </button>
       </div>
-
-      <div>
-        <table></table>
-      </div>
-
       <div className="location-scroll">
         <table className="locationLayout">{rs}</table>
       </div>

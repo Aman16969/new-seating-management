@@ -145,7 +145,7 @@ const Home = () => {
                     {openBooking && <th>Cancel</th>}
                   </tr>
                 </table>
-                <div className="table-scroll-1" >
+                <div className="table-scroll-1">
                   {openBooking && (
                     <UpcomingBooking flag={flag} setFlag={setFlag} />
                   )}
@@ -155,7 +155,10 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="row-card" style={{ gridRow: "2 / 3" ,height:'190px'}}>
+            <div
+              className="row-card"
+              style={{ gridRow: "2 / 3", height: "190px" }}
+            >
               <div className="row-card-title">
                 <span className="btn-group">
                   <button
@@ -176,47 +179,37 @@ const Home = () => {
               </div>
               <div className="row-card-body">
                 <table className="header-booking">
-                  <thead>
-                    {openRequest && (
-                      <>
-                        <tr>
-                          <th>Location</th>
-                          <th>From Time</th>
-                          <th>To Time</th>
-                          <th>Room Type</th>
-                        </tr>
-                      </>
-                    )}
-                    {!openRequest && (
-                      <>
-                        <tr>
-                          <th>Description</th>
-                          <th>Cancel</th>
-                        </tr>
-                      </>
-                    )}
-                  </thead>
-                  <div className="header-booking">
-                    {openRequest && (
-                      <AcceptedRequest flag={flag} setFlag={setFlag} />
-                    )}
-                    {!openRequest && (
-                      <PendingRequest flag={flag} setFlag={setFlag} />
-                    )}
-                  </div>
-                </table>
-              </div>
-              {/* <div className="table-scroll-2" >
-                  {openBooking && (
-                    <UpcomingBooking flag={flag} setFlag={setFlag} />
+                  {openRequest && (
+                    <tr>
+                      <th>Date</th>
+                      <th>Room Type</th>
+                      <th>Room Number</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                    </tr>
                   )}
-                  {!openBooking && (
-                    <CompletedBooking flag={flag} setFlag={setFlag} />
+                  {!openRequest && (
+                    <tr>
+                      <th>Description</th>
+                      <th>Cancel</th>
+                    </tr>
+                  )}
+                </table>
+
+                <div className="table-scroll-2">
+                  {openRequest && (
+                    <AcceptedRequest flag={flag} setFlag={setFlag} />
+                  )}
+                  {!openRequest && (
+                    <PendingRequest flag={flag} setFlag={setFlag} />
                   )}
                 </div>
-            </div> */}
+              </div>
             </div>
-            <div className="row-card" style={{ gridRow: "1 / 3" ,height:"530px"}}>
+            <div
+              className="row-card"
+              style={{ gridRow: "1 / 3", height: "530px" }}
+            >
               <div
                 className="row-card-title"
                 style={{
@@ -225,7 +218,7 @@ const Home = () => {
                   flexDirection: "row",
                 }}
               >
-                <div> 
+                <div>
                   <h3>Book Seats</h3>
                 </div>
                 <div>

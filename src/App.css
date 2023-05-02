@@ -20,7 +20,7 @@
 
 .navbar li a:hover {
   color: #ff9238;
-  transform: scale(1.2);
+  transform: scale(1.05);
 }
 
 .dropdown {
@@ -154,14 +154,16 @@
 .btn-group {
   display: flex;
   flex-direction: row;
+  column-gap: 10px;
 }
 .btn-group button {
   width: 100%;
   background-color: transparent;
-  border: 0px;
+  border: none
 }
 .btn-group button:hover {
-  color: #37a0c0;
+  color: #0f017d;
+  background-color: #fcb64e71;
 }
 .header-booking {
   width: 100%;
@@ -257,7 +259,7 @@
 }
 
 .table-scroll-2 {
-  height: 160px;
+  height: 95px;
   overflow-y: auto; /* Use "auto" instead of "scroll" to prevent the scrollbar from showing unnecessarily */
   max-width: 100%;
 }
@@ -845,10 +847,10 @@ id.login-button {
 }
 
 .user-row th {
-  width: 23%;
+  width: 25%;
 }
 .user-row td {
-  width: 23%;
+  width: 24%;
 }
 
 .user-row:hover {

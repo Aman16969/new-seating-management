@@ -138,7 +138,7 @@ const Login = () => {
           {" "}
           <h3 style={{ color: "white" }}>seats now!</h3>
         </span>
-        <div className="content">{error && <div>{error}</div>}</div>
+        {/* <div className="content">{error && <div>{error}</div>}</div> */}
       </div>
     </>
   );

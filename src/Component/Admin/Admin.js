@@ -63,12 +63,12 @@ const Admin = () => {
                     <table className="table-header">
                       <thead>
                         <tr className="user-row">
-                          <th>Email</th>
+                          <th style={{width:'85%'}}>Email</th>
                           <th>View</th>
                         </tr>
                       </thead>
                     </table>
-                    <div className="table-scroll" style={{ height: "220px" }}>
+                    <div className="table-scroll-1" >
                       <table>
                         <Request />
                       </table>
@@ -85,9 +85,9 @@ const Admin = () => {
                         </tr>
                       </thead>
                     </table>
-                    <div className="table-scroll" style={{ height: "150px" }}>
+                    <div className="table-scroll-2">
                       <table>
-                        <RoomBookings/>
+                                          <RoomBookings/>
                       </table>
                     </div>
                   </div>
@@ -100,6 +100,7 @@ const Admin = () => {
                   <h2>Users</h2>
                 </div>
                 <div>
+                  
                   <AllUsersByLocation style={{ width: "40px" }} />
                 </div>
               </div>
@@ -107,7 +108,7 @@ const Admin = () => {
               <table className="table-header">
                 <thead>
                   <tr className="user-row">
-                    <th>Email</th>
+                    <th style={{width:'70%'}}>Email</th>
                     <th>Role</th>
                   </tr>
                 </thead>

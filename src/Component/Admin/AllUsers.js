@@ -62,7 +62,7 @@ const AllUsers = () => {
         allUsers.map((user) => {
           return (
             <tr className="user-row" style={{textAlign: "left",marginRight:'2 0px'}}>
-              <td>{user.email?.substring(0, 40)}</td>
+              <td style={{width:'70%'}}>{user.email?.substring(0, 45)}</td>
               <td style={{textAlign:'center'}}>
                 <button
                   className="button-group"

@@ -95,7 +95,7 @@ const Request = () => {
             return (
               <tr className="user-row">
                 <td style={{ fontSize: "15px", textAlign: "left" }}>
-                  {req.email.substring(0, 30)}
+                  {req.email.substring(0, 35)}
                 </td>
                 <td>
                   <button
