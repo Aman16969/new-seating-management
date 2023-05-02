@@ -10,7 +10,7 @@ import { BsSaveFill } from "react-icons/bs";
 
 import AddSeatPopUp from "./AddSeatPopUp";
 
-const AdminSeat = ({ location, row, col }) => {
+const AdminSeat = ({ location, row, col, refresh }) => {
   const [seat, setSeat] = useState(null);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
@@ -45,7 +45,7 @@ const AdminSeat = ({ location, row, col }) => {
       .catch((error) => {
         setError(error.message);
       });
-  }, [flag]);
+  }, [flag, refresh]);
 
   const handleAdd = () => {
     const seata = {
