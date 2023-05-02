@@ -20,7 +20,7 @@
 
 .navbar li a:hover {
   color: #ff9238;
-  transform: scale(1.2);
+  transform: scale(1.05);
 }
 
 .dropdown {
@@ -154,14 +154,16 @@
 .btn-group {
   display: flex;
   flex-direction: row;
+  column-gap: 10px;
 }
 .btn-group button {
   width: 100%;
   background-color: transparent;
-  border: 0px;
+  border: none
 }
 .btn-group button:hover {
-  color: #37a0c0;
+  color: #0f017d;
+  background-color: #fcb64e71;
 }
 .header-booking {
   width: 100%;
