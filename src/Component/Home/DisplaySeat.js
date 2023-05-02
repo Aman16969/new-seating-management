@@ -154,9 +154,8 @@ const DisplaySeat = ({
             <div
               className="display-seat"
               style={{
-                color: "white",
+                color: "black",
                 backgroundColor: "rgb(150,150,150)",
-                backgroundImage: "linear-gradient( #97fcac, #28fa54)",
                 borderTop: "1px solid black",
                 borderBottom: "5px solid black",
                 borderLeft: "5px solid black",
