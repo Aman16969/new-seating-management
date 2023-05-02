@@ -8,25 +8,12 @@ const Location = () => {
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [error, setError] = useState(null);
-  const [showAddConference, setShowAddConference] = useState(false);
   const [conferences, setConferences] = useState([]);
   const [isPending, setIsPending] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [flag, setFlag] = useState(true);
   const token = sessionStorage.getItem("accessToken");
 
-  const handleAddConference = (conference) => {
-    setConferences([...conferences, conference]);
-    setShowAddConference(false);
-  };
-
-  const handleCancel = () => {
-    setShowAddConference(false);
-  };
-
-  function handleConferenceClick() {
-    setShowAddConference(true);
-  }
-
+  
   useEffect((e) => {
     fetch("http://localhost:8081/api/location/", {
       method: "GET",
@@ -48,11 +35,13 @@ const Location = () => {
         setError(error.message);
       });
   }, []);
+
   const handleLocationChange = (event) => {
     const locationId = parseInt(event.target.value);
     const selectedLocation = locations.find(
       (location) => location.id === locationId
     );
+    setFlag(!flag);
     setSelectedLocation(selectedLocation);
   };
 
@@ -119,7 +108,7 @@ const Location = () => {
               </div>
             </form>
           </div>
-          {selectedLocation && <LocationLayout location={selectedLocation} />}{" "}
+          {selectedLocation && <LocationLayout location={selectedLocation} flag={flag} />}{" "}
         </div>
       </div>
     </>
