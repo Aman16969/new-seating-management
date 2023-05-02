@@ -27,21 +27,24 @@ const AcceptedRequest = (props) => {
       .catch((err) => {
         setIsPending(false);
       });
-  }, []);
+  }, [props.flag]);
 
   return (
     <>
       {!isPending && acceptedRequest.length > 0 && (
-        <tbody>
+        <table className="header-booking">
+        <tbody className="header-booking">
           {acceptedRequest.map((request) => (
-            <tr key={request.id}>
-              <td>{request.location.name}</td>
+            <tr key={request.id} className="header-booking">
+              <td>{request.date}</td>
+              <td>{request.room.roomType}</td>
+              <td>{request.room.name}</td>
               <td>{request.fromTime}</td>
               <td>{request.toTime}</td>
-              <td>{request.room.roomType}</td>
             </tr>
           ))}
         </tbody>
+        </table>
       )}
     </>
   );

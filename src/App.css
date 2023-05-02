@@ -257,7 +257,7 @@
 }
 
 .table-scroll-2 {
-  height: 160px;
+  height: 95px;
   overflow-y: auto; /* Use "auto" instead of "scroll" to prevent the scrollbar from showing unnecessarily */
   max-width: 100%;
 }
