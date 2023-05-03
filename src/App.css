@@ -914,13 +914,12 @@ id.login-button {
   width: 400px;
   z-index: 1;
 }
-.request-card textarea {
-  height: 100px;
-  margin-bottom: 20px;
-  width: 90%;
-  padding: 10px;
-  /* margin-left: 3%; */
-  resize: none;
+.request-card label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #333;
 }
 
 .request-card button {
@@ -931,12 +930,13 @@ id.login-button {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  padding: 10px;
+  padding: 10px ;
+  margin-top: 1rem;
   transition: background-color 0.2s ease-in-out;
 }
 
 .request-card button:hover {
-  background-color: #F09440;
+  background-color: #1b4a92;
 }
 
 .access {
