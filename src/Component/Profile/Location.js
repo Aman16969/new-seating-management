@@ -8,10 +8,9 @@ const Location = (props) => {
     const [locationName,setLocationName]=useState("Choose Your Location")
     
 
-    console.log(JSON.stringify(loc))
 
     useEffect(() => {
-      if(loc){
+      if(loc!=='null'){
         setLocationName(JSON.parse(loc).name);
       }
       const header = "Bearer " + sessionStorage.getItem("accessToken");

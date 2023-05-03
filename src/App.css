@@ -6,7 +6,7 @@
   align-items: center;
   background-color: #0c3d4c;
   height: 55px;
-  font-size: 17px;
+  font-size: 15px;
   width: 100%;
 }
 .navbar-wrapper {
@@ -109,6 +109,7 @@
 } */
 
 .container {
+  
   position: fixed;
   display: block;
   float: unset;
@@ -157,6 +158,7 @@
   column-gap: 10px;
 }
 .btn-group button {
+  font-variant: small-caps;
   width: 100%;
   background-color: transparent;
   border: none
@@ -218,6 +220,7 @@
 }
 
 .button-group {
+  font-variant: small-caps;
   border-radius: 3px;
   padding: 5px 1;
   border: #1dc4e9;
@@ -304,6 +307,7 @@
 }
 
 .modal-form {
+  
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -317,15 +321,18 @@
   height: 35px;
   width: 190px;
   justify-content: center;
+  font-variant: small-caps;
 }
 .form-item input[type="date"],
 .form-item input[type="time"] {
+  font-variant: small-caps;
   width: 100%;
   border-radius: 5px;
   border: 1px solid #1574da;
   background-color: #e2ffff;
 }
 .drop-select {
+  font-variant: small-caps;
   width: 100%;
   border-radius: 2px;
   border: 1px solid #007bff;
@@ -400,8 +407,8 @@
   position: relative;
   width: 100%;
   text-align: center;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 13px;
+  /* font-weight: bold; */
   line-height: 1.5rem;
   padding: 4px 0;
   background: blue;
@@ -518,7 +525,7 @@
 
 .logout-body button {
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px 20px;
   transition: background-color 0.3s ease;
 }
@@ -631,7 +638,7 @@ id.login-button {
   color: #ffffff;
   background-color: #3eadcf;
   padding: 8px 40px;
-  font-size: 18px;
+  font-size: 14px;
   cursor: pointer;
   margin: 0px 40px;
 }
@@ -682,7 +689,7 @@ id.login-button {
 .location-form button {
   height: 30px;
   width: 120px;
-  font-size: 17px;
+  font-size: 14px;
   margin-top: 20px;
 }
 .location-item {
@@ -783,7 +790,7 @@ id.login-button {
 }
 
 .location-item label {
-  font-size: 20px;
+  font-size: 14px;
 }
 .layout-img {
   width: 30px;
@@ -797,6 +804,7 @@ id.login-button {
   padding: 10px;
 }
 .profile-form {
+  
   height: 85%;
   width: 35%;
   padding: 20px;
@@ -812,7 +820,8 @@ id.login-button {
 }
 
 .profile-form input[type="text"] {
-  width: 80%;
+  font-variant: small-caps;
+  width: 100%;
   height: 30px;
   background-color: #d0dbef;
   font-size: 15px;
@@ -820,7 +829,7 @@ id.login-button {
   border-radius: 5px;
 }
 .profile-form select {
-  width: 82%;
+  width: 101%;
   height: 40px;
   background-color: #d0dbef;
   font-size: 15px;
@@ -858,6 +867,7 @@ id.login-button {
 }
 
 .user-row {
+  /* font-variant: small-caps; */
   display: table-row;
   vertical-align: inherit;
   border-color: inherit;
@@ -936,7 +946,7 @@ id.login-button {
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   padding: 10px ;
   margin-top: 1rem;

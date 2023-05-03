@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from "react";
-import profilePic from "../../Static/man.png";
 import Location from "./Location";
 function Profile() {
   console.log("hi")
@@ -70,10 +69,10 @@ function Profile() {
         <div className="container-content">
           {!isPending && (
             <div className="profile-form">
-              <img className="profile-img" src={profilePic} alt="Profile" />
+              {/* <img className="profile-img" src={profilePic} alt="Profile" /> */}
 
               <form className="profile-container" onSubmit={handleUpdate}>
-                {/* <div className="profile-item" onClick={()=>setReadOnly(false)}>
+                <div className="profile-item" >
                 <label for="email">Accolite Id</label>
                   <input
                     type="text"
@@ -84,7 +83,7 @@ function Profile() {
                     readOnly={true}
                     value={userDetail.accoliteId}
                   />
-                </div> */}
+                </div>
                 <div className="profile-item">
                
                   <label for="email">Email</label>
