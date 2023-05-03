@@ -80,6 +80,8 @@ const Admin = () => {
                       <thead>
                         <tr className="user-row">
                           <th>Date</th>
+                          <th>From</th>
+                          <th>To</th>
                           <th>Type</th>
                           <th>Room</th>
                         </tr>

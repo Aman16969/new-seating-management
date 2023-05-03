@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import OpenBookingForm from "./RoomBookingForm";
-
 const Request = () => {
   const [requests, setRequest] = useState([]);
   const [requestById, setRequestById] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [requestId, setRequestId] = useState(null);
-  const[flag,setFlag]=useState(false);
-  const[openBookingForm,setOpenBookingForm]=useState(false);
+  const [acceptedRequest, setAcceptedRequest] = useState(null);
+  const [flag, setFlag] = useState(false);
+  const [openBookingForm, setOpenBookingForm] = useState(false);
   const token = "Bearer " + sessionStorage.getItem("accessToken");
+
   useEffect(() => {
-    fetch(`http://localhost:8081/api/requestBooking/`, {
+    fetch("http://localhost:8081/api/requestBooking/", {
       headers: {
         "content-type": "application/json",
         Authorization: token,
@@ -19,15 +20,15 @@ const Request = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          throw Error("connot fetch the data");
+          throw Error("cannot fetch the data");
         }
         return res.json();
       })
       .then((data) => {
         setRequest(data);
-        console.log(data)
       });
   }, [flag]);
+
   const handlePopup = (e) => {
     setRequestId(e);
     
@@ -39,7 +40,7 @@ const Request = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          throw Error("connot fetch the data");
+          throw Error("cannot fetch the data");
         }
         return res.json();
       })
@@ -49,43 +50,53 @@ const Request = () => {
         setIsPending(false);
       });
   };
-  const handleReject=(id)=>{
-    fetch(`http://localhost:8081/api/requestBooking/request/${id}/value/false`,{
-      method:'PUT',
+
+  const handleReject = (id) => {
+    fetch(`http://localhost:8081/api/requestBooking/request/${id}/value/false`, {
+      method: 'PUT',
       headers: {
         "content-type": "application/json",
         Authorization: token,
-      }
-    }).then((res)=>{
-      if (!res.ok) {
-        throw Error("connot fetch the data");
-      }
-      return res;
-    }).then((data) => {
-      setFlag(!flag)
-      setIsOpenCon(false)
-    });
-  }
-  const handleAccept = (id) => {
-    fetch(`http://localhost:8081/api/requestBooking/request/${id}/book/true`,{
-      method:'PUT',
-      headers: {
-        "content-type": "application/json",
-        Authorization: token,
-      }
-    }).then((res)=>{
-      if (!res.ok) {
-        throw Error("connot fetch the data");
-      }
-      return res;
-    }).then((data) => {
-
-      setFlag(!flag)
-      setOpenBookingForm(true)
-      setIsOpenCon(false)
-    });
-
+      },
+      body: JSON.stringify({ accepted: false }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("cannot fetch the data");
+        }
+        return res;
+      })
+      .then(() => {
+        setFlag(!flag);
+        setIsOpenCon(false);
+      });
   };
+
+  const handleAccept = (id) => {
+    fetch(`http://localhost:8081/api/requestBooking/request/${id}/book/true`, {
+      method: 'PUT',
+      headers: {
+        "content-type": "application/json",
+        Authorization: token,
+      }
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("cannot fetch the data");
+        }
+        return res.json();
+      })
+     
+      .then((data) => {
+        setFlag(!flag);
+        setAcceptedRequest(data);
+        setOpenBookingForm(true);
+        setIsOpenCon(false);
+        console.log();
+        
+      });
+  };
+
   return (
     <>
       <tbody>
@@ -110,7 +121,7 @@ const Request = () => {
             );
           })}
       </tbody>
-      {openBookingForm && <OpenBookingForm setOpenBookingForm={setOpenBookingForm} userEmail={requestById.email} />}
+      {openBookingForm && <OpenBookingForm setOpenBookingForm={setOpenBookingForm} userEmail={requestById.email}  acceptedRequest={acceptedRequest}/>}
       {isOpenCon && (
         <div className="popupContainer" onClick={() => setIsOpenCon(false)}>
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
@@ -124,7 +135,12 @@ const Request = () => {
                   <div className="request-details">
                     <span className="email" >{requestById.email}</span>
                     <hr />
-                    <p className="description">{requestById.description}</p>
+                    <span className="description">Description:
+                    {requestById.description}</span>
+                    <span className="date">Date: {requestById.date}</span>
+                    <span className="fromtime">From Time:{requestById.fromTime}</span>
+                    <span className="totime">To Time: {requestById.toTime}</span>
+                    <span className="available">Room Type: {requestById.roomType}</span>
                   </div>
                 )}
               </div>
