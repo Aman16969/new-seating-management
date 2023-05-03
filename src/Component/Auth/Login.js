@@ -48,62 +48,20 @@ const Login = () => {
           sessionStorage.setItem("userFirstName", data.firstName);
           sessionStorage.setItem("userLastName", data.lastName);
           sessionStorage.setItem("userRole", data.role);
-          sessionStorage.setItem("userLocation", JSON.stringify(data.location));
           sessionStorage.setItem("accoliteId", data.accoliteId);
-          if (data.accoliteId === null) {
-            fetch(`http://localhost:8081/api/swift/${data.email}`, {
-              method: "GET",
-              headers: {
-                "content-type": "application/json",
-                Authorization: "Bearer " + data.accessToken,
-              },
-            })
-              .then((res) => {
-                console.log("swift");
-                if (!res.ok) {
-                  throw new Error(res.message);
-                }
-                return res.json();
-              })
-              .then((data) => {
-                fetch(
-                  `http://localhost:8081/api/user/${sessionStorage.getItem("userId")}/accolite/${data.empId}`,
-                  {
-                    method: "PUT",
-                    headers: { "content-type": "application/json",
-                    Authorization: "Bearer " + sessionStorage.getItem("accessToken") },
-                  }
-                )
-                  .then((res) => {
-                    console.log("update");
-                    if (!res.ok) {
-                      throw new Error(res.message);
-                    }
-                    return res.json();
-                  })
-                  .then((data) => {
-                    console.log(data);
-                  })
-                  .catch((error) => {
-                    setError(error.message);
-                    console.log(error.message);
-                  });
-              })
-              .catch((error) => {
-                setError(error.message);
-                console.log(error.message);
-              });
           }
           if (data.location !== null) {
             sessionStorage.setItem("userLocationId", data.location.id);
+            sessionStorage.setItem("userLocation", JSON.stringify(data.location));
+
           }
           if (data.location === null) {
+            sessionStorage.setItem("userLocation",null)
             navigate("/profile", true);
           } else {
             navigate("/", true);
           }
-        }
-      })
+        })
       .catch((error) => {
         setError(error.message);
         console.log(error.message);

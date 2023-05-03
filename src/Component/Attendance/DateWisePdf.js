@@ -1,8 +1,9 @@
 import FileSaver from "file-saver";
 import { BiDownload } from 'react-icons/bi';
 const DayWisePdf = ({date}) => {
-
-    const downloadPdf = () => {
+    console.log(date)
+    const downloadPdf = (e) => {
+      e.preventDefault();
         const header = "Bearer " + sessionStorage.getItem("accessToken");
         const locationId=sessionStorage.getItem("userLocationId")
 

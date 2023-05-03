@@ -3,9 +3,12 @@ body {
   font-family: 'Roboto',sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: black;
+  color: rgb(0, 0, 0);
   font-size: 14px;
 }
 code {
   font-family: 'Roboto',sans-serif;
 }
+/* body {
+  font-family: 'Roboto', sans-serif;
+} */

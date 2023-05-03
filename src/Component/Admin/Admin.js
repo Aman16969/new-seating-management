@@ -100,7 +100,6 @@ const Admin = () => {
                   <h2>Users</h2>
                 </div>
                 <div>
-                  
                   <AllUsersByLocation style={{ width: "40px" }} />
                 </div>
               </div>

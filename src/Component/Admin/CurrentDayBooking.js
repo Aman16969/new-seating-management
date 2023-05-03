@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { LocalDate } from '@js-joda/core';
+import {useState, useEffect } from 'react';
+import { LocalDate } from "@js-joda/core";
 const CurrentDayBooking = () => {
   const [allBooking, setAllAbooking] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [bookId, setBookId] = useState(null);
   const [message, setMessage] = useState("");
-  const[flag,setFlag]=useState(false)
-  const locationId=sessionStorage.getItem("userLocationId")
+  const [flag, setFlag] = useState(false);
+  const locationId = sessionStorage.getItem("userLocationId");
   const token = "Bearer " + sessionStorage.getItem("accessToken");
   const handlePopup = (e) => {
     setBookId(e);
@@ -33,48 +33,56 @@ const CurrentDayBooking = () => {
       });
   }, [flag]);
   const handleDelete = (bookId) => {
-    fetch(`http://localhost:8081/api/booking/setActiveStatus/${bookId}/value/false`, {
-      method: 'PUT',
-      headers: {
-        "content-type": "application/json",
-        Authorization: token,
+    fetch(
+      `http://localhost:8081/api/booking/setActiveStatus/${bookId}/value/false`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          Authorization: token,
+        },
       }
-    })
+    )
       .then((res) => {
         if (!res.ok) {
-          throw Error('unable to fetch')
+          throw Error("unable to fetch");
         }
-        return res
+        return res;
       })
       .then((data) => {
-        setFlag(!flag)
-        setIsOpenCon(false)
-      })
-  }
-  
+        setFlag(!flag);
+        setIsOpenCon(false);
+      });
+  };
+
   return (
     <>
       <tbody>
         {allBooking &&
-           allBooking
-           .filter((booking) => LocalDate.parse(booking.date).equals(LocalDate.now())) // filter bookings for current date
-           .map((booking) => {
-            return (
-              <tr className="user-row">
-                <td>{booking.seat.name}</td>
-                <td style={{ fontSize: "small" }}>
-                  {booking.fromTime.substring(0, 5)} -{" "}
-                  {booking.toTime.substring(0, 5)}
-                </td>
-                <td>
-                  <button className="button-group" value={booking.id}
-                  onClick={() => handlePopup(booking.id)}>
-                    x
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          allBooking
+            .filter((booking) =>
+              LocalDate.parse(booking.date).equals(LocalDate.now())
+            ) // filter bookings for current date
+            .map((booking) => {
+              return (
+                <tr className="user-row">
+                  <td>{booking.seat.name}</td>
+                  <td style={{ fontSize: "small" }}>
+                    {booking.fromTime.substring(0, 5)} -{" "}
+                    {booking.toTime.substring(0, 5)}
+                  </td>
+                  <td>
+                    <button
+                      className="button-group"
+                      value={booking.id}
+                      onClick={() => handlePopup(booking.id)}
+                    >
+                      x
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
       </tbody>
       {isOpenCon && (
         <div className="popupContainer" onClick={() => setIsOpenCon(false)}>
