@@ -1,12 +1,11 @@
-
 .form-item input[type="file"] {
   margin-top: 5px;
   padding: 6px 6px 6px 6px;
   border-radius: 5px;
-  border: 1px solid blue;
+  border: 1px solid #1574da;
   height: 22px;
-  background-color: #e2ffff;
-  color: #480ae6;
+  background-color: #deecf9;
+  /* color: #480ae6; */
   font-size: 13px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
@@ -21,11 +20,9 @@ input[type="file"] {
   transition: border-color 0.2s ease-in-out;
   width: 60%;
 } */
-.attendance-form
-input[type="date"]:hover,
+.attendance-form input[type="date"]:hover,
 input[type="date"]:focus,
 input[type="file"]:hover,
 input[type="file"]:focus {
   border-color: #200ee0;
 }
-
