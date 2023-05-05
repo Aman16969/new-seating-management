@@ -342,17 +342,17 @@
 }
 .drop-select {
   width: 100%;
-  border-radius: 2px;
-  border: 1px solid #007bff;
-  background-color: #e0ebff;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #deecf9;
   padding: 10px;
   font-size: 15px;
 }
 .drop-select option {
   padding: 10px;
   font-size: 15px;
-  background-color: #e0ebff;
-  color: #007bff;
+  background-color: #deecf9;
   cursor: pointer;
 }
 /* .seat-display-img {
@@ -616,8 +616,8 @@ id.login-button {
 }
 .popup-boxd {
   position: absolute;
-  background-color: #abe9cd;
-  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+  background-color: #f7faff;
+  /* background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%); */
   width: 35vw;
   height: fit-content;
   z-index: 1;
@@ -815,8 +815,8 @@ id.login-button {
   height: 85%;
   width: 35%;
   padding: 20px;
-  background-color: #abe9cd;
-  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+  background-color: #f7faff;
+  /* background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%); */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -829,7 +829,7 @@ id.login-button {
 .profile-form input[type="text"] {
   width: 100%;
   height: 30px;
-  background-color: #d0dbef;
+  background-color: #deecf9;
   font-size: 15px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -837,7 +837,7 @@ id.login-button {
 .profile-form select {
   width: 101%;
   height: 40px;
-  background-color: #d0dbef;
+  background-color: #deecf9;
   font-size: 15px;
   border-radius: 5px;
   margin-bottom: 10px;
