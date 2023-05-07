@@ -222,6 +222,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
               <tr>
                 <td>
                   <button
+                  className="button-group"
                     style={{
                       display: "flex",
                       width: "100%",
@@ -237,6 +238,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
                 </td>
                 <td>
                   <button
+                  className="button-group"
                     style={{
                       display: "flex",
                       width: "100%",
@@ -255,10 +257,11 @@ const AdminSeat = ({ location, row, col, refresh }) => {
 
         {editPopUp && (
           <div className="popup">
-            <h3>Edit Seat Name</h3>
-            <table>
-              <tr>
-                <td>New Name: </td>
+            <p>Edit Seat Name</p>
+            <table style={{marginBottom:'20px'}}>
+              <tr >
+                <td >
+                  New Name: </td>
                 <td>
                   <input
                     type="text"
@@ -266,16 +269,17 @@ const AdminSeat = ({ location, row, col, refresh }) => {
                     onChange={(e) => setEditName(e.target.value)}
                   />
                 </td>
-              </tr>
+              </tr >
               <tr>
                 <td>
                   <button
-                    style={{
-                      display: "flex",
-                      width: "100%",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
+                  className="button-group"
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                     onClick={() => {
                       setEditPopUp(false);
                     }}
@@ -285,6 +289,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
                 </td>
                 <td>
                   <button
+                  className="button-group"
                     style={{
                       display: "flex",
                       width: "100%",
@@ -305,32 +310,12 @@ const AdminSeat = ({ location, row, col, refresh }) => {
 
         {deletePopUp && (
           <div className="popup">
-            <h3>Are you sure? Delete seat {name}</h3>
+            <h3>Are you sure you want to delete seat {name} ?</h3>
             <table>
               <tr>
-                <td>
+              <td>
                   <button
-                    style={{
-                      display: "flex",
-                      width: "100%",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                    onClick={() => {
-                      setDeletePopUp(false);
-                    }}
-                  >
-                    No
-                  </button>
-                </td>
-                <td>
-                  <button
-                    style={{
-                      display: "flex",
-                      width: "100%",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
+                  className="button-group"
                     onClick={() => {
                       handleDelete();
                     }}
@@ -338,6 +323,18 @@ const AdminSeat = ({ location, row, col, refresh }) => {
                     Yes
                   </button>
                 </td>
+                <td>
+                  <button
+                  className="button-group"
+                    
+                    onClick={() => {
+                      setDeletePopUp(false);
+                    }}
+                  >
+                    No
+                  </button>
+                </td>
+                
               </tr>
             </table>
           </div>

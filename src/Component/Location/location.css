@@ -1,5 +1,5 @@
 .location-scroll {
-  height: 400px !important;
+  height: 425px !important;
   overflow-y: scroll;
   overflow-x: scroll;
 }
@@ -13,7 +13,7 @@
   height: 80px;
   size: fixed;
   background-color: white;
-  background-image: linear-gradient(315deg, #d2fdea 0%, #c2f1ff 74%);
+  background-image: linear-gradient( #b6defe 0%, #9dd5f8 74%);
 }
 
 .locationpopupContainer {
@@ -48,7 +48,11 @@
 }
 
 .location-rc > input[type="number"] {
-  width: 30%;
+  width: 20%;
+  padding: 8px;
+}
+.location-rc button{
+  height: 35px;
 }
 .locationList {
   align-items: center;
@@ -73,7 +77,6 @@
   padding: 10px 10px;
   font-size: 14px;
   background-color: #0f355e;
-
   margin-bottom: 5px;
   margin-top: 5px;
   color: #fff;
@@ -107,8 +110,8 @@ button:disabled {
   height: auto;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
-  padding: 20px;
+  box-shadow: 2px 2px 5px rgb(0, 0, 0); /* Add a shadow effect */
+  padding: 15px;
   z-index: 1;
 }
 
