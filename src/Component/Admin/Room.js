@@ -1,44 +1,45 @@
 import { useEffect, useState } from "react";
 
-const Room = (props) => {
-    const[rooms,setRooms]=useState([])
+const Room = ({locationId,date,fromTime,toTime,setRoomId,roomId}) => {
+    const[availableRoom,setAvailableRoom]=useState(null)
     useEffect(() => {
+      if (locationId && date && fromTime && toTime ) {
         const header = "Bearer " + sessionStorage.getItem("accessToken");
-        fetch(`http://localhost:8081/api/room/location/${props.locationId}`, {
-          headers: {
-            "Content-type": "application/json",
-            Authorization: header,
-          },
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw Error(response.statusText);
+        fetch(
+          `http://localhost:8081/api/bookRoom/available/locationDateTime?location=${locationId}&date=${date}&fromTime=${fromTime}&toTime=${toTime}`,
+          {
+            headers: {
+              Authorization: header,
+            },
+          }
+        )
+          .then((res) => {
+            if (!res.ok) {
+              throw Error("filed to load the available seats");
             }
-            return response.json();
+            return res.json();
           })
           .then((data) => {
-            setRooms(data)
+            setAvailableRoom(data);
           })
-          .catch((error) => {
-            console.log(error)
-          });
-      }, [props.locationId]);
-      
+      }
+    }, [date, locationId,fromTime,toTime]);
+
     return ( <>
     <select
           className="drop-select"
           name="select"
           id="select"
-          value={props.roomId}
-            onChange={(e) => props.setRoomId(e.target.value)}
+          value={roomId}
+            onChange={(e) => setRoomId(e.target.value)}
             style={{width:'90%'}}
         >
-        <option value={props.roomId} selected disabled hidden>
+        <option selected disabled hidden>
             Select a Room
           </option>
         
-          {rooms &&
-            rooms.map((room) => (
+          {availableRoom &&
+            availableRoom.map((room) => (
               <option key={room.id} value={room.id}>
                 {room.name}
               </option>

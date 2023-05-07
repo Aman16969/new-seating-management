@@ -6,6 +6,7 @@ function RequestAccess({ onClose, ...props }) {
   const [fromTime, setFromTime] = useState("");
   const [toTime, setToTime] = useState("");
   const [roomType, setRoomType] = useState("available");
+  const [capacity,setCapacity]=useState(0)
 
   const email = sessionStorage.getItem("email");
   const token = "Bearer " + sessionStorage.getItem("accessToken");
@@ -18,13 +19,11 @@ function RequestAccess({ onClose, ...props }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(
-      `Submitting request: ${description}, ${date}, ${fromTime}, ${toTime}, ${roomType}`
-    );
     const requestData = {
       email,
       description,
       date,
+      capacity,
       fromTime,
       toTime,
       roomType,
@@ -54,46 +53,84 @@ function RequestAccess({ onClose, ...props }) {
     <div className="request-card">
       <h3>Request Board/Discussion Room</h3>
       <form onSubmit={handleSubmit}>
+        <label for="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          class="form-control"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          style={{ height: "20px", width: "90%" }}
+          required
+        />
+        <label for="fromTime">From Time</label>
+        <input
+          type="time"
+          id="fromTime"
+          name="fromTime"
+          class="form-control"
+          value={fromTime}
+          onChange={(e) => setFromTime(e.target.value)}
+          style={{ height: "20px", width: "90%" }}
+          required
+          step="3600"
+        />
+        <label for="toTime">To Time</label>
+        <input
+          type="time"
+          id="toTime"
+          name="toTime"
+          class="form-control"
+          value={toTime}
+          onChange={(e) => setToTime(e.target.value)}
+          required
+          step="3600"
+          style={{ height: "20px", width: "90%" }}
+        />
+        <label for="toTime">Capacity</label>
+        <input
+          type="number"
+          id="toTime"
+          name="toTime"
+          class="form-control"
+          value={capacity}
+          onChange={(e) => setCapacity(e.target.value)}
+          required
+          style={{ height: "20px", width: "90%" }}
+        />
+        <label for="RoomType">Room Type</label>
+        <select
+          className="drop-select"
+          name="select"
+          id="select"
+          style={{ height: "30px", width: "90%" }}
+          value={roomType}
+          onChange={(e) => {
+            setRoomType(e.target.value);
+          }}
+        >
+          <option value="" disabled>
+            Select Room Type
+          </option>
+          <option value="Board Room">Any Available</option>
+          <option value="Board Room">Board Room</option>
+          <option value="Confrence Room">Confrence Room</option>
+        </select>
         <textarea
           className="form-control"
           placeholder="Please provide your role along with purpose"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
+          style={{  width: "90%" }}
         />
-        <input
-          type="date"
-          className="form-control"
-          placeholder="Date"
-          value={date}
-          onChange={(event) => setDate(event.target.value)}
-        />
-        <input
-          type="time"
-          className="form-control"
-          placeholder="From time"
-          value={fromTime}
-          onChange={(event) => setFromTime(event.target.value)}
-        />
-        <input
-          type="time"
-          className="form-control"
-          placeholder="To time"
-          value={toTime}
-          onChange={(event) => setToTime(event.target.value)}
-        />
-        <select
-          className="form-control"
-          value={roomType}
-          onChange={(event) => setRoomType(event.target.value)}
-        >
-          <option value="available">Available Rooms</option>
-        </select>
         <span className="request-card-center">
           <button type="submit">Request</button>
           &nbsp;&nbsp;
           <button onClick={onClose}>Close</button>
-        </span>
+        </span>{" "}
       </form>
+      
     </div>
   );
 }

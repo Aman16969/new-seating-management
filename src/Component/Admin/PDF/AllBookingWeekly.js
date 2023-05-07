@@ -22,7 +22,7 @@ const AllBookingWeekly
       
     return (
         <div>
-          <button className="button-group" onClick={downloadPdf}>Download</button>
+          <button className="button-group" onClick={downloadPdf}>Weekly</button>
         </div>
       );
     };

@@ -1,6 +1,6 @@
 .admin-content {
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 1.2fr 1.8fr;
+  grid-template-columns: 1.2fr 0.8fr 1.5fr 1.5fr;
   column-gap: 5px;
   padding: 5px;
 }
@@ -219,5 +219,21 @@ label {
 }
 .admin-request-room-booking{
 display: grid;
-grid-template-columns: 2fr 1fr;
+grid-template-columns: auto;
+}
+.dropdown-stats {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fbfbfb;
+  color: #333;
+  /* margin-left: 70px; */
+  
+}
+
+.dropdown-stats option {
+  font-size: 1rem;
+  background-color: #7e9bf7;
+  color: #333;
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import OpenBookingForm from "./RoomBookingForm";
+import OpenRoomBookingForm from "./RoomBookingForm";
 const Request = () => {
   const [requests, setRequest] = useState([]);
   const [requestById, setRequestById] = useState([]);
@@ -84,7 +84,7 @@ const Request = () => {
         if (!res.ok) {
           throw Error("cannot fetch the data");
         }
-        return res.json();
+        return res;
       })
      
       .then((data) => {
@@ -121,26 +121,84 @@ const Request = () => {
             );
           })}
       </tbody>
-      {openBookingForm && <OpenBookingForm setOpenBookingForm={setOpenBookingForm} userEmail={requestById.email}  acceptedRequest={acceptedRequest}/>}
+      {openBookingForm && <OpenRoomBookingForm setOpenBookingForm={setOpenBookingForm} userEmail={requestById.email} date={requestById.date} fromTime={requestById.fromTime} toTime={requestById.toTime} roomType={requestId.roomType} acceptedRequest={acceptedRequest}/>}
       {isOpenCon && (
         <div className="popupContainer" onClick={() => setIsOpenCon(false)}>
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
             <div className="popupHeader">
-              <h2>Request</h2>
+            <span className="email" > <span style={{color:'black'}}>Requested by: </span>{requestById.email}</span>
+                   <hr />
             </div>
             {/* {isPending && <span>Loading...</span>} */}
             {!isPending && (
               <div className="request-info">
                 {requestById && (
                   <div className="request-details">
-                    <span className="email" >{requestById.email}</span>
-                    <hr />
-                    <span className="description">Description:
-                    {requestById.description}</span>
-                    <span className="date">Date: {requestById.date}</span>
-                    <span className="fromtime">From Time:{requestById.fromTime}</span>
-                    <span className="totime">To Time: {requestById.toTime}</span>
-                    <span className="available">Room Type: {requestById.roomType}</span>
+                    
+                    <form >
+        <label for="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          class="form-control"
+          value={requestById.date}
+          style={{ height: "20px", width: "90%" }}
+          required
+        />
+        <label for="fromTime">From Time</label>
+        <input
+          type="time"
+          id="fromTime"
+          name="fromTime"
+          class="form-control"
+          value={requestById.fromTime}
+         
+          style={{ height: "20px", width: "90%" }}
+          required
+          step="3600"
+        />
+        <label for="toTime">To Time</label>
+        <input
+          type="time"
+          id="toTime"
+          name="toTime"
+          class="form-control"
+          value={requestById.toTime}
+          required
+          step="3600"
+          style={{ height: "20px", width: "90%" }}
+        />
+        <label for="toTime">Capacity</label>
+        <input
+          type="number"
+          id="toTime"
+          name="toTime"
+          class="form-control"
+          value={requestById.capacity}
+          required
+          style={{ height: "20px", width: "90%" }}
+        />
+        <label for="RoomType">Room Type</label>
+        <input
+          type="text"
+          id="toTime"
+          name="toTime"
+          class="form-control"
+          value={requestById.roomType}
+          required
+          style={{ height: "20px", width: "90%" }}
+        />
+        
+        <textarea
+          className="form-control"
+          placeholder="Please provide your role along with purpose"
+          value={requestById.description}
+          
+          style={{  width: "90%" ,marginTop:'10px',height:'60px'}}
+        />
+        
+      </form>
                   </div>
                 )}
               </div>

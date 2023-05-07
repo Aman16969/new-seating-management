@@ -237,6 +237,7 @@
 }
 .table-scroll-1 {
   height: 240px;
+  width: 100%;
   overflow-y: auto; /* Use "auto" instead of "scroll" to prevent the scrollbar from showing unnecessarily */
   max-width: 100%;
 }
@@ -265,6 +266,7 @@
   height: 95px;
   overflow-y: auto; /* Use "auto" instead of "scroll" to prevent the scrollbar from showing unnecessarily */
   max-width: 100%;
+  width: 100%;
 }
 
 .table-scroll-2::-webkit-scrollbar {
@@ -915,23 +917,29 @@ id.login-button {
   box-shadow: 0 0 20px rgba(6, 6, 6, 0.2);
   padding: 30px;
   width: 400px;
+  height: 395px;
   z-index: 1;
 }
 .request-card textarea,
 .request-card input,
 .request-card select {
-  width: 100%;
-  padding: 9px;
-  margin: 6px 0;
+  padding: 5px;
+  margin: 2px 0;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   box-sizing: border-box;
 }
 .request-card form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width:50%
+  width:100%
+}
+.request-card form label{
+  display: inline-block;
+  width: 120px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 0px;
 }
 .request-card button {
   background-color: #02366d;

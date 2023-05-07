@@ -8,7 +8,9 @@ import AllRequest from "./PDF/AllRequestByLocation";
 import AllUsersByLocation from "./PDF/AllUsersByLocation";
 import BookingRoom from "./BoardRoom";
 import RoomBookings from "./RoomBookings";
+import AllBookingWeekly from "./PDF/AllBookingWeekly";
 const Admin = () => {
+  
   return (
     <>
       <div className="container">
@@ -40,7 +42,18 @@ const Admin = () => {
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">
+                
+                <div>
                 <h2>Statistics</h2>
+                </div>
+                <div>
+                <select id="frequency" class="dropdown-stats">
+  <option value="" onClick={<AllBookingWeekly/>}>Select Frequency</option>
+  <option value="weekly">Weekly</option>
+  <option value="monthly">Monthly</option>
+  <option value="daily">Daily</option>
+</select>
+                </div>
               </div>
               <div className="table-scroll">
                 <table>
@@ -63,12 +76,12 @@ const Admin = () => {
                     <table className="table-header">
                       <thead>
                         <tr className="user-row">
-                          <th style={{width:'85%'}}>Email</th>
+                          <th style={{width:'80%'}}>Email</th>
                           <th>View</th>
                         </tr>
                       </thead>
                     </table>
-                    <div className="table-scroll-1" >
+                    <div className="table-scroll" style={{ height: "220px" }}>
                       <table>
                         <Request />
                       </table>
@@ -79,17 +92,18 @@ const Admin = () => {
                     <table className="table-header">
                       <thead>
                         <tr className="user-row">
+                          <th >Accolite Id</th>
                           <th>Date</th>
-                          <th>From</th>
-                          <th>To</th>
+                          <th>Time</th>
                           <th>Type</th>
                           <th>Room</th>
                         </tr>
                       </thead>
                     </table>
-                    <div className="table-scroll-2">
+                    <div className="table-scroll" style={{ height: "150px" }}>
                       <table>
-                                          <RoomBookings/>
+                      
+                        <RoomBookings />
                       </table>
                     </div>
                   </div>
@@ -109,7 +123,7 @@ const Admin = () => {
               <table className="table-header">
                 <thead>
                   <tr className="user-row">
-                    <th style={{width:'70%'}}>Email</th>
+                    <th style={{width:'75%'}}>Email</th>
                     <th>Role</th>
                   </tr>
                 </thead>
