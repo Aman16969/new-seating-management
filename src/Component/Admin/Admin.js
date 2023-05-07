@@ -42,7 +42,6 @@ const Admin = () => {
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">
-                
                 <div>
                 <h2>Statistics</h2>
                 </div>
@@ -76,7 +75,7 @@ const Admin = () => {
                     <table className="table-header">
                       <thead>
                         <tr className="user-row">
-                          <th style={{width:'80%'}}>Email</th>
+                          <th style={{width:'60%'}}>Email</th>
                           <th>View</th>
                         </tr>
                       </thead>
@@ -92,7 +91,7 @@ const Admin = () => {
                     <table className="table-header">
                       <thead>
                         <tr className="user-row">
-                          <th >Accolite Id</th>
+                          <th >Emp Id</th>
                           <th>Date</th>
                           <th>Time</th>
                           <th>Type</th>
@@ -102,7 +101,6 @@ const Admin = () => {
                     </table>
                     <div className="table-scroll" style={{ height: "150px" }}>
                       <table>
-                      
                         <RoomBookings />
                       </table>
                     </div>

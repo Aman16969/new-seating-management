@@ -147,12 +147,15 @@
   text-align: center;
   background-color: transparent;
   border-bottom: 1px solid#4983c0;
-  padding: 1px 1px 1px 1px;
+  padding: 5px 5px 5px 5px;
   position: relative;
   height: 40px;
   display: flex;
   flex-direction: column;
 }
+/* .row-card-title div:last-child{
+  margin-left: auto;
+} */
 .btn-group {
   display: flex;
   flex-direction: row;
@@ -211,7 +214,7 @@
   border-color: inherit;
   padding: 10px 0;
   margin: 5px 5px;
-  border-bottom: 1px solid#007bff;
+  border-bottom: 1px solid#074d97;
   background-color: transparent;
 }
 /* .table-row:after {
@@ -274,7 +277,7 @@
 }
 
 .table-scroll-2 {
-  height: 85px;
+  height: 75px;
   overflow-y: auto; /* Use "auto" instead of "scroll" to prevent the scrollbar from showing unnecessarily */
   max-width: 100%;
   width: 100%;
