@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 body {
   font-family: 'Roboto',sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -8,7 +8,18 @@ body {
 }
 code {
   font-family: 'Roboto',sans-serif;
-}
+} */
 /* body {
   font-family: 'Roboto', sans-serif;
 } */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
+body {
+  font-family: "Nunito-Sans", sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+code {
+  font-family: "Nunito-Sans", sans-serif;
+}

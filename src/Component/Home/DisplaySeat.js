@@ -59,7 +59,7 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "black",
-                backgroundImage: "linear-gradient( #28fa54, #97fcac)",
+                backgroundImage: "linear-gradient( #0978d2,#5ca4d1)",
                 borderTop: "5px solid red",
                 borderBottom: "1px solid red",
                 borderLeft: "5px solid red",
@@ -78,7 +78,7 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "black",
-                backgroundImage: "linear-gradient( #28fa54, #97fcac)",
+                backgroundImage: "linear-gradient(#0978d2, #5ca4d1)",
                 borderTop: "5px solid black",
                 borderBottom: "1px solid black",
                 borderLeft: "5px solid black",
@@ -96,7 +96,7 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "black",
-                backgroundColor: "rgb(150,150,150)",
+                backgroundColor: "#c7c7c7",
                 borderTop: "5px solid black",
                 borderBottom: "1px solid black",
                 borderLeft: "5px solid black",
@@ -115,7 +115,7 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "white",
-                backgroundImage: "linear-gradient( #28fa54, #97fcac)",
+                backgroundImage: "linear-gradient( #0978d2,#5ca4d1)",
                 borderTop: "1px solid red",
                 borderBottom: "5px solid red",
                 borderLeft: "5px solid red",
@@ -136,7 +136,7 @@ const DisplaySeat = ({
               style={{
                 color: "black",
                 backgroundColor: "#ADFF2F",
-                backgroundImage: "linear-gradient( #97fcac, #28fa54)",
+                backgroundImage: "linear-gradient( #5ca4d1, #0978d2)",
                 borderTop: "1px solid black",
                 borderBottom: "5px solid black",
                 borderLeft: "5px solid black",
@@ -155,7 +155,7 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "black",
-                backgroundColor: "rgb(150,150,150)",
+                backgroundColor: "#c7c7c7",
                 borderTop: "1px solid black",
                 borderBottom: "5px solid black",
                 borderLeft: "5px solid black",
