@@ -8,8 +8,6 @@ const OpenRoomBookingForm = (props) => {
   const [date, setDate] = useState(props.date);
   const [fromTime, setFromTime] = useState(props.fromTime);
   const [toTime, setToTime] = useState(props.toTime);
-  const [admin, setadmin] = useState(null);
-  const [user, setUser] = useState(props.userEmail);
   const [locationId, setLocationId] = useState(null);
   const [roomId, setRoomId] = useState(null);
   const [roomType, setRoomType] = useState(props.roomType);
@@ -44,7 +42,9 @@ const OpenRoomBookingForm = (props) => {
         return response.json();
       })
       .then((data) => {
+        props.setFlag(!props.flag)
         props.setOpenBookingForm(false);
+        
       })
       .catch((error) => {
         console.log(error);

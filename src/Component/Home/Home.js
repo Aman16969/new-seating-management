@@ -244,6 +244,9 @@ const Home = () => {
                     <form className="modal-form">
                       <div className="form-item">
                         <input
+                        
+                       
+                        
                           type="date"
                           name="date"
                           id="date"
@@ -251,6 +254,7 @@ const Home = () => {
                           onChange={(e) => {
                             setDate(e.target.value);
                           }}
+                          
                           min={new Date().toISOString().split("T")[0]} // Set minimum date to today
                         />
                       </div>

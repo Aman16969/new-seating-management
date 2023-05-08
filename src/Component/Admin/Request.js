@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import OpenRoomBookingForm from "./RoomBookingForm";
-const Request = () => {
+import { ValueRange } from "@js-joda/core";
+const Request = (props) => {
   const [requests, setRequest] = useState([]);
   const [requestById, setRequestById] = useState([]);
   const [isPending, setIsPending] = useState(false);
@@ -27,7 +28,7 @@ const Request = () => {
       .then((data) => {
         setRequest(data);
       });
-  }, [flag]);
+  }, [flag,props.flag]);
 
   const handlePopup = (e) => {
     setRequestId(e);
@@ -46,6 +47,7 @@ const Request = () => {
       })
       .then((data) => {
         setRequestById(data);
+        console.log(requestById)
         setIsOpenCon(true);
         setIsPending(false);
       });
@@ -89,6 +91,7 @@ const Request = () => {
      
       .then((data) => {
         setFlag(!flag);
+        props.setFlag(!props.flag)
         setAcceptedRequest(data);
         setOpenBookingForm(true);
         setIsOpenCon(false);
@@ -121,7 +124,7 @@ const Request = () => {
             );
           })}
       </tbody>
-      {openBookingForm && <OpenRoomBookingForm setOpenBookingForm={setOpenBookingForm} userEmail={requestById.email} date={requestById.date} fromTime={requestById.fromTime} toTime={requestById.toTime} roomType={requestId.roomType} acceptedRequest={acceptedRequest}/>}
+      {openBookingForm && <OpenRoomBookingForm setOpenBookingForm={setOpenBookingForm} userEmail={requestById.email} date={requestById.date} fromTime={requestById.fromTime} toTime={requestById.toTime} roomType={requestId.roomType} acceptedRequest={acceptedRequest} flag={props.flag} setFlag={props.setFlag}/>}
       {isOpenCon && (
         <div className="popupContainer" onClick={() => setIsOpenCon(false)}>
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>

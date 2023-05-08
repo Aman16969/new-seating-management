@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const RoomBookings = () => {
+const RoomBookings = (props) => {
     const token = "Bearer " + sessionStorage.getItem("accessToken");
     const email=sessionStorage.getItem("email");
     const [acceptedRequest, setAcceptedRequest] = useState(null);
@@ -23,14 +23,21 @@ const RoomBookings = () => {
         console.log(data)
 
     })
-    },[acceptedRequest])
+    },[acceptedRequest,props.flag])
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString();
+        return `${day}-${month}-${year}`;
+      }
     return ( <>
     {data && data.map((booking)=>{
         if(booking.date>=currentDate){
             return(
                 <tr className="user-row" key={booking.id}  > 
                     <td style={{fontSize:'12px'}}>{booking.user.accoliteId}</td>
-                    <td style={{fontSize:'12px'}}>{booking.date}</td>
+                    <td style={{fontSize:'12px'}}>{formatDate(booking.date)}</td>
                     <td style={{fontSize:'12px'}}>{booking.fromTime.substring(0,5)} - {booking.toTime.substring(0,5)}</td>
                     <td style={{fontSize:'10px'}} >{booking.room.roomType}</td>
                     <td style={{fontSize:'12px'}}>{booking.room.name}</td>

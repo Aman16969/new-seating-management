@@ -27,6 +27,13 @@ const AcceptedRequest = ({ rFlag, setRFlag, ...props }) => {
         setIsPending(false);
       });
   }, [rFlag]);
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+    return `${day}-${month}-${year}`;
+  }
   const yearMonthDay = new Date();
   const currentDate = yearMonthDay.toISOString().substr(0, 10);
   return (
@@ -38,7 +45,7 @@ const AcceptedRequest = ({ rFlag, setRFlag, ...props }) => {
               if (request.date >= currentDate) {
                 return (
                   <tr key={request.id} className="header-booking">
-                    <td>{request.date}</td>
+                    <td>{formatDate(request.date)}</td>
                     <td>{request.room.roomType}</td>
                     <td>{request.room.name}</td>
                     <td>

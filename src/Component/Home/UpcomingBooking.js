@@ -64,6 +64,13 @@ const UpcomingBooking = (props) => {
         setMessage(err.message);
       });
   };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+    return `${day}-${month}-${year}`;
+  }
   return (
     <>
       {upcomingBooking && (
@@ -83,7 +90,7 @@ const UpcomingBooking = (props) => {
                   if (booking.date >= currentDate) {
                     return (
                       <tr key={booking.id} className="header-booking">
-                        <td>{booking.date}</td>
+                        <td>{formatDate(booking.date)}</td>
                         <td>{booking.seat.name}</td>
                         <td>{booking.fromTime}</td>
                         <td>{booking.toTime}</td>

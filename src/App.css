@@ -927,8 +927,8 @@ id.login-button {
   margin-bottom: 100%;
   margin-top: 1rem;
   border-radius: 10px;
-  background-color: #0c3d4c;
-  background-image: linear-gradient(315deg, #79badc 0%, #3eadcf 74%);
+  background-color: #ffffff;
+  /* background-image: linear-gradient(315deg, #79badc 0%, #3eadcf 74%); */
   box-shadow: 2px 2px 5px rgb(0, 0, 0);
   padding: 20px;
   width: 45%;
@@ -939,13 +939,13 @@ id.login-button {
 .request-card select {
   padding: 5px;
   margin: 2px 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #110a98;
   border-radius: 3px;
   box-sizing: border-box;
 }
 .request-card label{
   margin-top: 5px;
-  margin-bottom: 0px;
+  margin-bottom: 1px;
 }
 .request-card form {
   display: flex;

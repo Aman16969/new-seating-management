@@ -9,7 +9,9 @@ import AllUsersByLocation from "./PDF/AllUsersByLocation";
 import BookingRoom from "./BoardRoom";
 import RoomBookings from "./RoomBookings";
 import AllBookingWeekly from "./PDF/AllBookingWeekly";
+import { useState } from "react";
 const Admin = () => {
+  const[flag,setFlag]=useState(false)
   
   return (
     <>
@@ -42,17 +44,17 @@ const Admin = () => {
             </div>
             <div className="admin-content-row">
               <div className="content-row-header">
-                <div>
+                
                 <h2>Statistics</h2>
-                </div>
-                <div>
+                
+                {/* <div>
                 <select id="frequency" class="dropdown-stats">
   <option value="" onClick={<AllBookingWeekly/>}>Select Frequency</option>
   <option value="weekly">Weekly</option>
   <option value="monthly">Monthly</option>
   <option value="daily">Daily</option>
 </select>
-                </div>
+                </div> */}
               </div>
               <div className="table-scroll">
                 <table>
@@ -82,7 +84,7 @@ const Admin = () => {
                     </table>
                     <div className="table-scroll" style={{ height: "220px" }}>
                       <table>
-                        <Request />
+                        <Request flag={flag} setFlag={setFlag}/>
                       </table>
                     </div>
                     <div className="content-row-header">
@@ -101,7 +103,7 @@ const Admin = () => {
                     </table>
                     <div className="table-scroll" style={{ height: "150px" }}>
                       <table>
-                        <RoomBookings />
+                        <RoomBookings flag={flag} setFlag={setFlag}/>
                       </table>
                     </div>
                   </div>

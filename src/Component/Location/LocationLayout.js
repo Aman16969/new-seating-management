@@ -125,11 +125,11 @@ const LocationLayout = ({ location, flag }) => {
         >
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
             <div className="popupHeader">
-              <h2>Existing Board /Conference Room</h2>
+              <h2>Board /Conference Room</h2>
             </div>
             <div>
-              <table className="header-booking">
-                <thead className="header-booking">
+              <table className="header-booking" style={{border:'1px solid blue'}}>
+                <thead className="header-booking" style={{border:'1px solid blue'}}>
                   <tr >
                     <th>Room Type</th>
                     <th>Room Name</th>
@@ -139,7 +139,7 @@ const LocationLayout = ({ location, flag }) => {
                 </table>
                 <div className="table-scroll-1">
                   <table className="header-booking">
-                    <tbody className="header-booking" style={{textAlign:'center'}}>
+                    <tbody className="header-booking" style={{textAlign:'center',border:'1px solid blue'}}>
                       {roomData &&
                         roomData.map((room) => {
                           return (

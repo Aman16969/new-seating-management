@@ -54,6 +54,13 @@ const PendingRequest = ({rFlag, setRFlag, ...props}) => {
         console.log("booking canceled successfully");
       })
   }
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+    return `${day}-${month}-${year}`;
+  }
   return (
     <>
       {!isPending && acceptedRequest.length > 0 && (
@@ -61,7 +68,7 @@ const PendingRequest = ({rFlag, setRFlag, ...props}) => {
        <tbody className="header-booking">
           {acceptedRequest.map((request) => (
             <tr key={request.id} className="header-booking">
-              <td>{request.date}</td>
+              <td>{formatDate(request.date)}</td>
               <td>{request.fromTime.substring(0,5)} -{request.toTime.substring(0,5)}</td>
               <td>{request.capacity}</td>
               <td>{request.roomType}</td>
