@@ -28,12 +28,12 @@ const RoomBookings = () => {
     {data && data.map((booking)=>{
         if(booking.date>=currentDate){
             return(
-                <tr className="user-row" key={booking.id} style={{fontSize:'11px'}}> 
-                    <td>{booking.user.accoliteId}</td>
-                    <td>{booking.date}</td>
-                    <td>{booking.fromTime.substring(0,5)} - {booking.toTime.substring(0,5)}</td>
-                    <td>{booking.roomType}</td>
-                    <td>{booking.room.name}</td>
+                <tr className="user-row" key={booking.id}  > 
+                    <td style={{fontSize:'12px'}}>{booking.user.accoliteId}</td>
+                    <td style={{fontSize:'12px'}}>{booking.date}</td>
+                    <td style={{fontSize:'12px'}}>{booking.fromTime.substring(0,5)} - {booking.toTime.substring(0,5)}</td>
+                    <td style={{fontSize:'10px'}} >{booking.room.roomType}</td>
+                    <td style={{fontSize:'12px'}}>{booking.room.name}</td>
                 </tr>
             )
         }

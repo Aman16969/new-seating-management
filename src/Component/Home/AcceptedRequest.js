@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const AcceptedRequest = (props) => {
+const AcceptedRequest = ({ rFlag, setRFlag, ...props }) => {
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [acceptedRequest, setAcceptedRequest] = useState([]);
   const [isPending, setIsPending] = useState(true);
@@ -21,29 +21,35 @@ const AcceptedRequest = (props) => {
       })
       .then((data) => {
         setAcceptedRequest(data);
-        console.log(data);
         setIsPending(false);
       })
       .catch((err) => {
         setIsPending(false);
       });
-  }, [props.flag]);
-
+  }, [rFlag]);
+  const yearMonthDay = new Date();
+  const currentDate = yearMonthDay.toISOString().substr(0, 10);
   return (
     <>
       {!isPending && acceptedRequest.length > 0 && (
         <table className="header-booking">
-        <tbody className="header-booking">
-          {acceptedRequest.map((request) => (
-            <tr key={request.id} className="header-booking">
-              <td>{request.date}</td>
-              <td>{request.room.roomType}</td>
-              <td>{request.room.name}</td>
-              <td>{request.fromTime}</td>
-              <td>{request.toTime}</td>
-            </tr>
-          ))}
-        </tbody>
+          <tbody className="header-booking">
+            {acceptedRequest.map((request) => {
+              if (request.date >= currentDate) {
+                return (
+                  <tr key={request.id} className="header-booking">
+                    <td>{request.date}</td>
+                    <td>{request.room.roomType}</td>
+                    <td>{request.room.name}</td>
+                    <td>
+                      {request.fromTime.substring(0, 5)} -
+                      {request.toTime.substring(0, 5)}
+                    </td>
+                  </tr>
+                );
+              }
+            })}
+          </tbody>
         </table>
       )}
     </>

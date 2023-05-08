@@ -12,6 +12,8 @@ const Location = () => {
   const [isPending, setIsPending] = useState(null);
   const [flag, setFlag] = useState(true);
   const token = sessionStorage.getItem("accessToken");
+  const [openAddLocPopup,setAddLocPopup]=useState(false)
+  const [name,setName]=useState("")
 
   
   useEffect((e) => {
@@ -104,13 +106,33 @@ const Location = () => {
                   disabled={isPending}
                 >
                   Add New Location
-                </button>{" "}
+                </button>
               </div>
             </form>
           </div>
           {selectedLocation && <LocationLayout location={selectedLocation} flag={flag} />}{" "}
         </div>
       </div>
+      {/* {openAddLocPopup && (
+        <div
+          className="popupContainer"
+          onClick={() => setAddLocPopup(false)}
+        >
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2>Enter Location name</h2>
+            </div>
+            <div>
+              <form onSubmit={addLocation}>
+                <input type="text" name="location" value={name} onChange={(e)=>setName(e.target.value)} required/>
+                <button className="button-group"> Add New Location</button>
+              </form>
+                
+              
+            </div>
+          </div>
+        </div>
+      )} */}
     </>
   );
 };

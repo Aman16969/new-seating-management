@@ -8,18 +8,17 @@ import AcceptedRequest from "./AcceptedRequest";
 import PendingRequest from "./PendingRequest";
 
 const Home = () => {
-  const [countall, setCountAll] = useState(0);
-  const [countAvailable, setCountAvailable] = useState(0);
+  // const [countall, setCountAll] = useState(0);
+  // const [countAvailable, setCountAvailable] = useState(0);
   const [date, setDate] = useState(null);
   const [fromTime, setFromTime] = useState("09:30");
   const [toTime, setToTime] = useState("17:30");
-  const [seatName, setSeatName] = useState("");
-  const [seatId, setSeatId] = useState("");
   const [message, setMessage] = useState("");
   const [openBooking, setOpenBooking] = useState(true);
   const [openRequest, setOpenRequest] = useState(true);
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const [flag, setFlag] = useState(true);
+  const [rFlag,setRFlag]=useState(true);
   const locationId = sessionStorage.getItem("userLocationId");
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
@@ -184,13 +183,15 @@ const Home = () => {
                       <th>Date</th>
                       <th>Room Type</th>
                       <th>Room Number</th>
-                      <th>Start Time</th>
-                      <th>End Time</th>
+                      <th>Time</th>
                     </tr>
                   )}
                   {!openRequest && (
                     <tr>
-                      <th>Description</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Capacity</th>
+                      <th>Room Type</th>
                       <th>Cancel</th>
                     </tr>
                   )}
@@ -198,10 +199,10 @@ const Home = () => {
 
                 <div className="table-scroll-2">
                   {openRequest && (
-                    <AcceptedRequest flag={flag} setFlag={setFlag} />
+                    <AcceptedRequest rFlag={rFlag} setRFlag={setRFlag} />
                   )}
                   {!openRequest && (
-                    <PendingRequest flag={flag} setFlag={setFlag} />
+                    <PendingRequest rFlag={rFlag} setRFlag={setRFlag} />
                   )}
                 </div>
               </div>
@@ -232,6 +233,8 @@ const Home = () => {
                 <RequestAccess
                   setShowModal={setShowModal}
                   onClose={() => setShowModal(false)}
+                  rFlag={rFlag}
+                  setRFlag={setRFlag}
                 />
               )}
               <div className="card-body">

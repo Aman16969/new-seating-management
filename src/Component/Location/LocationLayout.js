@@ -12,11 +12,48 @@ const LocationLayout = ({ location, flag }) => {
   const [roomName, setRoomName] = useState(null);
   const [capacity, setCapacity] = useState(null);
   const [type, setType] = useState("BOARD");
+  const [openExistRoomPopup, setExistingRoomPopup] = useState(false);
+  const [roomData, setRoomData] = useState([]);
+  const [rflag, setRFlag] = useState(false);
+  const[lflag,setLFlag]=useState(false)
+
+    const rs = [];
+    for (let i = 1; i <= location.rs; i++) {
+      const cs = [];
+      for (let j = 1; j <= location.cs; j++) {
+        cs.push(
+          <td>
+            <h3>
+              {<AdminSeat location={location} row={i} col={j} refresh={flag} />}
+            </h3>
+          </td>
+        );
+      }
+      rs.push(<tr>{cs}</tr>);
+    }
 
   useEffect(() => {
     setRows(location.rs);
     setCols(location.cs);
-  }, [location]);
+  }, [location,lflag]);
+  useEffect(() => {
+    fetch(`http://localhost:8081/api/room/location/${location.id}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw error("error");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setRoomData(data);
+      });
+  }, [rflag]);
 
   const updateRowsAndCols = () => {
     fetch(
@@ -36,7 +73,8 @@ const LocationLayout = ({ location, flag }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        window.location.reload()
+
       })
       .catch((error) => {
         console.log(error.message);
@@ -68,7 +106,7 @@ const LocationLayout = ({ location, flag }) => {
       })
       .then((data) => {
         setAddRoom(false);
-        console.log(data);
+        setRFlag(!flag);
       })
       .catch((error) => {
         console.log(error.message);
@@ -76,23 +114,50 @@ const LocationLayout = ({ location, flag }) => {
       });
   };
 
-  const rs = [];
-  for (let i = 1; i <= location.rs; i++) {
-    const cs = [];
-    for (let j = 1; j <= location.cs; j++) {
-      cs.push(
-        <td>
-          <h3>
-            {<AdminSeat location={location} row={i} col={j} refresh={flag} />}
-          </h3>
-        </td>
-      );
-    }
-    rs.push(<tr>{cs}</tr>);
-  }
+  
 
   return (
     <div>
+      {openExistRoomPopup && (
+        <div
+          className="popupContainer"
+          onClick={() => setExistingRoomPopup(false)}
+        >
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2>Existing Board /Conference Room</h2>
+            </div>
+            <div>
+              <table className="header-booking">
+                <thead className="header-booking">
+                  <tr >
+                    <th>Room Type</th>
+                    <th>Room Name</th>
+                    <th>Capacity</th>
+                  </tr>
+                </thead>
+                </table>
+                <div className="table-scroll-1">
+                  <table className="header-booking">
+                    <tbody className="header-booking" style={{textAlign:'center'}}>
+                      {roomData &&
+                        roomData.map((room) => {
+                          return (
+                            <tr >
+                              <td>{room.roomType}</td>
+                              <td>{room.name}</td>
+                              <td>{room.capacity}</td>
+                            </tr>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      )}
       {addRoom && (
         <div className="popup">
           <table>
@@ -192,7 +257,7 @@ const LocationLayout = ({ location, flag }) => {
             updateRowsAndCols();
           }}
         >
-          <b> Update Layout</b>
+          Update Layout
         </button>
         <button
           className="button-group"
@@ -200,7 +265,15 @@ const LocationLayout = ({ location, flag }) => {
             setAddRoom(true);
           }}
         >
-          <b> Add Board Room / Discussion Room</b>
+          Add Board Room / Discussion Room
+        </button>
+        <button
+          className="button-group"
+          onClick={() => {
+            setExistingRoomPopup(true);
+          }}
+        >
+          View Rooms
         </button>
       </div>
       <div className="location-scroll">
