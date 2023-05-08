@@ -58,7 +58,7 @@ const DisplaySeat = ({
             <div
               className="display-seat"
               style={{
-                color: "black",
+                color: "white",
                 backgroundImage: "linear-gradient( #0978d2,#5ca4d1)",
                 borderTop: "5px solid red",
                 borderBottom: "1px solid red",
@@ -115,7 +115,7 @@ const DisplaySeat = ({
               className="display-seat"
               style={{
                 color: "white",
-                backgroundImage: "linear-gradient( #0978d2,#5ca4d1)",
+                backgroundImage: "linear-gradient(#5ca4d1, #0978d2)",
                 borderTop: "1px solid red",
                 borderBottom: "5px solid red",
                 borderLeft: "5px solid red",
