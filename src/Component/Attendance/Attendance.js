@@ -137,7 +137,7 @@ if(message){
                 <div className="card-attandance">
                   <div className="row-card-title">
                     
-                      <h3 >Mark Attandance</h3>
+                      <h3 >Upload Attendance from Biometrics</h3>
                     
                     <hr />
                   </div>
