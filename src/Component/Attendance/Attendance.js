@@ -59,7 +59,7 @@ const Attendance = () => {
       })
       .then((data) => {
         setData(data);
-        setMessage("Attandance recorded successfully")
+        setMessage("Attendance recorded successfully")
         setJsonData(null);
         setError(null);
         console.log(data);
