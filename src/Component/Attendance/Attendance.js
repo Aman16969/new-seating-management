@@ -59,7 +59,7 @@ const Attendance = () => {
       })
       .then((data) => {
         setData(data);
-        setMessage("Attandance recorded successfully")
+        setMessage("Attendance recorded successfully")
         setJsonData(null);
         setError(null);
         console.log(data);
@@ -137,7 +137,7 @@ if(message){
                 <div className="card-attandance">
                   <div className="row-card-title">
                     
-                      <h3 >Mark Attandance</h3>
+                      <h3 >Upload Attendance from Biometrics</h3>
                     
                     <hr />
                   </div>
