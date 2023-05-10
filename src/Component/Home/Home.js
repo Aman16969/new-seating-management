@@ -6,6 +6,7 @@ import RequestAccess from "./RequestAccess";
 import DisplayLayout from "./DisplayLayout";
 import AcceptedRequest from "./AcceptedRequest";
 import PendingRequest from "./PendingRequest";
+import RequestAccessSeat from "./RequestAccessSeat";
 
 const Home = () => {
   // const [countall, setCountAll] = useState(0);
@@ -18,9 +19,10 @@ const Home = () => {
   const [openRequest, setOpenRequest] = useState(true);
   const header = "Bearer " + sessionStorage.getItem("accessToken");
   const [flag, setFlag] = useState(true);
-  const [rFlag,setRFlag]=useState(true);
+  const [rFlag, setRFlag] = useState(true);
   const locationId = sessionStorage.getItem("userLocationId");
-  const [showModal, setShowModal] = useState(false);
+  const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
   const [error, setError] = useState(null);
   const [location, setLocation] = useState(null);
   const [seats, setSeats] = useState(null);
@@ -29,8 +31,7 @@ const Home = () => {
 
   useEffect(
     (e) => {
-      // console.log(`http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`);
-      console.log(date, fromTime, toTime);
+     
       fetch(
         `http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
         {
@@ -49,7 +50,7 @@ const Home = () => {
         })
         .then((data) => {
           setSeatAvailability(data);
-          console.log(data);
+        
         })
         .catch((error) => {
           setError(error.message);
@@ -99,15 +100,21 @@ const Home = () => {
       })
       .then((data) => {
         setSeats(data);
-        // console.log(data);
+       
       })
       .catch((error) => {
         setError(error.message);
       });
   }, []);
 
-  function handleAccessClick() {
-    setShowModal(true);
+  function handleAccessClick(e) {
+    if(e==="1"){
+      setShowModal1(true);
+    }
+    else if(e==="2"){
+      setShowModal2(true)
+    }
+    
   }
 
   return (
@@ -223,16 +230,33 @@ const Home = () => {
                   <h3>Book Seats</h3>
                 </div>
                 <div>
-                  <button className="access" onClick={handleAccessClick}>
+                  <select name="" id="" className="drop-select" onChange={(e)=>handleAccessClick(e.target.value)}>
+                  <option value="" disabled selected>Requests</option>
+                    <option value="1">Seats</option>
+                    <option value="2" >Board/Diccussion Room</option>
+                  </select>
+                  {/* <button className="access" onClick={handleAccessClick}>
                     Request Board/Discussion Room
                   </button>
+                  <button className="access" onClick={handleAccessClick}>
+                    Request seats
+                  </button> */}
                 </div>
+                
               </div>
 
-              {showModal && (
+              {showModal2 && (
                 <RequestAccess
-                  setShowModal={setShowModal}
-                  onClose={() => setShowModal(false)}
+                  setShowModal={setShowModal2}
+                  onClose={() => setShowModal2(false)}
+                  rFlag={rFlag}
+                  setRFlag={setRFlag}
+                />
+              )}
+              {showModal1 && (
+                <RequestAccessSeat
+                  setShowModal={setShowModal1}
+                  onClose={() => setShowModal1(false)}
                   rFlag={rFlag}
                   setRFlag={setRFlag}
                 />
@@ -244,9 +268,6 @@ const Home = () => {
                     <form className="modal-form">
                       <div className="form-item">
                         <input
-                        
-                       
-                        
                           type="date"
                           name="date"
                           id="date"
@@ -254,7 +275,6 @@ const Home = () => {
                           onChange={(e) => {
                             setDate(e.target.value);
                           }}
-                          
                           min={new Date().toISOString().split("T")[0]} // Set minimum date to today
                         />
                       </div>

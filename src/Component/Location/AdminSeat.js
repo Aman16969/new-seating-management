@@ -14,7 +14,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
   const [seat, setSeat] = useState(null);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
-  const [name, setName] = useState("");
+  const [name, setName] = useState(null);
   const [editName, setEditName] = useState("");
   const [addPopUp, setAddPopUp] = useState(false);
   const [editPopUp, setEditPopUp] = useState(false);
@@ -48,6 +48,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
   }, [flag, refresh]);
 
   const handleAdd = () => {
+    
     const seata = {
       row: row,
       col: col,
@@ -55,6 +56,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
       name: name,
       dir: 1,
     };
+    
     fetch(`http://localhost:8081/api/seat/`, {
       method: "POST",
       headers: {
@@ -62,6 +64,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify(seata),
+      
     })
       .then((response) => {
         if (!response.ok) {
@@ -75,7 +78,6 @@ const AdminSeat = ({ location, row, col, refresh }) => {
         setFlag(!flag);
       })
       .catch((error) => {
-        console.log(error.message);
         setError(error.message);
       });
   };
@@ -99,7 +101,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
         setFlag(!flag);
       })
       .catch((error) => {
-        console.log(error.message);
+       
         setError(error.message);
       });
   };
@@ -132,7 +134,7 @@ const AdminSeat = ({ location, row, col, refresh }) => {
         setFlag(!flag);
       })
       .catch((error) => {
-        console.log(error.message);
+       
         setError(error.message);
       });
   };
@@ -155,7 +157,6 @@ const AdminSeat = ({ location, row, col, refresh }) => {
         setFlag(!flag);
       })
       .catch((error) => {
-        console.log(error.message);
         setError(error.message);
       });
   };

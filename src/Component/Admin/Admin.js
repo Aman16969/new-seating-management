@@ -2,6 +2,7 @@ import "./admin.css";
 import AdminStats from "./AdminStats";
 import AllUsers from "./AllUsers";
 import Request from "./Request";
+import RequestSeat from "./RequestSeat.js";
 import CurrentDayBooking from "./CurrentDayBooking";
 import AllBookingDaily from "./PDF/AllBookingDaily";
 import AllRequest from "./PDF/AllRequestByLocation";
@@ -12,7 +13,15 @@ import AllBookingWeekly from "./PDF/AllBookingWeekly";
 import { useState } from "react";
 const Admin = () => {
   const[flag,setFlag]=useState(false)
-  
+  const[req,setReq]=useState("1")
+  function handleRequestDrop(e){
+    if(e==="1"){
+      setReq("1")
+    }
+    else if(e==="2"){
+      setReq("2")
+    }
+  }
   return (
     <>
       <div className="container">
@@ -67,8 +76,16 @@ const Admin = () => {
                 <div>
                   <h2>Requests</h2>
                 </div>
+                <div style={{marginLeft:'15px'}}>
+                <AllRequest />
+                </div>
                 <div>
-                  <AllRequest />
+                <select name="" id="" className="drop-select" onChange={(e)=>{handleRequestDrop(e.target.value)}} >
+                  {/* <option value="" disabled selected>Requests</option> */}
+                    <option value="1">Rooms</option>
+                    <option value="2" >Seats</option>
+                  </select>
+                  
                 </div>
               </div>
               <div className="admin-requests">
@@ -84,7 +101,10 @@ const Admin = () => {
                     </table>
                     <div className="table-scroll" style={{ height: "220px" }}>
                       <table>
-                        <Request flag={flag} setFlag={setFlag}/>
+                        {(req==="1") && <Request flag={flag} setFlag={setFlag}/>}
+                        {(req==="2") && <RequestSeat  flag={flag} setFlag={setFlag}/>}
+                        
+                        
                       </table>
                     </div>
                     <div className="content-row-header">

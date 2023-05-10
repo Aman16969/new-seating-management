@@ -19,7 +19,6 @@ const DisplayLayout = ({
   const userId = sessionStorage.getItem("userId");
   const accId = sessionStorage.getItem("accoliteId");
 
-  console.log(seatAvailability);
 
   const handleBooking = () => {
     const bookingDetail = {
@@ -48,14 +47,14 @@ const DisplayLayout = ({
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+       
         setStatus(data.isSuccessful);
         setMessage(data.message);
         window.location.reload();
       })
       .catch((error) => {
         setError(error.message);
-        console.log(error.message);
+        
       });
   };
 
