@@ -8,14 +8,13 @@ import Present from "./Present";
 import Absent from "./Absent";
 import DayWisePdf from "./DateWisePdf";
 
-
 const Attendance = () => {
   const [date, setDate] = useState("");
   const [toggle, setToggel] = useState(true);
   const [jsonData, setJsonData] = useState(null);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const [message,setMessage]=useState("");
+  const [message, setMessage] = useState("");
 
   const handleFile = (e) => {
     e.preventDefault();
@@ -59,7 +58,7 @@ const Attendance = () => {
       })
       .then((data) => {
         setData(data);
-        setMessage("Attendance recorded successfully")
+        setMessage("Attendance recorded successfully");
         setJsonData(null);
         setError(null);
         console.log(data);
@@ -74,11 +73,11 @@ const Attendance = () => {
   //   const formattedDate = new Date().toLocaleDateString();
   //   setDate(formattedDate);
   // }, [date]);
-if(message){
-  setTimeout(()=>{
-    setMessage("")
-  },2000)
-}
+  if (message) {
+    setTimeout(() => {
+      setMessage("");
+    }, 2000);
+  }
   return (
     <>
       <div className="container">
@@ -89,14 +88,14 @@ if(message){
                 <span className="btn-group">
                   <button
                     onClick={() => {
-                      setToggel(!toggle);
+                      setToggel(true);
                     }}
                   >
                     <h3>Present</h3>
                   </button>
                   <button
                     onClick={() => {
-                      setToggel(!toggle);
+                      setToggel(false);
                     }}
                   >
                     <h3>Absent</h3>
@@ -113,8 +112,11 @@ if(message){
                       }}
                     />
                   </div>
-                  {date && <span>Download <DayWisePdf date={date}/></span>}
-                  
+                  {date && (
+                    <span>
+                      Download <DayWisePdf date={date} />
+                    </span>
+                  )}
                 </form>
               </div>
               <div className="row-card-body">
@@ -127,8 +129,8 @@ if(message){
                   </tr>
                 </table>
                 <div className="table-scroll">
-                  {toggle && <Present date={date}/>}
-                  {!toggle && <Absent date={date}/>}
+                  {toggle && <Present date={date} />}
+                  {!toggle && <Absent date={date} />}
                 </div>
               </div>
             </div>
@@ -136,9 +138,8 @@ if(message){
               <div className="row-card-attendance">
                 <div className="card-attandance">
                   <div className="row-card-title">
-                    
-                      <h3 >Upload Attendance from Biometrics</h3>
-                    
+                    <h3>Upload Attendance from Biometrics</h3>
+
                     <hr />
                   </div>
                   <form className="modal-form" onSubmit={handleSubmit}>
@@ -150,20 +151,21 @@ if(message){
                 </div>
                 <div className="card-attandance">
                   <div className="table-scroll">
-                    {message &&
-                      <span>{message}</span>
-                    }
+                    {message && <span>{message}</span>}
                     {jsonData && (
-                       <table className="header-booking">
-                       <thead className="header-booking">
+                      <table className="header-booking">
+                        <thead className="header-booking">
                           <tr>
                             {Object.keys(jsonData[0]).map((key) => (
                               <th key={key}>{key}</th>
                             ))}
                           </tr>
                         </thead>
-                       
-          <tbody className="header-booking" style={{textAlign:"center"}}>
+
+                        <tbody
+                          className="header-booking"
+                          style={{ textAlign: "center" }}
+                        >
                           {jsonData.map((data, index) => (
                             <tr key={index}>
                               {Object.values(data).map((value, index) => (
