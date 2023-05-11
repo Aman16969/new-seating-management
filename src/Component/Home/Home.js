@@ -127,14 +127,14 @@ const Home = () => {
                 <span className="btn-group">
                   <button
                     onClick={() => {
-                      setOpenBooking(!openBooking);
+                      setOpenBooking(true);
                     }}
                   >
                     <h3>Upcoming Booking</h3>
                   </button>
                   <button
                     onClick={() => {
-                      setOpenBooking(!openBooking);
+                      setOpenBooking(false);
                     }}
                   >
                     <h3>Completed Booking</h3>
