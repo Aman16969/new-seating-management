@@ -76,6 +76,7 @@ const Home = () => {
           return response.json();
         })
         .then((data) => {
+          // console.log(Object.keys(data).length);
           setSeatAvailability(data);
         
         })
@@ -375,6 +376,7 @@ const Home = () => {
                     fromTime={fromTime}
                     toTime={toTime}
                     flag={flag}
+                    message1={null}
                     setFlag={setFlag}
                   ></DisplayLayout>
                 )}

@@ -11,20 +11,19 @@ const DisplayLayout = ({
   fromTime,
   toTime,
   flag,
-  setFlag
+  message1,
+  setFlag,
 }) => {
   const[b,setB]=useState(true);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
   const [selected, setSelected] = useState(null);
-  const [message, setMessage] = useState(null);
   const [status, setStatus] = useState(null);
+  const [message, setMessage] = useState(null);
   const [isPending,setIsPending]=useState(false);
   const userId = sessionStorage.getItem("userId");
   const accId = sessionStorage.getItem("accoliteId");
 
-
-  
 
   const handleBooking = () => {
     const year = date.getFullYear();
@@ -68,7 +67,6 @@ const DisplayLayout = ({
       })
       .catch((error) => {
         setError(error.message);
-        
       });
   };
 
@@ -91,14 +89,19 @@ const DisplayLayout = ({
             ></DisplaySeat>
           )}
           {seatAvailability && seatAvailability.hasOwnProperty(id) && (
-            <div onClick={()=>{setSelected(id)}}>
-            <DisplaySeat
-              location={location}
-              row={i}
-              col={j}
-              status={true}
-              selected={selected}
-              b={b}
+            <div
+              onClick={() => {
+                setMessage(null);
+                setSelected(id);
+              }}
+            >
+              <DisplaySeat
+                location={location}
+                row={i}
+                col={j}
+                status={true}
+                selected={selected}
+                b={b}
               
             ></DisplaySeat>
             </div>
@@ -140,9 +143,14 @@ const DisplayLayout = ({
       )}
       <div className="header">
         <h1>{location.name}</h1>
+        <h3>Available Seats : {seatAvailability ? Object.keys(seatAvailability).length : 0}/{location.seatingCapacity}</h3>
+        {message && status === 0 && <h3 style={{ color: "red" }}>{message}</h3>}
+        {message && status === 1 && (
+          <h3 style={{ color: "green" }}>{message}</h3>
+        )}
         {selected && (
           <button
-          className="button-group"
+            className="button-group"
             onClick={() => {
               handleBooking();
             }}
@@ -152,9 +160,6 @@ const DisplayLayout = ({
         )}
       </div>
       <table className="locationTable">{rows}</table>
-
-      {message && status === 0 && <h3 style={{ color: "red" }}>{message}</h3>}
-      {message && status === 1 && <h3 style={{ color: "green" }}>{message}</h3>}
     </>
   );
 };
