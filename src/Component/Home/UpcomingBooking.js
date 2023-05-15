@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-
+import loader from '../../Static/loader.gif'
 const UpcomingBooking = (props) => {
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [upcomingBooking, setupcomingBooking] = useState(null);
-  const [isPending, setIsPending] = useState(true);
+  const [isPending, setIsPending] = useState(false);
   const [message, setMessage] = useState("");
   const [bookId, setBookId] = useState(null);
-
   const yearMonthDay = new Date();
   const currentDate = yearMonthDay.toISOString().substr(0, 10);
 
@@ -26,7 +25,6 @@ const UpcomingBooking = (props) => {
       })
       .then((data) => {
         setupcomingBooking(data);
-        setIsPending(false);
       })
       .catch((err) => {
         setIsPending(false);
@@ -39,6 +37,7 @@ const UpcomingBooking = (props) => {
   };
   const handleDelete = (bookId) => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
+    setIsPending(true)
     fetch(
       `http://localhost:8081/api/booking/setActiveStatus/user/${bookId}/value/false`,
       {
@@ -56,10 +55,12 @@ const UpcomingBooking = (props) => {
       })
       .then((e) => {
         props.setFlag((prevState) => !prevState);
+        setIsPending(false)
         setIsOpenCon(false);
         setMessage("booking canceled successfully");
       })
       .catch((err) => {
+        setIsPending(false)
         setMessage(err.message);
       });
   };
@@ -72,6 +73,19 @@ const UpcomingBooking = (props) => {
   }
   return (
     <>
+    {isPending && (
+        <div className="popupContainer" >
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2 style={{color:'#0c3d4c'}}>Please wait while we process your request to cancel the booking.</h2>
+            </div>
+            <div className="loader">
+            <img src={loader} className="loader-gif" alt="loader" />
+            </div>
+            
+          </div>
+        </div>
+      )}
       {upcomingBooking && (
         <table className="header-booking">
           <tbody className="header-booking">

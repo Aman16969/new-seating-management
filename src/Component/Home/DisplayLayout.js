@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import DisplaySeat from "./DisplaySeat";
+import loader from '../../Static/loader.gif'
+import seat from '../../Static/seats.png'
 
 const DisplayLayout = ({
   location,
@@ -11,16 +13,19 @@ const DisplayLayout = ({
   flag,
   setFlag
 }) => {
+  const[b,setB]=useState(true);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
   const [selected, setSelected] = useState(null);
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState(null);
+  const [isPending,setIsPending]=useState(false);
   const userId = sessionStorage.getItem("userId");
   const accId = sessionStorage.getItem("accoliteId");
 
 
   const handleBooking = () => {
+    
     const bookingDetail = {
       locationId: location.id,
       userId: userId,
@@ -30,6 +35,7 @@ const DisplayLayout = ({
       toTime: toTime,
       accoliteId: accId,
     };
+    setIsPending(true)
     fetch(`http://localhost:8081/api/booking/`, {
       method: "POST",
       headers: {
@@ -45,12 +51,15 @@ const DisplayLayout = ({
         setSelected(null);
         setMessage(null);
         return res.json();
+
       })
       .then((data) => {
-       
         setStatus(data.isSuccessful);
         setMessage(data.message);
-        window.location.reload();
+        setIsPending(false)
+        setFlag(!flag)
+        setB(!b)
+        window.location.reload()
       })
       .catch((error) => {
         setError(error.message);
@@ -72,6 +81,8 @@ const DisplayLayout = ({
               col={j}
               status={false}
               selected={selected}
+              b={b}
+              
             ></DisplaySeat>
           )}
           {seatAvailability && seatAvailability.hasOwnProperty(id) && (
@@ -82,6 +93,8 @@ const DisplayLayout = ({
               col={j}
               status={true}
               selected={selected}
+              b={b}
+              
             ></DisplaySeat>
             </div>
           )}
@@ -92,6 +105,8 @@ const DisplayLayout = ({
               col={j}
               status={false}
               selected={selected}
+              b={b}
+              
             ></DisplaySeat>
           )}
         </td>
@@ -102,6 +117,22 @@ const DisplayLayout = ({
 
   return (
     <>
+    {isPending && (
+        <div className="popupContainer" >
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2 style={{color:'#0c3d4c'}}>Your reservation is being processed and will be confirmed shortly. </h2>
+            </div>
+            <div className="loader">
+            <img src={seat} className="loader-gif" alt="loader" />
+            </div>
+            <div className="loader">
+            <img src={loader} className="loader-gif" alt="loader" />
+            </div>
+            
+          </div>
+        </div>
+      )}
       <div className="header">
         <h1>{location.name}</h1>
         {selected && (

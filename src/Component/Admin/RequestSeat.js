@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { ValueRange } from "@js-joda/core";
 import OpenSeatBookingForm from "./OpenSeatBookingForm.js";
+import loader from '../../Static/loader.gif'
 const Request = (props) => {
   const [requests, setRequest] = useState([]);
   const [requestById, setRequestById] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [requestId, setRequestId] = useState(null);
-  const[accepted,setAccepted]=useState(false)
+  const [accepted, setAccepted] = useState(false);
   const [acceptedRequest, setAcceptedRequest] = useState(null);
   const [flag, setFlag] = useState(false);
   const [openBookingForm, setOpenBookingForm] = useState(false);
   const token = "Bearer " + sessionStorage.getItem("accessToken");
-  const locationId=sessionStorage.getItem("userLocationId")
+  const locationId = sessionStorage.getItem("userLocationId");
   useEffect(() => {
     fetch(`http://localhost:8081/api/request/seat/location/${locationId}`, {
       headers: {
@@ -46,7 +46,6 @@ const Request = (props) => {
       })
       .then((data) => {
         setRequestById(data);
-        
         setIsOpenCon(true);
         setIsPending(false);
       });
@@ -58,7 +57,7 @@ const Request = (props) => {
       headers: {
         "content-type": "application/json",
         Authorization: token,
-      }
+      },
     })
       .then((res) => {
         if (!res.ok) {
@@ -73,10 +72,9 @@ const Request = (props) => {
   };
 
   const handleAccept = () => {
-    setAccepted(true)
+    setAccepted(true);
     setIsOpenCon(false);
     setOpenBookingForm(true);
-    
   };
 
   return (
@@ -111,7 +109,7 @@ const Request = (props) => {
           date={requestById.date}
           fromTime={requestById.fromTime}
           toTime={requestById.toTime}
-         location={requestById.location}
+          location={requestById.location}
           accepted={accepted}
           flag={props.flag}
           setFlag={props.setFlag}
@@ -123,73 +121,72 @@ const Request = (props) => {
             <div className="popupHeader">
               <span className="email">
                 <span style={{ color: "black" }}>Requested by: </span>
-                {"aman"}
+                {requestById.user.email}
               </span>
               <hr />
             </div>
-            {isPending && <span>Loading...</span>}
+            {isPending && <span><img src={loader} alt="loader" /></span>}
             {!isPending && (
               <div className="request-info">
-                {/* {requestById && ( */}
-                  <div className="request-details">
-                    <form>
-                      <label for="date">Date</label>
-                      <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        class="form-control"
-                        value={requestById.date}
-                        style={{ height: "20px", width: "90%" }}
-                        required
-                      />
-                      <label for="fromTime">From Time</label>
-                      <input
-                        type="time"
-                        id="fromTime"
-                        name="fromTime"
-                        class="form-control"
-                        value={requestById.fromTime}
-                        style={{ height: "20px", width: "90%" }}
-                        required
-                        step="3600"
-                      />
-                      <label for="toTime">To Time</label>
-                      <input
-                        type="time"
-                        id="toTime"
-                        name="toTime"
-                        class="form-control"
-                        value={requestById.toTime}
-                        required
-                        step="3600"
-                        style={{ height: "20px", width: "90%" }}
-                      />
-                      <label for="location">Location</label>
-                      <input
-                        type="text"
-                        id="location"
-                        name="location"
-                        class="form-control"
-                        value={requestById.location.name}
-                        required
-                        step="3600"
-                        style={{ height: "20px", width: "90%" }}
-                      />
+                
+                <div className="request-details">
+                  <form>
+                    <label for="date">Date</label>
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      class="form-control"
+                      value={requestById.date}
+                      style={{ height: "20px", width: "90%" }}
+                      required
+                    />
+                    <label for="fromTime">From Time</label>
+                    <input
+                      type="time"
+                      id="fromTime"
+                      name="fromTime"
+                      class="form-control"
+                      value={requestById.fromTime}
+                      style={{ height: "20px", width: "90%" }}
+                      required
+                      step="3600"
+                    />
+                    <label for="toTime">To Time</label>
+                    <input
+                      type="time"
+                      id="toTime"
+                      name="toTime"
+                      class="form-control"
+                      value={requestById.toTime}
+                      required
+                      step="3600"
+                      style={{ height: "20px", width: "90%" }}
+                    />
+                    <label for="location">Location</label>
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
+                      class="form-control"
+                      value={requestById.location.name}
+                      required
+                      step="3600"
+                      style={{ height: "20px", width: "90%" }}
+                    />
 
-                      <textarea
-                        className="form-control"
-                        placeholder="Please provide your role along with purpose"
-                        value={requestById.description}
-                        style={{
-                          width: "90%",
-                          marginTop: "10px",
-                          height: "60px",
-                        }}
-                      />
-                    </form>
-                  </div>
-                {/* )} */}
+                    <textarea
+                      className="form-control"
+                      placeholder="Please provide your role along with purpose"
+                      value={requestById.description}
+                      style={{
+                        width: "90%",
+                        marginTop: "10px",
+                        height: "60px",
+                      }}
+                    />
+                  </form>
+                </div>
               </div>
             )}
 

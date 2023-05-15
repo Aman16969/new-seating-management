@@ -9,6 +9,7 @@ const DisplaySeat = ({
   selected,
   flag,
   setFlag,
+  b
 }) => {
   const [seat, setSeat] = useState(null);
   const [error, setError] = useState(null);
@@ -18,7 +19,7 @@ const DisplaySeat = ({
   // console.log(location.id+"R"+row+"C"+col, status);
 
   useEffect(
-    (e) => {
+    () => {
       fetch(
         `http://localhost:8081/api/seat/position?location=${location.id}&row=${row}&column=${col}`,
         {
@@ -39,12 +40,13 @@ const DisplaySeat = ({
           setSeat(data);
           setName(data.seatName);
           setFlag(!flag);
+          window.location.reload()
         })
         .catch((error) => {
           setError(error.message);
         });
     },
-    [flag]
+    [flag,b]
   );
 
   return (

@@ -80,6 +80,7 @@ const Location = () => {
 
   return (
     <>
+    <div className="container">
       <div className="container-content">
         <div className="row-card" style={{ padding: "5px" }}>
           <div className="locationList">
@@ -133,6 +134,7 @@ const Location = () => {
           </div>
         </div>
       )} */}
+      /</div>
     </>
   );
 };

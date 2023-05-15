@@ -4,7 +4,6 @@ import PrivateRoutes from "./PrivateRoutes";
 import "./App.css";
 import Navbar from "./Component/NavBar/Navbar";
 import Home from "./Component/Home/Home";
-import { Auth } from "../src/ContextApi/AuthContext";
 import Location from "./Component/Location/Location";
 import Logout from "./Component/Auth/Logout";
 import Profile from "./Component/Profile/Profile";
@@ -14,15 +13,15 @@ import Attendance from "./Component/Attendance/Attendance";
 function App() {
   return (
     <div className="App">
-      <Auth>
+      
         <Router>
           <Routes>
             <Route
               element={
-                <div>
+                <>
                   <Navbar />
                   <PrivateRoutes />
-                </div>
+                </>
               }
             >
               <Route exact path="/" element={<Home />} />
@@ -37,7 +36,6 @@ function App() {
             <Route exact path="/logout" element={<Logout />} />
           </Routes>
         </Router>
-      </Auth>
     </div>
   );
 }

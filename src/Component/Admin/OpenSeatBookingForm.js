@@ -1,8 +1,9 @@
 import { useState } from "react";
 import AvailableSeats from "./AvailableSeats";
-
+import loader from '../../Static/loader.gif'
 const OpenSeatBookingForm = (props) => {
     const [isOpenCon, setIsOpenCon] = useState(true);
+    const [isPending,setIsPending]=useState(false)
     const [date, setDate] = useState(props.date);
     const [fromTime, setFromTime] = useState(props.fromTime);
     const [toTime, setToTime] = useState(props.toTime);
@@ -13,6 +14,8 @@ const OpenSeatBookingForm = (props) => {
    
     const handleSubmit = (e) => {
       e.preventDefault();
+      setIsPending(true)
+      setIsOpenCon(false)
       const bookingDetail = {
         locationId: location.id,
         userId: user.id,
@@ -21,7 +24,8 @@ const OpenSeatBookingForm = (props) => {
         fromTime: fromTime,
         toTime: toTime,
         accoliteId: user.accoliteId,
-      };
+      };console.log(bookingDetail)
+      
       fetch(`http://localhost:8081/api/booking/`, {
         method: "POST",
         headers: {
@@ -37,7 +41,7 @@ const OpenSeatBookingForm = (props) => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
+          
           fetch(`http://localhost:8081/api/request/seat/accept/${props.id}`, {
       method: "PUT",
       headers: {
@@ -52,14 +56,30 @@ const OpenSeatBookingForm = (props) => {
         props.setFlag(!props.flag)
         return res;
       })
-      setIsOpenCon(false)
+      setIsPending(false)
+      
         })
         .catch((error) => {
+          setIsPending(false)
           console.log(error.message);
         });
     };
     return (
       <>
+      {isPending && (
+        <div className="popupContainer">
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2 style={{ color: "#0c3d4c" }}>
+                Please wait while we process your request to book a seat.
+              </h2>
+            </div>
+            <div className="loader">
+              <img src={loader} className="loader-gif" alt="loader" />
+            </div>
+          </div>
+        </div>
+      )}
         {isOpenCon && (
           <div
             className="popupContainer"
@@ -133,7 +153,6 @@ const OpenSeatBookingForm = (props) => {
                       <div class="form-group">
                         <AvailableSeats seatId={seatId} setSeatId={setSeatId} date={date} fromTime={fromTime} toTime={toTime} locationId={location.id}/>
                       </div>
-                   
                   </div>
                   <button className="button-group" style={{padding:'10px', marginTop:'10px'}}>Submit</button>
                 </form>

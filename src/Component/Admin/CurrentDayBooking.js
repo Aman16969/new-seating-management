@@ -1,5 +1,6 @@
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { LocalDate } from "@js-joda/core";
+import loader from "../../Static/loader.gif";
 const CurrentDayBooking = () => {
   const [allBooking, setAllAbooking] = useState([]);
   const [isPending, setIsPending] = useState(false);
@@ -14,7 +15,6 @@ const CurrentDayBooking = () => {
     setIsOpenCon(true);
   };
   useEffect(() => {
-    setIsPending(true);
     fetch(`http://localhost:8081/api/booking/location?location=${locationId}`, {
       headers: {
         "content-type": "application/json",
@@ -33,8 +33,11 @@ const CurrentDayBooking = () => {
       });
   }, [flag]);
   const handleDelete = (bookId) => {
+    setIsOpenCon(false);
+    setIsPending(true);
+
     fetch(
-      `http://localhost:8081/api/booking/admin/setActiveStatus/${bookId}/value/false`,
+      `http://localhost:8081/api/booking/setActiveStatus/admin/${bookId}/value/false`,
       {
         method: "PUT",
         headers: {
@@ -51,7 +54,7 @@ const CurrentDayBooking = () => {
       })
       .then((data) => {
         setFlag(!flag);
-        setIsOpenCon(false);
+        setIsPending(false);
       });
   };
 
@@ -84,6 +87,20 @@ const CurrentDayBooking = () => {
               );
             })}
       </tbody>
+      {isPending && (
+        <div className="popupContainer">
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2 style={{ color: "#0c3d4c" }}>
+                Please wait while we process your request to cancel the booking.
+              </h2>
+            </div>
+            <div className="loader">
+              <img src={loader} className="loader-gif" alt="loader" />
+            </div>
+          </div>
+        </div>
+      )}
       {isOpenCon && (
         <div className="popupContainer" onClick={() => setIsOpenCon(false)}>
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>

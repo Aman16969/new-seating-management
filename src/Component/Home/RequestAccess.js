@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import loader from '../../Static/loader.gif';
+
 
 function RequestAccess({ onClose, ...props }) {
+  const[isPending,setIsPending]=useState(false)
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [fromTime, setFromTime] = useState("");
@@ -22,7 +25,7 @@ function RequestAccess({ onClose, ...props }) {
       toTime,
       roomType,
     };
-   
+   setIsPending(true)
     fetch("http://localhost:8081/api/requestBooking/", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: token },
@@ -39,14 +42,30 @@ function RequestAccess({ onClose, ...props }) {
         } else {
           throw new Error("failed to send request");
         }
+        setIsPending(false)
       })
       .catch((error) => {
+        setIsPending(false)
         setDescription(error.Description);
       });
   };
 
   return (
     <>
+    {isPending && (
+        <div className="popupContainer">
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2 style={{ color: "#0c3d4c" }}>
+                Please wait while we process your request to book a Room.
+              </h2>
+            </div>
+            <div className="loader">
+              <img src={loader} className="loader-gif" alt="loader" />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="request-card">
         <h3>Request Board/Discussion Room</h3>
         <form onSubmit={handleSubmit}>

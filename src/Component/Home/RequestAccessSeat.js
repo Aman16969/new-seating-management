@@ -1,6 +1,8 @@
 import { useState } from "react";
 import GetLocation from "./GetLocation.js";
+import loader from '../../Static/loader.gif'
 const RequestAccessSeat = ({ onClose, ...props }) => {
+  const[isPending,setIsPending]=useState(false)
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [fromTime, setFromTime] = useState("");
@@ -20,6 +22,7 @@ const RequestAccessSeat = ({ onClose, ...props }) => {
       locationId,
       description,
     };
+    setIsPending(true)
     fetch(`http://localhost:8081/api/request/seat/`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: token },
@@ -32,18 +35,34 @@ const RequestAccessSeat = ({ onClose, ...props }) => {
           setTimeout(() => {
             onClose();
             setMessage("");
-          }, 1500);
+          }, 1000);
         } else {
           throw new Error("failed to send request");
         }
+        setIsPending(false)
       })
       .catch((error) => {
         setDescription(error.Description);
+        setIsPending(false)
       });
   }
 
   return (
     <>
+     {isPending && (
+        <div className="popupContainer">
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2 style={{ color: "#0c3d4c" }}>
+                Please wait while we process your request to book seat.
+              </h2>
+            </div>
+            <div className="loader">
+              <img src={loader} className="loader-gif" alt="loader" />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="request-card">
         <h3>Request Seat</h3>
         <form onSubmit={handleSubmit}>

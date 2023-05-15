@@ -15,27 +15,29 @@ const LocationLayout = ({ location, flag }) => {
   const [openExistRoomPopup, setExistingRoomPopup] = useState(false);
   const [roomData, setRoomData] = useState([]);
   const [rflag, setRFlag] = useState(false);
-  const[lflag,setLFlag]=useState(false)
+  const [lflag, setLFlag] = useState(false);
 
-    const rs = [];
-    for (let i = 1; i <= location.rs; i++) {
+  const [rs, setRs] = useState([]);
+
+  useEffect(() => {
+    const newRs = [];
+    for (let i = 1; i <= rows; i++) {
       const cs = [];
-      for (let j = 1; j <= location.cs; j++) {
+      for (let j = 1; j <= cols; j++) {
         cs.push(
           <td>
             <h3>
-              {<AdminSeat location={location} row={i} col={j} refresh={flag} />}
+              <AdminSeat location={location} row={i} col={j} refresh={flag} />
             </h3>
           </td>
         );
       }
-      rs.push(<tr>{cs}</tr>);
+      newRs.push(<tr>{cs}</tr>);
     }
+    setRs(newRs);
+  }, [location.rs, location.cs, lflag]);
 
-  useEffect(() => {
-    setRows(location.rs);
-    setCols(location.cs);
-  }, [location,lflag]);
+
   useEffect(() => {
     fetch(`http://localhost:8081/api/room/location/${location.id}`, {
       method: "GET",
@@ -55,7 +57,8 @@ const LocationLayout = ({ location, flag }) => {
       });
   }, [rflag]);
 
-  const updateRowsAndCols = () => {
+  const updateRowsAndCols = (e) => {
+    e.preventDefault();
     fetch(
       `http://localhost:8081/api/location/updateRowAndColumn?location=${location.id}&row=${rows}&column=${cols}`,
       {
@@ -73,8 +76,12 @@ const LocationLayout = ({ location, flag }) => {
         return response.json();
       })
       .then((data) => {
-        window.location.reload()
-
+        
+        console.log(data)
+        // Update the state variables with the new values
+        setRows(data.rs);
+        setCols(data.cs);
+        setLFlag(!lflag);
       })
       .catch((error) => {
         console.log(error.message);
@@ -82,14 +89,14 @@ const LocationLayout = ({ location, flag }) => {
       });
   };
 
-  const handleAddRoom = () => {
+  const handleAddRoom = (e) => {
+    e.preventDefault();
     const room = {
       name: roomName,
       capacity: capacity,
       roomType: type,
       location: location,
     };
-    console.log(room);
     fetch(`http://localhost:8081/api/room/`, {
       method: "POST",
       headers: {
@@ -106,15 +113,15 @@ const LocationLayout = ({ location, flag }) => {
       })
       .then((data) => {
         setAddRoom(false);
-        setRFlag(!flag);
+        setRFlag(!rflag);
+        setRoomName(null);
+        setCapacity(null);
       })
       .catch((error) => {
         console.log(error.message);
         setError(error.message);
       });
   };
-
-  
 
   return (
     <div>
@@ -128,137 +135,144 @@ const LocationLayout = ({ location, flag }) => {
               <h2>Board /Conference Room</h2>
             </div>
             <div>
-              <table className="header-booking" style={{border:'1px solid blue'}}>
-                <thead className="header-booking" style={{border:'1px solid blue'}}>
-                  <tr >
+              <table
+                className="header-booking"
+                style={{ border: "1px solid blue" }}
+              >
+                <thead
+                  className="header-booking"
+                  style={{ border: "1px solid blue" }}
+                >
+                  <tr>
                     <th>Room Type</th>
                     <th>Room Name</th>
                     <th>Capacity</th>
                   </tr>
                 </thead>
+              </table>
+              <div className="table-scroll-1">
+                <table className="header-booking">
+                  <tbody
+                    className="header-booking"
+                    style={{ textAlign: "center", border: "1px solid blue" }}
+                  >
+                    {roomData &&
+                      roomData.map((room) => {
+                        return (
+                          <tr>
+                            <td>{room.roomType}</td>
+                            <td>{room.name}</td>
+                            <td>{room.capacity}</td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
                 </table>
-                <div className="table-scroll-1">
-                  <table className="header-booking">
-                    <tbody className="header-booking" style={{textAlign:'center',border:'1px solid blue'}}>
-                      {roomData &&
-                        roomData.map((room) => {
-                          return (
-                            <tr >
-                              <td>{room.roomType}</td>
-                              <td>{room.name}</td>
-                              <td>{room.capacity}</td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </div>
-              
+              </div>
             </div>
           </div>
         </div>
       )}
       {addRoom && (
         <div className="popup">
-          <table>
-            <tr>
-              <td>Room Name: </td>
-              <td>
-                <input
-                  type="text"
-                  value={roomName}
-                  onChange={(e) => setRoomName(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Seating Capacity: </td>
-              <td>
-                <input
-                  type="number"
-                  value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Room Type:</td>
-              <td>
-                <select
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onChange={(e) => {
-                    setType(e.target.value);
-                  }}
-                >
-                  <option value="BOARD">Board Room</option>
-                  <option value="DISCUSSION">Discussion Room</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onClick={() => {
-                    setAddRoom(false);
-                  }}
-                >
-                  Cancel
-                </button>
-              </td>
-              <td>
-                <button
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onClick={() => handleAddRoom()}
-                >
-                  Add Room
-                </button>
-              </td>
-            </tr>
-          </table>
+          <form onSubmit={handleAddRoom}>
+            <table>
+              <tr>
+                <td>Room Name: </td>
+                <td>
+                  <input
+                    type="text"
+                    value={roomName}
+                    onChange={(e) => setRoomName(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Seating Capacity: </td>
+                <td>
+                  <input
+                    type="number"
+                    value={capacity}
+                    onChange={(e) => setCapacity(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Room Type:</td>
+                <td>
+                  <select
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onChange={(e) => {
+                      setType(e.target.value);
+                    }}
+                  >
+                    <option value="BOARD">Board Room</option>
+                    <option value="DISCUSSION">Discussion Room</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onClick={() => {
+                      setAddRoom(false);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </td>
+                <td>
+                  <button
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    type="submit"
+                  >
+                    Add Room
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </form>
         </div>
       )}
 
       <div className="location-rc">
-        <b>Rows:</b>{" "}
-        <input
-          type="number"
-          value={rows}
-          onChange={(e) => {
-            setRows(e.target.value);
-          }}
-        />
-        <b>Columns:</b>{" "}
-        <input
-          type="number"
-          value={cols}
-          onChange={(e) => {
-            setCols(e.target.value);
-          }}
-        />
-        <button
-          className="button-group"
-          onClick={() => {
-            updateRowsAndCols();
-          }}
-        >
-          Update Layout
-        </button>
+      
+          <b>Rows:</b>{" "}
+          <input
+            type="number"
+            value={rows}
+            onChange={(e) => {
+              setRows(e.target.value);
+            }}
+          />
+          <b>Columns:</b>{" "}
+          <input
+            type="number"
+            value={cols}
+            onChange={(e) => {
+              setCols(e.target.value);
+            }}
+          />
+          <button className="button-group" type="submit" onClick={updateRowsAndCols}>
+            Update Layout
+          </button>
+        
         <button
           className="button-group"
           onClick={() => {

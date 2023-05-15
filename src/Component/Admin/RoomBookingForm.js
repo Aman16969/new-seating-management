@@ -1,9 +1,10 @@
 import { use } from "@js-joda/core";
 import { useState } from "react";
 import Location from "./Location";
-import BookingRoom from "./BoardRoom";
+import loader from '../../Static/loader.gif'
 import Room from "./Room";
 const OpenRoomBookingForm = (props) => {
+  const[isPending,setIsPending]=useState(false)
   const [isOpenCon, setIsOpenCon] = useState(true);
   const [date, setDate] = useState(props.date);
   const [fromTime, setFromTime] = useState(props.fromTime);
@@ -24,8 +25,8 @@ const OpenRoomBookingForm = (props) => {
       location_id: parseInt(locationId),
       room_id: parseInt(roomId),
     };
-    console.log(data)
-    console.log(roomType)
+    props.setOpenBookingForm(false);
+    setIsPending(true)
     const header = "Bearer " + sessionStorage.getItem("accessToken");
     fetch(`http://localhost:8081/api/bookRoom/`, {
       method: "POST",
@@ -43,15 +44,42 @@ const OpenRoomBookingForm = (props) => {
       })
       .then((data) => {
         props.setFlag(!props.flag)
-        props.setOpenBookingForm(false);
-        
+        fetch(`http://localhost:8081/api/requestBooking/request/${props.id}/book/true`, {
+      method: 'PUT',
+      headers: {
+        "content-type": "application/json",
+        Authorization: header,
+      }
+    }).then((res) => {
+            if (!res.ok) {
+              throw Error("cannot fetch the data");
+            }
+            return res;
+          }).then((data)=>{
+            setIsPending(false)
+          })
       })
       .catch((error) => {
+        setIsPending(false)
         console.log(error);
       });
   };
   return (
     <>
+    {isPending && (
+        <div className="popupContainer">
+          <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
+            <div className="popupHeader">
+              <h2 style={{ color: "#0c3d4c" }}>
+                Please wait while we process your request to book a Room.
+              </h2>
+            </div>
+            <div className="loader">
+              <img src={loader} className="loader-gif" alt="loader" />
+            </div>
+          </div>
+        </div>
+      )}
       {isOpenCon && (
         <div
           className="popupContainer"

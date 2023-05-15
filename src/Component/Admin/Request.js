@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import OpenRoomBookingForm from "./RoomBookingForm";
-import { ValueRange } from "@js-joda/core";
+import loader from '../../Static/loader.gif'
 const Request = (props) => {
   const [requests, setRequest] = useState([]);
   const [requestById, setRequestById] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [isOpenCon, setIsOpenCon] = useState(false);
   const [requestId, setRequestId] = useState(null);
+  const [accepted, setAccepted] = useState(false);
   const [acceptedRequest, setAcceptedRequest] = useState(null);
   const [flag, setFlag] = useState(false);
   const [openBookingForm, setOpenBookingForm] = useState(false);
@@ -73,37 +74,40 @@ const Request = (props) => {
         setIsOpenCon(false);
       });
   };
-
-  const handleAccept = (id) => {
-    fetch(`http://localhost:8081/api/requestBooking/request/${id}/book/true`, {
-      method: 'PUT',
-      headers: {
-        "content-type": "application/json",
-        Authorization: token,
-      }
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("cannot fetch the data");
-        }
-        return res;
-      })
-     
-      .then((data) => {
-        setFlag(!flag);
-        props.setFlag(!props.flag)
-        setAcceptedRequest(data);
-        setOpenBookingForm(true);
-        setIsOpenCon(false);
-        console.log();
-        
-      });
+  const handleAccept = () => {
+    setAccepted(true);
+    setIsOpenCon(false);
+    setOpenBookingForm(true);
   };
+  // const handleAccept = (id) => {
+    
+  //   fetch(`http://localhost:8081/api/requestBooking/request/${id}/book/true`, {
+  //     method: 'PUT',
+  //     headers: {
+  //       "content-type": "application/json",
+  //       Authorization: token,
+  //     }
+  //   })
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw Error("cannot fetch the data");
+  //       }
+  //       return res;
+  //     })
+     
+  //     .then((data) => {
+  //       setFlag(!flag);
+  //       props.setFlag(!props.flag)
+
+  //       console.log();
+        
+  //     });
+  // };
 
   return (
     <>
       <tbody>
-        {/* {isPending && <div>Loading....</div>} */}
+        {isPending && <div><img src={loader} alt="loader" /></div>}
         {requests &&
           requests.map((req) => {
             return (
@@ -124,7 +128,7 @@ const Request = (props) => {
             );
           })}
       </tbody>
-      {openBookingForm && <OpenRoomBookingForm setOpenBookingForm={setOpenBookingForm} userEmail={requestById.email} date={requestById.date} fromTime={requestById.fromTime} toTime={requestById.toTime} roomType={requestId.roomType} acceptedRequest={acceptedRequest} flag={props.flag} setFlag={props.setFlag}/>}
+      {openBookingForm && <OpenRoomBookingForm setOpenBookingForm={setOpenBookingForm}  id={requestById.id} userEmail={requestById.email} date={requestById.date} fromTime={requestById.fromTime} toTime={requestById.toTime} roomType={requestId.roomType} acceptedRequest={acceptedRequest} flag={props.flag} setFlag={props.setFlag}/>}
       {isOpenCon && (
         <div className="popupContainer" onClick={() => setIsOpenCon(false)}>
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
@@ -209,7 +213,7 @@ const Request = (props) => {
 
             <div className="buttonsContainer">
               <button type="submit" className="submit-btn"
-              onClick={() => handleAccept(requestById.id)}>
+              onClick={() => handleAccept()}>
                 Accept
               </button>
               <button
