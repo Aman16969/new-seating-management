@@ -79,30 +79,7 @@ const Request = (props) => {
     setIsOpenCon(false);
     setOpenBookingForm(true);
   };
-  // const handleAccept = (id) => {
-    
-  //   fetch(`http://localhost:8081/api/requestBooking/request/${id}/book/true`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       "content-type": "application/json",
-  //       Authorization: token,
-  //     }
-  //   })
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw Error("cannot fetch the data");
-  //       }
-  //       return res;
-  //     })
-     
-  //     .then((data) => {
-  //       setFlag(!flag);
-  //       props.setFlag(!props.flag)
-
-  //       console.log();
-        
-  //     });
-  // };
+  
 
   return (
     <>
