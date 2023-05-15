@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import UpcomingBooking from "./UpcomingBooking";
-import GetSeat from "./GetSeat";
 import CompletedBooking from "./CompletedBooking";
 import RequestAccess from "./RequestAccess";
 import DisplayLayout from "./DisplayLayout";
 import AcceptedRequest from "./AcceptedRequest";
 import PendingRequest from "./PendingRequest";
 import RequestAccessSeat from "./RequestAccessSeat";
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 const Home = () => {
   // const [countall, setCountAll] = useState(0);
   // const [countAvailable, setCountAvailable] = useState(0);
@@ -29,11 +29,38 @@ const Home = () => {
   const [seatAvailability, setSeatAvailability] = useState(null);
   const token = sessionStorage.getItem("accessToken");
 
+  const [disabledDates, setDisabledDates] = useState([]);
+  useEffect(()=>{
+    const header = "Bearer " + sessionStorage.getItem("accessToken");
+    const email = sessionStorage.getItem("email");
+    fetch(`http://localhost:8081/api/booking/activeDates/user/${email}`, {
+      headers: {
+        Authorization: header,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("Response not received");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data)
+        setDisabledDates(data);
+      })
+  }, []);
   useEffect(
     (e) => {
-     
+      if(date!==null){
+        const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const ndate = `${year}-${month}-${day}`;
+        // const ndate=date.toISOString().split('T')[0];
+        // setDate(ndate)
+      
       fetch(
-        `http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
+        `http://localhost:8081/api/booking/available/locationDateTime?date=${ndate}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
         {
           method: "GET",
           headers: {
@@ -54,7 +81,7 @@ const Home = () => {
         })
         .catch((error) => {
           setError(error.message);
-        });
+        });}
     },
     [date, fromTime, toTime]
   );
@@ -114,9 +141,28 @@ const Home = () => {
     else if(e==="2"){
       setShowModal2(true)
     }
-    
   }
 
+  const isDayDisabled = (date) => {
+    const currentDate = new Date(); // Get the current date
+  currentDate.setHours(0, 0, 0, 0);
+    const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const ndate = `${year}-${month}-${day}`;
+    // const dateString = date.toISOString().split('T')[0];
+    const dayOfWeek = date.getDay();
+
+    return (disabledDates.includes(ndate) || dayOfWeek === 0 || dayOfWeek === 6 || date < currentDate);
+  };
+  const handleDateChange = (date) => {
+    setDate(date);
+    console.log(date)
+  };
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return date.toLocaleDateString(undefined, options);
+  };
   return (
     <>
       <div className="container">
@@ -267,16 +313,27 @@ const Home = () => {
                     <span>{message}</span>
                     <form className="modal-form">
                       <div className="form-item">
-                        <input
+                      <DatePicker
+                      className="date-picker"
+          selected={date}
+          onChange={handleDateChange}
+          filterDate={(date) => !isDayDisabled(date)}
+          dateFormat="yyyy-MM-dd"
+          placeholderText="dd/mm/yyyy"
+          value={date ? formatDate(date) : ''}
+        />
+                        {/* <input
                           type="date"
                           name="date"
-                          id="date"
+                          id="date1"
                           value={date}
                           onChange={(e) => {
                             setDate(e.target.value);
                           }}
+                          disabled={isWeekend(date)}
                           min={new Date().toISOString().split("T")[0]} // Set minimum date to today
-                        />
+                        /> */}
+                        
                       </div>
                       <div class="form-item">
                         <input
@@ -326,6 +383,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      
     </>
   );
 };

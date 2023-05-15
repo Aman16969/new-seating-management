@@ -40,7 +40,7 @@ const DisplaySeat = ({
           setSeat(data);
           setName(data.seatName);
           setFlag(!flag);
-          window.location.reload()
+          
         })
         .catch((error) => {
           setError(error.message);

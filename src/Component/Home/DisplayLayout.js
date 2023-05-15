@@ -24,13 +24,18 @@ const DisplayLayout = ({
   const accId = sessionStorage.getItem("accoliteId");
 
 
+  
+
   const handleBooking = () => {
-    
+    const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const ndate = `${year}-${month}-${day}`;
     const bookingDetail = {
       locationId: location.id,
       userId: userId,
       seatId: selected,
-      date: date,
+      date: ndate,
       fromTime: fromTime,
       toTime: toTime,
       accoliteId: accId,
