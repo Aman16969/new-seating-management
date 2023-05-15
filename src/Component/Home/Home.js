@@ -31,7 +31,6 @@ const Home = () => {
 
   useEffect(
     (e) => {
-     
       fetch(
         `http://localhost:8081/api/booking/available/locationDateTime?date=${date}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
         {
@@ -49,6 +48,7 @@ const Home = () => {
           return response.json();
         })
         .then((data) => {
+          // console.log(Object.keys(data).length);
           setSeatAvailability(data);
         
         })
