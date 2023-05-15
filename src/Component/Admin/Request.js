@@ -96,7 +96,6 @@ const Request = (props) => {
         setOpenBookingForm(true);
         setIsOpenCon(false);
         console.log();
-        
       });
   };
 

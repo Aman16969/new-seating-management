@@ -318,6 +318,7 @@ const Home = () => {
                     fromTime={fromTime}
                     toTime={toTime}
                     flag={flag}
+                    message1={null}
                     setFlag={setFlag}
                   ></DisplayLayout>
                 )}
