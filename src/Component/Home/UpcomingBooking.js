@@ -40,7 +40,7 @@ const UpcomingBooking = (props) => {
   const handleDelete = (bookId) => {
     const header = "Bearer " + sessionStorage.getItem("accessToken");
     fetch(
-      `http://localhost:8081/api/booking/user/setActiveStatus/${bookId}/value/false`,
+      `http://localhost:8081/api/booking/setActiveStatus/user/${bookId}/value/${false}`,
       {
         method: "PUT",
         headers: {
