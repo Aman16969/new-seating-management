@@ -170,6 +170,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenBooking(true);
                     }}
+                    style={{ 
+                      textDecoration: openBooking ? 'underline':'none',
+                      color: openBooking ? '#0c3d4c':'black',
+                      fontSize:openBooking ? '14px':'13px'
+                      }}
                   >
                     <h3>Upcoming Booking</h3>
                   </button>
@@ -177,6 +182,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenBooking(false);
                     }}
+                    style={{ 
+                      textDecoration: !openBooking ? 'underline':'none',
+                      color: !openBooking ? '#0c3d4c':'black',
+                      fontSize:!openBooking ? '14px':'13px'
+                      }}
                   >
                     <h3>Completed Booking</h3>
                   </button>
@@ -212,6 +222,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenRequest(true);
                     }}
+                    style={{ 
+                      textDecoration: openRequest ? 'underline':'none',
+                      color: openRequest ? '#0c3d4c':'black',
+                      fontSize:openRequest ? '14px':'13px'
+                      }}
                   >
                     <h3>Room Bookings</h3>
                   </button>
@@ -219,6 +234,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenRequest(false);
                     }}
+                    style={{ 
+                      textDecoration: !openRequest ? 'underline':'none',
+                      color: !openRequest ? '#0c3d4c':'black',
+                      fontSize:!openRequest ? '14px':'13px'
+                      }}
                   >
                     <h3>Requests</h3>
                   </button>
