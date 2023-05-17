@@ -8,6 +8,7 @@ import PendingRequest from "./PendingRequest";
 import RequestAccessSeat from "./RequestAccessSeat";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import BaseUrl from "../Api/Baseurl";
 const Home = () => {
   // const [countall, setCountAll] = useState(0);
   // const [countAvailable, setCountAvailable] = useState(0);
@@ -33,7 +34,7 @@ const Home = () => {
   useEffect(()=>{
     const header = "Bearer " + sessionStorage.getItem("accessToken");
     const email = sessionStorage.getItem("email");
-    fetch(`http://localhost:8081/api/booking/activeDates/user/${email}`, {
+    fetch(`${BaseUrl}api/booking/activeDates/user/${email}`, {
       headers: {
         Authorization: header,
       },
@@ -60,7 +61,7 @@ const Home = () => {
         // setDate(ndate)
       
       fetch(
-        `http://localhost:8081/api/booking/available/locationDateTime?date=${ndate}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
+        `${BaseUrl}api/booking/available/locationDateTime?date=${ndate}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
         {
           method: "GET",
           headers: {
@@ -89,7 +90,7 @@ const Home = () => {
 
   useEffect(
     (e) => {
-      fetch(`http://localhost:8081/api/location/${locationId}`, {
+      fetch(`${BaseUrl}api/location/${locationId}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",
@@ -113,7 +114,7 @@ const Home = () => {
   );
 
   useEffect((e) => {
-    fetch(`http://localhost:8081/api/seat/location/${locationId}`, {
+    fetch(`${BaseUrl}api/seat/location/${locationId}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -176,6 +177,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenBooking(true);
                     }}
+                    style={{ 
+                    textDecoration: openBooking ? 'underline':'none',
+                    color: openBooking ? '#0c3d4c':'black',
+                    fontSize:openBooking ? '14px':'13px'
+                    }}
                   >
                     <h3>Upcoming Booking</h3>
                   </button>
@@ -183,6 +189,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenBooking(false);
                     }}
+                    style={{ 
+                      textDecoration: !openBooking ? 'underline':'none',
+                      color: !openBooking ? '#0c3d4c':'black',
+                    fontSize:!openBooking ? '14px':'13px'
+                      }}
                   >
                     <h3>Completed Booking</h3>
                   </button>
@@ -218,6 +229,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenRequest(true);
                     }}
+                    style={{ 
+                      textDecoration: openRequest ? 'underline':'none',
+                      color: openRequest ? '#0c3d4c':'black',
+                    fontSize:openRequest ? '14px':'13px'
+                      }}
                   >
                     <h3>Room Bookings</h3>
                   </button>
@@ -225,6 +241,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenRequest(false);
                     }}
+                    style={{ 
+                      textDecoration: !openRequest ? 'underline':'none',
+                      color: !openRequest ? '#0c3d4c':'black',
+                    fontSize:!openRequest ? '14px':'13px'
+                      }}
                   >
                     <h3>Requests</h3>
                   </button>
