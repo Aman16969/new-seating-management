@@ -1,7 +1,10 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { render } from "react-dom";
 import Location from "./Location";
+import { Stats } from "./Stats";
+
 function Profile() {
-  console.log("hi")
+  console.log("hi");
   const [editMode, setEditMode] = useState(false);
   const [userDetail, setUserDetail] = useState(null);
   const [isPending, setIsPending] = useState(true);
@@ -11,10 +14,10 @@ function Profile() {
   const userId = sessionStorage.getItem("userId");
   const [read, setReadOnly] = useState(true);
   const [message, setMessage] = useState("");
-  const[flag,setFlag]=useState(true)
+  const [flag, setFlag] = useState(true);
 
   useEffect(() => {
-    console.log("hi")
+    console.log("hi");
     fetch(`http://localhost:8081/api/user/${userId}`, {
       headers: {
         Authorization: header,
@@ -53,10 +56,10 @@ function Profile() {
       .then((data) => {
         setMessage("User updated Successfully");
         setReadOnly(true);
-        
-        sessionStorage.setItem("userLocation",JSON.stringify(data.location))
-        sessionStorage.setItem("userLocationId",data.location.id)
-        setFlag(!flag)
+
+        sessionStorage.setItem("userLocation", JSON.stringify(data.location));
+        sessionStorage.setItem("userLocationId", data.location.id);
+        setFlag(!flag);
       })
       .catch((err) => {
         throw Error(err.message);
@@ -68,71 +71,76 @@ function Profile() {
       <div className="container">
         <div className="container-content">
           {!isPending && (
-            <div className="profile-form">
-              {/* <img className="profile-img" src={profilePic} alt="Profile" /> */}
+            <div className="profile-grid">
+              <div className="profile-form">
+                <form className="profile-container" onSubmit={handleUpdate}>
+                  <div className="profile-item">
+                    <label for="email">Accolite Id</label>
+                    <input
+                      type="text"
+                      placeholder="Enter Accolite Id"
+                      name="accoliteId"
+                      id="accoliteId"
+                      required
+                      readOnly={true}
+                      value={userDetail.accoliteId}
+                    />
+                  </div>
+                  <div className="profile-item">
+                    <label for="email">Email</label>
+                    <input
+                      type="text"
+                      placeholder="Enter Email"
+                      name="email"
+                      id="email"
+                      required
+                      readOnly={true}
+                      value={userDetail.email}
+                    />
+                  </div>
 
-              <form className="profile-container" onSubmit={handleUpdate}>
-                <div className="profile-item" >
-                <label for="email">Accolite Id</label>
-                  <input
-                    type="text"
-                    placeholder="Enter Accolite Id"
-                    name="accoliteId"
-                    id="accoliteId"
-                    required
-                    readOnly={true}
-                    value={userDetail.accoliteId}
-                  />
-                </div>
-                <div className="profile-item">
-               
-                  <label for="email">Email</label>
-                  <input
-                    type="text"
-                    placeholder="Enter Email"
-                    name="email"
-                    id="email"
-                    required
-                    readOnly={true}
-                    value={userDetail.email}
-                  />
-                </div>
+                  <div className="profile-item">
+                    <label for="fname">First Name</label>
 
-                <div className="profile-item">
-                  <label for="fname">First Name</label>
+                    <input
+                      type="text"
+                      placeholder="Enter First Name"
+                      name="fname"
+                      id="fname"
+                      required
+                      readOnly={true}
+                      value={userDetail.firstName}
+                    />
+                  </div>
 
-                  <input
-                    type="text"
-                    placeholder="Enter First Name"
-                    name="fname"
-                    id="fname"
-                    required
-                    readOnly={true}
-                    value={userDetail.firstName}
-                  />
-                </div>
+                  <div className="profile-item">
+                    <label for="lname">Last Name</label>
 
-                <div className="profile-item">
-                  <label for="lname">Last Name</label>
-
-                  <input
-                    type="text"
-                    placeholder="Enter Last Name"
-                    name="lname"
-                    id="lname"
-                    required
-                    readOnly={true}
-                    value={userDetail.lastName}
-                  />
-                </div>
-                <div className="profile-item" onClick={()=>setReadOnly(false)}>
-                  <label for="Location">Location  </label>
-                  <br />
-                  <Location setLocationId={setLocationId} />
-                </div>
-                <span style={{ fontSize: "small" }}>{message}</span>
-                {!read && <button className="button-group">Edit</button>}
-              </form>
+                    <input
+                      type="text"
+                      placeholder="Enter Last Name"
+                      name="lname"
+                      id="lname"
+                      required
+                      readOnly={true}
+                      value={userDetail.lastName}
+                    />
+                  </div>
+                  <div
+                    className="profile-item"
+                    onClick={() => setReadOnly(false)}
+                  >
+                    <label for="Location">Location </label>
+                    <br />
+                    <Location setLocationId={setLocationId} />
+                  </div>
+                  <span style={{ fontSize: "small" }}>{message}</span>
+                  {!read && <button className="button-group">Edit</button>}
+                </form>
+              </div>
+              <div className="profile-form">
+                <Stats />
+              </div>
             </div>
           )}
         </div>
