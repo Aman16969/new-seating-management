@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DisplaySeat from "./DisplaySeat";
-import loader from '../../Static/loader.gif'
-import seat from '../../Static/seats.png'
+import loader from "../../Static/loader.gif";
+import seat from "../../Static/seats.png";
 
 const DisplayLayout = ({
   location,
@@ -11,25 +11,23 @@ const DisplayLayout = ({
   fromTime,
   toTime,
   flag,
-  message1,
   setFlag,
 }) => {
-  const[b,setB]=useState(true);
+  const [b, setB] = useState(true);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
   const [selected, setSelected] = useState(null);
   const [status, setStatus] = useState(null);
   const [message, setMessage] = useState(null);
-  const [isPending,setIsPending]=useState(false);
+  const [isPending, setIsPending] = useState(false);
   const userId = sessionStorage.getItem("userId");
   const accId = sessionStorage.getItem("accoliteId");
 
-
   const handleBooking = () => {
     const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const ndate = `${year}-${month}-${day}`;
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const ndate = `${year}-${month}-${day}`;
     const bookingDetail = {
       locationId: location.id,
       userId: userId,
@@ -39,7 +37,7 @@ const DisplayLayout = ({
       toTime: toTime,
       accoliteId: accId,
     };
-    setIsPending(true)
+    setIsPending(true);
     fetch(`http://localhost:8081/api/booking/`, {
       method: "POST",
       headers: {
@@ -55,15 +53,14 @@ const DisplayLayout = ({
         setSelected(null);
         setMessage(null);
         return res.json();
-
       })
       .then((data) => {
         setStatus(data.isSuccessful);
         setMessage(data.message);
-        setIsPending(false)
-        setFlag(!flag)
-        setB(!b)
-        window.location.reload()
+        setIsPending(false);
+        setFlag(!flag);
+        setB(!b);
+        window.location.reload();
       })
       .catch((error) => {
         setError(error.message);
@@ -85,7 +82,6 @@ const DisplayLayout = ({
               status={false}
               selected={selected}
               b={b}
-              
             ></DisplaySeat>
           )}
           {seatAvailability && seatAvailability.hasOwnProperty(id) && (
@@ -102,8 +98,7 @@ const DisplayLayout = ({
                 status={true}
                 selected={selected}
                 b={b}
-              
-            ></DisplaySeat>
+              ></DisplaySeat>
             </div>
           )}
           {seatAvailability && !seatAvailability.hasOwnProperty(id) && (
@@ -114,7 +109,6 @@ const DisplayLayout = ({
               status={false}
               selected={selected}
               b={b}
-              
             ></DisplaySeat>
           )}
         </td>
@@ -125,25 +119,31 @@ const DisplayLayout = ({
 
   return (
     <>
-    {isPending && (
-        <div className="popupContainer" >
+      {isPending && (
+        <div className="popupContainer">
           <div className="popup-boxd" onClick={(e) => e.stopPropagation()}>
             <div className="popupHeader">
-              <h2 style={{color:'#0c3d4c'}}>Your reservation is being processed and will be confirmed shortly. </h2>
+              <h2 style={{ color: "#0c3d4c" }}>
+                Your reservation is being processed and will be confirmed
+                shortly.{" "}
+              </h2>
             </div>
             <div className="loader">
-            <img src={seat} className="loader-gif" alt="loader" />
+              <img src={seat} className="loader-gif" alt="loader" />
             </div>
             <div className="loader">
-            <img src={loader} className="loader-gif" alt="loader" />
+              <img src={loader} className="loader-gif" alt="loader" />
             </div>
-            
           </div>
         </div>
       )}
       <div className="header">
         <h1>{location.name}</h1>
-        <h3>Available Seats : {seatAvailability ? Object.keys(seatAvailability).length : 0}/{location.seatingCapacity}</h3>
+        <h3>
+          Available Seats :{" "}
+          {seatAvailability ? Object.keys(seatAvailability).length : 0}/
+          {location.seatingCapacity}
+        </h3>
         {message && status === 0 && <h3 style={{ color: "red" }}>{message}</h3>}
         {message && status === 1 && (
           <h3 style={{ color: "green" }}>{message}</h3>
