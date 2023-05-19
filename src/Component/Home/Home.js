@@ -28,8 +28,8 @@ const Home = () => {
   const [seats, setSeats] = useState(null);
   const [seatAvailability, setSeatAvailability] = useState(null);
   const token = sessionStorage.getItem("accessToken");
-
   const [disabledDates, setDisabledDates] = useState([]);
+
   useEffect(()=>{
     const header = "Bearer " + sessionStorage.getItem("accessToken");
     const email = sessionStorage.getItem("email");
@@ -45,7 +45,6 @@ const Home = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data)
         setDisabledDates(data);
       })
   }, []);
@@ -56,9 +55,6 @@ const Home = () => {
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
       const ndate = `${year}-${month}-${day}`;
-        // const ndate=date.toISOString().split('T')[0];
-        // setDate(ndate)
-      
       fetch(
         `http://localhost:8081/api/booking/available/locationDateTime?date=${ndate}&fromTime=${fromTime}&toTime=${toTime}&location=${locationId}`,
         {
@@ -76,7 +72,6 @@ const Home = () => {
           return response.json();
         })
         .then((data) => {
-          // console.log(Object.keys(data).length);
           setSeatAvailability(data);
         
         })
@@ -143,7 +138,6 @@ const Home = () => {
       setShowModal2(true)
     }
   }
-
   const isDayDisabled = (date) => {
     const currentDate = new Date(); // Get the current date
   currentDate.setHours(0, 0, 0, 0);
@@ -176,6 +170,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenBooking(true);
                     }}
+                    style={{ 
+                      textDecoration: openBooking ? 'underline':'none',
+                      color: openBooking ? '#0c3d4c':'black',
+                      fontSize:openBooking ? '14px':'13px'
+                      }}
                   >
                     <h3>Upcoming Booking</h3>
                   </button>
@@ -183,6 +182,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenBooking(false);
                     }}
+                    style={{ 
+                      textDecoration: !openBooking ? 'underline':'none',
+                      color: !openBooking ? '#0c3d4c':'black',
+                      fontSize:!openBooking ? '14px':'13px'
+                      }}
                   >
                     <h3>Completed Booking</h3>
                   </button>
@@ -218,6 +222,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenRequest(true);
                     }}
+                    style={{ 
+                      textDecoration: openRequest ? 'underline':'none',
+                      color: openRequest ? '#0c3d4c':'black',
+                      fontSize:openRequest ? '14px':'13px'
+                      }}
                   >
                     <h3>Room Bookings</h3>
                   </button>
@@ -225,6 +234,11 @@ const Home = () => {
                     onClick={() => {
                       setOpenRequest(false);
                     }}
+                    style={{ 
+                      textDecoration: !openRequest ? 'underline':'none',
+                      color: !openRequest ? '#0c3d4c':'black',
+                      fontSize:!openRequest ? '14px':'13px'
+                      }}
                   >
                     <h3>Requests</h3>
                   </button>
@@ -331,7 +345,7 @@ const Home = () => {
                           onChange={(e) => {
                             setDate(e.target.value);
                           }}
-                          disabled={isWeekend(date)}
+                          
                           min={new Date().toISOString().split("T")[0]} // Set minimum date to today
                         /> */}
                         
@@ -376,7 +390,6 @@ const Home = () => {
                     fromTime={fromTime}
                     toTime={toTime}
                     flag={flag}
-                    message1={null}
                     setFlag={setFlag}
                   ></DisplayLayout>
                 )}

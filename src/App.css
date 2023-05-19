@@ -175,10 +175,10 @@
   background-color: transparent;
 }
 
-.btn-group button:focus {
+/* .btn-group button:focus {
   border-bottom: 3px solid #4983c0;
   border-radius: 2px;
-}
+} */
 
 .header-booking {
   width: 100%;
