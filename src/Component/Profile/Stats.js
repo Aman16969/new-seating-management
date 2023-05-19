@@ -57,7 +57,8 @@ export function Stats() {
         {heading}
         <MdArrowRight size={"20px"} onClick={() => setValue(value+1)} />
       </div>
-      {apiData && (
+      {apiData && <>
+        {apiData.bookedAndAbsent===0 && apiData.bookedAndPresent===0 && <><br/>No bookings were made.<br/></>}
         <Chart
           chartType="PieChart"
           width="100%"
@@ -69,7 +70,7 @@ export function Stats() {
           ]}
           options={options}
         />
-      )}
+      </>}
     </div>
   );
 }
