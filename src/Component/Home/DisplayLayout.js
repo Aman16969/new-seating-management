@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import DisplaySeat from "./DisplaySeat";
 import loader from "../../Static/loader.gif";
 import seat from "../../Static/seats.png";
+import DisplayStaticArea from "./DisplayStaticArea";
 
 const DisplayLayout = ({
   location,
@@ -23,6 +24,9 @@ const DisplayLayout = ({
   const userId = sessionStorage.getItem("userId");
   const accId = sessionStorage.getItem("accoliteId");
 
+  
+
+  
   const handleBooking = () => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -66,7 +70,38 @@ const DisplayLayout = ({
         setError(error.message);
       });
   };
-
+  const staticArea=[];
+  for(let i=1;i<=1;i++){
+    const sCols=[];
+    for(let j=1;j<=location.cs;j++){
+      sCols.push(<td>
+        { (
+          <DisplayStaticArea
+            location={location}
+            row={i}
+            col={j}
+          ></DisplayStaticArea>
+        )}
+        </td>)
+    }
+    staticArea.push(<tr>{sCols}</tr>)
+  }
+  const staticAreaC=[];
+  for(let i=1;i<=location.rs;i++){
+    const sColsC=[];
+    for(let j=1;j<=1;j++){
+      sColsC.push(<td>
+        { (
+          <DisplayStaticArea
+            location={location}
+            row={i}
+            col={j}
+          ></DisplayStaticArea>
+        )}
+        </td>)
+    }
+    staticAreaC.push(<tr>{sColsC}</tr>)
+  }
   const rows = [];
   for (let i = 1; i <= location.rs; i++) {
     const cols = [];
@@ -159,7 +194,15 @@ const DisplayLayout = ({
           </button>
         )}
       </div>
+      <div className="loc-layout-tables" >
+        
+      <table className="staticLocTable">{staticArea}</table>
+      <div style={{display:'flex'}}>
+      <table>{staticAreaC}</table>
       <table className="locationTable">{rows}</table>
+      </div>
+      
+      </div>
     </>
   );
 };

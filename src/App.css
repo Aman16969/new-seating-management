@@ -164,11 +164,13 @@
   flex-direction: row;
   column-gap: 10px;
   height: 43px;
+  
 }
 .btn-group button {
   width: 100%;
   background-color: transparent;
   border: none;
+  font-variant: small-caps;
 }
 .btn-group button:hover {
   color: #0f017d;

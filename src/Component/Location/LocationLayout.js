@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AdminSeat from "./AdminSeat";
 import "./location.css";
 import AddConference from "./AddConference";
+import Entrance from "./AdminAreaR";
 
 const LocationLayout = ({ location, flag }) => {
   const [rows, setRows] = useState(location.rs);
@@ -18,8 +19,39 @@ const LocationLayout = ({ location, flag }) => {
   const [lflag, setLFlag] = useState(false);
 
   const [rs, setRs] = useState([]);
-
+  const[ent,setEnt]=useState([])
+  const[sideArea,setSideArea]=useState([]);
   useEffect(() => {
+    const newEntR=[];
+    for(let i=1;i<=1;i++){
+      const newEntC=[];
+      for(let j=1;j<=cols;j++){
+        newEntC.push(
+          <td>
+            <h3>
+              <Entrance location={location} row={i} col={j} refresh={flag} />
+            </h3>
+          </td>
+        )
+      }
+      newEntR.push(<tr>{newEntC}</tr>);
+    }
+    setEnt(newEntR);
+    const newSideR=[];
+    for(let i=1;i<=rows;i++){
+      const newSideC=[];
+      for(let j=1;j<=1;j++){
+        newSideC.push(
+          <td>
+            <h3>
+              <Entrance location={location} row={i} col={j} refresh={flag} />
+            </h3>
+          </td>
+        )
+      }
+      newSideR.push(<tr>{newSideC}</tr>);
+    }
+    setSideArea(newSideR);
     const newRs = [];
     for (let i = 1; i <= rows; i++) {
       const cs = [];
@@ -290,10 +322,18 @@ const LocationLayout = ({ location, flag }) => {
           View Rooms
         </button>
       </div>
-      <div className="location-scroll">
-        <table className="locationLayout">{rs}</table>
+      
+      
+      <div className="location-scroll" >
+        <div>
+        <table  className="static-area-col">{sideArea}</table>
+        </div>
+        <div><table className="static-area-row" style={{height:'20px'}}>{ent}</table>
+        <table className="locationLayout">{rs}</table></div>
+      
       </div>
-    </div>
+      </div>
+    
   );
 };
 

@@ -6,18 +6,54 @@
   height: 35px;
   border-radius: 2px;
 }
+.display-area{
+  background-color: #b2dbec;
+  display: flex;
+  justify-content: center;
+  color: #130f68;
+  width:70px;
+  height: 20px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  text-align: center;
+  cursor:not-allowed;
+  border-radius: 15px;
+  font-weight: 600;
+  
+}
 
-.locationTable {
-  display: inline-block;
-  height: 55vh;
+.display-static-area{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 20px;
+  
+  
+}
+.loc-layout-tables{
+  display: grid;
+  grid-template-rows: .5fr 4.5fr;
+  margin: 0 5px;
+  justify-content: center;
+  height: 56vh;
   overflow-y: scroll;
   overflow-x: scroll;
+}
+.staticLocTable{
+  display: inline-block;
+  max-width: 100%;
+}
+.locationTable {
+  display: inline-block;
+  
+  
   /* Set a max-width to prevent horizontal scrolling */
   max-width: 100%;
 }
 
 /* Style the scrollbar */
-.locationTable::-webkit-scrollbar {
+.loc-layout-tables::-webkit-scrollbar {
   background-color: #d6eaf8;
   width: 10px;
   height: 10px;
@@ -25,19 +61,19 @@
 }
 
 /* Style the scrollbar thumb */
-.locationTable::-webkit-scrollbar-thumb {
+.loc-layout-tables::-webkit-scrollbar-thumb {
   background-color: #1ba5dc;
   border-radius: 10px;
   border: 3px solid #f5f5f5;
 }
 
 /* Style the scrollbar on hover */
-.locationTable::-webkit-scrollbar-thumb:hover {
+.loc-layout-tables::-webkit-scrollbar-thumb:hover {
   background-color: #999;
 }
 
 /* Style the scrollbar on active state */
-.locationTable::-webkit-scrollbar-thumb:active {
+.loc-layout-tables::-webkit-scrollbar-thumb:active {
   background-color: #555;
 }
 

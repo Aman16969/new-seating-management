@@ -2,6 +2,31 @@
   height: 425px !important;
   overflow-y: scroll;
   overflow-x: scroll;
+  display: flex;
+}
+.static-area-row{
+  table-layout: fixed;
+  border: 1px solid blue;
+  width: 100%;
+}.static-area-row > tr > td {
+  width: 100px;
+  height: 30px;
+  size: fixed;
+  background-color: rgb(227, 197, 141);
+  color: rgb(11, 0, 0);
+  
+}
+.static-area-col{
+  table-layout: fixed;
+  border: 1px solid blue;
+  width: 85px;
+  margin-top: 80px;
+}.static-area-col > tr > td {
+  height: 80px;
+  size: fixed;
+  background-color: rgb(227, 197, 141);
+  color: rgb(11, 0, 0);
+  
 }
 .locationLayout {
   table-layout: fixed;
