@@ -11,13 +11,12 @@
   display: flex;
   justify-content: center;
   color: #130f68;
-  width:70px;
+  width:75px;
   height: 20px;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+  border: none;
   text-align: center;
   cursor:not-allowed;
-  border-radius: 15px;
+  border-radius: 3px;
   font-weight: 600;
   
 }

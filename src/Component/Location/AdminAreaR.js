@@ -6,7 +6,7 @@ import {
   MdOutlineArrowDownward,
   MdOutlineArrowUpward,
 } from "react-icons/md";
-const Entrance = ({ location, row, col, refresh }) => {
+const Entrance = ({ location, row, col, dir, refresh }) => {
   const [staticArea, setStaticArea] = useState(null);
   const [sArea, setSArea] = useState(null);
   const token = sessionStorage.getItem("accessToken");
@@ -20,7 +20,7 @@ const Entrance = ({ location, row, col, refresh }) => {
     const [deletePopUp, setDeletePopUp] = useState(false);
   useEffect(() => {
     fetch(
-      `http://localhost:8081/api/locationStaticArea/position?location=${location.id}&row=${row}&column=${col}`,
+      `http://localhost:8081/api/locationStaticArea/position?location=${location.id}&row=${row}&column=${col}&dir=${dir}`,
       {
         method: "GET",
         headers: {
@@ -42,12 +42,14 @@ const Entrance = ({ location, row, col, refresh }) => {
       .catch((error) => {
         setError(error.message);
       });
+      console.log(staticArea)
   }, [flag, refresh]);
 
   const handleEdit = (e) => {
     const areaB = {
       row: row,
       col: col,
+      d:dir,
       locationId: location.id,
       name: editName,
     };
@@ -80,6 +82,7 @@ const Entrance = ({ location, row, col, refresh }) => {
     const area = {
       row: row,
       col: col,
+      d:dir,
       locationId: location.id,
       name: name,
     };
@@ -129,7 +132,7 @@ const Entrance = ({ location, row, col, refresh }) => {
   };
   return (
     <>
-      {staticArea && staticArea.isAvailable !== 0 && (
+      {dir===1 && staticArea && staticArea.isAvailable !== 0  && staticArea.d===1 &&  (
         <div className="seatDiv">
           <div>
             <MdEdit size={"20px"} onClick={() => {
@@ -141,7 +144,85 @@ const Entrance = ({ location, row, col, refresh }) => {
           <p>{name}</p>
         </div>
       )}
-      {staticArea && staticArea.isAvailable === 0 && (
+      {dir===1 && staticArea && staticArea.isAvailable === 0 && staticArea.d===0 && (
+        <>
+          <div className="seatDiv">
+            <div className="addBtn">
+              <MdAdd
+                size={"20px"}
+                onClick={() => {
+                  setAddPopUp(true);
+                }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+      {dir===2 && staticArea && staticArea.isAvailable !== 0 && staticArea.d===2 &&  (
+        <div className="seatDiv">
+          <div>
+            <MdEdit size={"20px"} onClick={() => {
+                  setEditPopUp(true);
+                  setEditName(name);
+                }} />
+            <MdDelete size={"20px"}  onClick={() => setDeletePopUp(true)}/>
+          </div>
+          <p>{name}</p>
+        </div>
+      )}
+      {dir===2 && staticArea && staticArea.isAvailable === 0 && staticArea.d===0 && (
+        <>
+          <div className="seatDiv">
+            <div className="addBtn">
+              <MdAdd
+                size={"20px"}
+                onClick={() => {
+                  setAddPopUp(true);
+                }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+      {dir===3 && staticArea && staticArea.isAvailable !== 0 && staticArea.d===3 &&  (
+        <div className="seatDiv">
+          <div>
+            <MdEdit size={"20px"} onClick={() => {
+                  setEditPopUp(true);
+                  setEditName(name);
+                }} />
+            <MdDelete size={"20px"}  onClick={() => setDeletePopUp(true)}/>
+          </div>
+          <p>{name}</p>
+        </div>
+      )}
+      {dir===3 && staticArea && staticArea.isAvailable === 0 && staticArea.d===0 && (
+        <>
+          <div className="seatDiv">
+            <div className="addBtn">
+              <MdAdd
+                size={"20px"}
+                onClick={() => {
+                  setAddPopUp(true);
+                }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+      {dir===4 && staticArea && staticArea.isAvailable !== 0 && staticArea.d===4 &&  (
+        <div className="seatDiv">
+          <div>
+            <MdEdit size={"20px"} onClick={() => {
+                  setEditPopUp(true);
+                  setEditName(name);
+                }} />
+            <MdDelete size={"20px"}  onClick={() => setDeletePopUp(true)}/>
+          </div>
+          <p>{name}</p>
+        </div>
+      )}
+      {dir===4 && staticArea && staticArea.isAvailable === 0 && staticArea.d===0 && (
         <>
           <div className="seatDiv">
             <div className="addBtn">

@@ -19,39 +19,65 @@ const LocationLayout = ({ location, flag }) => {
   const [lflag, setLFlag] = useState(false);
 
   const [rs, setRs] = useState([]);
-  const[ent,setEnt]=useState([])
-  const[sideArea,setSideArea]=useState([]);
+  const [ent1, setEnt1] = useState([]);
+  const [ent_1, setEnt_1] = useState([]);
+  
+  const [sideArea1, setSideArea1] = useState([]);
+  const [sideArea_1, setSideArea_1] = useState([]);
   useEffect(() => {
-    const newEntR=[];
-    for(let i=1;i<=1;i++){
-      const newEntC=[];
-      for(let j=1;j<=cols;j++){
-        newEntC.push(
+    const newEntR1 = [];
+    const newEntR_1 = [];
+    for (let i = 1; i <= 1; i++) {
+      const newEntC1 = [];
+      const newEntC_1 = [];
+      for (let j = 1; j <= cols; j++) {
+        newEntC1.push(
           <td>
             <h3>
-              <Entrance location={location} row={i} col={j} refresh={flag} />
+              <Entrance location={location} row={i} col={j} dir={1} refresh={flag} />
             </h3>
           </td>
-        )
-      }
-      newEntR.push(<tr>{newEntC}</tr>);
-    }
-    setEnt(newEntR);
-    const newSideR=[];
-    for(let i=1;i<=rows;i++){
-      const newSideC=[];
-      for(let j=1;j<=1;j++){
-        newSideC.push(
+        );
+        newEntC_1.push(
           <td>
             <h3>
-              <Entrance location={location} row={i} col={j} refresh={flag} />
+              <Entrance location={location} row={i} col={j} dir={2} refresh={flag} />
             </h3>
           </td>
-        )
+        );
       }
-      newSideR.push(<tr>{newSideC}</tr>);
+      newEntR1.push(<tr>{newEntC1}</tr>);
+      newEntR_1.push(<tr>{newEntC_1}</tr>);
     }
-    setSideArea(newSideR);
+    setEnt1(newEntR1);
+    setEnt_1(newEntR_1);
+
+    const newSideR1 = [];
+    const newSideR_1 = [];
+    for (let i = 1; i <= rows; i++) {
+      const newSideC1 = [];
+      const newSideC_1 = [];
+      for (let j = 1; j <= 1; j++) {
+        newSideC1.push(
+          <td>
+            <h3>
+              <Entrance location={location} row={i} col={j} dir={3} refresh={flag} />
+            </h3>
+          </td>
+        );
+        newSideC_1.push(
+          <td>
+            <h3>
+              <Entrance location={location} row={i} col={j} dir={4} refresh={flag} />
+            </h3>
+          </td>
+        );
+      }
+      newSideR1.push(<tr>{newSideC1}</tr>);
+      newSideR_1.push(<tr>{newSideC_1}</tr>);
+    }
+    setSideArea1(newSideR1);
+    setSideArea_1(newSideR_1);
     const newRs = [];
     for (let i = 1; i <= rows; i++) {
       const cs = [];
@@ -68,7 +94,6 @@ const LocationLayout = ({ location, flag }) => {
     }
     setRs(newRs);
   }, [location.rs, location.cs, lflag]);
-
 
   useEffect(() => {
     fetch(`http://localhost:8081/api/room/location/${location.id}`, {
@@ -108,8 +133,7 @@ const LocationLayout = ({ location, flag }) => {
         return response.json();
       })
       .then((data) => {
-        
-        console.log(data)
+        console.log(data);
         // Update the state variables with the new values
         setRows(data.rs);
         setCols(data.cs);
@@ -284,27 +308,29 @@ const LocationLayout = ({ location, flag }) => {
       )}
 
       <div className="location-rc">
-      
-          <b>Rows:</b>{" "}
-          <input
-            type="number"
-            value={rows}
-            onChange={(e) => {
-              setRows(e.target.value);
-            }}
-          />
-          <b>Columns:</b>{" "}
-          <input
-            type="number"
-            value={cols}
-            onChange={(e) => {
-              setCols(e.target.value);
-            }}
-          />
-          <button className="button-group" type="submit" onClick={updateRowsAndCols}>
-            Update Layout
-          </button>
-        
+        <b>Rows:</b>{" "}
+        <input
+          type="number"
+          value={rows}
+          onChange={(e) => {
+            setRows(e.target.value);
+          }}
+        />
+        <b>Columns:</b>{" "}
+        <input
+          type="number"
+          value={cols}
+          onChange={(e) => {
+            setCols(e.target.value);
+          }}
+        />
+        <button
+          className="button-group"
+          type="submit"
+          onClick={updateRowsAndCols}
+        >
+          Update Layout
+        </button>
         <button
           className="button-group"
           onClick={() => {
@@ -322,18 +348,25 @@ const LocationLayout = ({ location, flag }) => {
           View Rooms
         </button>
       </div>
-      
-      
-      <div className="location-scroll" >
+
+      <div className="location-scroll">
         <div>
-        <table  className="static-area-col">{sideArea}</table>
+          <table className="static-area-col">{sideArea1}</table>
         </div>
-        <div><table className="static-area-row" style={{height:'20px'}}>{ent}</table>
-        <table className="locationLayout">{rs}</table></div>
-      
+        <div>
+          <table className="static-area-row" style={{ height: "20px" }}>
+            {ent1}
+          </table>
+          <table className="locationLayout">{rs}</table>
+          <table className="static-area-row" style={{ height: "20px" }}>
+            {ent_1}
+          </table>
+        </div>
+        <div>
+          <table className="static-area-col">{sideArea_1}</table>
+        </div>
       </div>
-      </div>
-    
+    </div>
   );
 };
 
