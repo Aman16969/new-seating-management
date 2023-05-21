@@ -42,9 +42,14 @@
 .staticLocTable{
   display: inline-block;
   max-width: 100%;
+  padding: 2px;
+  
 }
 .locationTable {
   display: inline-block;
+  /* border: 1px solid blue; */
+  border-radius: 5px;
+  background-color: #3c89d119;
   
   
   /* Set a max-width to prevent horizontal scrolling */

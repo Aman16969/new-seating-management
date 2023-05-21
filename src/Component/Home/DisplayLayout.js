@@ -228,13 +228,13 @@ const DisplayLayout = ({
         )}
       </div>
       <div className="loc-layout-tables">
-        <table className="staticLocTable">{staticArea1}</table>
+        <table className="staticLocTable" >{staticArea1}</table>
         <div style={{ display: "flex" }}>
-          <table>{staticAreaC1}</table>
+          <table >{staticAreaC1}</table>
           <table className="locationTable">{rows}</table>
-          <table>{staticAreaC_1}</table>
+          <table >{staticAreaC_1}</table>
         </div>
-        <table className="staticLocTable">{staticArea_1}</table>
+        <table className="staticLocTable" >{staticArea_1}</table>
       </div>
     </>
   );
