@@ -10,7 +10,7 @@ const Entrance = ({ location, row, col, dir, refresh }) => {
   const [staticArea, setStaticArea] = useState(null);
   const [sArea, setSArea] = useState(null);
   const token = sessionStorage.getItem("accessToken");
-  const [name, setName] = useState(null);
+  const [name, setName] = useState("");
   const [editName, setEditName] = useState("");
   const [addPopUp, setAddPopUp] = useState(false);
   const [error, setError] = useState(null);
@@ -141,7 +141,7 @@ const Entrance = ({ location, row, col, dir, refresh }) => {
                 }} />
             <MdDelete size={"20px"}  onClick={() => setDeletePopUp(true)}/>
           </div>
-          <p>{name}</p>
+          <small>{name}</small>
         </div>
       )}
       {dir===1 && staticArea && staticArea.isAvailable === 0 && staticArea.d===0 && (
@@ -167,7 +167,7 @@ const Entrance = ({ location, row, col, dir, refresh }) => {
                 }} />
             <MdDelete size={"20px"}  onClick={() => setDeletePopUp(true)}/>
           </div>
-          <p>{name}</p>
+          <small>{name}</small>
         </div>
       )}
       {dir===2 && staticArea && staticArea.isAvailable === 0 && staticArea.d===0 && (
@@ -193,7 +193,7 @@ const Entrance = ({ location, row, col, dir, refresh }) => {
                 }} />
             <MdDelete size={"20px"}  onClick={() => setDeletePopUp(true)}/>
           </div>
-          <p>{name}</p>
+          <small>{name}</small>
         </div>
       )}
       {dir===3 && staticArea && staticArea.isAvailable === 0 && staticArea.d===0 && (
@@ -219,7 +219,7 @@ const Entrance = ({ location, row, col, dir, refresh }) => {
                 }} />
             <MdDelete size={"20px"}  onClick={() => setDeletePopUp(true)}/>
           </div>
-          <p>{name}</p>
+          <small>{name}</small>
         </div>
       )}
       {dir===4 && staticArea && staticArea.isAvailable === 0 && staticArea.d===0 && (
@@ -274,11 +274,35 @@ const Entrance = ({ location, row, col, dir, refresh }) => {
             <tr>
               <td>Name: </td>
               <td>
-                <input
-                  type="text"
+              <select
+                  name="select"
+                  id="select"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+                  onChange={(e)=>setName(e.target.value)}
+                >
+                  <option value="" disabled>Select an Area</option>
+                  <option value={"Entry"}>
+                      Entry
+                    </option>
+                    <option value={"WashRoom"}>
+                      WashRoom
+                    </option>
+                    <option value={"Pantry"}>
+                      Pantry
+                    </option>
+                    <option value={"Room"}>
+                      Board/Confrence Room
+                    </option>
+                    <option value={"EExit"}>
+                      Emergency Exit
+                    </option>
+                    <option value={"Store"}>
+                      Store Room
+                    </option>
+                    <option value={"Exit"}>
+                      Exit
+                    </option>
+                    </select>
               </td>
             </tr>
             <tr>

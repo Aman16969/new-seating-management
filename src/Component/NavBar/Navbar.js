@@ -2,9 +2,14 @@ import { Link } from "react-router-dom";
 import accLogo from "../../Static/newlogo.png";
 import { CgChevronDoubleDownO } from "react-icons/cg";
 import { MdOutlineLocalLibrary } from "react-icons/md";
+import Bell from "../../Static/bell.png"
+import NotiBell from "../../Static/notifications.png";
+import Notification from "./Notification";
+
 import { useState } from "react";
 
 const Navbar = () => {
+  const[flag,setFlag]=useState(false)
   const [activeTab, setActiveTab] = useState("");
 
   const role = sessionStorage.getItem("userRole");
@@ -12,6 +17,7 @@ const Navbar = () => {
     sessionStorage.getItem("userFirstName") +
     " " +
     sessionStorage.getItem("userLastName");
+
   return (
     <>
       <nav className="navbar">
@@ -60,7 +66,22 @@ const Navbar = () => {
                 </li>
               </>
             )}
-
+            <li className="nav-item">
+              <div className="nav-link">
+                <div className="dropdown">
+                  <div className="dropbtn">
+                    
+                    <span className="span-text">
+                      {flag && <img src={NotiBell} alt="bell" style={{height:'30px'}}/>}
+                      {!flag && <img src={Bell} alt="bell" style={{height:'30px'}}/>}
+                      </span>
+                    <div className="dropdown-content">
+                      <Notification setFlag={setFlag} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
             <li className="nav-item">
               <div className="dropdown">
                 <div className="dropbtn">

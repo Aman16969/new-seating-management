@@ -1,9 +1,20 @@
 import { useState, useEffect } from "react";
+import boardRoom from "../../Static/boardroom.png";
+import Entry from "../../Static/Entry.png";
+import Exit from "../../Static/exit.png";
+import Pantry from "../../Static/pantry.png"
+import washRoom from "../../Static/washRoom.png"
+import EmergencyExit from "../../Static/emergency-exit.png";
+import Store from "../../Static/warehouse.png";
+
+
+
 const DisplayStaticArea = ({ location, row, col, dir }) => {
   const [area, setArea] = useState(null);
   const [error, setError] = useState(null);
   const token = sessionStorage.getItem("accessToken");
   const [name, setName] = useState(null);
+ 
 
   useEffect(() => {
     fetch(
@@ -23,7 +34,7 @@ const DisplayStaticArea = ({ location, row, col, dir }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+       
         setArea(data);
         setName(data.seatName);
       })
@@ -34,8 +45,16 @@ const DisplayStaticArea = ({ location, row, col, dir }) => {
   return (
     <>
       {area && area.isAvailable === 1 && area.d===dir && (
-        <div className="display-area" style={{}}>
-          {area.areaName}
+        <div className="display-area" >
+          {area.areaName==="Entry" && <><img src={Entry} alt="entry" /></>  }
+          {area.areaName==="Exit" && <img src={Exit} alt="exit" /> }
+          {area.areaName==="WashRoom" && <img src={washRoom} alt="entry" /> }
+          {area.areaName==="Pantry" && <img src={Pantry} alt="entry" /> }
+          {area.areaName==="Room" && <img src={boardRoom} alt="entry" /> }
+          {area.areaName==="Store" && <img src={Store} alt="entry" /> }
+          {area.areaName==="EExit" && <img src={EmergencyExit} alt="entry" /> }
+            
+          
         </div>
       )}
       {area && area.isAvailable === 0  && area.d===0 && (
