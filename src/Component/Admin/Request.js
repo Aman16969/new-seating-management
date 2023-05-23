@@ -48,7 +48,7 @@ const Request = (props) => {
       })
       .then((data) => {
         setRequestById(data);
-        console.log(requestById)
+        console.log(data);
         setIsOpenCon(true);
         setIsPending(false);
       });
@@ -72,8 +72,31 @@ const Request = (props) => {
       .then(() => {
         setFlag(!flag);
         setIsOpenCon(false);
+        RejectNotification()
       });
   };
+  const RejectNotification=()=>{
+    const notificationBody={
+      email:requestById.email,
+      message:"Your Request for Booking "+requestById.roomType+" for "+requestById.date+" between "+requestById.fromTime+"-"+requestById.toTime+" has been rejected."
+    }
+    fetch(`http://localhost:8081/api/notification/`,{
+      method:'POST',
+      headers: {
+        "content-type": "application/json",
+        Authorization: token,
+      },
+      body:JSON.stringify(notificationBody)
+    }).then((res)=>{
+      if(!res.ok){
+        throw new Error(res.statusText)
+      }
+      return res.json()
+    })
+    .then((data)=>{
+     
+    })
+  }
   const handleAccept = () => {
     setAccepted(true);
     setIsOpenCon(false);

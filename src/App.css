@@ -124,14 +124,14 @@
   background-color: #bcccd8;
 }
 .notification-card{
-  height: 30px;
+  height: 40px;
   padding: 5px;
   color: #000000;
   
   border-bottom: 1px solid #007bff;
 }
 .notification-card p{
-  font-size: small;
+  font-size: 11px;
 }
 .container {
   position: fixed;

@@ -41,7 +41,7 @@ const AvailableSeats = ({ date, fromTime, toTime, locationId, ...props }) => {
       >
         {seats &&
           seats.map((seat) => {
-            return <option value={seat.id}>{seat.name}</option>;
+            return <option value={seat.id} key={seat.name} onSelect={(e)=>props.setSeatName(e.target.key)}>{seat.name}</option>;
           })}
       </select>
     </>

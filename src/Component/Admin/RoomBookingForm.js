@@ -12,7 +12,8 @@ const OpenRoomBookingForm = (props) => {
   const [locationId, setLocationId] = useState(null);
   const [roomId, setRoomId] = useState(null);
   const [roomType, setRoomType] = useState(props.roomType);
- 
+
+ const header = "Bearer " + sessionStorage.getItem("accessToken");
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -27,7 +28,7 @@ const OpenRoomBookingForm = (props) => {
     };
     props.setOpenBookingForm(false);
     setIsPending(true)
-    const header = "Bearer " + sessionStorage.getItem("accessToken");
+    
     fetch(`http://localhost:8081/api/bookRoom/`, {
       method: "POST",
       headers: {
@@ -44,6 +45,7 @@ const OpenRoomBookingForm = (props) => {
       })
       .then((data) => {
         props.setFlag(!props.flag)
+        AddNotification()
         fetch(`http://localhost:8081/api/requestBooking/request/${props.id}/book/true`, {
       method: 'PUT',
       headers: {
@@ -57,6 +59,7 @@ const OpenRoomBookingForm = (props) => {
             return res;
           }).then((data)=>{
             setIsPending(false)
+            
           })
       })
       .catch((error) => {
@@ -64,6 +67,31 @@ const OpenRoomBookingForm = (props) => {
         console.log(error);
       });
   };
+  const AddNotification=()=>{
+    const notificationBody={
+      email:props.userEmail,
+      message:"Your Request for Booking room on "+date+" between "+fromTime+"-"+toTime+" has been accepted."
+    }
+    console.log(JSON.stringify(notificationBody))
+    fetch(`http://localhost:8081/api/notification/`,{
+      method:'POST',
+      headers: {
+        "Content-type": "application/json",
+        Authorization: header,
+      },
+      body:JSON.stringify(notificationBody)
+    }).then((res)=>{
+      console.log(res)
+      if(!res.ok){
+        throw new Error(res.statusText)
+      }
+
+      return res.json()
+    })
+    .then((data)=>{
+     console.log(data)
+    })
+  }
   return (
     <>
     {isPending && (

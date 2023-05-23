@@ -68,9 +68,31 @@ const Request = (props) => {
       .then(() => {
         setFlag(!flag);
         setIsOpenCon(false);
+        RejectNotification()
       });
   };
-
+  const RejectNotification=()=>{
+    const notificationBody={
+      email:requestById.user.email,
+      message:"Your Request for Booking seat in "+requestById.location.name+" on "+requestById.date+" between "+requestById.fromTime+"-"+requestById.toTime+" has been rejected."
+    }
+    console.log(JSON.stringify(notificationBody))
+    fetch(`http://localhost:8081/api/notification/`,{
+      method:'POST',
+      headers: {
+        "content-type": "application/json",
+        Authorization: token,
+      },
+      body:JSON.stringify(notificationBody)
+    }).then((res)=>{
+      if(!res.ok){
+        throw new Error(res.statusText)
+      }
+      return res.json()
+    }).then((data)=>{
+     console.log(data)
+    })
+  }
   const handleAccept = () => {
     setAccepted(true);
     setIsOpenCon(false);

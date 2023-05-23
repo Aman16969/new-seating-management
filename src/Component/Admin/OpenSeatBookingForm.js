@@ -10,6 +10,7 @@ const OpenSeatBookingForm = (props) => {
     const [location, setLocation] = useState(props.location);
     const [user,setUser]=useState(props.user)
     const [seatId, setSeatId] = useState(null);
+    const[seatname,setSeatName]=useState(null);
     const token = sessionStorage.getItem("accessToken");
    
     const handleSubmit = (e) => {
@@ -24,7 +25,7 @@ const OpenSeatBookingForm = (props) => {
         fromTime: fromTime,
         toTime: toTime,
         accoliteId: user.accoliteId,
-      };console.log(bookingDetail)
+      };
       
       fetch(`http://localhost:8081/api/booking/`, {
         method: "POST",
@@ -41,7 +42,7 @@ const OpenSeatBookingForm = (props) => {
           return res.json();
         })
         .then((data) => {
-          
+          AddNotification()
           fetch(`http://localhost:8081/api/request/seat/accept/${props.id}`, {
       method: "PUT",
       headers: {
@@ -64,6 +65,29 @@ const OpenSeatBookingForm = (props) => {
           console.log(error.message);
         });
     };
+    const AddNotification=()=>{
+      const notificationBody={
+        email:user.email,
+        message:"Your Request for Booking Seat in "+location.name+" on "+date+" between "+fromTime+"-"+toTime+" has been accepted. Your seat number is "+seatname+" ."
+      }
+      console.log(JSON.stringify(notificationBody))
+      fetch(`http://localhost:8081/api/notification/`,{
+        method:'POST',
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body:JSON.stringify(notificationBody)
+      }).then((res)=>{
+        if(!res.ok){
+          throw new Error(res.statusText)
+        }
+        return res.json()
+      })
+      .then((data)=>{
+       console.log(data)
+      })
+    }
     return (
       <>
       {isPending && (
@@ -151,7 +175,7 @@ const OpenSeatBookingForm = (props) => {
                   <div className="location-item">
                     
                       <div class="form-group">
-                        <AvailableSeats seatId={seatId} setSeatId={setSeatId} date={date} fromTime={fromTime} toTime={toTime} locationId={location.id}/>
+                        <AvailableSeats setSeatName={setSeatName}seatId={seatId} setSeatId={setSeatId} date={date} fromTime={fromTime} toTime={toTime} locationId={location.id}/>
                       </div>
                   </div>
                   <button className="button-group" style={{padding:'10px', marginTop:'10px'}}>Submit</button>
