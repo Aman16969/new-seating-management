@@ -206,12 +206,12 @@ const DisplayLayout = ({
         </div>
       )}
       <div className="header">
-        <h1>{location.name}</h1>
-        <h3>
+        <h4>{location.name}</h4>
+        <h5>
           Available Seats :{" "}
           {seatAvailability ? Object.keys(seatAvailability).length : 0}/
           {location.seatingCapacity}
-        </h3>
+        </h5>
         {message && status === 0 && <h3 style={{ color: "red" }}>{message}</h3>}
         {message && status === 1 && (
           <h3 style={{ color: "green" }}>{message}</h3>

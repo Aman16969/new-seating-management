@@ -40,13 +40,14 @@
   height: 20px;
   
   
+  
 }
 .loc-layout-tables{
+  margin-top: -15px;
   display: grid;
   grid-template-rows: .5fr 4.5fr;
-  margin: 0 5px;
   justify-content: center;
-  height: 56vh;
+  height: 62vh;
   overflow-y: scroll;
   overflow-x: scroll;
 }
@@ -97,11 +98,15 @@
 .header {
   padding-left: 10px;
   padding-right: 10px;
-  font-size: small;
+  height: 40px;
+  margin-top: -30px;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
-
+.header h4{
+  color:#1a498f;
+  text-decoration:double underline;
+}
 .header button {
   height: 35px;
   border-radius: 5px;
