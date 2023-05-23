@@ -1,3 +1,20 @@
+
+:root {
+  --navBar: #0c3d4c;
+  --bgPrimary:#edf7ff;
+  --bgSecondary:#FFFFFF;
+  --bgTertiary:#eef8fd;
+  --boxShadow:#13121c;
+  --textPrimary:black;
+  --hover:#ff9238;
+  --hoversecondry:#ff9238c6;
+  --borderBottom:#19a4cf;
+  --inputBorder:#30a3c6;
+  --cards:white;
+  --btnColor:#0f355e;
+}
+
+
 .navbar {
   font-variant: small-caps;
   display: flex;
@@ -5,10 +22,10 @@
   align-items: center;
   position: fixed;
   top: 0;
-  background-color: #0c3d4c;
+  background-color: var(--navBar);
   height: 50px;
   font-size: 15px;
-  box-shadow: 1px 1px #010101;
+  box-shadow: 1px 1px var(--boxShadow);
   padding: 5px;
   width: 100%;
   z-index: 100;
@@ -25,7 +42,7 @@
 }
 
 .navbar li a:hover {
-  color: #ff9238;
+  color: var(--hover);
   transform: scale(1.05);
 }
 
@@ -52,7 +69,7 @@
     rgb(83, 120, 149) 100%
   );
   width: 100px;
-  box-shadow: 0px 8px 16px 0px rgba(255, 249, 249, 0.2);
+  box-shadow: 0px 8px 16px 0px var(--boxShadow);
   z-index: 1;
 }
 
@@ -109,14 +126,13 @@
 }
 
 .span-text:hover {
-  color: #f46c1d;
+  color: var(--hover);
 }
 .notification-cards {
   max-height: 200px;
   overflow-y: auto;
   overflow-x: none;
   width: 400px;
-  background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 10px;
@@ -128,7 +144,7 @@
   padding: 5px;
   color: #000000;
   
-  border-bottom: 1px solid #007bff;
+  border-bottom: 1px solid var(--borderBottom);
 }
 .notification-card p{
   font-size: 11px;
@@ -137,10 +153,11 @@
   position: fixed;
   display: block;
   float: unset;
-  background-color: #edeff0;
+  background-color: var(--bgPrimary);
   height: calc(90vh);
   width: 100%;
   margin-top: 53px;
+  margin-left: -8px;
 }
 
 .container-content {
@@ -158,10 +175,10 @@
 }
 .row-card {
   box-sizing: border-box;
-  box-shadow: 2px 2px 5px #13121c;
+  box-shadow: 2px 2px 3px var(--boxShadow);
   display: block;
   border-radius: 5px;
-  background-color: #f7faff;
+  background-color: var(--bgSecondary);
   /* background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%); */
 }
 .row-card-title {
@@ -170,7 +187,7 @@
   width: 100%;
   text-align: center;
   background-color: transparent;
-  border-bottom: 1px solid#4983c0;
+  border-bottom: 1px solid var(--borderBottom);
   padding: 5px 5px 5px 5px;
   position: relative;
   height: 40px;
@@ -194,7 +211,7 @@
   font-variant: small-caps;
 }
 .btn-group button:hover {
-  color: #0f017d;
+  color: var(--hover);
   background-color: transparent;
 }
 
@@ -221,7 +238,8 @@
   text-align: center;
 }
 .header-booking > tr:hover {
-  background-color: #f0c993;
+  background-color: var(--hoversecondry);
+  color: rgb(255, 255, 255);
 }
 .table {
   width: 100%;
@@ -239,7 +257,7 @@
   border-color: inherit;
   padding: 10px 0;
   margin: 5px 5px;
-  border-bottom: 1px solid#074d97;
+  border-bottom: 1px solid var(--borderBottom);
   background-color: transparent;
 }
 /* .table-row:after {
@@ -262,12 +280,12 @@
   font-variant: small-caps;
   border-radius: 3px;
   padding: 5px 1;
-  border: #1dc4e9;
-  background-color: #0f355e;
+  border: var(--inputBorder);
+  background-color: var(--btnColor);
   color: #ffffff;
 }
 .button-group:hover {
-  background-color: #f09440;
+  background-color: var(--hover);
   color: #0e0148;
 }
 .table-scroll {
@@ -351,7 +369,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  border-bottom: 1px solid#0855a8;
+  border-bottom: 1px solid var(--borderBottom);
   padding: 5px;
 }
 .form-item {
@@ -366,25 +384,30 @@
 .form-item input[type="time"] {
   width: 100%;
   border-radius: 5px;
-  border: 1px solid #1574da;
+  border: 1px solid var(--inputBorder);
   /* background-color: #e2ffff; */
-  background-color: #deecf9;
+  background-color: var(--bgTertiary);
 }
 .drop-select {
   width: 100%;
-  border: 1px solid black;
+  border: 1px solid var(--inputBorder);
   margin-bottom: 10px;
   border-radius: 5px;
-  background-color: #deecf9;
+  background-color: var(--bgTertiary);
   padding: 10px;
-  font-size: 15px;
+  font-size: 14px;
 }
 .drop-select option {
   padding: 10px;
-  font-size: 15px;
-  background-color: #deecf9;
+  font-size: 14px;
+  background-color: var(--bgTertiary);
   cursor: pointer;
+  border: 1px solid var(--inputBorder);
 }
+.drop-select option:hover{
+  background-color: var(--hover);
+}
+
 /* .seat-display-img {
   width: 100%;
 } */
@@ -469,7 +492,7 @@
 
 .seat label:hover {
   cursor: pointer;
-  box-shadow: 0 0 0px 2px #126bab;
+  box-shadow: 0 0 0px 2px var(--boxShadow);
 }
 
 @keyframes rubberBand {
@@ -539,14 +562,7 @@
   background-color: #3f4d67;
 }
 
-.logout-card {
-  background-color: rgb(225, 206, 206);
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
-  padding: 20px;
-  text-align: center;
-}
+
 
 .logout-header {
   margin-bottom: 20px;
@@ -561,31 +577,26 @@
   color: #c95405;
 }
 
-.logout-body button {
-  cursor: pointer;
-  font-size: 14px;
-  padding: 10px 20px;
-  transition: background-color 0.3s ease;
-}
+
 
 /* Login */
 .container-login {
-  background-image: url(./Static/background.jpg);
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 20px;
-  min-height: 90vh;
+  margin-top: -5px;
+  height: 94vh;
+  width: 100%;
+  padding: 10px 0;
+  background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
 }
 
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 10px;
+  margin: 0 30px ;
 }
 .title:hover {
-  color: #f7c9b3;
+  color: var(--hover);
 }
 /* .logo{
   margin: 20px;
@@ -593,41 +604,39 @@
 
 .logo img {
   width: 200px;
+  height: 50px;
 }
 
-id.login-button {
-  /* width: 20%;
-  height: 40px;
-  padding: 5px; */
-  margin-top: 50%;
-  left: 50%;
-}
+
 
 .login-button:hover {
-  color: aliceblue;
+  color: var(--hover);
 }
 
-/* video{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-/* .seatlogo{
- margin-top: 50px; 
- filter: drop-shadow(10px 10px 10px rgb(154, 96, 8));
- 
-} */
+
 .girlbook {
-  margin-left: 50%;
   margin-top: 5%;
-  width: 33.33%;
+  margin: 5%;
+  display: flex;
+  justify-content: space-between;
+
+}
+.girlbook h1{
+  color: var(--bgSecondary);
+  font-size: 80px;
+}
+.girlbook h3{
+  color: var(--bgSecondary);
+  font-size: 40px;
+  margin-left: 40%
 }
 .book {
-  border-radius: 2%;
+  width: 500px;
+  border-radius: 10px;
   filter: drop-shadow(20px 20px 20px rgb(75, 89, 223));
+}
+.heading{
+  color: var(--bgPrimary);
 }
 /* login */
 
@@ -638,7 +647,7 @@ id.login-button {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #00000046;
+  background-color: #000000a5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -646,12 +655,12 @@ id.login-button {
 }
 .popup-boxd {
   position: absolute;
-  background-color: #ffffff;
+  background-color:var(--bgSecondary);
   width: 35vw;
   height: fit-content;
   z-index: 1;
   border-radius: 3px;
-  box-shadow: 2px 2px 5px #000000;
+  box-shadow: 2px 2px 5px var(--boxShadow);
 }
 #pop-edit {
   height: 80vh;
@@ -670,7 +679,7 @@ id.login-button {
 }
 .buttonsContainer > button {
   width: fit-content;
-  border: 1px solid #007bff;
+  border: 1px solid var(--inputBorder);
   border-radius: 3px;
   color: #ffffff;
   background-color: #0c3d4c;
@@ -680,8 +689,8 @@ id.login-button {
   margin: 0px 40px;
 }
 .buttonsContainer > button:hover {
-  background: #ff9238;
-  color: rgb(0, 0, 0);
+  background: var(--hover);
+  color: white;
 }
 .accolite-logo-img {
   display: flex;
@@ -740,10 +749,9 @@ id.login-button {
   padding: 14px 15px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #3f4d67;
+  border: 1px solid var(--inputBorder);
   box-sizing: border-box;
-  background-color: white;
-  border: 1px solid #60e4ff;
+  background-color: var(--bgTertiary);
   border-radius: 5px;
 }
 .location-item input[type="number"] {
@@ -751,10 +759,9 @@ id.login-button {
   padding: 14px 15px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #3f4d67;
+  border: 1px solid var(--inputBorder);
   box-sizing: border-box;
   background-color: white;
-  border: 1px solid #60e4ff;
   border-radius: 5px;
 }
 .location-item input[type="date"] {
@@ -762,10 +769,9 @@ id.login-button {
   padding: 14px 15px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #3f4d67;
+  border: 1px solid var(--inputBorder);
   box-sizing: border-box;
-  background-color: white;
-  border: 1px solid #60e4ff;
+  background-color: var(--bgTertiary);
   border-radius: 5px;
 }
 .location-item input[type="time"] {
@@ -773,10 +779,9 @@ id.login-button {
   padding: 14px 15px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #3f4d67;
+  border: 1px solid var(--inputBorder);
   box-sizing: border-box;
-  background-color: white;
-  border: 1px solid #60e4ff;
+  background-color: var(--bgTertiary);
   border-radius: 5px;
 }
 .location-item input[type="file"] {
@@ -784,10 +789,9 @@ id.login-button {
   padding: 14px 15px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #3f4d67;
+  border: 1px solid var(--inputBorder);
   box-sizing: border-box;
-  background-color: white;
-  border: 1px solid #60e4ff;
+  background-color: var(--bgTertiary);
   border-radius: 5px;
 }
 #excel-sheet {
@@ -807,7 +811,7 @@ id.login-button {
 }
 
 .location-button:hover {
-  background-color: #d6d6d6;
+  background-color: var(--hover);
 }
 .row-location {
   display: grid;
@@ -843,7 +847,7 @@ id.login-button {
 /* Admin UserDetails */
 
 .user-detail {
-  box-shadow: 5px 7px 10px #3f4d67;
+  box-shadow: 5px 7px 10px var(--boxShadow);
 }
 
 .user-row th {
@@ -855,7 +859,7 @@ id.login-button {
 }
 
 .user-row:hover {
-  background-color: #f0c993;
+  background-color: var(--hoversecondry);
 }
 
 .user-row {
@@ -865,7 +869,7 @@ id.login-button {
   padding: 10px 0;
   margin: 5px 0;
   height: 35px;
-  border-bottom: 1px solid#007bff;
+  border-bottom: 1px solid var(--borderBottom);
   text-align: center;
   background-color: transparent #3f4d670d;
 }
@@ -878,7 +882,7 @@ id.login-button {
   /* border: 1px solid #7daefd; */
 }
 .view-layout-icon:hover {
-  background-color: #d2f2ff;
+  background-color: var(--hover);
 }
 .container-layout-location {
   width: 100%;
@@ -910,7 +914,7 @@ id.login-button {
   border-radius: 10px;
   background-color: #ffffff;
   /* background-image: linear-gradient(315deg, #79badc 0%, #3eadcf 74%); */
-  box-shadow: 2px 2px 5px rgb(0, 0, 0);
+  box-shadow: 2px 2px 5px var(--boxShadow);
   padding: 20px;
   width: 45%;
   z-index: 1;
@@ -920,7 +924,7 @@ id.login-button {
 .request-card select {
   padding: 5px;
   margin: 2px 2px;
-  border: 1px solid #110a98;
+  border: 1px solid var(--inputBorder);
   border-radius: 3px;
   box-sizing: border-box;
 }
@@ -934,7 +938,7 @@ id.login-button {
   width: 100%;
 }
 .request-card button {
-  background-color: #02366d;
+  background-color: var(--btnColor);
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -947,7 +951,8 @@ id.login-button {
 }
 
 .request-card button:hover {
-  background-color: #f09440;
+  background-color: var(--hover);
+  color: black;
 }
 
 .access {
@@ -959,8 +964,8 @@ id.login-button {
   margin-left: 200px;
 }
 .access:hover {
-  background-color: #f09440;
-  color: #000000;
+  background-color: var(--hover);
+  color: white;
 }
 .display-seat {
   cursor: pointer;
@@ -975,5 +980,5 @@ id.login-button {
   /* background-color: #007bff; */
 }
 form input select {
-  border: 1px solid #0f355e;
+  border: 1px solid var(--inputBorder);
 }

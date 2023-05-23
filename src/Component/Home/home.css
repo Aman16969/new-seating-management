@@ -1,3 +1,16 @@
+:root {
+  --bgPrimary:#edf7ff;
+  --bgSecondary:#FFFFFF;
+  --bgTertiary:#eef8fd;
+  --boxShadow:#13121c;
+  --textPrimary:black;
+  --hover:#ff9238;
+  --hoversecondry:#ff9238c6;
+  --borderBottom:#19a4cf;
+  --inputBorder:#30a3c6;
+  --cards:white;
+  --btnColor:#0f355e;
+}
 .display-seat {
   display: flex;
   justify-content: center;
@@ -96,7 +109,8 @@
 
 .date-picker{
   height: 30px;
-  border-radius: 2px;
-  border: 1px solid blue;
-  background-color: #e8f8ff;
+  border-radius: 5px;
+  border: 1px solid var(--inputBorder);
+  background-color: var(--bgTertiary);
+  color: black;
 }

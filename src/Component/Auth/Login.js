@@ -5,7 +5,7 @@ import book from "../../Static/book.jpg";
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  
+
   useEffect(() => {
     /* global google */
     const onGoogleScriptLoad = () => {
@@ -44,25 +44,24 @@ const Login = () => {
         if (data.length !== 0) {
           sessionStorage.setItem("email", data.email);
           sessionStorage.setItem("accessToken", data.accessToken);
-          console.log("accessToken",data.accessToken);
+          console.log("accessToken", data.accessToken);
           sessionStorage.setItem("userId", data.id);
           sessionStorage.setItem("userFirstName", data.firstName);
           sessionStorage.setItem("userLastName", data.lastName);
           sessionStorage.setItem("userRole", data.role);
           sessionStorage.setItem("accoliteId", data.accoliteId);
-          }
-          if (data.location !== null) {
-            sessionStorage.setItem("userLocationId", data.location.id);
-            sessionStorage.setItem("userLocation", JSON.stringify(data.location));
-
-          }
-          if (data.location === null) {
-            sessionStorage.setItem("userLocation",null)
-            navigate("/profile", true);
-          } else {
-            navigate("/", true);
-          }
-        })
+        }
+        if (data.location !== null) {
+          sessionStorage.setItem("userLocationId", data.location.id);
+          sessionStorage.setItem("userLocation", JSON.stringify(data.location));
+        }
+        if (data.location === null) {
+          sessionStorage.setItem("userLocation", null);
+          navigate("/profile", true);
+        } else {
+          navigate("/", true);
+        }
+      })
       .catch((error) => {
         setError(error.message);
         console.log(error.message);
@@ -81,23 +80,19 @@ const Login = () => {
           </div>
         </div>
         <div className="girlbook">
+          <div>
+            <h1 >Book your</h1>
+            <h3>seats now!</h3>
+          </div>
+        <div>
           <img
             className="book"
             src={book}
             alt="book"
-            width="500"
-            height="300"
           />
         </div>
-        <span className="heading">
-          {" "}
-          <h1 style={{ color: "white", fontSize: "30px" }}>Book your</h1>{" "}
-        </span>
-        <span className="heading2">
-          {" "}
-          <h3 style={{ color: "white" }}>seats now!</h3>
-        </span>
-        {/* <div className="content">{error && <div>{error}</div>}</div> */}
+      </div>
+      <span style={{fontSize:'10px',color:'black'}}>Devloped by Aman,Dency,Viswateza,Nireeksha</span>
       </div>
     </>
   );
