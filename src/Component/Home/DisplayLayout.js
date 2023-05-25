@@ -206,7 +206,7 @@ const DisplayLayout = ({
         </div>
       )}
       <div className="header">
-        <h4>{location.name}</h4>
+        <h4 style={{fontVariant:'small-caps'}}>{location.name}</h4>
         <h5>
           Available Seats :{" "}
           {seatAvailability ? Object.keys(seatAvailability).length : 0}/
@@ -219,6 +219,7 @@ const DisplayLayout = ({
         {selected && (
           <button
             className="button-group"
+            style={{marginTop:'10px'}}
             onClick={() => {
               handleBooking();
             }}

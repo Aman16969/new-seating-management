@@ -22,7 +22,7 @@ const AllBookingDaily = () => {
       
     return (
       <div >  
-      <button className="button-group" onClick={downloadPdf} style={{marginTop:"10px"}}><BiDownload /></button>
+          <img width="32" height="32" onClick={downloadPdf} src="https://img.icons8.com/fluency/48/microsoft-excel-2019.png" alt="microsoft-excel-2019"/>
     </div>
       );
     };

@@ -288,7 +288,7 @@ const Home = () => {
                 }}
               >
                 <div>
-                  <h3>Book Seats</h3>
+                  <h4 style={{fontVariant:'small-caps'}}>Book Seats</h4>
                 </div>
                 <div>
                   <select name="" id="" className="drop-select" onChange={(e)=>handleAccessClick(e.target.value)}>
