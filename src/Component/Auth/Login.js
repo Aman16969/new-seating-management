@@ -92,7 +92,7 @@ const Login = () => {
           />
         </div>
       </div>
-      <span style={{fontSize:'10px',color:'black'}}>Devloped by Aman,Dency,Viswateza,Nireeksha</span>
+      {/* <span style={{fontSize:'10px',color:'black'}}>Devloped by Aman,Dency,Viswateza,Nireeksha</span> */}
       </div>
     </>
   );

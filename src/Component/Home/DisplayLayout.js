@@ -207,11 +207,11 @@ const DisplayLayout = ({
       )}
       <div className="header">
         <h4>{location.name}</h4>
-        <h5>
+        {/* <h5>
           Available Seats :{" "}
           {seatAvailability ? Object.keys(seatAvailability).length : 0}/
           {location.seatingCapacity}
-        </h5>
+        </h5> */}
         {message && status === 0 && <h3 style={{ color: "red" }}>{message}</h3>}
         {message && status === 1 && (
           <h3 style={{ color: "green" }}>{message}</h3>
@@ -228,13 +228,13 @@ const DisplayLayout = ({
         )}
       </div>
       <div className="loc-layout-tables">
-        <table className="staticLocTable" >{staticArea1}</table>
+        <table className="staticLocTable">{staticArea1}</table>
         <div style={{ display: "flex" }}>
-          <table >{staticAreaC1}</table>
+          <table>{staticAreaC1}</table>
           <table className="locationTable">{rows}</table>
-          <table >{staticAreaC_1}</table>
+          <table>{staticAreaC_1}</table>
         </div>
-        <table className="staticLocTable" >{staticArea_1}</table>
+        <table className="staticLocTable">{staticArea_1}</table>
       </div>
     </>
   );
