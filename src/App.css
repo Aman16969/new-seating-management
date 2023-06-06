@@ -12,6 +12,10 @@
   --inputBorder:#30a3c6;
   --cards:white;
   --btnColor:#0f355e;
+  --headingPrimary:15px;
+  --headingSecondary:14px;
+  --headingTertiary:12px;
+  --headingSeat:13px;
 }
 
 
@@ -24,7 +28,7 @@
   top: 0;
   background-color: var(--navBar);
   height: 50px;
-  font-size: 15px;
+  font-size: var(--headingPrimary);
   box-shadow: 1px 1px var(--boxShadow);
   padding: 5px;
   width: 100%;
@@ -147,7 +151,7 @@
   border-bottom: 1px solid var(--borderBottom);
 }
 .notification-card p{
-  font-size: 11px;
+  font-size: var(--headingTertiary);
 }
 .container {
   position: fixed;
@@ -193,6 +197,8 @@
   height: 40px;
   display: flex;
   flex-direction: column;
+  font-variant: small-caps;
+
 }
 /* .row-card-title div:last-child{
   margin-left: auto;
@@ -202,6 +208,7 @@
   flex-direction: row;
   column-gap: 10px;
   height: 43px;
+
   
 }
 .btn-group button {
@@ -225,6 +232,7 @@
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
+  font-size: var(--headingSecondary);
 }
 .header-booking th,
 .header-booking td,
@@ -232,7 +240,7 @@
   width: 20%;
 }
 .header-booking td {
-  font-size: 12px;
+  font-size: var(--headingTertiary);
 }
 .header-booking > td {
   text-align: center;
@@ -395,11 +403,11 @@
   border-radius: 5px;
   background-color: var(--bgTertiary);
   padding: 10px;
-  font-size: 14px;
+  font-size: var(--headingSecondary);
 }
 .drop-select option {
   padding: 10px;
-  font-size: 14px;
+  font-size: var(--headingSecondary);
   background-color: var(--bgTertiary);
   cursor: pointer;
   border: 1px solid var(--inputBorder);
@@ -468,8 +476,7 @@
   position: relative;
   width: 100%;
   text-align: center;
-  font-size: 13px;
-  /* font-weight: bold; */
+  font-size: var(--headingTertiary);
   line-height: 1.5rem;
   padding: 4px 0;
   background: blue;
@@ -564,18 +571,7 @@
 
 
 
-.logout-header {
-  margin-bottom: 20px;
-}
 
-.logout-header h2 {
-  font-size: 18px;
-  color: #333;
-}
-.logout-header a {
-  text-decoration: none;
-  color: #c95405;
-}
 
 
 
@@ -684,7 +680,7 @@
   color: #ffffff;
   background-color: #0c3d4c;
   padding: 8px 40px;
-  font-size: 14px;
+  font-size: var(--headingSecondary);
   cursor: pointer;
   margin: 0px 40px;
 }
@@ -735,7 +731,7 @@
 .location-form button {
   height: 30px;
   width: 120px;
-  font-size: 14px;
+  font-size: var(--headingSecondary);
   margin-top: 20px;
 }
 .location-item {
@@ -831,7 +827,7 @@
 }
 
 .location-item label {
-  font-size: 14px;
+  font-size: var(--headingSecondary);
 }
 .layout-img {
   width: 30px;
@@ -855,7 +851,7 @@
 }
 .user-row td {
   width: 24%;
-  font-size: 13px;
+  font-size: var(--headingTertiary);
 }
 
 .user-row:hover {
@@ -943,7 +939,7 @@
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--headingSecondary);
   font-weight: bold;
   padding: 10px;
   transition: background-color 0.2s ease-in-out;

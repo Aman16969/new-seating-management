@@ -82,8 +82,8 @@ const Attendance = () => {
     <>
       <div className="container">
         <div className="container-content">
-          <div className="row">
-            <div className="row-card">
+          <div className="row" >
+            <div className="row-card" style={{height:'86vh'}}>
               <div className="row-card-title">
                 <span className="btn-group">
                   <button
@@ -102,7 +102,7 @@ const Attendance = () => {
                   </button>
                 </span>
                 <hr />
-                <form className="modal-form">
+                <form className="modal-form" style={{marginTop:"-10px"}}>
                   <div className="form-item">
                     <input
                       type="date"
@@ -114,7 +114,7 @@ const Attendance = () => {
                   </div>
                   {date && (
                     <span>
-                      Download <DayWisePdf date={date} />
+                    <DayWisePdf date={date} />
                     </span>
                   )}
                 </form>
@@ -134,7 +134,7 @@ const Attendance = () => {
                 </div>
               </div>
             </div>
-            <div className="row-card">
+            <div className="row-card" style={{height:'86vh'}}>
               <div className="row-card-attendance">
                 <div className="card-attandance">
                   <div className="row-card-title">
