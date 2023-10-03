@@ -624,7 +624,7 @@
 .girlbook h3{
   color: var(--bgSecondary);
   font-size: 40px;
-  margin-left: 40%
+  /* margin-left: 40% */
 }
 .book {
   width: 500px;

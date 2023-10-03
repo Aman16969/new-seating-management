@@ -13,7 +13,6 @@ import Attendance from "./Component/Attendance/Attendance";
 function App() {
   return (
     <div className="App">
-      
         <Router>
           <Routes>
             <Route

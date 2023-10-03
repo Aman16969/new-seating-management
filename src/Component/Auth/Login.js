@@ -81,18 +81,14 @@ const Login = () => {
         </div>
         <div className="girlbook">
           <div>
-            <h1 >Book your</h1>
-            <h3>seats now!</h3>
+            <h1>BMS</h1>
+            <h3>Book seats now!</h3>
           </div>
-        <div>
-          <img
-            className="book"
-            src={book}
-            alt="book"
-          />
+          <div>
+            <img className="book" src={book} alt="book" />
+          </div>
         </div>
-      </div>
-      {/* <span style={{fontSize:'10px',color:'black'}}>Devloped by Aman,Dency,Viswateza,Nireeksha</span> */}
+        {/* <span style={{fontSize:'10px',color:'black'}}>Devloped by Aman,Dency,Viswateza,Nireeksha</span> */}
       </div>
     </>
   );
